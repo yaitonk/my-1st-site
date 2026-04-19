@@ -888,22 +888,39 @@
     }
 
     function slugify(value) {
-      return String(value || '')
-        .trim()
-        .toLowerCase()
-        .replace(/[\s\/]+/g, '-')
-        .replace(/[^a-z0-9\-_]/g, '')
-        .replace(/-+/g, '-')
-        .replace(/^-|-$/g, '');
-    }
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[\s\/]+/g, '-')
+    .replace(/[^a-z0-9\-_]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
 
-    function getSafeFilenameBase() {
-      const date = getValue('cupping_date') || getLocalDateString();
-      const sample = slugify(getValue('sample_id')) || 'sample';
-      const coffee = slugify(getValue('coffee')) || 'coffee';
-      return `${date}-${sample}-${coffee}`;
-    }
+function getCupperShort() {
+  const name = getValue('cupper') || '';
+  const parts = name.trim().toLowerCase().split(' ').filter(Boolean);
 
+  if (parts.length === 0) {
+    return 'xx';
+  }
+
+  if (parts.length === 1) {
+    return parts[0].slice(0, 2);
+  }
+
+  return parts.map(p => p[0]).join('').slice(0, 3);
+}
+
+function getSafeFilenameBase() {
+  const date = getValue('cupping_date') || getLocalDateString();
+  const sample = slugify(getValue('sample_id')) || 'sample';
+  const coffee = slugify(getValue('coffee')) || 'coffee';
+  const cupper = slugify(getCupperShort()) || 'xx';
+
+  return `${date}-${sample}-${coffee}-${cupper}`;
+}
+    
     function buildRecordObject() {
       return {
         coffee: getValue('coffee') || '',
