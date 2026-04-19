@@ -113,7 +113,7 @@
       resize: vertical;
     }
 
-    .group { margin-bottom: 12px; }
+    .group { margin-bottom: 14px; }
 
     .group h3 {
       margin: 0 0 6px;
@@ -160,26 +160,36 @@
       min-width: fit-content;
     }
 
-    .scales {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 8px;
-    }
-
-    .scale-box {
+    .mini-intensity {
+      margin-top: 8px;
       border: 1px solid var(--line);
       border-radius: 12px;
-      padding: 9px;
+      padding: 8px 10px;
       background: #fff;
     }
 
-    .scale-box .head {
+    .mini-intensity + .mini-intensity {
+      margin-top: 6px;
+    }
+
+    .mini-intensity-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 5px;
-      font-size: 12px;
       gap: 8px;
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+
+    .mini-intensity-label {
+      color: var(--muted);
+    }
+
+    .mini-intensity-value {
+      font-weight: 700;
+      min-width: 18px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
     }
 
     input[type="range"] {
@@ -188,6 +198,39 @@
       height: auto;
       border: none;
       background: transparent;
+    }
+
+    .intensity-band {
+      margin-top: 6px;
+    }
+
+    .intensity-segments {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      height: 10px;
+      background: #f4eee6;
+    }
+
+    .intensity-segment {
+      position: relative;
+    }
+
+    .intensity-segment + .intensity-segment {
+      border-left: 1px solid var(--line);
+    }
+
+    .intensity-labels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 4px;
+      font-size: 10px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.1;
+      letter-spacing: 0.03em;
     }
 
     .detail-fields {
@@ -246,6 +289,81 @@
       line-height: 1.35;
     }
 
+    .descriptor-output {
+      margin-bottom: 12px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .descriptor-row {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 10px;
+    }
+
+    .descriptor-label {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .descriptor-score-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .descriptor-score {
+      font-weight: 700;
+    }
+
+    .descriptor-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .descriptor-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--chip);
+      font-size: 12px;
+      line-height: 1.2;
+      color: var(--text);
+    }
+
+    .descriptor-empty {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .descriptor-meter {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      color: var(--text);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .descriptor-meter + .descriptor-meter {
+      margin-top: 4px;
+    }
+
     @media (max-width: 980px) {
       .grid { grid-template-columns: 1fr; }
     }
@@ -280,7 +398,6 @@
       .chip { font-size: 11px; padding: 5px 8px; }
       .group h3 { font-size: 12px; }
       .custom-row { gap: 5px; }
-      .scales { grid-template-columns: 1fr; gap: 6px; }
       .detail-fields { grid-template-columns: 1fr; gap: 6px; margin-top: 10px; }
       .actions { gap: 6px; }
       button { font-size: 12px; padding: 7px 10px; }
@@ -369,9 +486,6 @@
           <div class="section-title">Descriptors</div>
           <div id="descriptor-groups"></div>
 
-          <div class="section-title" style="margin-top:14px;">Intensity (0–15)</div>
-          <div class="scales" id="intensity-scales"></div>
-
           <div class="detail-fields">
             <div class="field full">
               <label>Overall & Remark</label>
@@ -400,59 +514,134 @@
           </div>
 
           <div class="actions">
-            <button class="primary" id="generateBtn">Generate</button>
-            <button id="copyBtn">Copy</button>
-            <button id="resetBtn">Reset</button>
+            <button type="button" class="primary" id="generateBtn">Generate</button>
+            <button type="button" id="copyBtn">Copy</button>
+            <button type="button" id="copyLogseqBtn">Copy for Logseq</button>
+            <button type="button" id="downloadJsonBtn">Download JSON</button>
+            <button type="button" id="downloadMdBtn">Download Markdown</button>
+            <button type="button" id="resetBtn">Reset</button>
           </div>
         </div>
       </div>
 
       <div class="card">
         <div class="section-title">ผลลัพธ์</div>
+        <div id="descriptorOutput" class="descriptor-output"></div>
         <pre id="output"></pre>
-        <div class="hint">Don’t be swayed by the fragrant!
+        <div class="hint">Don’t be swayed by the fragrance!</div>
       </div>
     </div>
   </div>
 
   <script>
     const descriptorData = {
-      "aroma": [
+      fragrance_aroma: [
         'floral / ดอกไม้','jasmine / มะลิ','bergamot / เบอร์กามอต','citrus / ซิตรัส',
         'berry / เบอร์รี','tropical fruit / ผลไม้เมืองร้อน','stone fruit / ผลไม้เมล็ดแข็ง',
         'honey / น้ำผึ้ง','candy / ลูกกวาด','caramel / คาราเมล','tea-like / คล้ายชา',
         'herbal / สมุนไพร','cocoa / โกโก้','spice / เครื่องเทศ'
       ],
-      "flavor": [
+      flavor: [
         'floral / ดอกไม้','jasmine / มะลิ','bergamot / เบอร์กามอต','citrus / ซิตรัส',
         'berry / เบอร์รี','tropical fruit / ผลไม้เมืองร้อน','stone fruit / ผลไม้เมล็ดแข็ง',
         'apple / แอปเปิล','grape / องุ่น','honey / น้ำผึ้ง','candy / ลูกกวาด',
         'caramel / คาราเมล','tea-like / คล้ายชา','cocoa / โกโก้','spice / เครื่องเทศ'
       ],
-      "aftertaste": [
+      aftertaste: [
         'clean / สะอาด','sweet / หวาน','floral / ดอกไม้','tea-like / คล้ายชา',
         'short / สั้น','medium / ปานกลาง','long / ยาว','drying / ฝาดแห้ง',
         'slightly bitter / ขมเล็กน้อย'
       ],
-      "acidity": [
+      acidity: [
         'citric / ซิตรัส','malic / มาลิก','tartaric / ทาร์ทาริก','phosphoric / ฟอสฟอริก',
         'lactic / แลกติก','soft / นุ่ม','bright / สดใส','round / กลม','sharp / คม'
       ],
-      "sweetness": [
+      sweetness: [
         'sugar / น้ำตาล','honey / น้ำผึ้ง','candy / ลูกกวาด','caramel / คาราเมล',
         'brown sugar / น้ำตาลทรายแดง','molasses / กากน้ำตาล','ripe fruit / ผลไม้สุก',
         'jammy / แยม','clean sweet / หวานสะอาด'
       ],
-      "mouthfeel": [
+      mouthfeel: [
         'silky / เนียน','juicy / ฉ่ำ','creamy / ครีมมี','smooth / ลื่น',
         'tea-like / คล้ายชา','syrupy / หนืดหวาน','dense / แน่น',
         'thin / บาง','drying / ฝาดแห้ง'
       ]
     };
 
-    const intensityFields = ['aroma','flavor','aftertaste','acidity','sweetness','mouthfeel'];
+    const fieldLabels = {
+      fragrance_aroma: 'fragrance/aroma',
+      flavor: 'flavor',
+      aftertaste: 'aftertaste',
+      acidity: 'acidity',
+      sweetness: 'sweetness',
+      mouthfeel: 'mouthfeel'
+    };
+
     const selected = {};
     Object.keys(descriptorData).forEach(k => selected[k] = []);
+
+    function getLocalDateString() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    function createIntensityBand() {
+      const band = document.createElement('div');
+      band.className = 'intensity-band';
+      band.innerHTML = `
+        <div class="intensity-segments">
+          <div class="intensity-segment"></div>
+          <div class="intensity-segment"></div>
+          <div class="intensity-segment"></div>
+        </div>
+        <div class="intensity-labels">
+          <span>LOW</span>
+          <span>MEDIUM</span>
+          <span>HIGH</span>
+        </div>
+      `;
+      return band;
+    }
+
+    function createMiniIntensity(labelText, valueId, rangeId) {
+      const miniIntensity = document.createElement('div');
+      miniIntensity.className = 'mini-intensity';
+
+      const miniHead = document.createElement('div');
+      miniHead.className = 'mini-intensity-head';
+
+      const miniLabel = document.createElement('span');
+      miniLabel.className = 'mini-intensity-label';
+      miniLabel.textContent = labelText;
+
+      const miniValue = document.createElement('strong');
+      miniValue.className = 'mini-intensity-value';
+      miniValue.id = valueId;
+      miniValue.textContent = '0';
+
+      miniHead.appendChild(miniLabel);
+      miniHead.appendChild(miniValue);
+
+      const range = document.createElement('input');
+      range.type = 'range';
+      range.min = '0';
+      range.max = '15';
+      range.step = '1';
+      range.value = '0';
+      range.id = rangeId;
+      range.addEventListener('input', () => {
+        miniValue.textContent = range.value;
+      });
+
+      miniIntensity.appendChild(miniHead);
+      miniIntensity.appendChild(range);
+      miniIntensity.appendChild(createIntensityBand());
+
+      return miniIntensity;
+    }
 
     function renderDescriptors() {
       const root = document.getElementById('descriptor-groups');
@@ -463,7 +652,7 @@
         group.className = 'group';
 
         const title = document.createElement('h3');
-        title.textContent = field;
+        title.textContent = fieldLabels[field] || field;
 
         const chips = document.createElement('div');
         chips.className = 'chips';
@@ -510,47 +699,21 @@
         group.appendChild(title);
         group.appendChild(chips);
         group.appendChild(customRow);
+
+        if (field === 'fragrance_aroma') {
+          group.appendChild(
+            createMiniIntensity('Fragrance 0–15', 'fragrance_value', 'intensity_fragrance')
+          );
+          group.appendChild(
+            createMiniIntensity('Aroma 0–15', 'aroma_value', 'intensity_aroma')
+          );
+        } else {
+          group.appendChild(
+            createMiniIntensity('Intensity 0–15', field + '_value', 'intensity_' + field)
+          );
+        }
+
         root.appendChild(group);
-      });
-    }
-
-    function renderScales(containerId, fields, max, prefix='') {
-      const root = document.getElementById(containerId);
-      root.innerHTML = '';
-
-      fields.forEach(field => {
-        const box = document.createElement('div');
-        box.className = 'scale-box';
-
-        const head = document.createElement('div');
-        head.className = 'head';
-
-        const label = document.createElement('span');
-        label.textContent = prefix
-          ? (prefix + ' ' + field.replace(prefix + '_',''))
-          : ('intensity ' + field);
-
-        const value = document.createElement('strong');
-        value.id = field + '_value';
-        value.textContent = '0';
-
-        head.appendChild(label);
-        head.appendChild(value);
-
-        const range = document.createElement('input');
-        range.type = 'range';
-        range.min = '0';
-        range.max = String(max);
-        range.step = '1';
-        range.value = '0';
-        range.id = 'intensity_' + field;
-        range.addEventListener('input', () => {
-          value.textContent = range.value;
-        });
-
-        box.appendChild(head);
-        box.appendChild(range);
-        root.appendChild(box);
       });
     }
 
@@ -559,19 +722,10 @@
       return el ? el.value.trim() : '';
     }
 
-    const emojiMap = {
-      aroma:'👃',
-      flavor:'🍬',
-      aftertaste:'🫧',
-      acidity:'✨',
-      sweetness:'🍯',
-      mouthfeel:'🫶'
-    };
-
     function scoreBar(value, max = 15) {
       const n = Number(value || 0);
       const filled = Math.max(0, Math.min(5, Math.round((n / max) * 5)));
-      return '█'.repeat(filled) + '·'.repeat(5 - filled);
+      return '█'.repeat(filled) + '░'.repeat(5 - filled);
     }
 
     function line(prefix, value) {
@@ -583,6 +737,75 @@
       const custom = getValue('custom_' + field);
       if (custom) vals.push('other / อื่นๆ: ' + custom);
       return vals.join(', ');
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function renderDescriptorOutput() {
+      const root = document.getElementById('descriptorOutput');
+
+      const descriptorFields = [
+        { key: 'fragrance_aroma', label: '👃 Fragrance/Aroma' },
+        { key: 'flavor', label: '🍬 Flavor' },
+        { key: 'aftertaste', label: '🫧 Aftertaste' },
+        { key: 'acidity', label: '✨ Acidity' },
+        { key: 'sweetness', label: '🍯 Sweetness' },
+        { key: 'mouthfeel', label: '🫶 Mouthfeel' }
+      ];
+
+      root.innerHTML = descriptorFields.map(({ key, label }) => {
+        const values = [...selected[key]];
+        const custom = getValue('custom_' + key);
+        if (custom) values.push('other / อื่นๆ: ' + custom);
+
+        const tagsHtml = values.length
+          ? `<div class="descriptor-tags">
+              ${values.map(v => `<span class="descriptor-tag">${escapeHtml(v)}</span>`).join('')}
+            </div>`
+          : `<div class="descriptor-empty">-</div>`;
+
+        if (key === 'fragrance_aroma') {
+          const fragrance = getValue('intensity_fragrance') || '0';
+          const aroma = getValue('intensity_aroma') || '0';
+
+          return `
+            <div class="descriptor-row">
+              <div class="descriptor-label">
+                <span>${label}</span>
+                <span class="descriptor-score-stack">
+                  <span class="descriptor-score">Fragrance ${fragrance}/15</span>
+                  <span class="descriptor-score">Aroma ${aroma}/15</span>
+                </span>
+              </div>
+              ${tagsHtml}
+              <div class="descriptor-meter">Fragrance  ${scoreBar(fragrance)}</div>
+              <div class="descriptor-meter">Aroma      ${scoreBar(aroma)}</div>
+            </div>
+          `;
+        }
+
+        const intensity = getValue('intensity_' + key) || '0';
+
+        return `
+          <div class="descriptor-row">
+            <div class="descriptor-label">
+              <span>${label}</span>
+              <span class="descriptor-score-stack">
+                <span class="descriptor-score">${intensity}/15</span>
+              </span>
+            </div>
+            ${tagsHtml}
+            <div class="descriptor-meter">${scoreBar(intensity)}</div>
+          </div>
+        `;
+      }).join('');
     }
 
     function generateOutput() {
@@ -600,7 +823,7 @@
       lines.push(`Process: ${getValue('process') || '-'}`);
       lines.push('');
       lines.push('— Descriptors —');
-      lines.push(line('👃 Aroma:', collectDescriptor('aroma')));
+      lines.push(line('👃 Fragrance/Aroma:', collectDescriptor('fragrance_aroma')));
       lines.push(line('🍬 Flavor:', collectDescriptor('flavor')));
       lines.push(line('🫧 Aftertaste:', collectDescriptor('aftertaste')));
       lines.push(line('✨ Acidity:', collectDescriptor('acidity')));
@@ -609,62 +832,290 @@
       lines.push(line('📝 Notes:', getValue('descriptive_notes')));
       lines.push('');
       lines.push('— Intensity (0–15) —');
-
-      ['aroma','flavor','aftertaste','acidity','sweetness','mouthfeel'].forEach(field => {
-        const v = getValue('intensity_' + field);
-        const label = field.charAt(0).toUpperCase() + field.slice(1);
-        lines.push(`${emojiMap[field]} ${label}: ${v || '0'}   ${scoreBar(v)}`);
-      });
-
+      lines.push(`👃 Fragrance: ${getValue('intensity_fragrance') || '0'}   ${scoreBar(getValue('intensity_fragrance'))}`);
+      lines.push(`👃 Aroma: ${getValue('intensity_aroma') || '0'}   ${scoreBar(getValue('intensity_aroma'))}`);
+      lines.push(`🍬 Flavor: ${getValue('intensity_flavor') || '0'}   ${scoreBar(getValue('intensity_flavor'))}`);
+      lines.push(`🫧 Aftertaste: ${getValue('intensity_aftertaste') || '0'}   ${scoreBar(getValue('intensity_aftertaste'))}`);
+      lines.push(`✨ Acidity: ${getValue('intensity_acidity') || '0'}   ${scoreBar(getValue('intensity_acidity'))}`);
+      lines.push(`🍯 Sweetness: ${getValue('intensity_sweetness') || '0'}   ${scoreBar(getValue('intensity_sweetness'))}`);
+      lines.push(`🫶 Mouthfeel: ${getValue('intensity_mouthfeel') || '0'}   ${scoreBar(getValue('intensity_mouthfeel'))}`);
       lines.push('');
       lines.push(line('⚠️ Defects:', getValue('defects')));
       lines.push(line('💭 Tasting Notes:', getValue('tasting_notes')));
       lines.push(line('➡️ Next action:', getValue('next_action')));
       lines.push('');
-      lines.push('#Cupping #CVA #Coffee');
+      lines.push(getValue('tags') || '#cupping #cva #coffee');
 
       const text = lines.join('\n');
       document.getElementById('output').textContent = text;
+      renderDescriptorOutput();
       return text;
+    }
+
+    function buildLogseqOutput() {
+      const lines = [];
+      lines.push(`- ☕ CVA Cupping Note`);
+      lines.push(`  - Coffee:: ${getValue('coffee') || '-'}`);
+      lines.push(`  - Sample:: ${getValue('sample_id') || '-'}`);
+      lines.push(`  - Date:: ${getValue('cupping_date') || '-'}`);
+      lines.push(`  - Cupper:: ${getValue('cupper') || '-'}`);
+      lines.push(`  - Session:: ${getValue('session') || '-'}`);
+      lines.push(`  - Round:: ${getValue('round_no') || '-'}`);
+      lines.push(`  - Origin:: ${getValue('origin') || '-'}`);
+      lines.push(`  - Variety:: ${getValue('variety') || '-'}`);
+      lines.push(`  - Process:: ${getValue('process') || '-'}`);
+      lines.push(`  - Descriptors`);
+      lines.push(`    - Fragrance/Aroma:: ${collectDescriptor('fragrance_aroma') || '-'}`);
+      lines.push(`    - Flavor:: ${collectDescriptor('flavor') || '-'}`);
+      lines.push(`    - Aftertaste:: ${collectDescriptor('aftertaste') || '-'}`);
+      lines.push(`    - Acidity:: ${collectDescriptor('acidity') || '-'}`);
+      lines.push(`    - Sweetness:: ${collectDescriptor('sweetness') || '-'}`);
+      lines.push(`    - Mouthfeel:: ${collectDescriptor('mouthfeel') || '-'}`);
+      lines.push(`    - Notes:: ${getValue('descriptive_notes') || '-'}`);
+      lines.push(`  - Intensity`);
+      lines.push(`    - Fragrance:: ${getValue('intensity_fragrance') || '0'}`);
+      lines.push(`    - Aroma:: ${getValue('intensity_aroma') || '0'}`);
+      lines.push(`    - Flavor:: ${getValue('intensity_flavor') || '0'}`);
+      lines.push(`    - Aftertaste:: ${getValue('intensity_aftertaste') || '0'}`);
+      lines.push(`    - Acidity:: ${getValue('intensity_acidity') || '0'}`);
+      lines.push(`    - Sweetness:: ${getValue('intensity_sweetness') || '0'}`);
+      lines.push(`    - Mouthfeel:: ${getValue('intensity_mouthfeel') || '0'}`);
+      lines.push(`  - Defects:: ${getValue('defects') || '-'}`);
+      lines.push(`  - Tasting Notes:: ${getValue('tasting_notes') || '-'}`);
+      lines.push(`  - Next Action:: ${getValue('next_action') || '-'}`);
+      lines.push(`  - Tags:: ${getValue('tags') || '#cupping #cva #coffee'}`);
+      return lines.join('\n');
+    }
+
+    function slugify(value) {
+      return String(value || '')
+        .trim()
+        .toLowerCase()
+        .replace(/[\s\/]+/g, '-')
+        .replace(/[^a-z0-9\-_]/g, '')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+    }
+
+    function getSafeFilenameBase() {
+      const date = getValue('cupping_date') || getLocalDateString();
+      const sample = slugify(getValue('sample_id')) || 'sample';
+      const coffee = slugify(getValue('coffee')) || 'coffee';
+      return `${date}-${sample}-${coffee}`;
+    }
+
+    function buildRecordObject() {
+      return {
+        coffee: getValue('coffee') || '',
+        sample_id: getValue('sample_id') || '',
+        cupping_date: getValue('cupping_date') || '',
+        cupper: getValue('cupper') || '',
+        session: getValue('session') || '',
+        round_no: getValue('round_no') || '',
+        origin: getValue('origin') || '',
+        variety: getValue('variety') || '',
+        process: getValue('process') || '',
+        descriptors: {
+          fragrance_aroma: {
+            selected: [...selected.fragrance_aroma],
+            custom: getValue('custom_fragrance_aroma') || ''
+          },
+          flavor: {
+            selected: [...selected.flavor],
+            custom: getValue('custom_flavor') || ''
+          },
+          aftertaste: {
+            selected: [...selected.aftertaste],
+            custom: getValue('custom_aftertaste') || ''
+          },
+          acidity: {
+            selected: [...selected.acidity],
+            custom: getValue('custom_acidity') || ''
+          },
+          sweetness: {
+            selected: [...selected.sweetness],
+            custom: getValue('custom_sweetness') || ''
+          },
+          mouthfeel: {
+            selected: [...selected.mouthfeel],
+            custom: getValue('custom_mouthfeel') || ''
+          }
+        },
+        intensity: {
+          fragrance: Number(getValue('intensity_fragrance') || 0),
+          aroma: Number(getValue('intensity_aroma') || 0),
+          flavor: Number(getValue('intensity_flavor') || 0),
+          aftertaste: Number(getValue('intensity_aftertaste') || 0),
+          acidity: Number(getValue('intensity_acidity') || 0),
+          sweetness: Number(getValue('intensity_sweetness') || 0),
+          mouthfeel: Number(getValue('intensity_mouthfeel') || 0)
+        },
+        descriptive_notes: getValue('descriptive_notes') || '',
+        defects: getValue('defects') || '',
+        tasting_notes: getValue('tasting_notes') || '',
+        next_action: getValue('next_action') || '',
+        tags: getValue('tags') || '#cupping #cva #coffee',
+        created_at: new Date().toISOString()
+      };
+    }
+
+    function buildMarkdownOutput() {
+      const record = buildRecordObject();
+      const descriptorLine = (label, value) => `- **${label}:** ${value || '-'}`;
+
+      const lines = [];
+      lines.push(`# CVA Cupping Note`);
+      lines.push('');
+      lines.push(`- **Coffee:** ${record.coffee || '-'}`);
+      lines.push(`- **Sample:** ${record.sample_id || '-'}`);
+      lines.push(`- **Date:** ${record.cupping_date || '-'}`);
+      lines.push(`- **Cupper:** ${record.cupper || '-'}`);
+      lines.push(`- **Session:** ${record.session || '-'}`);
+      lines.push(`- **Round:** ${record.round_no || '-'}`);
+      lines.push(`- **Origin:** ${record.origin || '-'}`);
+      lines.push(`- **Variety:** ${record.variety || '-'}`);
+      lines.push(`- **Process:** ${record.process || '-'}`);
+      lines.push('');
+      lines.push(`## Descriptors`);
+      lines.push(descriptorLine('Fragrance/Aroma', collectDescriptor('fragrance_aroma')));
+      lines.push(descriptorLine('Flavor', collectDescriptor('flavor')));
+      lines.push(descriptorLine('Aftertaste', collectDescriptor('aftertaste')));
+      lines.push(descriptorLine('Acidity', collectDescriptor('acidity')));
+      lines.push(descriptorLine('Sweetness', collectDescriptor('sweetness')));
+      lines.push(descriptorLine('Mouthfeel', collectDescriptor('mouthfeel')));
+      lines.push(descriptorLine('Notes', record.descriptive_notes));
+      lines.push('');
+      lines.push(`## Intensity (0–15)`);
+      lines.push(`- **Fragrance:** ${record.intensity.fragrance}`);
+      lines.push(`- **Aroma:** ${record.intensity.aroma}`);
+      lines.push(`- **Flavor:** ${record.intensity.flavor}`);
+      lines.push(`- **Aftertaste:** ${record.intensity.aftertaste}`);
+      lines.push(`- **Acidity:** ${record.intensity.acidity}`);
+      lines.push(`- **Sweetness:** ${record.intensity.sweetness}`);
+      lines.push(`- **Mouthfeel:** ${record.intensity.mouthfeel}`);
+      lines.push('');
+      lines.push(descriptorLine('Defects', record.defects));
+      lines.push(descriptorLine('Tasting Notes', record.tasting_notes));
+      lines.push(descriptorLine('Next Action', record.next_action));
+      lines.push(descriptorLine('Tags', record.tags));
+      return lines.join('\n');
+    }
+
+    function downloadFile(filename, content, mimeType) {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function downloadJsonFile() {
+      generateOutput();
+      const record = buildRecordObject();
+      const filename = `${getSafeFilenameBase()}.json`;
+      const content = JSON.stringify(record, null, 2);
+      downloadFile(filename, content, 'application/json');
+    }
+
+    function downloadMarkdownFile() {
+      generateOutput();
+      const filename = `${getSafeFilenameBase()}.md`;
+      const content = buildMarkdownOutput();
+      downloadFile(filename, content, 'text/markdown');
+    }
+
+    async function copyTextSmart(text) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+        throw new Error('Clipboard API unavailable');
+      } catch {
+        const temp = document.createElement('textarea');
+        temp.value = text;
+        temp.setAttribute('readonly', '');
+        temp.style.position = 'absolute';
+        temp.style.left = '-9999px';
+        document.body.appendChild(temp);
+        temp.select();
+        temp.setSelectionRange(0, temp.value.length);
+
+        try {
+          const ok = document.execCommand('copy');
+          document.body.removeChild(temp);
+          return ok;
+        } catch {
+          document.body.removeChild(temp);
+          return false;
+        }
+      }
     }
 
     function resetForm() {
       document.querySelectorAll('input, textarea').forEach(el => {
         if (el.type === 'range') {
           el.value = '0';
-          const v = document.getElementById(el.id.replace('intensity_', '') + '_value');
-          if (v) v.textContent = '0';
         } else if (el.id === 'tags') {
           el.value = '#cupping #cva #coffee';
+        } else if (el.id === 'cupping_date') {
+          el.value = getLocalDateString();
         } else {
           el.value = '';
         }
       });
 
-      document.querySelectorAll('select').forEach(el => el.value = '');
-      Object.keys(selected).forEach(k => selected[k] = []);
-      document.querySelectorAll('.chip').forEach(ch => ch.classList.remove('active'));
+      document.querySelectorAll('select').forEach(el => {
+        el.value = '';
+      });
+
+      Object.keys(selected).forEach(k => {
+        selected[k] = [];
+      });
+
+      document.querySelectorAll('.chip.active').forEach(ch => {
+        ch.classList.remove('active');
+      });
+
+      [
+        'fragrance_value', 'aroma_value',
+        'flavor_value', 'aftertaste_value', 'acidity_value', 'sweetness_value', 'mouthfeel_value'
+      ].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = '0';
+      });
+
       document.getElementById('output').textContent = '';
-      document.getElementById('cupping_date').value = new Date().toISOString().slice(0,10);
+      document.getElementById('descriptorOutput').innerHTML = '';
+      generateOutput();
+    }
+
+    async function copyOutput() {
+      const text = generateOutput();
+      const ok = await copyTextSmart(text);
+      alert(ok ? 'Copied to clipboard' : 'Copy failed. Please copy manually.');
+    }
+
+    async function copyLogseqOutput() {
+      generateOutput();
+      const text = buildLogseqOutput();
+      const ok = await copyTextSmart(text);
+      alert(ok ? 'Copied Logseq format' : 'Copy failed. Please copy manually.');
     }
 
     document.getElementById('generateBtn').addEventListener('click', generateOutput);
-
-    document.getElementById('copyBtn').addEventListener('click', async () => {
-      const text = generateOutput();
-      try {
-        await navigator.clipboard.writeText(text);
-        alert('Copied to clipboard');
-      } catch {
-        alert('Copy failed. Please copy from the output box manually.');
-      }
-    });
-
+    document.getElementById('copyBtn').addEventListener('click', copyOutput);
+    document.getElementById('copyLogseqBtn').addEventListener('click', copyLogseqOutput);
+    document.getElementById('downloadJsonBtn').addEventListener('click', downloadJsonFile);
+    document.getElementById('downloadMdBtn').addEventListener('click', downloadMarkdownFile);
     document.getElementById('resetBtn').addEventListener('click', resetForm);
 
     renderDescriptors();
-    renderScales('intensity-scales', intensityFields, 15);
-    document.getElementById('cupping_date').value = new Date().toISOString().slice(0,10);
+    document.getElementById('cupping_date').value = getLocalDateString();
     generateOutput();
   </script>
 </body>
