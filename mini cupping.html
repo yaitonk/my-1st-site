@@ -1,59 +1,671 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Cupping</title>
-    <style>
-        #format-toggle {
-            margin-bottom: 1em;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apple Notes CVA Cupping Form — Gen Z Compact v2</title>
+  <style>
+    :root {
+      --bg: #f7f4ee;
+      --card: #fffdf9;
+      --text: #2a241d;
+      --muted: #6b6258;
+      --line: #ddd2c6;
+      --chip: #efe7dc;
+      --chip-active: #d6c2aa;
+      --accent: #8a6846;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 12px;
+    }
+
+    h1 {
+      margin: 0 0 4px;
+      font-size: 20px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .sub {
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.035);
+    }
+
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 2px 0 10px;
+      line-height: 1.2;
+    }
+
+    .main-fields {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0,1fr));
+      gap: 8px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .span-6 { grid-column: span 6; }
+    .span-3 { grid-column: span 3; }
+    .span-2 { grid-column: span 2; }
+
+    label {
+      font-size: 10.5px;
+      color: var(--muted);
+      line-height: 1.1;
+      letter-spacing: 0.01em;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 6px 9px;
+      background: white;
+      color: var(--text);
+      font: inherit;
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    input, select {
+      height: 34px;
+    }
+
+    textarea {
+      min-height: 72px;
+      resize: vertical;
+    }
+
+    .group { margin-bottom: 12px; }
+
+    .group h3 {
+      margin: 0 0 6px;
+      font-size: 13px;
+      color: var(--accent);
+      text-transform: capitalize;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      background: var(--chip);
+      color: var(--text);
+      padding: 6px 9px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 1.2;
+      user-select: none;
+    }
+
+    .chip.active {
+      background: var(--chip-active);
+      border-color: #b99f80;
+    }
+
+    .custom-row {
+      margin-top: 6px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .custom-row input {
+      flex: 1;
+    }
+
+    .custom-toggle {
+      min-width: fit-content;
+    }
+
+    .scales {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 8px;
+    }
+
+    .scale-box {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 9px;
+      background: #fff;
+    }
+
+    .scale-box .head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 5px;
+      font-size: 12px;
+      gap: 8px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      padding: 0;
+      height: auto;
+      border: none;
+      background: transparent;
+    }
+
+    .detail-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .detail-fields .full {
+      grid-column: 1 / -1;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+    }
+
+    button.primary {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      min-height: 360px;
+      font-size: 13px;
+      line-height: 1.5;
+      overflow: auto;
+      margin: 0;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 8px;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { padding: 8px; }
+      h1 { font-size: 16px; }
+      .sub { font-size: 11px; margin-bottom: 8px; }
+      .card { padding: 10px; border-radius: 14px; }
+      .section-title { font-size: 14px; margin-bottom: 8px; }
+
+      .main-fields {
+        grid-template-columns: repeat(6, minmax(0,1fr));
+        gap: 6px;
+      }
+
+      .main-fields .coffee-field { grid-column: span 6; }
+      .main-fields .orig-field,
+      .main-fields .var-field,
+      .main-fields .date-field,
+      .main-fields .by-field { grid-column: span 3; }
+      .main-fields .sess-field,
+      .main-fields .rnd-field,
+      .main-fields .id-field { grid-column: span 2; }
+      .main-fields .proc-field { grid-column: span 6; }
+
+      label { font-size: 10px; }
+      input, select { height: 32px; padding: 5px 8px; font-size: 12px; }
+      textarea { min-height: 68px; padding: 7px 8px; font-size: 12px; }
+
+      .chips { gap: 5px; }
+      .chip { font-size: 11px; padding: 5px 8px; }
+      .group h3 { font-size: 12px; }
+      .custom-row { gap: 5px; }
+      .scales { grid-template-columns: 1fr; gap: 6px; }
+      .detail-fields { grid-template-columns: 1fr; gap: 6px; margin-top: 10px; }
+      .actions { gap: 6px; }
+      button { font-size: 12px; padding: 7px 10px; }
+      pre { min-height: 280px; font-size: 12px; padding: 10px; }
+    }
+  </style>
 </head>
 <body>
-    <h1>Mini Cupping</h1>
-    <div id="format-toggle">
-        <label for='toggle'>Select Format: </label>
-        <select id='toggle'>
-            <option value='apple-notes'>Apple Notes</option>
-            <option value='logseq'>Logseq MD</option>
-        </select>
+  <div class="wrap">
+    <h1>mini CVA Cupping Form — Casa R&d Gen Z style</h1>
+    <div class="sub">Compact version for iPhone / iPad </div>
+
+    <div class="grid">
+      <div>
+        <div class="card">
+          <div class="section-title">ข้อมูลหลัก</div>
+          <div class="main-fields">
+            <div class="field span-6 coffee-field">
+              <label>Coffee</label>
+              <input id="coffee" placeholder="Alto Quiel Selecto Natural" />
+            </div>
+
+            <div class="field span-3 orig-field">
+              <label>Origin</label>
+              <input id="origin" placeholder="Panama" />
+            </div>
+
+            <div class="field span-3 var-field">
+              <label>Variety</label>
+              <input id="variety" placeholder="Geisha" />
+            </div>
+
+            <div class="field span-3 date-field">
+              <label>Date</label>
+              <input id="cupping_date" type="date" />
+            </div>
+
+            <div class="field span-3 by-field">
+              <label>By</label>
+              <input id="cupper" placeholder="Name" />
+            </div>
+
+            <div class="field span-2 sess-field">
+              <label>Session</label>
+              <select id="session">
+                <option value="">-</option>
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+                <option value="S1">S1</option>
+                <option value="S2">S2</option>
+                <option value="S3">S3</option>
+                <option value="Final">Final</option>
+              </select>
+            </div>
+
+            <div class="field span-2 rnd-field">
+              <label>Round</label>
+              <select id="round_no">
+                <option value="">-</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+
+            <div class="field span-2 id-field">
+              <label>ID</label>
+              <input id="sample_id" placeholder="B04" />
+            </div>
+
+            <div class="field span-6 proc-field">
+              <label>Process</label>
+              <input id="process" placeholder="Natural" />
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:10px;">
+          <div class="section-title">Descriptors</div>
+          <div id="descriptor-groups"></div>
+
+          <div class="section-title" style="margin-top:14px;">Intensity (0–15)</div>
+          <div class="scales" id="intensity-scales"></div>
+
+          <div class="detail-fields">
+            <div class="field full">
+              <label>Overall & Remark</label>
+              <textarea id="descriptive_notes" placeholder="floral low / โทนดอกไม้ยังเบา, sweetness clear / ความหวานชัด"></textarea>
+            </div>
+
+            <div class="field">
+              <label>Defects</label>
+              <input id="defects" placeholder="none / ไม่มี" />
+            </div>
+
+            <div class="field full">
+              <label>Tasting Notes</label>
+              <textarea id="tasting_notes" placeholder="sweet, clean, good mouthfeel / หวานสะอาด สัมผัสดี"></textarea>
+            </div>
+
+            <div class="field full">
+              <label>Next</label>
+              <textarea id="next_action" placeholder="compare with artisan graph later / ค่อยเทียบกับกราฟ Artisan ภายหลัง"></textarea>
+            </div>
+
+            <div class="field full">
+              <label>Tags</label>
+              <input id="tags" value="#cupping #cva #coffee" />
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="primary" id="generateBtn">Generate</button>
+            <button id="copyBtn">Copy</button>
+            <button id="resetBtn">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">ผลลัพธ์</div>
+        <pre id="output"></pre>
+        <div class="hint">Don’t be swayed by the aroma!
+      </div>
     </div>
+  </div>
 
-    <textarea id='output' rows="10" cols="50"></textarea>
-    <br>
-    <button id='copy-apple'>Copy as Apple Notes</button>
-    <button id='copy-logseq'>Copy as Logseq MD</button>
+  <script>
+    const descriptorData = {
+      "aroma": [
+        'floral / ดอกไม้','jasmine / มะลิ','bergamot / เบอร์กามอต','citrus / ซิตรัส',
+        'berry / เบอร์รี','tropical fruit / ผลไม้เมืองร้อน','stone fruit / ผลไม้เมล็ดแข็ง',
+        'honey / น้ำผึ้ง','candy / ลูกกวาด','caramel / คาราเมล','tea-like / คล้ายชา',
+        'herbal / สมุนไพร','cocoa / โกโก้','spice / เครื่องเทศ'
+      ],
+      "flavor": [
+        'floral / ดอกไม้','jasmine / มะลิ','bergamot / เบอร์กามอต','citrus / ซิตรัส',
+        'berry / เบอร์รี','tropical fruit / ผลไม้เมืองร้อน','stone fruit / ผลไม้เมล็ดแข็ง',
+        'apple / แอปเปิล','grape / องุ่น','honey / น้ำผึ้ง','candy / ลูกกวาด',
+        'caramel / คาราเมล','tea-like / คล้ายชา','cocoa / โกโก้','spice / เครื่องเทศ'
+      ],
+      "aftertaste": [
+        'clean / สะอาด','sweet / หวาน','floral / ดอกไม้','tea-like / คล้ายชา',
+        'short / สั้น','medium / ปานกลาง','long / ยาว','drying / ฝาดแห้ง',
+        'slightly bitter / ขมเล็กน้อย'
+      ],
+      "acidity": [
+        'citric / ซิตรัส','malic / มาลิก','tartaric / ทาร์ทาริก','phosphoric / ฟอสฟอริก',
+        'lactic / แลกติก','soft / นุ่ม','bright / สดใส','round / กลม','sharp / คม'
+      ],
+      "sweetness": [
+        'sugar / น้ำตาล','honey / น้ำผึ้ง','candy / ลูกกวาด','caramel / คาราเมล',
+        'brown sugar / น้ำตาลทรายแดง','molasses / กากน้ำตาล','ripe fruit / ผลไม้สุก',
+        'jammy / แยม','clean sweet / หวานสะอาด'
+      ],
+      "mouthfeel": [
+        'silky / เนียน','juicy / ฉ่ำ','creamy / ครีมมี','smooth / ลื่น',
+        'tea-like / คล้ายชา','syrupy / หนืดหวาน','dense / แน่น',
+        'thin / บาง','drying / ฝาดแห้ง'
+      ]
+    };
 
-    <script>
-        const output = document.getElementById('output');
-        const toggle = document.getElementById('toggle');
-        const copyAppleButton = document.getElementById('copy-apple');
-        const copyLogseqButton = document.getElementById('copy-logseq');
+    const intensityFields = ['aroma','flavor','aftertaste','acidity','sweetness','mouthfeel'];
+    const selected = {};
+    Object.keys(descriptorData).forEach(k => selected[k] = []);
 
-        function generateMarkdown() {
-            const format = toggle.value;
-            let content;
-            if (format === 'apple-notes') {
-                content = "Your content formatted for Apple Notes.";
+    function renderDescriptors() {
+      const root = document.getElementById('descriptor-groups');
+      root.innerHTML = '';
+
+      Object.entries(descriptorData).forEach(([field, options]) => {
+        const group = document.createElement('div');
+        group.className = 'group';
+
+        const title = document.createElement('h3');
+        title.textContent = field;
+
+        const chips = document.createElement('div');
+        chips.className = 'chips';
+
+        options.forEach(option => {
+          const chip = document.createElement('button');
+          chip.type = 'button';
+          chip.className = 'chip';
+          chip.textContent = option;
+
+          chip.addEventListener('click', () => {
+            const arr = selected[field];
+            const idx = arr.indexOf(option);
+
+            if (idx >= 0) {
+              arr.splice(idx, 1);
+              chip.classList.remove('active');
             } else {
-                content = "Your content formatted for Logseq.";
+              arr.push(option);
+              chip.classList.add('active');
             }
-            output.value = content;
+          });
+
+          chips.appendChild(chip);
+        });
+
+        const customRow = document.createElement('div');
+        customRow.className = 'custom-row';
+
+        const customToggle = document.createElement('button');
+        customToggle.type = 'button';
+        customToggle.className = 'chip custom-toggle';
+        customToggle.textContent = 'other / อื่นๆ';
+
+        const customInput = document.createElement('input');
+        customInput.id = 'custom_' + field;
+        customInput.placeholder = 'พิมพ์ descriptor เพิ่มเอง';
+
+        customToggle.addEventListener('click', () => customInput.focus());
+
+        customRow.appendChild(customToggle);
+        customRow.appendChild(customInput);
+
+        group.appendChild(title);
+        group.appendChild(chips);
+        group.appendChild(customRow);
+        root.appendChild(group);
+      });
+    }
+
+    function renderScales(containerId, fields, max, prefix='') {
+      const root = document.getElementById(containerId);
+      root.innerHTML = '';
+
+      fields.forEach(field => {
+        const box = document.createElement('div');
+        box.className = 'scale-box';
+
+        const head = document.createElement('div');
+        head.className = 'head';
+
+        const label = document.createElement('span');
+        label.textContent = prefix
+          ? (prefix + ' ' + field.replace(prefix + '_',''))
+          : ('intensity ' + field);
+
+        const value = document.createElement('strong');
+        value.id = field + '_value';
+        value.textContent = '0';
+
+        head.appendChild(label);
+        head.appendChild(value);
+
+        const range = document.createElement('input');
+        range.type = 'range';
+        range.min = '0';
+        range.max = String(max);
+        range.step = '1';
+        range.value = '0';
+        range.id = 'intensity_' + field;
+        range.addEventListener('input', () => {
+          value.textContent = range.value;
+        });
+
+        box.appendChild(head);
+        box.appendChild(range);
+        root.appendChild(box);
+      });
+    }
+
+    function getValue(id) {
+      const el = document.getElementById(id);
+      return el ? el.value.trim() : '';
+    }
+
+    const emojiMap = {
+      aroma:'👃',
+      flavor:'🍬',
+      aftertaste:'🫧',
+      acidity:'✨',
+      sweetness:'🍯',
+      mouthfeel:'🫶'
+    };
+
+    function scoreBar(value, max = 15) {
+      const n = Number(value || 0);
+      const filled = Math.max(0, Math.min(5, Math.round((n / max) * 5)));
+      return '█'.repeat(filled) + '·'.repeat(5 - filled);
+    }
+
+    function line(prefix, value) {
+      return value ? `${prefix} ${value}` : `${prefix} -`;
+    }
+
+    function collectDescriptor(field) {
+      const vals = [...selected[field]];
+      const custom = getValue('custom_' + field);
+      if (custom) vals.push('other / อื่นๆ: ' + custom);
+      return vals.join(', ');
+    }
+
+    function generateOutput() {
+      const lines = [];
+      lines.push('☕ CVA Cupping Note');
+      lines.push('');
+      lines.push(`Coffee: ${getValue('coffee') || '-'}`);
+      lines.push(`Sample: ${getValue('sample_id') || '-'}`);
+      lines.push(`Date: ${getValue('cupping_date') || '-'}`);
+      lines.push(`Cupper: ${getValue('cupper') || '-'}`);
+      lines.push(`Session: ${getValue('session') || '-'}`);
+      lines.push(`Round: ${getValue('round_no') || '-'}`);
+      lines.push(`Origin: ${getValue('origin') || '-'}`);
+      lines.push(`Variety: ${getValue('variety') || '-'}`);
+      lines.push(`Process: ${getValue('process') || '-'}`);
+      lines.push('');
+      lines.push('— Descriptors —');
+      lines.push(line('👃 Aroma:', collectDescriptor('aroma')));
+      lines.push(line('🍬 Flavor:', collectDescriptor('flavor')));
+      lines.push(line('🫧 Aftertaste:', collectDescriptor('aftertaste')));
+      lines.push(line('✨ Acidity:', collectDescriptor('acidity')));
+      lines.push(line('🍯 Sweetness:', collectDescriptor('sweetness')));
+      lines.push(line('🫶 Mouthfeel:', collectDescriptor('mouthfeel')));
+      lines.push(line('📝 Notes:', getValue('descriptive_notes')));
+      lines.push('');
+      lines.push('— Intensity (0–15) —');
+
+      ['aroma','flavor','aftertaste','acidity','sweetness','mouthfeel'].forEach(field => {
+        const v = getValue('intensity_' + field);
+        const label = field.charAt(0).toUpperCase() + field.slice(1);
+        lines.push(`${emojiMap[field]} ${label}: ${v || '0'}   ${scoreBar(v)}`);
+      });
+
+      lines.push('');
+      lines.push(line('⚠️ Defects:', getValue('defects')));
+      lines.push(line('💭 Tasting Notes:', getValue('tasting_notes')));
+      lines.push(line('➡️ Next action:', getValue('next_action')));
+      lines.push('');
+      lines.push('#Cupping #CVA #Coffee');
+
+      const text = lines.join('\n');
+      document.getElementById('output').textContent = text;
+      return text;
+    }
+
+    function resetForm() {
+      document.querySelectorAll('input, textarea').forEach(el => {
+        if (el.type === 'range') {
+          el.value = '0';
+          const v = document.getElementById(el.id.replace('intensity_', '') + '_value');
+          if (v) v.textContent = '0';
+        } else if (el.id === 'tags') {
+          el.value = '#cupping #cva #coffee';
+        } else {
+          el.value = '';
         }
+      });
 
-        dataToggle.addEventListener('change', generateMarkdown);
-        copyAppleButton.addEventListener('click', () => {
-            navigator.clipboard.writeText(output.value);
-            alert('Copied to clipboard: Apple Notes!');
-        });
-        copyLogseqButton.addEventListener('click', () => {
-            navigator.clipboard.writeText(output.value);
-            alert('Copied to clipboard: Logseq MD!');
-        });
+      document.querySelectorAll('select').forEach(el => el.value = '');
+      Object.keys(selected).forEach(k => selected[k] = []);
+      document.querySelectorAll('.chip').forEach(ch => ch.classList.remove('active'));
+      document.getElementById('output').textContent = '';
+      document.getElementById('cupping_date').value = new Date().toISOString().slice(0,10);
+    }
 
-        // Generate initial markdown content
-        generateMarkdown();
-    </script>
+    document.getElementById('generateBtn').addEventListener('click', generateOutput);
+
+    document.getElementById('copyBtn').addEventListener('click', async () => {
+      const text = generateOutput();
+      try {
+        await navigator.clipboard.writeText(text);
+        alert('Copied to clipboard');
+      } catch {
+        alert('Copy failed. Please copy from the output box manually.');
+      }
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', resetForm);
+
+    renderDescriptors();
+    renderScales('intensity-scales', intensityFields, 15);
+    document.getElementById('cupping_date').value = new Date().toISOString().slice(0,10);
+    generateOutput();
+  </script>
 </body>
 </html>
