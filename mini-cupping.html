@@ -127,7 +127,11 @@
       flex-wrap:wrap;
     }
 
-    #themeToggle{
+    .hero-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
       border:1px solid var(--line);
       background:var(--chip);
       color:var(--text);
@@ -136,11 +140,12 @@
       cursor:pointer;
       font-size:13px;
       font: inherit;
+      text-decoration:none;
       backdrop-filter: blur(10px);
       transition:0.2s;
     }
 
-    #themeToggle:hover{
+    .hero-btn:hover{
       transform:translateY(-1px);
     }
 
@@ -157,6 +162,23 @@
       font-size: 14px;
       line-height: 1.45;
       max-width: 760px;
+    }
+
+    .status-bar{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .status-pill{
+      padding:8px 12px;
+      border-radius:999px;
+      background:var(--chip);
+      border:1px solid var(--line);
     }
 
     .grid {
@@ -424,6 +446,11 @@
       box-shadow: 0 10px 24px rgba(85,100,255,0.22);
     }
 
+    button.warn {
+      background: rgba(255, 99, 132, 0.08);
+      border-color: rgba(255, 99, 132, 0.20);
+    }
+
     pre {
       white-space: pre-wrap;
       word-break: break-word;
@@ -581,12 +608,19 @@
       <div class="hero-top">
         <div>
           <div class="eyebrow">✦ Pro Max Theme · Casa R&amp;D</div>
-          <h1>mini CVA Cupping Form GenZ</h1>
+          <h1>mini CVA Cupping Form</h1>
           <div class="sub">Glass UI theme เดียวกับ dashboard · compact · ใช้งานง่ายบน iPad / iPhone / Android</div>
         </div>
         <div class="hero-actions">
+          <a class="hero-btn" href="https://yaitonk.github.io/my-1st-site/">🏠 Home</a>
+          <a class="hero-btn" href="https://yaitonk.github.io/casa-cupping-data/dashboard.html">📊 Dashboard</a>
           <button id="themeToggle">🌙 Dark</button>
         </div>
+      </div>
+
+      <div class="status-bar">
+        <div class="status-pill" id="autosaveStatus">Draft: ready</div>
+        <div class="status-pill" id="filenamePreview">Filename: -</div>
       </div>
     </div>
 
@@ -700,9 +734,8 @@
             <button type="button" id="downloadJsonBtn">Download JSON</button>
             <button type="button" id="downloadMdBtn">Download Markdown</button>
             <button type="button" id="resetBtn">Reset</button>
+            <button type="button" class="warn" id="clearDraftBtn">Clear Draft</button>
           </div>
-
-          <div class="hint" id="filenamePreview"></div>
         </div>
       </div>
 
@@ -762,6 +795,8 @@
     const selected = {};
     Object.keys(descriptorData).forEach(k => selected[k] = []);
 
+    const DRAFT_KEY = 'casa-cupping-draft-v1';
+
     function getLocalDateString() {
       const now = new Date();
       const year = now.getFullYear();
@@ -816,6 +851,7 @@
       range.id = rangeId;
       range.addEventListener('input', () => {
         miniValue.textContent = range.value;
+        onDraftChange();
       });
 
       miniIntensity.appendChild(miniHead);
@@ -856,6 +892,8 @@
               arr.push(option);
               chip.classList.add('active');
             }
+
+            onDraftChange();
           });
 
           chips.appendChild(chip);
@@ -872,6 +910,7 @@
         const customInput = document.createElement('input');
         customInput.id = 'custom_' + field;
         customInput.placeholder = 'พิมพ์ descriptor เพิ่มเอง';
+        customInput.addEventListener('input', onDraftChange);
 
         customToggle.addEventListener('click', () => customInput.focus());
 
@@ -883,16 +922,10 @@
         group.appendChild(customRow);
 
         if (field === 'fragrance_aroma') {
-          group.appendChild(
-            createMiniIntensity('Fragrance 0–15', 'fragrance_value', 'intensity_fragrance')
-          );
-          group.appendChild(
-            createMiniIntensity('Aroma 0–15', 'aroma_value', 'intensity_aroma')
-          );
+          group.appendChild(createMiniIntensity('Fragrance 0–15', 'fragrance_value', 'intensity_fragrance'));
+          group.appendChild(createMiniIntensity('Aroma 0–15', 'aroma_value', 'intensity_aroma'));
         } else {
-          group.appendChild(
-            createMiniIntensity('Intensity 0–15', field + '_value', 'intensity_' + field)
-          );
+          group.appendChild(createMiniIntensity('Intensity 0–15', field + '_value', 'intensity_' + field));
         }
 
         root.appendChild(group);
@@ -988,91 +1021,6 @@
           </div>
         `;
       }).join('');
-    }
-
-    function generateOutput() {
-      const lines = [];
-      lines.push('☕ CVA Cupping Note');
-      lines.push('');
-      lines.push(`Coffee: ${getValue('coffee') || '-'}`);
-      lines.push(`Sample: ${getValue('sample_id') || '-'}`);
-      lines.push(`Date: ${getValue('cupping_date') || '-'}`);
-      lines.push(`Cupper: ${getValue('cupper') || '-'}`);
-      lines.push(`Session: ${getValue('session') || '-'}`);
-      lines.push(`Round: ${getValue('round_no') || '-'}`);
-      lines.push(`Origin: ${getValue('origin') || '-'}`);
-      lines.push(`Variety: ${getValue('variety') || '-'}`);
-      lines.push(`Process: ${getValue('process') || '-'}`);
-      lines.push('');
-      lines.push('— Descriptors —');
-      lines.push(line('👃 Fragrance/Aroma:', collectDescriptor('fragrance_aroma')));
-      lines.push(line('🍬 Flavor:', collectDescriptor('flavor')));
-      lines.push(line('🫧 Aftertaste:', collectDescriptor('aftertaste')));
-      lines.push(line('✨ Acidity:', collectDescriptor('acidity')));
-      lines.push(line('🍯 Sweetness:', collectDescriptor('sweetness')));
-      lines.push(line('🫶 Mouthfeel:', collectDescriptor('mouthfeel')));
-      lines.push(line('📝 Notes:', getValue('descriptive_notes')));
-      lines.push('');
-      lines.push('— Intensity (0–15) —');
-      lines.push(`👃 Fragrance: ${getValue('intensity_fragrance') || '0'}   ${scoreBar(getValue('intensity_fragrance'))}`);
-      lines.push(`👃 Aroma: ${getValue('intensity_aroma') || '0'}   ${scoreBar(getValue('intensity_aroma'))}`);
-      lines.push(`🍬 Flavor: ${getValue('intensity_flavor') || '0'}   ${scoreBar(getValue('intensity_flavor'))}`);
-      lines.push(`🫧 Aftertaste: ${getValue('intensity_aftertaste') || '0'}   ${scoreBar(getValue('intensity_aftertaste'))}`);
-      lines.push(`✨ Acidity: ${getValue('intensity_acidity') || '0'}   ${scoreBar(getValue('intensity_acidity'))}`);
-      lines.push(`🍯 Sweetness: ${getValue('intensity_sweetness') || '0'}   ${scoreBar(getValue('intensity_sweetness'))}`);
-      lines.push(`🫶 Mouthfeel: ${getValue('intensity_mouthfeel') || '0'}   ${scoreBar(getValue('intensity_mouthfeel'))}`);
-      lines.push('');
-      lines.push(line('⚠️ Defects:', getValue('defects')));
-      lines.push(line('💭 Tasting Notes:', getValue('tasting_notes')));
-      lines.push(line('➡️ Next action:', getValue('next_action')));
-      lines.push('');
-      lines.push(getValue('tags') || '#cupping #cva #coffee');
-
-      const text = lines.join('\n');
-      document.getElementById('output').textContent = text;
-      renderDescriptorOutput();
-
-      const preview = document.getElementById('filenamePreview');
-      if (preview) {
-        preview.textContent = `Filename: ${getSafeFilenameBase()}`;
-      }
-
-      return text;
-    }
-
-    function buildLogseqOutput() {
-      const lines = [];
-      lines.push(`- ☕ CVA Cupping Note`);
-      lines.push(`  - Coffee:: ${getValue('coffee') || '-'}`);
-      lines.push(`  - Sample:: ${getValue('sample_id') || '-'}`);
-      lines.push(`  - Date:: ${getValue('cupping_date') || '-'}`);
-      lines.push(`  - Cupper:: ${getValue('cupper') || '-'}`);
-      lines.push(`  - Session:: ${getValue('session') || '-'}`);
-      lines.push(`  - Round:: ${getValue('round_no') || '-'}`);
-      lines.push(`  - Origin:: ${getValue('origin') || '-'}`);
-      lines.push(`  - Variety:: ${getValue('variety') || '-'}`);
-      lines.push(`  - Process:: ${getValue('process') || '-'}`);
-      lines.push(`  - Descriptors`);
-      lines.push(`    - Fragrance/Aroma:: ${collectDescriptor('fragrance_aroma') || '-'}`);
-      lines.push(`    - Flavor:: ${collectDescriptor('flavor') || '-'}`);
-      lines.push(`    - Aftertaste:: ${collectDescriptor('aftertaste') || '-'}`);
-      lines.push(`    - Acidity:: ${collectDescriptor('acidity') || '-'}`);
-      lines.push(`    - Sweetness:: ${collectDescriptor('sweetness') || '-'}`);
-      lines.push(`    - Mouthfeel:: ${collectDescriptor('mouthfeel') || '-'}`);
-      lines.push(`    - Notes:: ${getValue('descriptive_notes') || '-'}`);
-      lines.push(`  - Intensity`);
-      lines.push(`    - Fragrance:: ${getValue('intensity_fragrance') || '0'}`);
-      lines.push(`    - Aroma:: ${getValue('intensity_aroma') || '0'}`);
-      lines.push(`    - Flavor:: ${getValue('intensity_flavor') || '0'}`);
-      lines.push(`    - Aftertaste:: ${getValue('intensity_aftertaste') || '0'}`);
-      lines.push(`    - Acidity:: ${getValue('intensity_acidity') || '0'}`);
-      lines.push(`    - Sweetness:: ${getValue('intensity_sweetness') || '0'}`);
-      lines.push(`    - Mouthfeel:: ${getValue('intensity_mouthfeel') || '0'}`);
-      lines.push(`  - Defects:: ${getValue('defects') || '-'}`);
-      lines.push(`  - Tasting Notes:: ${getValue('tasting_notes') || '-'}`);
-      lines.push(`  - Next Action:: ${getValue('next_action') || '-'}`);
-      lines.push(`  - Tags:: ${getValue('tags') || '#cupping #cva #coffee'}`);
-      return lines.join('\n');
     }
 
     function slugify(value) {
@@ -1201,6 +1149,54 @@
       return lines.join('\n');
     }
 
+    function generateOutput() {
+      const lines = [];
+      lines.push('☕ CVA Cupping Note');
+      lines.push('');
+      lines.push(`Coffee: ${getValue('coffee') || '-'}`);
+      lines.push(`Sample: ${getValue('sample_id') || '-'}`);
+      lines.push(`Date: ${getValue('cupping_date') || '-'}`);
+      lines.push(`Cupper: ${getValue('cupper') || '-'}`);
+      lines.push(`Session: ${getValue('session') || '-'}`);
+      lines.push(`Round: ${getValue('round_no') || '-'}`);
+      lines.push(`Origin: ${getValue('origin') || '-'}`);
+      lines.push(`Variety: ${getValue('variety') || '-'}`);
+      lines.push(`Process: ${getValue('process') || '-'}`);
+      lines.push('');
+      lines.push('— Descriptors —');
+      lines.push(line('👃 Fragrance/Aroma:', collectDescriptor('fragrance_aroma')));
+      lines.push(line('🍬 Flavor:', collectDescriptor('flavor')));
+      lines.push(line('🫧 Aftertaste:', collectDescriptor('aftertaste')));
+      lines.push(line('✨ Acidity:', collectDescriptor('acidity')));
+      lines.push(line('🍯 Sweetness:', collectDescriptor('sweetness')));
+      lines.push(line('🫶 Mouthfeel:', collectDescriptor('mouthfeel')));
+      lines.push(line('📝 Notes:', getValue('descriptive_notes')));
+      lines.push('');
+      lines.push('— Intensity (0–15) —');
+      lines.push(`👃 Fragrance: ${getValue('intensity_fragrance') || '0'}   ${scoreBar(getValue('intensity_fragrance'))}`);
+      lines.push(`👃 Aroma: ${getValue('intensity_aroma') || '0'}   ${scoreBar(getValue('intensity_aroma'))}`);
+      lines.push(`🍬 Flavor: ${getValue('intensity_flavor') || '0'}   ${scoreBar(getValue('intensity_flavor'))}`);
+      lines.push(`🫧 Aftertaste: ${getValue('intensity_aftertaste') || '0'}   ${scoreBar(getValue('intensity_aftertaste'))}`);
+      lines.push(`✨ Acidity: ${getValue('intensity_acidity') || '0'}   ${scoreBar(getValue('intensity_acidity'))}`);
+      lines.push(`🍯 Sweetness: ${getValue('intensity_sweetness') || '0'}   ${scoreBar(getValue('intensity_sweetness'))}`);
+      lines.push(`🫶 Mouthfeel: ${getValue('intensity_mouthfeel') || '0'}   ${scoreBar(getValue('intensity_mouthfeel'))}`);
+      lines.push('');
+      lines.push(line('⚠️ Defects:', getValue('defects')));
+      lines.push(line('💭 Tasting Notes:', getValue('tasting_notes')));
+      lines.push(line('➡️ Next action:', getValue('next_action')));
+      lines.push('');
+      lines.push(getValue('tags') || '#cupping #cva #coffee');
+
+      const text = lines.join('\n');
+      document.getElementById('output').textContent = text;
+      renderDescriptorOutput();
+
+      const preview = document.getElementById('filenamePreview');
+      if (preview) preview.textContent = `Filename: ${getSafeFilenameBase()}`;
+
+      return text;
+    }
+
     function downloadFile(filename, content, mimeType) {
       const blob = new Blob([content], { type: mimeType });
       const url = URL.createObjectURL(blob);
@@ -1292,6 +1288,147 @@
       document.getElementById('output').textContent = '';
       document.getElementById('descriptorOutput').innerHTML = '';
       generateOutput();
+      saveDraft();
+    }
+
+    function buildDraftPayload() {
+      return {
+        record: buildRecordObject(),
+        customs: {
+          custom_fragrance_aroma: getValue('custom_fragrance_aroma'),
+          custom_flavor: getValue('custom_flavor'),
+          custom_aftertaste: getValue('custom_aftertaste'),
+          custom_acidity: getValue('custom_acidity'),
+          custom_sweetness: getValue('custom_sweetness'),
+          custom_mouthfeel: getValue('custom_mouthfeel')
+        }
+      };
+    }
+
+    function saveDraft() {
+      try {
+        localStorage.setItem(DRAFT_KEY, JSON.stringify(buildDraftPayload()));
+        setAutosaveStatus('Draft: saved');
+      } catch (err) {
+        setAutosaveStatus('Draft: save failed');
+      }
+    }
+
+    function loadDraft() {
+      try {
+        const raw = localStorage.getItem(DRAFT_KEY);
+        if (!raw) {
+          setAutosaveStatus('Draft: empty');
+          return;
+        }
+
+        const payload = JSON.parse(raw);
+        const record = payload.record || {};
+        const customs = payload.customs || {};
+
+        const simpleFields = [
+          'coffee','sample_id','cupping_date','cupper','session',
+          'round_no','origin','variety','process',
+          'descriptive_notes','defects','tasting_notes','next_action','tags'
+        ];
+
+        simpleFields.forEach(id => {
+          const el = document.getElementById(id);
+          if (el && record[id] !== undefined && record[id] !== null) {
+            el.value = record[id];
+          }
+        });
+
+        Object.keys(selected).forEach(k => selected[k] = []);
+
+        if (record.descriptors) {
+          Object.keys(record.descriptors).forEach(field => {
+            if (selected[field] && Array.isArray(record.descriptors[field].selected)) {
+              selected[field] = [...record.descriptors[field].selected];
+            }
+          });
+        }
+
+        Object.keys(customs).forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.value = customs[id] || '';
+        });
+
+        if (record.intensity) {
+          const map = {
+            fragrance:'intensity_fragrance',
+            aroma:'intensity_aroma',
+            flavor:'intensity_flavor',
+            aftertaste:'intensity_aftertaste',
+            acidity:'intensity_acidity',
+            sweetness:'intensity_sweetness',
+            mouthfeel:'intensity_mouthfeel'
+          };
+
+          Object.entries(map).forEach(([key, id]) => {
+            const input = document.getElementById(id);
+            if (input && record.intensity[key] !== undefined) {
+              input.value = String(record.intensity[key]);
+            }
+          });
+        }
+
+        syncChipUI();
+        syncIntensityLabels();
+        generateOutput();
+        setAutosaveStatus('Draft: loaded');
+      } catch (err) {
+        setAutosaveStatus('Draft: load failed');
+      }
+    }
+
+    function clearDraft() {
+      localStorage.removeItem(DRAFT_KEY);
+      setAutosaveStatus('Draft: cleared');
+    }
+
+    function syncChipUI() {
+      document.querySelectorAll('.group').forEach(group => {
+        const title = group.querySelector('h3');
+        if (!title) return;
+
+        const field = Object.keys(fieldLabels).find(k => fieldLabels[k] === title.textContent);
+        if (!field) return;
+
+        group.querySelectorAll('.chip').forEach(chip => {
+          if (chip.classList.contains('custom-toggle')) return;
+          const active = selected[field].includes(chip.textContent);
+          chip.classList.toggle('active', active);
+        });
+      });
+    }
+
+    function syncIntensityLabels() {
+      const ids = [
+        ['intensity_fragrance','fragrance_value'],
+        ['intensity_aroma','aroma_value'],
+        ['intensity_flavor','flavor_value'],
+        ['intensity_aftertaste','aftertaste_value'],
+        ['intensity_acidity','acidity_value'],
+        ['intensity_sweetness','sweetness_value'],
+        ['intensity_mouthfeel','mouthfeel_value']
+      ];
+
+      ids.forEach(([inputId, valueId]) => {
+        const input = document.getElementById(inputId);
+        const value = document.getElementById(valueId);
+        if (input && value) value.textContent = input.value || '0';
+      });
+    }
+
+    function setAutosaveStatus(text) {
+      const el = document.getElementById('autosaveStatus');
+      if (el) el.textContent = text;
+    }
+
+    function onDraftChange() {
+      generateOutput();
+      saveDraft();
     }
 
     async function copyOutput() {
@@ -1305,6 +1442,41 @@
       const text = buildLogseqOutput();
       const ok = await copyTextSmart(text);
       alert(ok ? 'Copied Logseq format' : 'Copy failed. Please copy manually.');
+    }
+
+    function buildLogseqOutput() {
+      const lines = [];
+      lines.push(`- ☕ CVA Cupping Note`);
+      lines.push(`  - Coffee:: ${getValue('coffee') || '-'}`);
+      lines.push(`  - Sample:: ${getValue('sample_id') || '-'}`);
+      lines.push(`  - Date:: ${getValue('cupping_date') || '-'}`);
+      lines.push(`  - Cupper:: ${getValue('cupper') || '-'}`);
+      lines.push(`  - Session:: ${getValue('session') || '-'}`);
+      lines.push(`  - Round:: ${getValue('round_no') || '-'}`);
+      lines.push(`  - Origin:: ${getValue('origin') || '-'}`);
+      lines.push(`  - Variety:: ${getValue('variety') || '-'}`);
+      lines.push(`  - Process:: ${getValue('process') || '-'}`);
+      lines.push(`  - Descriptors`);
+      lines.push(`    - Fragrance/Aroma:: ${collectDescriptor('fragrance_aroma') || '-'}`);
+      lines.push(`    - Flavor:: ${collectDescriptor('flavor') || '-'}`);
+      lines.push(`    - Aftertaste:: ${collectDescriptor('aftertaste') || '-'}`);
+      lines.push(`    - Acidity:: ${collectDescriptor('acidity') || '-'}`);
+      lines.push(`    - Sweetness:: ${collectDescriptor('sweetness') || '-'}`);
+      lines.push(`    - Mouthfeel:: ${collectDescriptor('mouthfeel') || '-'}`);
+      lines.push(`    - Notes:: ${getValue('descriptive_notes') || '-'}`);
+      lines.push(`  - Intensity`);
+      lines.push(`    - Fragrance:: ${getValue('intensity_fragrance') || '0'}`);
+      lines.push(`    - Aroma:: ${getValue('intensity_aroma') || '0'}`);
+      lines.push(`    - Flavor:: ${getValue('intensity_flavor') || '0'}`);
+      lines.push(`    - Aftertaste:: ${getValue('intensity_aftertaste') || '0'}`);
+      lines.push(`    - Acidity:: ${getValue('intensity_acidity') || '0'}`);
+      lines.push(`    - Sweetness:: ${getValue('intensity_sweetness') || '0'}`);
+      lines.push(`    - Mouthfeel:: ${getValue('intensity_mouthfeel') || '0'}`);
+      lines.push(`  - Defects:: ${getValue('defects') || '-'}`);
+      lines.push(`  - Tasting Notes:: ${getValue('tasting_notes') || '-'}`);
+      lines.push(`  - Next Action:: ${getValue('next_action') || '-'}`);
+      lines.push(`  - Tags:: ${getValue('tags') || '#cupping #cva #coffee'}`);
+      return lines.join('\n');
     }
 
     function setupTheme() {
@@ -1330,16 +1502,29 @@
       }
     }
 
+    function bindAutosaveEvents() {
+      document.querySelectorAll('input, textarea, select').forEach(el => {
+        el.addEventListener('input', onDraftChange);
+        el.addEventListener('change', onDraftChange);
+      });
+    }
+
     document.getElementById('generateBtn').addEventListener('click', generateOutput);
     document.getElementById('copyBtn').addEventListener('click', copyOutput);
     document.getElementById('copyLogseqBtn').addEventListener('click', copyLogseqOutput);
     document.getElementById('downloadJsonBtn').addEventListener('click', downloadJsonFile);
     document.getElementById('downloadMdBtn').addEventListener('click', downloadMarkdownFile);
     document.getElementById('resetBtn').addEventListener('click', resetForm);
+    document.getElementById('clearDraftBtn').addEventListener('click', () => {
+      clearDraft();
+      resetForm();
+    });
 
     renderDescriptors();
     setupTheme();
+    bindAutosaveEvents();
     document.getElementById('cupping_date').value = getLocalDateString();
+    loadDraft();
     generateOutput();
   </script>
 </body>
