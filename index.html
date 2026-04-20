@@ -14,23 +14,43 @@
       --line:rgba(255,255,255,0.7);
       --text:#17212f;
       --muted:#667085;
+      --chip:rgba(255,255,255,0.65);
+      --shadow:0 20px 60px rgba(23,33,47,0.10);
+      --accent:#5564ff;
+      --accent-soft:#8894ff;
+    }
+
+    body.dark{
+      --bg1:#0c1220;
+      --bg2:#12192b;
+      --bg3:#0f1728;
+      --glass:rgba(17,24,39,0.55);
+      --line:rgba(255,255,255,0.08);
+      --text:#eef2ff;
+      --muted:#a8b0c2;
+      --chip:rgba(255,255,255,0.06);
+      --shadow:0 20px 60px rgba(0,0,0,0.28);
+      --accent:#8ea2ff;
+      --accent-soft:#b2bcff;
     }
 
     *{ box-sizing:border-box; }
 
     body{
       margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",sans-serif;
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter",sans-serif;
       color:var(--text);
       background:
         radial-gradient(circle at 10% 10%, rgba(131,182,255,0.35), transparent 25%),
         radial-gradient(circle at 90% 20%, rgba(255,200,150,0.3), transparent 25%),
+        radial-gradient(circle at 75% 80%, rgba(110,231,183,0.18), transparent 22%),
         linear-gradient(180deg,var(--bg1),var(--bg2),var(--bg3));
       min-height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
       padding:20px;
+      transition:background .25s ease,color .25s ease;
     }
 
     .orb{
@@ -41,6 +61,8 @@
       filter:blur(30px);
       opacity:0.4;
       z-index:0;
+      pointer-events:none;
+      animation:float 14s ease-in-out infinite;
     }
 
     .orb.one{
@@ -53,26 +75,92 @@
       bottom:-60px;
       right:-80px;
       background:rgba(255,180,120,0.4);
+      animation-delay:-4s;
+    }
+
+    .orb.three{
+      bottom:10%;
+      left:25%;
+      background:rgba(110,231,183,0.22);
+      animation-delay:-8s;
+    }
+
+    @keyframes float{
+      0%,100%{ transform:translateY(0) translateX(0); }
+      50%{ transform:translateY(-16px) translateX(12px); }
     }
 
     .card{
       position:relative;
       z-index:1;
       width:100%;
-      max-width:600px;
+      max-width:640px;
       padding:40px 28px;
-      border-radius:28px;
+      border-radius:32px;
       background:var(--glass);
       backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
       border:1px solid var(--line);
-      box-shadow:0 20px 60px rgba(0,0,0,0.1);
+      box-shadow:var(--shadow);
       text-align:center;
+      overflow:hidden;
+    }
+
+    .card::after{
+      content:"";
+      position:absolute;
+      right:-60px;
+      bottom:-70px;
+      width:220px;
+      height:220px;
+      border-radius:999px;
+      background:radial-gradient(circle, rgba(255,255,255,0.28), transparent 68%);
+      pointer-events:none;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:8px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 14px;
+      border-radius:999px;
+      background:var(--chip);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+      text-align:left;
+    }
+
+    .theme-btn{
+      border:1px solid var(--line);
+      background:var(--chip);
+      color:var(--text);
+      padding:10px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      font:inherit;
+      font-size:13px;
+      transition:0.2s;
+      white-space:nowrap;
+    }
+
+    .theme-btn:hover{
+      transform:translateY(-1px);
     }
 
     h1{
-      margin:0;
-      font-size:40px;
+      margin:14px 0 0;
+      font-size:42px;
       letter-spacing:-0.04em;
+      line-height:0.98;
     }
 
     .subtitle{
@@ -85,6 +173,7 @@
       margin-top:14px;
       font-size:15px;
       color:var(--muted);
+      line-height:1.5;
     }
 
     .buttons{
@@ -101,24 +190,77 @@
       text-decoration:none;
       font-weight:600;
       font-size:15px;
-      transition:0.2s;
+      transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease,
+        filter 0.22s ease;
       backdrop-filter: blur(10px);
       border:1px solid var(--line);
+      position:relative;
+      overflow:hidden;
+      background-size:200% 200%;
+    }
+
+    .btn::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255,255,255,0.18) 35%,
+        transparent 70%
+      );
+      transform:translateX(-120%);
+      transition:transform 0.55s ease;
+      pointer-events:none;
+    }
+
+    .btn:hover::before{
+      transform:translateX(120%);
     }
 
     .btn-main{
-      background:#111;
+      background:linear-gradient(135deg,#5564ff,#6f7cff);
       color:#fff;
+      box-shadow:0 10px 24px rgba(85,100,255,0.24);
     }
 
-    .btn-sub{
-      background:rgba(255,255,255,0.7);
-      color:#111;
+    /* softer primary: ลดความเข้มลงประมาณ 25% */
+    .btn-secondary-main{
+      background:linear-gradient(135deg,#8894ff,#a3adff);
+      color:#fff;
+      box-shadow:0 8px 20px rgba(85,100,255,0.18);
     }
 
     .btn:hover{
-      transform:translateY(-2px);
-      box-shadow:0 10px 25px rgba(0,0,0,0.12);
+      transform:translateY(-2px) scale(1.01);
+      box-shadow:0 14px 30px rgba(0,0,0,0.14);
+      background-position:100% 50%;
+      filter:saturate(1.06);
+    }
+
+    .btn-main:hover{
+      box-shadow:
+        0 14px 30px rgba(85,100,255,0.28),
+        0 0 22px rgba(85,100,255,0.18);
+    }
+
+    .btn-secondary-main:hover{
+      box-shadow:
+        0 12px 26px rgba(85,100,255,0.20),
+        0 0 18px rgba(136,148,255,0.14);
+    }
+
+    body.dark .btn-main{
+      background:linear-gradient(135deg,#7f91ff,#9aa8ff);
+      box-shadow:0 10px 24px rgba(127,145,255,0.22);
+    }
+
+    body.dark .btn-secondary-main{
+      background:linear-gradient(135deg,#6f7cff,#8ea2ff);
+      box-shadow:0 8px 20px rgba(127,145,255,0.16);
     }
 
     .footer{
@@ -128,37 +270,88 @@
     }
 
     @media(max-width:600px){
-      h1{ font-size:30px; }
-    }
+      .card{
+        padding:22px 18px;
+        border-radius:26px;
+      }
 
+      .topbar{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .theme-btn{
+        width:100%;
+      }
+
+      h1{
+        font-size:30px;
+      }
+
+      .btn{
+        font-size:14px;
+        padding:14px;
+      }
+    }
   </style>
 </head>
 <body>
 
-<div class="orb one"></div>
-<div class="orb two"></div>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
 
-<div class="card">
-  <h1>Casa Lab</h1>
-  <div class="subtitle">Cupping System</div>
-  <div class="desc">ทดลองใช้งานบน iPad · iPhone · Android</div>
+  <div class="card">
+    <div class="topbar">
+      <div class="eyebrow">✦ Casa Lab · Cupping System</div>
+      <button id="themeToggle" class="theme-btn">🌙 Dark</button>
+    </div>
 
-  <div class="buttons">
+    <h1>Casa Lab</h1>
+    <div class="subtitle">Cupping System</div>
+    <div class="desc">ทดลองใช้งานบน iPad · iPhone · Android</div>
 
-    <a href="https://yaitonk.github.io/my-1st-site/mini-cupping.html" class="btn btn-sub">
-      ☕ ไปหน้า Cupping
-    </a>
+    <div class="buttons">
+      <a href="https://yaitonk.github.io/my-1st-site/mini-cupping.html" class="btn btn-secondary-main">
+        ☕ ไปหน้า Cupping
+      </a>
 
-    <a href="https://yaitonk.github.io/casa-cupping-data/dashboard.html" class="btn btn-main">
-      📊 เปิด Dashboard
-    </a>
+      <a href="https://yaitonk.github.io/casa-cupping-data/dashboard.html" class="btn btn-main">
+        📊 เปิด Dashboard
+      </a>
+    </div>
 
+    <div class="footer">
+      powered by GitHub Pages
+    </div>
   </div>
 
-  <div class="footer">
-    powered by GitHub Pages
-  </div>
-</div>
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const THEME_KEY = 'casa-home-theme';
+
+    function applySavedTheme() {
+      const saved = localStorage.getItem(THEME_KEY);
+      if (saved === 'dark') {
+        document.body.classList.add('dark');
+      }
+      updateThemeButton();
+    }
+
+    function updateThemeButton() {
+      const isDark = document.body.classList.contains('dark');
+      themeToggle.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
+      updateThemeButton();
+    });
+
+    applySavedTheme();
+  </script>
 
 </body>
 </html>
