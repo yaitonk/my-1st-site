@@ -3,80 +3,150 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Apple Notes CVA Cupping Form — Gen Z Compact v2</title>
+  <title>Casa Cupping Form — Pro Max Theme</title>
   <style>
     :root {
-      --bg: #f7f4ee;
-      --card: #fffdf9;
-      --text: #2a241d;
-      --muted: #6b6258;
-      --line: #ddd2c6;
-      --chip: #efe7dc;
-      --chip-active: #d6c2aa;
-      --accent: #8a6846;
+      --bg1:#eef4ff;
+      --bg2:#f8f6ff;
+      --bg3:#f6fbf7;
+      --glass:rgba(255,255,255,0.54);
+      --glass-strong:rgba(255,255,255,0.72);
+      --line:rgba(255,255,255,0.72);
+      --text:#16202f;
+      --muted:#667085;
+      --chip:rgba(255,255,255,0.64);
+      --accent:#5564ff;
+      --accent-soft:rgba(85,100,255,0.12);
+      --shadow:0 20px 60px rgba(23,33,47,0.10);
     }
 
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, ui-sans-serif, system-ui, sans-serif;
       color: var(--text);
+      background:
+        radial-gradient(circle at 12% 12%, rgba(131,182,255,0.34), transparent 23%),
+        radial-gradient(circle at 88% 10%, rgba(255,205,153,0.26), transparent 24%),
+        radial-gradient(circle at 80% 84%, rgba(110,231,183,0.18), transparent 22%),
+        linear-gradient(180deg,var(--bg1),var(--bg2) 48%,var(--bg3));
+      min-height: 100vh;
+      padding: 18px;
     }
 
+    .orb{
+      position:fixed;
+      width:320px;
+      height:320px;
+      border-radius:999px;
+      filter:blur(20px);
+      opacity:0.42;
+      pointer-events:none;
+      z-index:0;
+      animation:float 15s ease-in-out infinite;
+    }
+    .orb.one{ top:2%; left:-80px; background:radial-gradient(circle, rgba(100,149,237,0.34), transparent 60%); }
+    .orb.two{ top:46%; right:-90px; background:radial-gradient(circle, rgba(255,185,122,0.26), transparent 60%); animation-delay:-5s; }
+    .orb.three{ bottom:-50px; left:28%; background:radial-gradient(circle, rgba(110,231,183,0.22), transparent 60%); animation-delay:-9s; }
+    @keyframes float{ 0%,100%{transform:translateY(0) translateX(0)} 50%{transform:translateY(-18px) translateX(12px)} }
+
     .wrap {
-      max-width: 1140px;
+      max-width: 1380px;
       margin: 0 auto;
-      padding: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      padding: 24px;
+      border-radius: 32px;
+      margin-bottom: 18px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(24px) saturate(1.25);
+      -webkit-backdrop-filter: blur(24px) saturate(1.25);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      right:-60px;
+      bottom:-80px;
+      width:240px;
+      height:240px;
+      border-radius:999px;
+      background:radial-gradient(circle, rgba(255,255,255,0.36), transparent 68%);
+      pointer-events:none;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 14px;
+      border-radius:999px;
+      background:var(--chip);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:12px;
     }
 
     h1 {
-      margin: 0 0 4px;
-      font-size: 20px;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
+      margin: 0 0 6px;
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
     }
 
     .sub {
       color: var(--muted);
-      margin-bottom: 10px;
-      font-size: 12px;
-      line-height: 1.35;
+      margin-bottom: 0;
+      font-size: 14px;
+      line-height: 1.45;
+      max-width: 760px;
     }
 
     .grid {
       display: grid;
       grid-template-columns: 1.12fr 0.88fr;
-      gap: 12px;
+      gap: 16px;
       align-items: start;
     }
 
     .card {
-      background: var(--card);
+      background: var(--glass);
       border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 12px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.035);
+      border-radius: 28px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(24px) saturate(1.2);
+      -webkit-backdrop-filter: blur(24px) saturate(1.2);
     }
 
     .section-title {
-      font-size: 15px;
-      font-weight: 700;
-      margin: 2px 0 10px;
+      font-size: 18px;
+      font-weight: 800;
+      margin: 2px 0 14px;
       line-height: 1.2;
+      letter-spacing: -0.02em;
     }
 
     .main-fields {
       display: grid;
       grid-template-columns: repeat(6, minmax(0,1fr));
-      gap: 8px;
+      gap: 10px;
     }
 
     .field {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 5px;
       min-width: 0;
     }
 
@@ -85,70 +155,87 @@
     .span-2 { grid-column: span 2; }
 
     label {
-      font-size: 10.5px;
+      font-size: 11px;
       color: var(--muted);
       line-height: 1.1;
-      letter-spacing: 0.01em;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     input, textarea, select {
       width: 100%;
       min-width: 0;
       border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 6px 9px;
-      background: white;
+      border-radius: 16px;
+      padding: 8px 12px;
+      background: var(--chip);
       color: var(--text);
       font: inherit;
-      font-size: 13px;
-      line-height: 1.25;
+      font-size: 14px;
+      line-height: 1.3;
+      outline: none;
+      transition: 0.18s ease;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: rgba(85,100,255,0.35);
+      box-shadow: 0 0 0 4px rgba(85,100,255,0.10);
+      background: rgba(255,255,255,0.82);
     }
 
     input, select {
-      height: 34px;
+      height: 42px;
     }
 
     textarea {
-      min-height: 72px;
+      min-height: 88px;
       resize: vertical;
     }
 
-    .group { margin-bottom: 14px; }
+    .group { margin-bottom: 16px; }
 
     .group h3 {
-      margin: 0 0 6px;
-      font-size: 13px;
+      margin: 0 0 8px;
+      font-size: 14px;
       color: var(--accent);
       text-transform: capitalize;
+      letter-spacing: -0.01em;
     }
 
     .chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 8px;
     }
 
     .chip {
       border: 1px solid var(--line);
       background: var(--chip);
       color: var(--text);
-      padding: 6px 9px;
+      padding: 7px 11px;
       border-radius: 999px;
       cursor: pointer;
       font-size: 12px;
       line-height: 1.2;
       user-select: none;
+      transition: .18s ease;
+    }
+
+    .chip:hover {
+      transform: translateY(-1px);
     }
 
     .chip.active {
-      background: var(--chip-active);
-      border-color: #b99f80;
+      background: var(--accent-soft);
+      border-color: rgba(85,100,255,0.28);
+      color: var(--accent);
+      font-weight: 700;
     }
 
     .custom-row {
-      margin-top: 6px;
+      margin-top: 8px;
       display: flex;
-      gap: 6px;
+      gap: 8px;
       align-items: center;
     }
 
@@ -161,15 +248,15 @@
     }
 
     .mini-intensity {
-      margin-top: 8px;
+      margin-top: 10px;
       border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 8px 10px;
-      background: #fff;
+      border-radius: 18px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.55);
     }
 
     .mini-intensity + .mini-intensity {
-      margin-top: 6px;
+      margin-top: 8px;
     }
 
     .mini-intensity-head {
@@ -177,7 +264,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       font-size: 12px;
     }
 
@@ -186,10 +273,11 @@
     }
 
     .mini-intensity-value {
-      font-weight: 700;
+      font-weight: 800;
       min-width: 18px;
       text-align: right;
       font-variant-numeric: tabular-nums;
+      color: var(--accent);
     }
 
     input[type="range"] {
@@ -198,20 +286,21 @@
       height: auto;
       border: none;
       background: transparent;
+      accent-color: var(--accent);
     }
 
     .intensity-band {
-      margin-top: 6px;
+      margin-top: 8px;
     }
 
     .intensity-segments {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: 999px;
       overflow: hidden;
       height: 10px;
-      background: #f4eee6;
+      background: rgba(255,255,255,0.55);
     }
 
     .intensity-segment {
@@ -225,19 +314,19 @@
     .intensity-labels {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      margin-top: 4px;
+      margin-top: 5px;
       font-size: 10px;
       color: var(--muted);
       text-align: center;
       line-height: 1.1;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.06em;
     }
 
     .detail-fields {
       display: grid;
       grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 8px;
-      margin-top: 12px;
+      gap: 10px;
+      margin-top: 14px;
     }
 
     .detail-fields .full {
@@ -247,37 +336,43 @@
     .actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
+      gap: 10px;
+      margin-top: 14px;
     }
 
     button {
       border: 1px solid var(--line);
-      background: white;
+      background: var(--chip);
       color: var(--text);
-      padding: 8px 12px;
-      border-radius: 10px;
+      padding: 10px 14px;
+      border-radius: 16px;
       cursor: pointer;
       font: inherit;
       font-size: 13px;
+      transition: .18s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
     }
 
     button.primary {
-      background: var(--accent);
+      background: linear-gradient(135deg, #5564ff, #6b7aff);
       color: white;
-      border-color: var(--accent);
+      border-color: transparent;
+      box-shadow: 0 10px 24px rgba(85,100,255,0.22);
     }
 
     pre {
       white-space: pre-wrap;
       word-break: break-word;
-      background: #fff;
+      background: rgba(255,255,255,0.58);
       border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 12px;
+      border-radius: 20px;
+      padding: 14px;
       min-height: 360px;
       font-size: 13px;
-      line-height: 1.5;
+      line-height: 1.55;
       overflow: auto;
       margin: 0;
     }
@@ -285,21 +380,21 @@
     .hint {
       color: var(--muted);
       font-size: 12px;
-      margin-top: 8px;
-      line-height: 1.35;
+      margin-top: 10px;
+      line-height: 1.45;
     }
 
     .descriptor-output {
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       display: grid;
-      gap: 8px;
+      gap: 10px;
     }
 
     .descriptor-row {
       border: 1px solid var(--line);
-      border-radius: 12px;
-      background: #fff;
-      padding: 10px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.56);
+      padding: 12px;
     }
 
     .descriptor-label {
@@ -308,9 +403,9 @@
       justify-content: space-between;
       gap: 8px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--accent);
-      margin-bottom: 6px;
+      margin-bottom: 7px;
     }
 
     .descriptor-score-stack {
@@ -324,7 +419,7 @@
     }
 
     .descriptor-score {
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .descriptor-tags {
@@ -337,7 +432,7 @@
     .descriptor-tag {
       display: inline-flex;
       align-items: center;
-      padding: 5px 9px;
+      padding: 6px 10px;
       border: 1px solid var(--line);
       border-radius: 999px;
       background: var(--chip);
@@ -369,15 +464,17 @@
     }
 
     @media (max-width: 640px) {
-      .wrap { padding: 8px; }
-      h1 { font-size: 16px; }
-      .sub { font-size: 11px; margin-bottom: 8px; }
-      .card { padding: 10px; border-radius: 14px; }
-      .section-title { font-size: 14px; margin-bottom: 8px; }
+      body { padding: 12px; }
+      .hero { padding: 18px; border-radius: 24px; }
+      .wrap { padding: 0; }
+      h1 { font-size: 24px; }
+      .sub { font-size: 12px; }
+      .card { padding: 14px; border-radius: 22px; }
+      .section-title { font-size: 16px; margin-bottom: 10px; }
 
       .main-fields {
         grid-template-columns: repeat(6, minmax(0,1fr));
-        gap: 6px;
+        gap: 8px;
       }
 
       .main-fields .coffee-field { grid-column: span 6; }
@@ -391,24 +488,31 @@
       .main-fields .proc-field { grid-column: span 6; }
 
       label { font-size: 10px; }
-      input, select { height: 32px; padding: 5px 8px; font-size: 12px; }
-      textarea { min-height: 68px; padding: 7px 8px; font-size: 12px; }
+      input, select { height: 40px; font-size: 13px; }
+      textarea { min-height: 74px; font-size: 13px; }
 
-      .chips { gap: 5px; }
-      .chip { font-size: 11px; padding: 5px 8px; }
-      .group h3 { font-size: 12px; }
-      .custom-row { gap: 5px; }
-      .detail-fields { grid-template-columns: 1fr; gap: 6px; margin-top: 10px; }
-      .actions { gap: 6px; }
-      button { font-size: 12px; padding: 7px 10px; }
-      pre { min-height: 280px; font-size: 12px; padding: 10px; }
+      .chips { gap: 6px; }
+      .chip { font-size: 11px; padding: 6px 9px; }
+      .group h3 { font-size: 13px; }
+      .custom-row { gap: 6px; }
+      .detail-fields { grid-template-columns: 1fr; gap: 8px; margin-top: 12px; }
+      .actions { gap: 8px; }
+      button { font-size: 12px; padding: 9px 12px; }
+      pre { min-height: 280px; font-size: 12px; padding: 12px; }
     }
   </style>
 </head>
 <body>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
   <div class="wrap">
-    <h1>mini CVA Cupping Form — Casa R&d Gen Z style</h1>
-    <div class="sub">Compact version</div>
+    <div class="hero">
+      <div class="eyebrow">✦ Pro Max Theme · Casa R&amp;D</div>
+      <h1>mini CVA Cupping Form</h1>
+      <div class="sub">Glass UI theme เดียวกับ dashboard · compact · ใช้งานง่ายบน iPad / iPhone / Android</div>
+    </div>
 
     <div class="grid">
       <div>
@@ -482,7 +586,7 @@
           </div>
         </div>
 
-        <div class="card" style="margin-top:10px;">
+        <div class="card" style="margin-top:14px;">
           <div class="section-title">Descriptors</div>
           <div id="descriptor-groups"></div>
 
@@ -890,39 +994,34 @@
     }
 
     function slugify(value) {
-  return String(value || '')
-    .trim()
-    .toLowerCase()
-    .replace(/[\s\/]+/g, '-')
-    .replace(/[^a-z0-9\-_]/g, '')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-}
+      return String(value || '')
+        .trim()
+        .toLowerCase()
+        .replace(/[\s\/]+/g, '-')
+        .replace(/[^a-z0-9\-_]/g, '')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+    }
 
-function getCupperShort() {
-  const name = getValue('cupper') || '';
-  const parts = name.trim().toLowerCase().split(' ').filter(Boolean);
+    function getCupperShort() {
+      const name = getValue('cupper') || '';
+      const parts = name.trim().toLowerCase().split(' ').filter(Boolean);
 
-  if (parts.length === 0) {
-    return 'xx';
-  }
+      if (parts.length === 0) return 'xx';
+      if (parts.length === 1) return parts[0].slice(0, 2);
 
-  if (parts.length === 1) {
-    return parts[0].slice(0, 2);
-  }
+      return parts.map(p => p[0]).join('').slice(0, 3);
+    }
 
-  return parts.map(p => p[0]).join('').slice(0, 3);
-}
+    function getSafeFilenameBase() {
+      const date = getValue('cupping_date') || getLocalDateString();
+      const sample = slugify(getValue('sample_id')) || 'sample';
+      const coffee = slugify(getValue('coffee')) || 'coffee';
+      const cupper = slugify(getCupperShort()) || 'xx';
 
-function getSafeFilenameBase() {
-  const date = getValue('cupping_date') || getLocalDateString();
-  const sample = slugify(getValue('sample_id')) || 'sample';
-  const coffee = slugify(getValue('coffee')) || 'coffee';
-  const cupper = slugify(getCupperShort()) || 'xx';
+      return `${date}-${sample}-${coffee}-${cupper}`;
+    }
 
-  return `${date}-${sample}-${coffee}-${cupper}`;
-}
-    
     function buildRecordObject() {
       return {
         coffee: getValue('coffee') || '',
