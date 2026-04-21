@@ -1,512 +1,285 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Casa Lab — R&D People</title>
-  <style>
-    :root{
-      --bg1:#eef4ff;
-      --bg2:#f8f6ff;
-      --bg3:#f6fbf7;
-      --glass:rgba(255,255,255,0.55);
-      --glass-strong:rgba(255,255,255,0.72);
-      --line:rgba(255,255,255,0.72);
-      --text:#17212f;
-      --muted:#667085;
-      --accent:#5564ff;
-      --accent2:#8f7bff;
-      --accent-soft:rgba(85,100,255,0.12);
-      --shadow:0 20px 60px rgba(23,33,47,0.10);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Lab — R&D Team</title>
 
-    *{box-sizing:border-box}
+<style>
+:root{
+  --bg:#f6f8ff;
+  --glass:rgba(255,255,255,0.65);
+  --line:#e6eaf2;
+  --text:#1a1f2c;
+  --muted:#6b7280;
+  --accent:#5b6cff;
+  --shadow:0 20px 60px rgba(0,0,0,.08);
+}
 
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 12% 12%, rgba(131,182,255,0.34), transparent 23%),
-        radial-gradient(circle at 88% 10%, rgba(255,205,153,0.26), transparent 24%),
-        radial-gradient(circle at 80% 84%, rgba(110,231,183,0.18), transparent 22%),
-        linear-gradient(180deg,var(--bg1),var(--bg2) 48%,var(--bg3));
-      min-height:100vh;
-      padding:20px;
-    }
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",sans-serif;
+  background:linear-gradient(180deg,#eef3ff,#f8f7ff);
+  color:var(--text);
+  padding:20px;
+}
 
-    .orb{
-      position:fixed;
-      width:320px;
-      height:320px;
-      border-radius:999px;
-      filter:blur(28px);
-      opacity:.42;
-      pointer-events:none;
-      z-index:0;
-    }
-    .orb.one{
-      top:0;
-      left:-80px;
-      background:radial-gradient(circle, rgba(100,149,237,0.38), transparent 60%);
-    }
-    .orb.two{
-      bottom:-60px;
-      right:-80px;
-      background:radial-gradient(circle, rgba(255,185,122,0.28), transparent 60%);
-    }
+.shell{
+  max-width:1200px;
+  margin:auto;
+}
 
-    .shell{
-      max-width:1320px;
-      margin:0 auto;
-      position:relative;
-      z-index:1;
-    }
+.topbar{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
 
-    .glass{
-      background:var(--glass);
-      border:1px solid var(--line);
-      backdrop-filter:blur(22px) saturate(1.2);
-      -webkit-backdrop-filter:blur(22px) saturate(1.2);
-      box-shadow:var(--shadow);
-    }
+.nav-btn{
+  padding:10px 16px;
+  border-radius:999px;
+  text-decoration:none;
+  background:white;
+  border:1px solid var(--line);
+  color:var(--text);
+  font-size:14px;
+}
 
-    .topbar{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom:18px;
-    }
+.nav-btn.primary{
+  background:#111;
+  color:white;
+}
 
-    .nav-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:11px 16px;
-      border-radius:999px;
-      text-decoration:none;
-      font-size:14px;
-      color:var(--text);
-      background:rgba(255,255,255,0.7);
-      border:1px solid var(--line);
-    }
+.hero{
+  background:var(--glass);
+  border-radius:30px;
+  padding:30px;
+  box-shadow:var(--shadow);
+  margin-bottom:20px;
+}
 
-    .nav-btn.primary{
-      background:linear-gradient(135deg,#6ea8ff,#8f7bff);
-      color:#fff;
-      border:none;
-    }
+h1{
+  margin:0;
+  font-size:42px;
+  letter-spacing:-.04em;
+}
 
-    .hero{
-      padding:28px;
-      border-radius:34px;
-      margin-bottom:18px;
-      overflow:hidden;
-      position:relative;
-    }
+.hero p{
+  color:var(--muted);
+  margin-top:12px;
+  line-height:1.6;
+}
 
-    .hero::after{
-      content:"";
-      position:absolute;
-      right:-70px;
-      top:-40px;
-      width:240px;
-      height:240px;
-      border-radius:999px;
-      background:radial-gradient(circle, rgba(255,255,255,.38), transparent 68%);
-      pointer-events:none;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
 
-    .eyebrow{
-      display:inline-flex;
-      padding:8px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.72);
-      border:1px solid var(--line);
-      color:var(--muted);
-      font-size:12px;
-      font-weight:700;
-      margin-bottom:14px;
-    }
+.card{
+  background:white;
+  border-radius:24px;
+  padding:20px;
+  border:1px solid var(--line);
+}
 
-    h1{
-      margin:0;
-      font-size:clamp(36px,5vw,62px);
-      line-height:.92;
-      letter-spacing:-.055em;
-    }
+.name{
+  font-size:22px;
+  font-weight:700;
+}
 
-    .hero p{
-      margin:14px 0 0;
-      max-width:900px;
-      color:var(--muted);
-      line-height:1.7;
-      font-size:16px;
-    }
+.role{
+  font-size:14px;
+  color:var(--muted);
+  margin-top:4px;
+}
 
-    .hero-strip{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:12px;
-      margin-top:20px;
-    }
+.block{
+  margin-top:14px;
+}
 
-    .strip-card{
-      padding:16px;
-      border-radius:22px;
-      background:rgba(255,255,255,.72);
-      border:1px solid var(--line);
-    }
+.label{
+  font-size:11px;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
 
-    .strip-card .label{
-      display:block;
-      font-size:11px;
-      color:var(--muted);
-      text-transform:uppercase;
-      letter-spacing:.06em;
-      margin-bottom:8px;
-    }
+.text{
+  font-size:14px;
+  line-height:1.6;
+}
 
-    .strip-card .value{
-      font-size:22px;
-      font-weight:800;
-      letter-spacing:-.04em;
-    }
-
-    .section{
-      padding:22px;
-      border-radius:30px;
-    }
-
-    .section h2{
-      margin:0 0 6px;
-      font-size:30px;
-      letter-spacing:-.04em;
-    }
-
-    .section-sub{
-      color:var(--muted);
-      font-size:14px;
-      margin-bottom:18px;
-    }
-
-    .team-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-    }
-
-    .member-card{
-      padding:20px;
-      border-radius:28px;
-      background:rgba(255,255,255,.72);
-      border:1px solid var(--line);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .member-card::before{
-      content:"";
-      position:absolute;
-      top:-30px;
-      right:-30px;
-      width:120px;
-      height:120px;
-      border-radius:999px;
-      background:radial-gradient(circle, rgba(143,123,255,.18), transparent 70%);
-      pointer-events:none;
-    }
-
-    .avatar{
-      width:62px;
-      height:62px;
-      border-radius:20px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:24px;
-      margin-bottom:14px;
-      background:linear-gradient(135deg, rgba(110,168,255,.18), rgba(143,123,255,.18));
-      border:1px solid var(--line);
-    }
-
-    .member-name{
-      margin:0;
-      font-size:26px;
-      line-height:1;
-      letter-spacing:-.04em;
-    }
-
-    .member-role{
-      margin-top:8px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.5;
-    }
-
-    .member-block{
-      margin-top:16px;
-      display:grid;
-      gap:10px;
-    }
-
-    .mini-box{
-      padding:12px 14px;
-      border-radius:18px;
-      background:rgba(255,255,255,.64);
-      border:1px solid var(--line);
-    }
-
-    .mini-box .label{
-      display:block;
-      font-size:11px;
-      color:var(--muted);
-      text-transform:uppercase;
-      letter-spacing:.06em;
-      margin-bottom:6px;
-    }
-
-    .mini-box .text{
-      font-size:14px;
-      line-height:1.65;
-    }
-
-    .pill-wrap{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:14px;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      padding:8px 12px;
-      border-radius:999px;
-      background:var(--accent-soft);
-      color:var(--accent);
-      border:1px solid rgba(85,100,255,.12);
-      font-size:12px;
-      font-weight:700;
-    }
-
-    .footer-note{
-      text-align:center;
-      color:var(--muted);
-      font-size:13px;
-      padding:14px 0 4px;
-    }
-
-    @media (max-width: 1100px){
-      .team-grid{grid-template-columns:repeat(2,1fr)}
-      .hero-strip{grid-template-columns:repeat(2,1fr)}
-    }
-
-    @media (max-width: 720px){
-      body{padding:12px}
-      .hero,.section,.member-card{padding:18px;border-radius:22px}
-      .team-grid,.hero-strip{grid-template-columns:1fr}
-      .member-name{font-size:22px}
-      h1{font-size:36px}
-    }
-  </style>
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr}
+}
+</style>
 </head>
+
 <body>
-  <div class="orb one"></div>
-  <div class="orb two"></div>
+<div class="shell">
 
-  <div class="shell">
-    <div class="topbar">
-      <a href="https://yaitonk.github.io/my-1st-site/" class="nav-btn">🏠 Home</a>
-      <a href="https://yaitonk.github.io/my-1st-site/mini-cupping.html" class="nav-btn">☕ Cupping</a>
-      <a href="https://yaitonk.github.io/casa-cupping-data/dashboard.html" class="nav-btn primary">📊 Dashboard</a>
-    </div>
+<div class="topbar">
+  <a href="https://yaitonk.github.io/my-1st-site/" class="nav-btn">Home</a>
+  <a href="https://yaitonk.github.io/my-1st-site/mini-cupping.html" class="nav-btn">Cupping</a>
+  <a href="https://yaitonk.github.io/casa-cupping-data/dashboard.html" class="nav-btn primary">Dashboard</a>
+</div>
 
-    <section class="hero glass">
-      <div class="eyebrow">Casa Lab · R&D People</div>
-      <h1>The Team<br>Behind R&D</h1>
-      <p>
-        รวมสมาชิกในทีม R&amp;D พร้อมบทบาท ประสบการณ์ และจุดแข็งของแต่ละคน
-        ในรูปแบบ card profile ที่ดูทันสมัย อ่านง่าย และสื่อสารตัวตนของทีมได้ชัดขึ้น
-      </p>
+<div class="hero">
+  <h1>R&D Team — Casa Lab</h1>
+  <p>
+    ทีมวิจัยและพัฒนาของ Casa Lab มุ่งเน้นการทดลอง วิเคราะห์ และพัฒนากาแฟ
+    ผ่านการผสานระหว่าง sensory evaluation, roast development และ data-driven decision
+    เพื่อยกระดับคุณภาพและ consistency ของกาแฟในทุกระดับ
+  </p>
+</div>
 
-      <div class="hero-strip">
-        <div class="strip-card">
-          <span class="label">Team Size</span>
-          <div class="value">7 Members</div>
-        </div>
-        <div class="strip-card">
-          <span class="label">Main Area</span>
-          <div class="value">Coffee R&amp;D</div>
-        </div>
-        <div class="strip-card">
-          <span class="label">Core Skills</span>
-          <div class="value">Sensory · Roast · QA</div>
-        </div>
-        <div class="strip-card">
-          <span class="label">Mindset</span>
-          <div class="value">Test · Learn · Refine</div>
-        </div>
-      </div>
-    </section>
+<div class="grid">
 
-    <section class="section glass">
-      <h2>R&amp;D Members</h2>
-      <div class="section-sub">เปลี่ยนชื่อ ประสบการณ์ และจุดเด่นของแต่ละคนได้ทันที</div>
+<!-- 1 -->
+<div class="card">
+  <div class="name">Surapan Tanta (สรพันธ์ ทันตา)</div>
+  <div class="role">SVP / Founder — Casa Lapin</div>
 
-      <div class="team-grid">
-        <article class="member-card">
-          <div class="avatar">☕</div>
-          <h3 class="member-name">Surapan Tanta</h3>
-          <div class="member-role">R&amp;D Lead / Cupping & Roast Development</div>
-          <div class="member-block">
-            <div class="mini-box">
-              <span class="label">Experience</span>
-              <div class="text">มีประสบการณ์ด้านการประเมินกาแฟ การทดลอง roast direction และการใช้ข้อมูล sensory เพื่อพัฒนาแนวทางของ batch</div>
-            </div>
-            <div class="mini-box">
-              <span class="label">Strength</span>
-              <div class="text">เด่นด้านการเชื่อมผลการชิมเข้ากับการทดลองจริง และมองเห็นทิศทางของ profile ได้ชัด</div>
-            </div>
-          </div>
-          <div class="pill-wrap">
-            <span class="pill">Roast Direction</span>
-            <span class="pill">Cupping</span>
-            <span class="pill">Batch Review</span>
-          </div>
-        </article>
-
-        <article class="member-card">
-          <div class="avatar">🧪</div>
-          <h3 class="member-name">Member 02</h3>
-          <div class="member-role">Quality & Sensory Support</div>
-          <div class="member-block">
-            <div class="mini-box">
-              <span class="label">Experience</span>
-              <div class="text">มีประสบการณ์สนับสนุนการประเมิน sample และติดตามความสม่ำเสมอของข้อมูลในการชิม</div>
-            </div>
-            <div class="mini-box">
-              <span class="label">Strength</span>
-              <div class="text">ละเอียด รอบคอบ และช่วยให้ข้อมูลพร้อมใช้งานต่อใน report และ dashboard</div>
-            </div>
-          </div>
-          <div class="pill-wrap">
-            <span class="pill">QA</span>
-            <span class="pill">Data Check</span>
-            <span class="pill">Sensory Support</span>
-          </div>
-        </article>
-
-        <article class="member-card">
-          <div class="avatar">🔥</div>
-          <h3 class="member-name">Member 03</h3>
-          <div class="member-role">Roast Trial & Production Interface</div>
-          <div class="member-block">
-            <div class="mini-box">
-              <span class="label">Experience</span>
-              <div class="text">มีประสบการณ์ในงานทดลองคั่วหลายเงื่อนไข และเชื่อมผลการชิมกับข้อจำกัดในการใช้งานจริง</div>
-            </div>
-            <div class="mini-box">
-              <span class="label">Strength</span>
-              <div class="text">เข้าใจ roast behavior และช่วยแปลผลเชิงเทคนิคออกมาให้ทีมใช้ตัดสินใจได้เร็ว</div>
-            </div>
-          </div>
-          <div class="pill-wrap">
-            <span class="pill">Roast Trial</span>
-            <span class="pill">Profile Test</span>
-            <span class="pill">Production Link</span>
-          </div>
-        </article>
-
-        <article class="member-card">
-          <div class="avatar">📊</div>
-          <h3 class="member-name">Member 04</h3>
-          <div class="member-role">Documentation & Insight Support</div>
-          <div class="member-block">
-            <div class="mini-box">
-              <span class="label">Experience</span>
-              <div class="text">มีประสบการณ์ด้านการจัดทำเอกสาร สรุปผลการทดลอง และจัดระเบียบข้อมูลเพื่อการใช้งานต่อ</div>
-            </div>
-            <div class="mini-box">
-              <span class="label">Strength</span>
-              <div class="text">ทำให้ข้อมูลที่ซับซ้อนอ่านง่ายและแปลงเป็น insight ได้ชัดเจน</div>
-            </div>
-          </div>
-          <div class="pill-wrap">
-            <span class="pill">Documentation</span>
-            <span class="pill">Insights</span>
-            <span class="pill">Dashboard</span>
-          </div>
-        </article>
-
-        <article class="member-card">
-          <div class="avatar">🧾</div>
-          <h3 class="member-name">Member 05</h3>
-          <div class="member-role">Sample Preparation & Session Support</div>
-          <div class="member-block">
-            <div class="mini-box">
-              <span class="label">Experience</span>
-              <div class="text">มีประสบการณ์ช่วยเตรียม sample และสนับสนุน workflow ของ session ให้เป็นไปอย่างราบรื่น</div>
-            </div>
-            <div class="mini-box">
-              <span class="label">Strength</span>
-              <div class="text">ทำงานเป็นระบบ ช่วยให้การทดลองหลายตัวอย่างเกิดขึ้นได้จริงอย่างต่อเนื่อง</div>
-            </div>
-          </div>
-          <div class="pill-wrap">
-            <span class="pill">Sample Prep</span>
-            <span class="pill">Session Flow</span>
-            <span class="pill">Support</span>
-          </div>
-        </article>
-
-        <article class="member-card">
-          <div class="avatar">👃</div>
-          <h3 class="member-name">Member 06</h3>
-          <div class="member-role">Sensory Calibration Support</div>
-          <div class="member-block">
-            <div class="mini-box">
-              <span class="label">Experience</span>
-              <div class="text">มีประสบการณ์สนับสนุนการเทียบผลการชิมและช่วย calibrate ภาษาที่ใช้ในทีม</div>
-            </div>
-            <div class="mini-box">
-              <span class="label">Strength</span>
-              <div class="text">ช่วยลดความคลาดเคลื่อนในการสื่อสาร descriptor และมุมมองทาง sensory</div>
-            </div>
-          </div>
-          <div class="pill-wrap">
-            <span class="pill">Calibration</span>
-            <span class="pill">Descriptors</span>
-            <span class="pill">Sensory</span>
-          </div>
-        </article>
-
-        <article class="member-card">
-          <div class="avatar">🔗</div>
-          <h3 class="member-name">Member 07</h3>
-          <div class="member-role">R&amp;D Coordinator</div>
-          <div class="member-block">
-            <div class="mini-box">
-              <span class="label">Experience</span>
-              <div class="text">มีประสบการณ์ประสาน workflow ระหว่างการทดลอง การบันทึกข้อมูล และการสื่อสารภายในทีม</div>
-            </div>
-            <div class="mini-box">
-              <span class="label">Strength</span>
-              <div class="text">ช่วยให้ทีมทำงานต่อเนื่องและเชื่อมแต่ละขั้นตอนเข้าหากันได้อย่างลื่นไหล</div>
-            </div>
-          </div>
-          <div class="pill-wrap">
-            <span class="pill">Coordination</span>
-            <span class="pill">Workflow</span>
-            <span class="pill">Communication</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <div class="footer-note">
-      Casa Lab · R&amp;D Team Page
+  <div class="block">
+    <div class="label">Experience</div>
+    <div class="text">
+      Founder ของ Casa Lapin และผู้อยู่เบื้องหลังการพัฒนาแนวคิดด้านกาแฟในองค์กร
+      มีประสบการณ์ด้านการคัดเลือกกาแฟ การประเมินคุณภาพ และการวาง direction ของ product
     </div>
   </div>
+
+  <div class="block">
+    <div class="label">Strength</div>
+    <div class="text">
+      เชื่อม vision ระหว่าง business, product และ sensory ได้อย่างชัดเจน
+      ทำให้การพัฒนา R&D มีทิศทางและ identity ที่แข็งแรง
+    </div>
+  </div>
+</div>
+
+<!-- 2 -->
+<div class="card">
+  <div class="name">Kittirat Jantamanee (กิตติรัตน์ จันทมณี)</div>
+  <div class="role">Section Manager — Coffee Product</div>
+
+  <div class="block">
+    <div class="label">Experience</div>
+    <div class="text">
+      ดูแลการพัฒนาผลิตภัณฑ์กาแฟในระดับภาพรวม ตั้งแต่ selection ไปจนถึงการใช้งานจริง
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="label">Strength</div>
+    <div class="text">
+      เข้าใจ balance ระหว่างคุณภาพถ้วยกับความเป็นไปได้ในการผลิตจริง
+    </div>
+  </div>
+</div>
+
+<!-- 3 -->
+<div class="card">
+  <div class="name">Sutatip Sawangareetagoon (สุฑาทิพย์ สว่างอารีตระกูล)</div>
+  <div class="role">Section Manager — Product Creator</div>
+
+  <div class="block">
+    <div class="label">Experience</div>
+    <div class="text">
+      รับผิดชอบการพัฒนา concept และ product ใหม่ ๆ ที่เชื่อมระหว่าง coffee experience และ consumer
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="label">Strength</div>
+    <div class="text">
+      แปลง insight จาก R&D ให้กลายเป็น product ที่มี story และเข้าถึงลูกค้า
+    </div>
+  </div>
+</div>
+
+<!-- 4 -->
+<div class="card">
+  <div class="name">Jirayu Kanchan (จิรายุ ก้านจันทร์)</div>
+  <div class="role">Senior Coffee Roaster</div>
+
+  <div class="block">
+    <div class="label">Experience</div>
+    <div class="text">
+      มีประสบการณ์ด้านการคั่วกาแฟระดับสูง และการทดลอง roast profile เพื่อค้นหา optimum flavor
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="label">Strength</div>
+    <div class="text">
+      ควบคุม consistency ของ roast ได้ดี และเข้าใจ behavior ของเมล็ดกาแฟในเชิงลึก
+    </div>
+  </div>
+</div>
+
+<!-- 5 -->
+<div class="card">
+  <div class="name">Santi Matitathang (สันติ มะติตะถัง)</div>
+  <div class="role">Coffee Roaster</div>
+
+  <div class="block">
+    <div class="label">Experience</div>
+    <div class="text">
+      ทำงานด้าน roasting และสนับสนุนการทดลอง batch ต่าง ๆ ในงาน R&D
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="label">Strength</div>
+    <div class="text">
+      ปรับ execution ได้รวดเร็ว และช่วยให้การทดลองหลายโปรไฟล์เกิดขึ้นจริงได้
+    </div>
+  </div>
+</div>
+
+<!-- 6 -->
+<div class="card">
+  <div class="name">Fun</div>
+  <div class="role">Trainer</div>
+
+  <div class="block">
+    <div class="label">Experience</div>
+    <div class="text">
+      ดูแลด้าน training และการถ่ายทอดความรู้เกี่ยวกับกาแฟทั้งภายในและภายนอกองค์กร
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="label">Strength</div>
+    <div class="text">
+      ทำให้ความรู้ที่ซับซ้อนเข้าใจง่าย และสร้างมาตรฐานร่วมในทีม
+    </div>
+  </div>
+</div>
+
+<!-- 7 -->
+<div class="card">
+  <div class="name">พิชญุตม์ แซ่ด่าน</div>
+  <div class="role">R&D Officer</div>
+
+  <div class="block">
+    <div class="label">Experience</div>
+    <div class="text">
+      สนับสนุนงานทดลอง การเก็บข้อมูล และการวิเคราะห์ผลใน workflow ของ R&D
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="label">Strength</div>
+    <div class="text">
+      เชื่อม data กับการทดลองจริง และช่วยให้การพัฒนาเป็นระบบมากขึ้น
+    </div>
+  </div>
+</div>
+
+</div>
+
+</div>
 </body>
 </html>
