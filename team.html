@@ -49,7 +49,7 @@
         linear-gradient(180deg,var(--bg1),var(--bg2) 48%,var(--bg3));
       min-height:100vh;
       padding:20px;
-      transition:background .25s ease,color .25s ease;
+      transition:background .3s ease,color .3s ease;
     }
 
     .orb{
@@ -63,17 +63,20 @@
       z-index:0;
       animation:float 16s ease-in-out infinite;
     }
+
     .orb.one{
       top:0;
       left:-80px;
       background:radial-gradient(circle, rgba(100,149,237,0.38), transparent 60%);
     }
+
     .orb.two{
       bottom:-60px;
       right:-80px;
       background:radial-gradient(circle, rgba(255,185,122,0.28), transparent 60%);
       animation-delay:-7s;
     }
+
     @keyframes float{
       0%,100%{ transform:translateY(0) translateX(0); }
       50%{ transform:translateY(-18px) translateX(10px); }
@@ -92,6 +95,7 @@
       backdrop-filter:blur(22px) saturate(1.2);
       -webkit-backdrop-filter:blur(22px) saturate(1.2);
       box-shadow:var(--shadow);
+      transition:background .3s ease,border-color .3s ease,box-shadow .3s ease;
     }
 
     .topbar{
@@ -187,7 +191,7 @@
 
     .hero p{
       margin:14px 0 0;
-      max-width:900px;
+      max-width:920px;
       color:var(--muted);
       line-height:1.7;
       font-size:16px;
@@ -291,55 +295,122 @@
 
     .member-card{
       padding:20px;
-      border-radius:28px;
-      background:rgba(255,255,255,.74);
+      border-radius:30px;
+      background:rgba(255,255,255,.76);
       border:1px solid var(--line);
       position:relative;
       overflow:hidden;
-      box-shadow:var(--card-shadow);
-      transition:transform .22s ease, box-shadow .22s ease, opacity .2s ease;
+      box-shadow:0 16px 40px rgba(16,24,40,0.08);
+      transition:
+        transform .28s cubic-bezier(.2,.8,.2,1),
+        box-shadow .28s cubic-bezier(.2,.8,.2,1),
+        border-color .28s ease,
+        background .28s ease;
       cursor:pointer;
+      isolation:isolate;
     }
 
     body.dark .member-card{
-      background:rgba(255,255,255,0.04);
-    }
-
-    .member-card:hover{
-      transform:translateY(-4px);
-      box-shadow:0 22px 50px rgba(16,24,40,0.12);
+      background:rgba(255,255,255,0.045);
+      box-shadow:0 18px 38px rgba(0,0,0,0.24);
     }
 
     .member-card::before{
       content:"";
       position:absolute;
-      top:-30px;
-      right:-30px;
-      width:120px;
-      height:120px;
-      border-radius:999px;
-      background:radial-gradient(circle, rgba(143,123,255,.18), transparent 70%);
+      inset:-1px;
+      border-radius:30px;
+      padding:1px;
+      background:linear-gradient(135deg, rgba(110,168,255,.35), rgba(143,123,255,.18), rgba(110,231,183,.18));
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      opacity:.45;
       pointer-events:none;
+      z-index:-1;
+    }
+
+    .member-card::after{
+      content:"";
+      position:absolute;
+      top:-40px;
+      right:-40px;
+      width:150px;
+      height:150px;
+      border-radius:999px;
+      background:radial-gradient(circle, rgba(143,123,255,.22), transparent 70%);
+      pointer-events:none;
+      transition:transform .3s ease, opacity .3s ease;
+    }
+
+    .member-card:hover{
+      transform:translateY(-6px) scale(1.01);
+      box-shadow:0 26px 58px rgba(16,24,40,0.14);
+    }
+
+    body.dark .member-card:hover{
+      box-shadow:0 28px 56px rgba(0,0,0,0.32);
+    }
+
+    .member-card:hover::after{
+      transform:scale(1.08);
+      opacity:1;
     }
 
     .member-head{
       display:flex;
-      gap:14px;
+      gap:16px;
       align-items:flex-start;
     }
 
     .avatar-wrap{
+      position:relative;
       flex:0 0 auto;
-      width:72px;
-      height:72px;
-      border-radius:22px;
+      width:120px;
+      height:120px;
+      border-radius:32px;
       overflow:hidden;
-      background:linear-gradient(135deg, rgba(110,168,255,.18), rgba(143,123,255,.18));
-      border:1px solid var(--line);
       display:flex;
       align-items:center;
       justify-content:center;
-      box-shadow:0 8px 18px rgba(0,0,0,.05);
+      background:linear-gradient(135deg, rgba(110,168,255,.16), rgba(143,123,255,.16));
+      border:1px solid rgba(255,255,255,.55);
+      box-shadow:
+        0 10px 24px rgba(0,0,0,.08),
+        inset 0 1px 0 rgba(255,255,255,.55);
+      transition:transform .28s ease, box-shadow .28s ease;
+    }
+
+    body.dark .avatar-wrap{
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:
+        0 12px 28px rgba(0,0,0,.22),
+        inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .avatar-wrap::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:32px;
+      padding:1.5px;
+      background:linear-gradient(135deg, rgba(110,168,255,.7), rgba(143,123,255,.55), rgba(110,231,183,.45));
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      opacity:.85;
+      pointer-events:none;
+    }
+
+    .member-card:hover .avatar-wrap{
+      transform:scale(1.03);
+      box-shadow:
+        0 16px 34px rgba(0,0,0,.12),
+        inset 0 1px 0 rgba(255,255,255,.65);
     }
 
     .avatar-wrap img{
@@ -347,10 +418,15 @@
       height:100%;
       object-fit:cover;
       display:block;
+      transition:transform .35s ease;
+    }
+
+    .member-card:hover .avatar-wrap img{
+      transform:scale(1.05);
     }
 
     .avatar-fallback{
-      font-size:24px;
+      font-size:32px;
       font-weight:800;
       color:var(--accent);
     }
@@ -362,23 +438,23 @@
 
     .member-name{
       margin:0;
-      font-size:24px;
+      font-size:28px;
       line-height:1.05;
-      letter-spacing:-.04em;
+      letter-spacing:-.045em;
     }
 
     .member-name-en{
       margin-top:6px;
       color:var(--muted);
-      font-size:13px;
-      line-height:1.4;
+      font-size:14px;
+      line-height:1.45;
     }
 
     .member-role{
       margin-top:8px;
       color:var(--text);
-      font-size:14px;
-      font-weight:600;
+      font-size:15px;
+      font-weight:650;
       line-height:1.5;
     }
 
@@ -386,14 +462,42 @@
       display:inline-flex;
       align-items:center;
       margin-top:10px;
-      padding:7px 11px;
+      padding:8px 12px;
       border-radius:999px;
-      background:var(--accent-soft);
-      color:var(--accent);
-      border:1px solid rgba(85,100,255,.10);
       font-size:12px;
-      font-weight:700;
+      font-weight:800;
+      letter-spacing:.02em;
+      border:1px solid transparent;
     }
+
+    .role-tag.leadership{
+      background:rgba(85,100,255,.12);
+      color:#4f5cff;
+      border-color:rgba(85,100,255,.15);
+    }
+
+    .role-tag.product{
+      background:rgba(16,185,129,.12);
+      color:#059669;
+      border-color:rgba(16,185,129,.15);
+    }
+
+    .role-tag.roast{
+      background:rgba(249,115,22,.12);
+      color:#ea580c;
+      border-color:rgba(249,115,22,.16);
+    }
+
+    .role-tag.support{
+      background:rgba(168,85,247,.12);
+      color:#7c3aed;
+      border-color:rgba(168,85,247,.16);
+    }
+
+    body.dark .role-tag.leadership{ color:#a9b6ff; }
+    body.dark .role-tag.product{ color:#7ee7c6; }
+    body.dark .role-tag.roast{ color:#fdba74; }
+    body.dark .role-tag.support{ color:#d8b4fe; }
 
     .member-block{
       margin-top:16px;
@@ -402,10 +506,11 @@
     }
 
     .mini-box{
-      padding:12px 14px;
+      padding:13px 14px;
       border-radius:18px;
-      background:rgba(255,255,255,.64);
+      background:rgba(255,255,255,.68);
       border:1px solid var(--line);
+      transition:background .25s ease,border-color .25s ease;
     }
 
     body.dark .mini-box{
@@ -467,21 +572,30 @@
       background:rgba(10,15,25,0.45);
       backdrop-filter:blur(8px);
       -webkit-backdrop-filter:blur(8px);
+      opacity:0;
+      transition:opacity .22s ease;
     }
 
     .modal.show{
       display:flex;
+      opacity:1;
     }
 
     .modal-card{
-      width:min(860px, 100%);
+      width:min(880px, 100%);
       max-height:90vh;
       overflow:auto;
-      border-radius:28px;
+      border-radius:30px;
       padding:22px;
       background:var(--glass-strong);
       border:1px solid var(--line);
       box-shadow:var(--shadow);
+      transform:translateY(14px) scale(.98);
+      transition:transform .22s ease;
+    }
+
+    .modal.show .modal-card{
+      transform:translateY(0) scale(1);
     }
 
     .modal-top{
@@ -499,9 +613,9 @@
     }
 
     .modal-avatar{
-      width:92px;
-      height:92px;
-      border-radius:24px;
+      width:160px;
+      height:160px;
+      border-radius:34px;
       overflow:hidden;
       background:linear-gradient(135deg, rgba(110,168,255,.18), rgba(143,123,255,.18));
       border:1px solid var(--line);
@@ -509,6 +623,7 @@
       align-items:center;
       justify-content:center;
       flex:0 0 auto;
+      box-shadow:0 14px 34px rgba(0,0,0,.12);
     }
 
     .modal-avatar img{
@@ -519,14 +634,14 @@
     }
 
     .modal-avatar-fallback{
-      font-size:28px;
+      font-size:42px;
       font-weight:800;
       color:var(--accent);
     }
 
     .modal-name{
       margin:0;
-      font-size:30px;
+      font-size:32px;
       letter-spacing:-.04em;
       line-height:1;
     }
@@ -535,6 +650,7 @@
       margin-top:6px;
       color:var(--muted);
       font-size:14px;
+      line-height:1.5;
     }
 
     .modal-role{
@@ -553,6 +669,7 @@
       border-radius:999px;
       cursor:pointer;
       font-size:18px;
+      flex:0 0 auto;
     }
 
     body.dark .close-btn{
@@ -608,6 +725,16 @@
       .member-head{ align-items:center; }
       .modal-profile{ flex-direction:column; }
       .modal-top{ align-items:flex-start; }
+      .avatar-wrap{
+        width:92px;
+        height:92px;
+        border-radius:24px;
+      }
+      .modal-avatar{
+        width:120px;
+        height:120px;
+        border-radius:26px;
+      }
     }
   </style>
 </head>
@@ -630,7 +757,12 @@
     <section class="hero glass">
       <div class="eyebrow">Casa Lab · R&D People</div>
       <h1>The Team<br>Behind R&D</h1>
-      
+      <p>
+        รวมสมาชิกในทีม R&amp;D พร้อมบทบาท ประสบการณ์ และจุดแข็งของแต่ละคน
+        ในรูปแบบ card profile ที่ดูทันสมัย อ่านง่าย และสะท้อนแนวคิดของทีมที่ใช้ทั้ง
+        sensory evaluation, roast development และ data-driven workflow ในการพัฒนากาแฟ
+      </p>
+
       <div class="hero-strip">
         <div class="strip-card">
           <span class="label">Team Size</span>
@@ -687,13 +819,13 @@
               <h3 class="member-name">สรพันธ์ ทันตา</h3>
               <div class="member-name-en">Surapan Tanta</div>
               <div class="member-role">SVP / Founder — Casa Lapin</div>
-              <div class="role-tag">Leadership</div>
+              <div class="role-tag leadership">Leadership</div>
             </div>
           </div>
           <div class="member-block">
             <div class="mini-box">
               <span class="label">Experience</span>
-              <div class="text">Founder Casa Lapin</div>
+              <div class="text">Founder Casa Lapin และกำหนด direction ด้านกาแฟขององค์กร</div>
             </div>
             <div class="mini-box">
               <span class="label">Strength</span>
@@ -728,7 +860,7 @@
               <h3 class="member-name">กิตติรัตน์ จันทมณี</h3>
               <div class="member-name-en">Kittirat Jantamanee</div>
               <div class="member-role">Section Manager — Coffee Product</div>
-              <div class="role-tag">Product</div>
+              <div class="role-tag product">Product</div>
             </div>
           </div>
           <div class="member-block">
@@ -751,7 +883,7 @@
         <article class="member-card"
           data-group="product"
           data-name-th="สุฑาทิพย์ สว่างอารีตระกูล"
-          data-name-en="SUTATIP SAWANGAREETAGUL"
+          data-name-en="Sutatip Sawangareetagul"
           data-role="Section Manager — Product Creator"
           data-tag="Product"
           data-image="images/sutatip-sawangareetagul.jpg"
@@ -767,9 +899,9 @@
             </div>
             <div class="member-main">
               <h3 class="member-name">สุฑาทิพย์ สว่างอารีตระกูล</h3>
-              <div class="member-name-en">SUTATIP SAWANGAREETAGUL</div>
+              <div class="member-name-en">Sutatip Sawangareetagul</div>
               <div class="member-role">Section Manager — Product Creator</div>
-              <div class="role-tag">Product</div>
+              <div class="role-tag product">Product</div>
             </div>
           </div>
           <div class="member-block">
@@ -810,7 +942,7 @@
               <h3 class="member-name">วรายุ ก้านจันทร์</h3>
               <div class="member-name-en">Varayu Kanchan</div>
               <div class="member-role">Senior Coffee Roaster</div>
-              <div class="role-tag">Roast</div>
+              <div class="role-tag roast">Roast</div>
             </div>
           </div>
           <div class="member-block">
@@ -833,7 +965,7 @@
         <article class="member-card"
           data-group="roast"
           data-name-th="สันติ มะติตะถัง"
-          data-name-en="SANTI MATITATHANG"
+          data-name-en="Santi Matitathang"
           data-role="Coffee Roaster"
           data-tag="Roast"
           data-image="images/santi-matitathang.jpg"
@@ -849,9 +981,9 @@
             </div>
             <div class="member-main">
               <h3 class="member-name">สันติ มะติตะถัง</h3>
-              <div class="member-name-en">SANTI MATITATHANG</div>
+              <div class="member-name-en">Santi Matitathang</div>
               <div class="member-role">Coffee Roaster</div>
-              <div class="role-tag">Roast</div>
+              <div class="role-tag roast">Roast</div>
             </div>
           </div>
           <div class="member-block">
@@ -872,47 +1004,45 @@
         </article>
 
         <article class="member-card"
-  data-group="support"
-  data-name-th="มณีนุช สุดใจ"
-  data-name-en="Maneenuch Sudjai"
-  data-role="Trainer & QC"
-  data-tag="Support"
-  data-image="images/maneenuch-sudjai.jpg"
-  data-fallback="ม"
-  data-experience="มีประสบการณ์ด้านการฝึกอบรมและการควบคุมคุณภาพ โดยทำหน้าที่สนับสนุนการยกระดับมาตรฐานการทำงานและความเข้าใจด้านกาแฟภายในทีมอย่างต่อเนื่อง"
-  data-strength="โดดเด่นด้านการถ่ายทอดความรู้ให้เข้าใจง่าย ควบคู่กับความละเอียดรอบคอบในการตรวจสอบคุณภาพ ช่วยให้ทีมทำงานได้อย่างมีมาตรฐานและสม่ำเสมอ"
-  data-responsibility="รับผิดชอบงานด้าน training และ quality control สนับสนุนการพัฒนาทักษะของทีม พร้อมดูแลให้มาตรฐานการปฏิบัติงานและคุณภาพในกระบวนการต่าง ๆ เป็นไปอย่างมีประสิทธิภาพ"
-  data-focus="Training, Quality Control, Standards">
-  <div class="member-head">
-    <div class="avatar-wrap">
-      <img src="images/maneenuch-sudjai.jpg" alt="Maneenuch Sudjai" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-      <div class="avatar-fallback" style="display:none;">ม</div>
-    </div>
-    <div class="member-main">
-      <h3 class="member-name">มณีนุช สุดใจ</h3>
-      <div class="member-name-en">Maneenuch Sudjai</div>
-      <div class="member-role">Trainer &amp; QC</div>
-      <div class="role-tag">Support</div>
-    </div>
-  </div>
-
-  <div class="member-block">
-    <div class="mini-box">
-      <span class="label">Experience</span>
-      <div class="text">มีประสบการณ์ด้านการฝึกอบรมและการควบคุมคุณภาพ โดยสนับสนุนการยกระดับมาตรฐานการทำงานและความเข้าใจด้านกาแฟภายในทีม</div>
-    </div>
-    <div class="mini-box">
-      <span class="label">Strength</span>
-      <div class="text">ถ่ายทอดความรู้ได้ชัดเจน เข้าใจง่าย และมีความละเอียดรอบคอบในการตรวจสอบคุณภาพ ช่วยให้ทีมทำงานได้อย่างสม่ำเสมอ</div>
-    </div>
-  </div>
-
-  <div class="pill-wrap">
-    <span class="pill">Trainer</span>
-    <span class="pill">Quality Control</span>
-    <span class="pill">Standards</span>
-  </div>
-</article>
+          data-group="support"
+          data-name-th="มณีนุช สุดใจ"
+          data-name-en="Maneenuch Sudjai"
+          data-role="Trainer & QC"
+          data-tag="Support"
+          data-image="images/maneenuch-sudjai.jpg"
+          data-fallback="ม"
+          data-experience="มีประสบการณ์ด้านการฝึกอบรมและการควบคุมคุณภาพ โดยทำหน้าที่สนับสนุนการยกระดับมาตรฐานการทำงานและความเข้าใจด้านกาแฟภายในทีมอย่างต่อเนื่อง"
+          data-strength="โดดเด่นด้านการถ่ายทอดความรู้ให้เข้าใจง่าย ควบคู่กับความละเอียดรอบคอบในการตรวจสอบคุณภาพ ช่วยให้ทีมทำงานได้อย่างมีมาตรฐานและสม่ำเสมอ"
+          data-responsibility="รับผิดชอบงานด้าน training และ quality control สนับสนุนการพัฒนาทักษะของทีม พร้อมดูแลให้มาตรฐานการปฏิบัติงานและคุณภาพในกระบวนการต่าง ๆ เป็นไปอย่างมีประสิทธิภาพ"
+          data-focus="Training, Quality Control, Standards">
+          <div class="member-head">
+            <div class="avatar-wrap">
+              <img src="images/maneenuch-sudjai.jpg" alt="Maneenuch Sudjai" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="avatar-fallback" style="display:none;">ม</div>
+            </div>
+            <div class="member-main">
+              <h3 class="member-name">มณีนุช สุดใจ</h3>
+              <div class="member-name-en">Maneenuch Sudjai</div>
+              <div class="member-role">Trainer &amp; QC</div>
+              <div class="role-tag support">Support</div>
+            </div>
+          </div>
+          <div class="member-block">
+            <div class="mini-box">
+              <span class="label">Experience</span>
+              <div class="text">มีประสบการณ์ด้านการฝึกอบรมและการควบคุมคุณภาพ โดยสนับสนุนการยกระดับมาตรฐานการทำงานและความเข้าใจด้านกาแฟภายในทีม</div>
+            </div>
+            <div class="mini-box">
+              <span class="label">Strength</span>
+              <div class="text">ถ่ายทอดความรู้ได้ชัดเจน เข้าใจง่าย และมีความละเอียดรอบคอบในการตรวจสอบคุณภาพ ช่วยให้ทีมทำงานได้อย่างสม่ำเสมอ</div>
+            </div>
+          </div>
+          <div class="pill-wrap">
+            <span class="pill">Trainer</span>
+            <span class="pill">Quality Control</span>
+            <span class="pill">Standards</span>
+          </div>
+        </article>
 
         <article class="member-card"
           data-group="support"
@@ -935,7 +1065,7 @@
               <h3 class="member-name">พิชญุตม์ แซ่ด่าน</h3>
               <div class="member-name-en">Pichyut Saedan</div>
               <div class="member-role">R&amp;D Officer</div>
-              <div class="role-tag">Support</div>
+              <div class="role-tag support">Support</div>
             </div>
           </div>
           <div class="member-block">
@@ -1050,12 +1180,20 @@
     const modalResponsibility = document.getElementById("modalResponsibility");
     const modalFocus = document.getElementById("modalFocus");
 
+    function tagClassName(group){
+      if (group === "leadership") return "role-tag leadership";
+      if (group === "product") return "role-tag product";
+      if (group === "roast") return "role-tag roast";
+      return "role-tag support";
+    }
+
     cards.forEach(card => {
       card.addEventListener("click", () => {
         modalNameTh.textContent = card.dataset.nameTh || "-";
         modalNameEn.textContent = card.dataset.nameEn || "-";
         modalRole.textContent = card.dataset.role || "-";
         modalTag.textContent = card.dataset.tag || "-";
+        modalTag.className = tagClassName(card.dataset.group);
         modalExperience.textContent = card.dataset.experience || "-";
         modalStrength.textContent = card.dataset.strength || "-";
         modalResponsibility.textContent = card.dataset.responsibility || "-";
