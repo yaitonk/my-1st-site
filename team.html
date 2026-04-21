@@ -15,14 +15,27 @@
       --text:#17212f;
       --muted:#667085;
       --accent:#5564ff;
-      --accent2:#8f7bff;
       --accent-soft:rgba(85,100,255,0.12);
       --shadow:0 20px 60px rgba(23,33,47,0.10);
       --card-shadow:0 18px 40px rgba(16,24,40,0.08);
     }
 
-    *{ box-sizing:border-box; }
+    body.dark{
+      --bg1:#0c1220;
+      --bg2:#12192b;
+      --bg3:#0f1728;
+      --glass:rgba(17,24,39,0.58);
+      --glass-strong:rgba(17,24,39,0.74);
+      --line:rgba(255,255,255,0.08);
+      --text:#eef2ff;
+      --muted:#a8b0c2;
+      --accent:#8ea2ff;
+      --accent-soft:rgba(142,162,255,0.18);
+      --shadow:0 20px 60px rgba(0,0,0,0.30);
+      --card-shadow:0 18px 40px rgba(0,0,0,0.22);
+    }
 
+    *{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
 
     body{
@@ -36,6 +49,7 @@
         linear-gradient(180deg,var(--bg1),var(--bg2) 48%,var(--bg3));
       min-height:100vh;
       padding:20px;
+      transition:background .25s ease,color .25s ease;
     }
 
     .orb{
@@ -49,20 +63,17 @@
       z-index:0;
       animation:float 16s ease-in-out infinite;
     }
-
     .orb.one{
       top:0;
       left:-80px;
       background:radial-gradient(circle, rgba(100,149,237,0.38), transparent 60%);
     }
-
     .orb.two{
       bottom:-60px;
       right:-80px;
       background:radial-gradient(circle, rgba(255,185,122,0.28), transparent 60%);
       animation-delay:-7s;
     }
-
     @keyframes float{
       0%,100%{ transform:translateY(0) translateX(0); }
       50%{ transform:translateY(-18px) translateX(10px); }
@@ -88,9 +99,18 @@
       gap:10px;
       flex-wrap:wrap;
       margin-bottom:18px;
+      align-items:center;
+      justify-content:space-between;
     }
 
-    .nav-btn{
+    .topbar-left,.topbar-right{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .nav-btn,.ghost-btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
@@ -103,9 +123,16 @@
       border:1px solid var(--line);
       box-shadow:0 8px 20px rgba(0,0,0,.04);
       transition:.2s ease;
+      cursor:pointer;
+      font:inherit;
     }
 
-    .nav-btn:hover{
+    body.dark .nav-btn,
+    body.dark .ghost-btn{
+      background:rgba(255,255,255,0.04);
+    }
+
+    .nav-btn:hover,.ghost-btn:hover{
       transform:translateY(-1px);
     }
 
@@ -147,6 +174,10 @@
       margin-bottom:14px;
     }
 
+    body.dark .eyebrow{
+      background:rgba(255,255,255,0.05);
+    }
+
     h1{
       margin:0;
       font-size:clamp(36px,5vw,62px);
@@ -174,6 +205,10 @@
       border-radius:22px;
       background:rgba(255,255,255,.72);
       border:1px solid var(--line);
+    }
+
+    body.dark .strip-card{
+      background:rgba(255,255,255,0.04);
     }
 
     .strip-card .label{
@@ -237,6 +272,10 @@
       transition:.2s ease;
     }
 
+    body.dark .filter-btn{
+      background:rgba(255,255,255,0.04);
+    }
+
     .filter-btn.active{
       background:var(--accent-soft);
       border-color:rgba(85,100,255,.15);
@@ -259,6 +298,11 @@
       overflow:hidden;
       box-shadow:var(--card-shadow);
       transition:transform .22s ease, box-shadow .22s ease, opacity .2s ease;
+      cursor:pointer;
+    }
+
+    body.dark .member-card{
+      background:rgba(255,255,255,0.04);
     }
 
     .member-card:hover{
@@ -364,6 +408,10 @@
       border:1px solid var(--line);
     }
 
+    body.dark .mini-box{
+      background:rgba(255,255,255,0.03);
+    }
+
     .mini-box .label{
       display:block;
       font-size:11px;
@@ -408,6 +456,144 @@
       display:none;
     }
 
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:1000;
+      background:rgba(10,15,25,0.45);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+    }
+
+    .modal.show{
+      display:flex;
+    }
+
+    .modal-card{
+      width:min(860px, 100%);
+      max-height:90vh;
+      overflow:auto;
+      border-radius:28px;
+      padding:22px;
+      background:var(--glass-strong);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .modal-top{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:flex-start;
+      margin-bottom:18px;
+    }
+
+    .modal-profile{
+      display:flex;
+      gap:16px;
+      align-items:flex-start;
+    }
+
+    .modal-avatar{
+      width:92px;
+      height:92px;
+      border-radius:24px;
+      overflow:hidden;
+      background:linear-gradient(135deg, rgba(110,168,255,.18), rgba(143,123,255,.18));
+      border:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+    }
+
+    .modal-avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .modal-avatar-fallback{
+      font-size:28px;
+      font-weight:800;
+      color:var(--accent);
+    }
+
+    .modal-name{
+      margin:0;
+      font-size:30px;
+      letter-spacing:-.04em;
+      line-height:1;
+    }
+
+    .modal-name-en{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .modal-role{
+      margin-top:10px;
+      font-size:15px;
+      font-weight:700;
+    }
+
+    .close-btn{
+      border:none;
+      background:rgba(255,255,255,.72);
+      border:1px solid var(--line);
+      color:var(--text);
+      width:40px;
+      height:40px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:18px;
+    }
+
+    body.dark .close-btn{
+      background:rgba(255,255,255,0.05);
+    }
+
+    .modal-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .modal-box{
+      padding:16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.56);
+      border:1px solid var(--line);
+    }
+
+    body.dark .modal-box{
+      background:rgba(255,255,255,0.03);
+    }
+
+    .modal-box.full{
+      grid-column:1 / -1;
+    }
+
+    .modal-box .label{
+      display:block;
+      font-size:11px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      margin-bottom:8px;
+    }
+
+    .modal-box .text{
+      font-size:15px;
+      line-height:1.7;
+    }
+
     @media (max-width: 1100px){
       .team-grid{ grid-template-columns:repeat(2,1fr); }
       .hero-strip{ grid-template-columns:repeat(2,1fr); }
@@ -415,11 +601,13 @@
 
     @media (max-width: 720px){
       body{ padding:12px; }
-      .hero,.section,.member-card{ padding:18px; border-radius:22px; }
-      .team-grid,.hero-strip{ grid-template-columns:1fr; }
+      .hero,.section,.member-card,.modal-card{ padding:18px; border-radius:22px; }
+      .team-grid,.hero-strip,.modal-grid{ grid-template-columns:1fr; }
       .member-name{ font-size:22px; }
       h1{ font-size:36px; }
       .member-head{ align-items:center; }
+      .modal-profile{ flex-direction:column; }
+      .modal-top{ align-items:flex-start; }
     }
   </style>
 </head>
@@ -429,9 +617,14 @@
 
   <div class="shell">
     <div class="topbar">
-      <a href="https://yaitonk.github.io/my-1st-site/" class="nav-btn">🏠 Home</a>
-      <a href="https://yaitonk.github.io/my-1st-site/mini-cupping.html" class="nav-btn">☕ Cupping</a>
-      <a href="https://yaitonk.github.io/casa-cupping-data/dashboard.html" class="nav-btn primary">📊 Dashboard</a>
+      <div class="topbar-left">
+        <a href="https://yaitonk.github.io/my-1st-site/" class="nav-btn">🏠 Home</a>
+        <a href="https://yaitonk.github.io/my-1st-site/mini-cupping.html" class="nav-btn">☕ Cupping</a>
+        <a href="https://yaitonk.github.io/casa-cupping-data/dashboard.html" class="nav-btn primary">📊 Dashboard</a>
+      </div>
+      <div class="topbar-right">
+        <button class="ghost-btn" id="themeToggle">🌙 Dark</button>
+      </div>
     </div>
 
     <section class="hero glass">
@@ -465,7 +658,7 @@
 
     <section class="section glass">
       <h2>R&amp;D Members</h2>
-      <div class="section-sub">เลือกดูสมาชิกตามบทบาทของทีมได้</div>
+      <div class="section-sub">คลิกที่การ์ดเพื่อดูรายละเอียดเต็ม</div>
 
       <div class="toolbar">
         <div class="filter-group">
@@ -478,10 +671,21 @@
       </div>
 
       <div class="team-grid" id="teamGrid">
-        <article class="member-card" data-group="leadership">
+        <article class="member-card"
+          data-group="leadership"
+          data-name-th="สรพันธ์ ทันตา"
+          data-name-en="Surapan Tanta"
+          data-role="SVP / Founder — Casa Lapin"
+          data-tag="Leadership"
+          data-image="images/surapan-tanta.jpg"
+          data-fallback="S"
+          data-experience="Founder ของ Casa Lapin และผู้อยู่เบื้องหลังการพัฒนาแนวคิดด้านกาแฟในองค์กร มีประสบการณ์ด้านการคัดเลือกกาแฟ การประเมินคุณภาพ และการวาง direction ของ product"
+          data-strength="เชื่อม vision ระหว่าง business, product และ sensory ได้อย่างชัดเจน ทำให้การพัฒนา R&D มีทิศทางและ identity ที่แข็งแรง"
+          data-responsibility="ดูแลภาพรวมของการกำหนดทิศทางผลิตภัณฑ์ การตัดสินใจเชิงคุณภาพ และการผลักดันแนวคิดด้านกาแฟขององค์กร"
+          data-focus="Leadership, Coffee Direction, Founder Vision">
           <div class="member-head">
             <div class="avatar-wrap">
-              <img src="images/surapan.jpg" alt="Surapan Tanta" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <img src="images/surapan-tanta.jpg" alt="Surapan Tanta" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
               <div class="avatar-fallback" style="display:none;">S</div>
             </div>
             <div class="member-main">
@@ -491,18 +695,16 @@
               <div class="role-tag">Leadership</div>
             </div>
           </div>
-
           <div class="member-block">
             <div class="mini-box">
               <span class="label">Experience</span>
-              <div class="text">Founder ของ Casa Lapin และผู้อยู่เบื้องหลังการพัฒนาแนวคิดด้านกาแฟในองค์กร มีประสบการณ์ด้านการคัดเลือกกาแฟ การประเมินคุณภาพ และการวาง direction ของ product</div>
+              <div class="text">Founder Casa Lapin และกำหนด direction ด้านกาแฟขององค์กร</div>
             </div>
             <div class="mini-box">
               <span class="label">Strength</span>
-              <div class="text">เชื่อม vision ระหว่าง business, product และ sensory ได้อย่างชัดเจน ทำให้การพัฒนา R&amp;D มีทิศทางและ identity ที่แข็งแรง</div>
+              <div class="text">เชื่อม vision ระหว่าง business, product และ sensory ได้อย่างชัดเจน</div>
             </div>
           </div>
-
           <div class="pill-wrap">
             <span class="pill">Leadership</span>
             <span class="pill">Coffee Direction</span>
@@ -510,10 +712,21 @@
           </div>
         </article>
 
-        <article class="member-card" data-group="product">
+        <article class="member-card"
+          data-group="product"
+          data-name-th="กิตติรัตน์ จันทมณี"
+          data-name-en="Kittirat Jantamanee"
+          data-role="Section Manager — Coffee Product"
+          data-tag="Product"
+          data-image="images/kittirat-jantamanee.jpg"
+          data-fallback="K"
+          data-experience="ดูแลการพัฒนาผลิตภัณฑ์กาแฟในระดับภาพรวม ตั้งแต่ selection ไปจนถึงการใช้งานจริง โดยเชื่อมมุมมองด้านคุณภาพเข้ากับ product execution"
+          data-strength="เข้าใจ balance ระหว่างคุณภาพถ้วยกับความเป็นไปได้ในการผลิตจริง ช่วยให้แนวคิด R&D ถูกนำไปใช้ต่อได้อย่างมีประสิทธิภาพ"
+          data-responsibility="ดูแลการพัฒนากลุ่ม coffee product การเชื่อม product concept กับการใช้งานจริง และช่วยผลักดันมาตรฐานด้านกาแฟ"
+          data-focus="Coffee Product, Product Direction, Execution">
           <div class="member-head">
             <div class="avatar-wrap">
-              <img src="images/kittirat.jpg" alt="Kittirat Jantamanee" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <img src="images/kittirat-jantamanee.jpg" alt="Kittirat Jantamanee" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
               <div class="avatar-fallback" style="display:none;">K</div>
             </div>
             <div class="member-main">
@@ -523,18 +736,16 @@
               <div class="role-tag">Product</div>
             </div>
           </div>
-
           <div class="member-block">
             <div class="mini-box">
               <span class="label">Experience</span>
-              <div class="text">ดูแลการพัฒนาผลิตภัณฑ์กาแฟในระดับภาพรวม ตั้งแต่ selection ไปจนถึงการใช้งานจริง โดยเชื่อมมุมมองด้านคุณภาพเข้ากับ product execution</div>
+              <div class="text">ดูแลการพัฒนาผลิตภัณฑ์กาแฟในระดับภาพรวม</div>
             </div>
             <div class="mini-box">
               <span class="label">Strength</span>
-              <div class="text">เข้าใจ balance ระหว่างคุณภาพถ้วยกับความเป็นไปได้ในการผลิตจริง ช่วยให้แนวคิด R&amp;D ถูกนำไปใช้ต่อได้อย่างมีประสิทธิภาพ</div>
+              <div class="text">เข้าใจ balance ระหว่างคุณภาพถ้วยกับความเป็นไปได้ในการผลิตจริง</div>
             </div>
           </div>
-
           <div class="pill-wrap">
             <span class="pill">Coffee Product</span>
             <span class="pill">Product Direction</span>
@@ -542,31 +753,40 @@
           </div>
         </article>
 
-        <article class="member-card" data-group="product">
+        <article class="member-card"
+          data-group="product"
+          data-name-th="สุฑาทิพย์ สว่างอารีตระกูล"
+          data-name-en="SUTATIP SAWANGAREETAGUL"
+          data-role="Section Manager — Product Creator"
+          data-tag="Product"
+          data-image="images/sutatip-sawangareetagul.jpg"
+          data-fallback="S"
+          data-experience="รับผิดชอบการพัฒนา concept และ product ใหม่ ๆ ที่เชื่อมระหว่าง coffee experience, brand direction และมุมมองของผู้บริโภค"
+          data-strength="สามารถแปลง insight จาก R&D ให้กลายเป็น product ที่มี story ชัด มีคาแรกเตอร์ และเข้าถึงลูกค้าได้ดี"
+          data-responsibility="ดูแลการสร้างแนวคิดสินค้า การพัฒนา product identity และเชื่อมผลงานจาก R&D ไปสู่ประสบการณ์ของผู้บริโภค"
+          data-focus="Product Creator, Concept Design, Consumer Insight">
           <div class="member-head">
             <div class="avatar-wrap">
-              <img src="images/sutatip.jpg" alt="Sutatip Sawangareetagul" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <img src="images/sutatip-sawangareetagul.jpg" alt="Sutatip Sawangareetagul" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
               <div class="avatar-fallback" style="display:none;">S</div>
             </div>
             <div class="member-main">
               <h3 class="member-name">สุฑาทิพย์ สว่างอารีตระกูล</h3>
-              <div class="member-name-en">Sutatip Sawangareetagul</div>
+              <div class="member-name-en">SUTATIP SAWANGAREETAGUL</div>
               <div class="member-role">Section Manager — Product Creator</div>
               <div class="role-tag">Product</div>
             </div>
           </div>
-
           <div class="member-block">
             <div class="mini-box">
               <span class="label">Experience</span>
-              <div class="text">รับผิดชอบการพัฒนา concept และ product ใหม่ ๆ ที่เชื่อมระหว่าง coffee experience, brand direction และมุมมองของผู้บริโภค</div>
+              <div class="text">ดูแลการพัฒนา concept และ product ใหม่ ๆ</div>
             </div>
             <div class="mini-box">
               <span class="label">Strength</span>
-              <div class="text">สามารถแปลง insight จาก R&amp;D ให้กลายเป็น product ที่มี story ชัด มีคาแรกเตอร์ และเข้าถึงลูกค้าได้ดี</div>
+              <div class="text">แปลง insight จาก R&D ให้กลายเป็น product ที่มี story</div>
             </div>
           </div>
-
           <div class="pill-wrap">
             <span class="pill">Product Creator</span>
             <span class="pill">Concept Design</span>
@@ -574,31 +794,40 @@
           </div>
         </article>
 
-        <article class="member-card" data-group="roast">
+        <article class="member-card"
+          data-group="roast"
+          data-name-th="วรายุ ก้านจันทร์"
+          data-name-en="Varayu Kanchan"
+          data-role="Senior Coffee Roaster"
+          data-tag="Roast"
+          data-image="images/varayu-kanchan.jpg"
+          data-fallback="V"
+          data-experience="มีประสบการณ์ด้านการคั่วกาแฟระดับสูง และการทดลอง roast profile เพื่อค้นหา optimum flavor สำหรับกาแฟแต่ละประเภท"
+          data-strength="ควบคุม consistency ของ roast ได้ดี และเข้าใจ behavior ของเมล็ดกาแฟในเชิงลึก ช่วยให้การทดลองมีความแม่นยำ"
+          data-responsibility="รับผิดชอบงานคั่วในระดับสูง ดูแล roast profile trial และช่วยผลักดันคุณภาพด้าน roasting ของทีม"
+          data-focus="Senior Roaster, Roast Profile, Consistency">
           <div class="member-head">
             <div class="avatar-wrap">
-              <img src="images/jirayu.jpg" alt="Jirayu Kanchan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="avatar-fallback" style="display:none;">J</div>
+              <img src="images/varayu-kanchan.jpg" alt="Varayu Kanchan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="avatar-fallback" style="display:none;">V</div>
             </div>
             <div class="member-main">
-              <h3 class="member-name">จิรายุ ก้านจันทร์</h3>
-              <div class="member-name-en">Jirayu Kanchan</div>
+              <h3 class="member-name">วรายุ ก้านจันทร์</h3>
+              <div class="member-name-en">Varayu Kanchan</div>
               <div class="member-role">Senior Coffee Roaster</div>
               <div class="role-tag">Roast</div>
             </div>
           </div>
-
           <div class="member-block">
             <div class="mini-box">
               <span class="label">Experience</span>
-              <div class="text">มีประสบการณ์ด้านการคั่วกาแฟระดับสูง และการทดลอง roast profile เพื่อค้นหา optimum flavor สำหรับกาแฟแต่ละประเภท</div>
+              <div class="text">มีประสบการณ์ด้านการคั่วกาแฟระดับสูง และการทดลอง roast profile</div>
             </div>
             <div class="mini-box">
               <span class="label">Strength</span>
-              <div class="text">ควบคุม consistency ของ roast ได้ดี และเข้าใจ behavior ของเมล็ดกาแฟในเชิงลึก ช่วยให้การทดลองมีความแม่นยำ</div>
+              <div class="text">ควบคุม consistency ของ roast ได้ดี และเข้าใจ behavior ของเมล็ดกาแฟ</div>
             </div>
           </div>
-
           <div class="pill-wrap">
             <span class="pill">Senior Roaster</span>
             <span class="pill">Roast Profile</span>
@@ -606,31 +835,40 @@
           </div>
         </article>
 
-        <article class="member-card" data-group="roast">
+        <article class="member-card"
+          data-group="roast"
+          data-name-th="สันติ มะติตะถัง"
+          data-name-en="SANTI MATITATHANG"
+          data-role="Coffee Roaster"
+          data-tag="Roast"
+          data-image="images/santi-matitathang.jpg"
+          data-fallback="S"
+          data-experience="ทำงานด้าน roasting และสนับสนุนการทดลอง batch ต่าง ๆ ใน workflow ของ R&D เพื่อให้ทีมสามารถทดสอบหลายแนวทางได้จริง"
+          data-strength="ปรับ execution ได้รวดเร็ว ทำงานคล่อง และช่วยให้การทดลองหลาย profile เกิดขึ้นได้ต่อเนื่องในภาคปฏิบัติ"
+          data-responsibility="สนับสนุนงาน roasting, batch trial และการทดลองที่เกี่ยวข้องกับการพัฒนา roast direction ภายในทีม"
+          data-focus="Coffee Roaster, Execution, Batch Trial">
           <div class="member-head">
             <div class="avatar-wrap">
-              <img src="images/santi.jpg" alt="Santi Matitathang" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <img src="images/santi-matitathang.jpg" alt="Santi Matitathang" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
               <div class="avatar-fallback" style="display:none;">S</div>
             </div>
             <div class="member-main">
               <h3 class="member-name">สันติ มะติตะถัง</h3>
-              <div class="member-name-en">Santi Matitathang</div>
+              <div class="member-name-en">SANTI MATITATHANG</div>
               <div class="member-role">Coffee Roaster</div>
               <div class="role-tag">Roast</div>
             </div>
           </div>
-
           <div class="member-block">
             <div class="mini-box">
               <span class="label">Experience</span>
-              <div class="text">ทำงานด้าน roasting และสนับสนุนการทดลอง batch ต่าง ๆ ใน workflow ของ R&amp;D เพื่อให้ทีมสามารถทดสอบหลายแนวทางได้จริง</div>
+              <div class="text">ทำงานด้าน roasting และสนับสนุนการทดลอง batch ต่าง ๆ</div>
             </div>
             <div class="mini-box">
               <span class="label">Strength</span>
-              <div class="text">ปรับ execution ได้รวดเร็ว ทำงานคล่อง และช่วยให้การทดลองหลาย profile เกิดขึ้นได้ต่อเนื่องในภาคปฏิบัติ</div>
+              <div class="text">ปรับ execution ได้รวดเร็ว และช่วยให้การทดลองหลาย profile เกิดขึ้นได้จริง</div>
             </div>
           </div>
-
           <div class="pill-wrap">
             <span class="pill">Coffee Roaster</span>
             <span class="pill">Execution</span>
@@ -638,7 +876,18 @@
           </div>
         </article>
 
-        <article class="member-card" data-group="support">
+        <article class="member-card"
+          data-group="support"
+          data-name-th="Fun"
+          data-name-en="Fun"
+          data-role="Trainer"
+          data-tag="Support"
+          data-image="images/fun.jpg"
+          data-fallback="F"
+          data-experience="ดูแลด้าน training และการถ่ายทอดความรู้เกี่ยวกับกาแฟทั้งภายในและภายนอกองค์กร เพื่อยกระดับความเข้าใจและมาตรฐานร่วมของทีม"
+          data-strength="ทำให้ความรู้ที่ซับซ้อนเข้าใจง่าย ถ่ายทอดได้ดี และช่วยสร้างภาษาร่วมในการทำงานระหว่างทีมต่าง ๆ"
+          data-responsibility="รับผิดชอบการฝึกอบรม การพัฒนาความเข้าใจด้านกาแฟ และการสนับสนุนมาตรฐานการเรียนรู้ภายในทีม"
+          data-focus="Trainer, Knowledge Transfer, Standards">
           <div class="member-head">
             <div class="avatar-wrap">
               <img src="images/fun.jpg" alt="Fun" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -651,18 +900,16 @@
               <div class="role-tag">Support</div>
             </div>
           </div>
-
           <div class="member-block">
             <div class="mini-box">
               <span class="label">Experience</span>
-              <div class="text">ดูแลด้าน training และการถ่ายทอดความรู้เกี่ยวกับกาแฟทั้งภายในและภายนอกองค์กร เพื่อยกระดับความเข้าใจและมาตรฐานร่วมของทีม</div>
+              <div class="text">ดูแลด้าน training และการถ่ายทอดความรู้เกี่ยวกับกาแฟ</div>
             </div>
             <div class="mini-box">
               <span class="label">Strength</span>
-              <div class="text">ทำให้ความรู้ที่ซับซ้อนเข้าใจง่าย ถ่ายทอดได้ดี และช่วยสร้างภาษาร่วมในการทำงานระหว่างทีมต่าง ๆ</div>
+              <div class="text">ทำให้ความรู้ที่ซับซ้อนเข้าใจง่าย และช่วยสร้างมาตรฐานร่วมในทีม</div>
             </div>
           </div>
-
           <div class="pill-wrap">
             <span class="pill">Trainer</span>
             <span class="pill">Knowledge Transfer</span>
@@ -670,10 +917,21 @@
           </div>
         </article>
 
-        <article class="member-card" data-group="support">
+        <article class="member-card"
+          data-group="support"
+          data-name-th="พิชญุตม์ แซ่ด่าน"
+          data-name-en="Pichyut Saedan"
+          data-role="R&D Officer"
+          data-tag="Support"
+          data-image="images/pichyut-saedan.jpg"
+          data-fallback="พ"
+          data-experience="สนับสนุนงานทดลอง การเก็บข้อมูล และการวิเคราะห์ผลใน workflow ของ R&D เพื่อให้ข้อมูลพร้อมสำหรับการทบทวนและพัฒนาต่อ"
+          data-strength="เชื่อม data กับการทดลองจริงได้ดี ช่วยให้การพัฒนาเป็นระบบมากขึ้น และลดความซ้ำซ้อนในการทำงานของทีม"
+          data-responsibility="ดูแลงานสนับสนุนด้านข้อมูล การติดตามผลการทดลอง และการเชื่อมข้อมูลกับ workflow ของทีม R&D"
+          data-focus="R&D Officer, Data Support, Workflow">
           <div class="member-head">
             <div class="avatar-wrap">
-              <img src="images/pichyut.jpg" alt="พิชญุตม์ แซ่ด่าน" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <img src="images/pichyut-saedan.jpg" alt="Pichyut Saedan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
               <div class="avatar-fallback" style="display:none;">พ</div>
             </div>
             <div class="member-main">
@@ -683,18 +941,16 @@
               <div class="role-tag">Support</div>
             </div>
           </div>
-
           <div class="member-block">
             <div class="mini-box">
               <span class="label">Experience</span>
-              <div class="text">สนับสนุนงานทดลอง การเก็บข้อมูล และการวิเคราะห์ผลใน workflow ของ R&amp;D เพื่อให้ข้อมูลพร้อมสำหรับการทบทวนและพัฒนาต่อ</div>
+              <div class="text">สนับสนุนงานทดลอง การเก็บข้อมูล และการวิเคราะห์ผลใน workflow ของ R&amp;D</div>
             </div>
             <div class="mini-box">
               <span class="label">Strength</span>
-              <div class="text">เชื่อม data กับการทดลองจริงได้ดี ช่วยให้การพัฒนาเป็นระบบมากขึ้น และลดความซ้ำซ้อนในการทำงานของทีม</div>
+              <div class="text">เชื่อม data กับการทดลองจริง และช่วยให้การพัฒนาเป็นระบบมากขึ้น</div>
             </div>
           </div>
-
           <div class="pill-wrap">
             <span class="pill">R&amp;D Officer</span>
             <span class="pill">Data Support</span>
@@ -709,14 +965,67 @@
     </div>
   </div>
 
+  <div class="modal" id="profileModal">
+    <div class="modal-card">
+      <div class="modal-top">
+        <div class="modal-profile">
+          <div class="modal-avatar">
+            <img id="modalImg" src="" alt="" onerror="this.style.display='none'; document.getElementById('modalFallback').style.display='flex';">
+            <div class="modal-avatar-fallback" id="modalFallback" style="display:none;">A</div>
+          </div>
+          <div>
+            <h3 class="modal-name" id="modalNameTh">-</h3>
+            <div class="modal-name-en" id="modalNameEn">-</div>
+            <div class="modal-role" id="modalRole">-</div>
+            <div class="role-tag" id="modalTag" style="margin-top:12px;">-</div>
+          </div>
+        </div>
+        <button class="close-btn" id="closeModal">✕</button>
+      </div>
+
+      <div class="modal-grid">
+        <div class="modal-box">
+          <span class="label">Experience</span>
+          <div class="text" id="modalExperience">-</div>
+        </div>
+        <div class="modal-box">
+          <span class="label">Strength</span>
+          <div class="text" id="modalStrength">-</div>
+        </div>
+        <div class="modal-box full">
+          <span class="label">Responsibility</span>
+          <div class="text" id="modalResponsibility">-</div>
+        </div>
+        <div class="modal-box full">
+          <span class="label">Focus</span>
+          <div class="text" id="modalFocus">-</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
+    const themeToggle = document.getElementById("themeToggle");
+    const savedTheme = localStorage.getItem("teamTheme");
+    if (savedTheme === "dark") document.body.classList.add("dark");
+    updateThemeButton();
+
+    function updateThemeButton(){
+      themeToggle.textContent = document.body.classList.contains("dark") ? "☀️ Light" : "🌙 Dark";
+    }
+
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("teamTheme", document.body.classList.contains("dark") ? "dark" : "light");
+      updateThemeButton();
+    });
+
     const filterButtons = document.querySelectorAll(".filter-btn");
     const cards = document.querySelectorAll(".member-card");
 
     filterButtons.forEach(btn => {
       btn.addEventListener("click", () => {
         const filter = btn.dataset.filter;
-
         filterButtons.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
 
@@ -728,6 +1037,59 @@
           }
         });
       });
+    });
+
+    const modal = document.getElementById("profileModal");
+    const closeModal = document.getElementById("closeModal");
+
+    const modalImg = document.getElementById("modalImg");
+    const modalFallback = document.getElementById("modalFallback");
+    const modalNameTh = document.getElementById("modalNameTh");
+    const modalNameEn = document.getElementById("modalNameEn");
+    const modalRole = document.getElementById("modalRole");
+    const modalTag = document.getElementById("modalTag");
+    const modalExperience = document.getElementById("modalExperience");
+    const modalStrength = document.getElementById("modalStrength");
+    const modalResponsibility = document.getElementById("modalResponsibility");
+    const modalFocus = document.getElementById("modalFocus");
+
+    cards.forEach(card => {
+      card.addEventListener("click", () => {
+        modalNameTh.textContent = card.dataset.nameTh || "-";
+        modalNameEn.textContent = card.dataset.nameEn || "-";
+        modalRole.textContent = card.dataset.role || "-";
+        modalTag.textContent = card.dataset.tag || "-";
+        modalExperience.textContent = card.dataset.experience || "-";
+        modalStrength.textContent = card.dataset.strength || "-";
+        modalResponsibility.textContent = card.dataset.responsibility || "-";
+        modalFocus.textContent = card.dataset.focus || "-";
+
+        modalFallback.textContent = card.dataset.fallback || "A";
+        modalFallback.style.display = "none";
+        modalImg.style.display = "block";
+        modalImg.src = card.dataset.image || "";
+        modalImg.alt = card.dataset.nameEn || card.dataset.nameTh || "profile";
+
+        modal.classList.add("show");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    function closeProfileModal(){
+      modal.classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    closeModal.addEventListener("click", closeProfileModal);
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeProfileModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("show")) {
+        closeProfileModal();
+      }
     });
   </script>
 </body>
