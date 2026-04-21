@@ -1,1231 +1,1098 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Casa Lab — R&D Team</title>
-  <style>
-    :root{
-      --bg1:#eef4ff;
-      --bg2:#f8f6ff;
-      --bg3:#f6fbf7;
-      --glass:rgba(255,255,255,0.58);
-      --glass-strong:rgba(255,255,255,0.78);
-      --line:rgba(255,255,255,0.72);
-      --text:#17212f;
-      --muted:#667085;
-      --accent:#5564ff;
-      --accent-soft:rgba(85,100,255,0.12);
-      --shadow:0 20px 60px rgba(23,33,47,0.10);
-      --card-shadow:0 18px 40px rgba(16,24,40,0.08);
-    }
-
-    body.dark{
-      --bg1:#0c1220;
-      --bg2:#12192b;
-      --bg3:#0f1728;
-      --glass:rgba(17,24,39,0.58);
-      --glass-strong:rgba(17,24,39,0.74);
-      --line:rgba(255,255,255,0.08);
-      --text:#eef2ff;
-      --muted:#a8b0c2;
-      --accent:#8ea2ff;
-      --accent-soft:rgba(142,162,255,0.18);
-      --shadow:0 20px 60px rgba(0,0,0,0.30);
-      --card-shadow:0 18px 40px rgba(0,0,0,0.22);
-    }
-
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
-
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 12% 12%, rgba(131,182,255,0.34), transparent 23%),
-        radial-gradient(circle at 88% 10%, rgba(255,205,153,0.26), transparent 24%),
-        radial-gradient(circle at 80% 84%, rgba(110,231,183,0.18), transparent 22%),
-        linear-gradient(180deg,var(--bg1),var(--bg2) 48%,var(--bg3));
-      min-height:100vh;
-      padding:20px;
-      transition:background .3s ease,color .3s ease;
-    }
-
-    .orb{
-      position:fixed;
-      width:320px;
-      height:320px;
-      border-radius:999px;
-      filter:blur(28px);
-      opacity:.42;
-      pointer-events:none;
-      z-index:0;
-      animation:float 16s ease-in-out infinite;
-    }
-
-    .orb.one{
-      top:0;
-      left:-80px;
-      background:radial-gradient(circle, rgba(100,149,237,0.38), transparent 60%);
-    }
-
-    .orb.two{
-      bottom:-60px;
-      right:-80px;
-      background:radial-gradient(circle, rgba(255,185,122,0.28), transparent 60%);
-      animation-delay:-7s;
-    }
-
-    @keyframes float{
-      0%,100%{ transform:translateY(0) translateX(0); }
-      50%{ transform:translateY(-18px) translateX(10px); }
-    }
-
-    .shell{
-      max-width:1320px;
-      margin:0 auto;
-      position:relative;
-      z-index:1;
-    }
-
-    .glass{
-      background:var(--glass);
-      border:1px solid var(--line);
-      backdrop-filter:blur(22px) saturate(1.2);
-      -webkit-backdrop-filter:blur(22px) saturate(1.2);
-      box-shadow:var(--shadow);
-      transition:background .3s ease,border-color .3s ease,box-shadow .3s ease;
-    }
-
-    .topbar{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom:18px;
-      align-items:center;
-      justify-content:space-between;
-    }
-
-    .topbar-left,.topbar-right{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-
-    .nav-btn,.ghost-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:11px 16px;
-      border-radius:999px;
-      text-decoration:none;
-      font-size:14px;
-      color:var(--text);
-      background:rgba(255,255,255,0.72);
-      border:1px solid var(--line);
-      box-shadow:0 8px 20px rgba(0,0,0,.04);
-      transition:.2s ease;
-      cursor:pointer;
-      font:inherit;
-    }
-
-    body.dark .nav-btn,
-    body.dark .ghost-btn{
-      background:rgba(255,255,255,0.04);
-    }
-
-    .nav-btn:hover,.ghost-btn:hover{
-      transform:translateY(-1px);
-    }
-
-    .nav-btn.primary{
-      background:linear-gradient(135deg,#6ea8ff,#8f7bff);
-      color:#fff;
-      border:none;
-    }
-
-    .hero{
-      padding:30px;
-      border-radius:34px;
-      margin-bottom:18px;
-      overflow:hidden;
-      position:relative;
-    }
-
-    .hero::after{
-      content:"";
-      position:absolute;
-      right:-70px;
-      top:-40px;
-      width:240px;
-      height:240px;
-      border-radius:999px;
-      background:radial-gradient(circle, rgba(255,255,255,.38), transparent 68%);
-      pointer-events:none;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      padding:8px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.72);
-      border:1px solid var(--line);
-      color:var(--muted);
-      font-size:12px;
-      font-weight:700;
-      margin-bottom:14px;
-    }
-
-    body.dark .eyebrow{
-      background:rgba(255,255,255,0.05);
-    }
-
-    h1{
-      margin:0;
-      font-size:clamp(36px,5vw,62px);
-      line-height:.92;
-      letter-spacing:-.055em;
-    }
-
-    .hero p{
-      margin:14px 0 0;
-      max-width:920px;
-      color:var(--muted);
-      line-height:1.7;
-      font-size:16px;
-    }
-
-    .hero-strip{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:12px;
-      margin-top:20px;
-    }
-
-    .strip-card{
-      padding:16px;
-      border-radius:22px;
-      background:rgba(255,255,255,.72);
-      border:1px solid var(--line);
-    }
-
-    body.dark .strip-card{
-      background:rgba(255,255,255,0.04);
-    }
-
-    .strip-card .label{
-      display:block;
-      font-size:11px;
-      color:var(--muted);
-      text-transform:uppercase;
-      letter-spacing:.06em;
-      margin-bottom:8px;
-    }
-
-    .strip-card .value{
-      font-size:22px;
-      font-weight:800;
-      letter-spacing:-.04em;
-    }
-
-    .section{
-      padding:22px;
-      border-radius:30px;
-      margin-bottom:18px;
-    }
-
-    .section h2{
-      margin:0 0 6px;
-      font-size:30px;
-      letter-spacing:-.04em;
-    }
-
-    .section-sub{
-      color:var(--muted);
-      font-size:14px;
-      margin-bottom:18px;
-    }
-
-    .toolbar{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      align-items:center;
-      flex-wrap:wrap;
-      margin-bottom:18px;
-    }
-
-    .filter-group{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .filter-btn{
-      border:none;
-      cursor:pointer;
-      padding:10px 14px;
-      border-radius:999px;
-      font:inherit;
-      font-size:13px;
-      color:var(--text);
-      background:rgba(255,255,255,.72);
-      border:1px solid var(--line);
-      transition:.2s ease;
-    }
-
-    body.dark .filter-btn{
-      background:rgba(255,255,255,0.04);
-    }
-
-    .filter-btn.active{
-      background:var(--accent-soft);
-      border-color:rgba(85,100,255,.15);
-      color:var(--accent);
-      font-weight:700;
-    }
-
-    .team-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-    }
-
-    .member-card{
-      padding:20px;
-      border-radius:30px;
-      background:rgba(255,255,255,.76);
-      border:1px solid var(--line);
-      position:relative;
-      overflow:hidden;
-      box-shadow:0 16px 40px rgba(16,24,40,0.08);
-      transition:
-        transform .28s cubic-bezier(.2,.8,.2,1),
-        box-shadow .28s cubic-bezier(.2,.8,.2,1),
-        border-color .28s ease,
-        background .28s ease;
-      cursor:pointer;
-      isolation:isolate;
-    }
-
-    body.dark .member-card{
-      background:rgba(255,255,255,0.045);
-      box-shadow:0 18px 38px rgba(0,0,0,0.24);
-    }
-
-    .member-card::before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      border-radius:30px;
-      padding:1px;
-      background:linear-gradient(135deg, rgba(110,168,255,.35), rgba(143,123,255,.18), rgba(110,231,183,.18));
-      -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor;
-      mask-composite:exclude;
-      opacity:.45;
-      pointer-events:none;
-      z-index:-1;
-    }
-
-    .member-card::after{
-      content:"";
-      position:absolute;
-      top:-40px;
-      right:-40px;
-      width:150px;
-      height:150px;
-      border-radius:999px;
-      background:radial-gradient(circle, rgba(143,123,255,.22), transparent 70%);
-      pointer-events:none;
-      transition:transform .3s ease, opacity .3s ease;
-    }
-
-    .member-card:hover{
-      transform:translateY(-6px) scale(1.01);
-      box-shadow:0 26px 58px rgba(16,24,40,0.14);
-    }
-
-    body.dark .member-card:hover{
-      box-shadow:0 28px 56px rgba(0,0,0,0.32);
-    }
-
-    .member-card:hover::after{
-      transform:scale(1.08);
-      opacity:1;
-    }
-
-    .member-head{
-      display:flex;
-      gap:16px;
-      align-items:flex-start;
-    }
-
-    .avatar-wrap{
-      position:relative;
-      flex:0 0 auto;
-      width:120px;
-      height:120px;
-      border-radius:32px;
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:linear-gradient(135deg, rgba(110,168,255,.16), rgba(143,123,255,.16));
-      border:1px solid rgba(255,255,255,.55);
-      box-shadow:
-        0 10px 24px rgba(0,0,0,.08),
-        inset 0 1px 0 rgba(255,255,255,.55);
-      transition:transform .28s ease, box-shadow .28s ease;
-    }
-
-    body.dark .avatar-wrap{
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:
-        0 12px 28px rgba(0,0,0,.22),
-        inset 0 1px 0 rgba(255,255,255,.04);
-    }
-
-    .avatar-wrap::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      border-radius:32px;
-      padding:1.5px;
-      background:linear-gradient(135deg, rgba(110,168,255,.7), rgba(143,123,255,.55), rgba(110,231,183,.45));
-      -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor;
-      mask-composite:exclude;
-      opacity:.85;
-      pointer-events:none;
-    }
-
-    .member-card:hover .avatar-wrap{
-      transform:scale(1.03);
-      box-shadow:
-        0 16px 34px rgba(0,0,0,.12),
-        inset 0 1px 0 rgba(255,255,255,.65);
-    }
-
-    .avatar-wrap img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      transition:transform .35s ease;
-    }
-
-    .member-card:hover .avatar-wrap img{
-      transform:scale(1.05);
-    }
-
-    .avatar-fallback{
-      font-size:32px;
-      font-weight:800;
-      color:var(--accent);
-    }
-
-    .member-main{
-      min-width:0;
-      flex:1 1 auto;
-    }
-
-    .member-name{
-      margin:0;
-      font-size:28px;
-      line-height:1.05;
-      letter-spacing:-.045em;
-    }
-
-    .member-name-en{
-      margin-top:6px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.45;
-    }
-
-    .member-role{
-      margin-top:8px;
-      color:var(--text);
-      font-size:15px;
-      font-weight:650;
-      line-height:1.5;
-    }
-
-    .role-tag{
-      display:inline-flex;
-      align-items:center;
-      margin-top:10px;
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.02em;
-      border:1px solid transparent;
-    }
-
-    .role-tag.leadership{
-      background:rgba(85,100,255,.12);
-      color:#4f5cff;
-      border-color:rgba(85,100,255,.15);
-    }
-
-    .role-tag.product{
-      background:rgba(16,185,129,.12);
-      color:#059669;
-      border-color:rgba(16,185,129,.15);
-    }
-
-    .role-tag.roast{
-      background:rgba(249,115,22,.12);
-      color:#ea580c;
-      border-color:rgba(249,115,22,.16);
-    }
-
-    .role-tag.support{
-      background:rgba(168,85,247,.12);
-      color:#7c3aed;
-      border-color:rgba(168,85,247,.16);
-    }
-
-    body.dark .role-tag.leadership{ color:#a9b6ff; }
-    body.dark .role-tag.product{ color:#7ee7c6; }
-    body.dark .role-tag.roast{ color:#fdba74; }
-    body.dark .role-tag.support{ color:#d8b4fe; }
-
-    .member-block{
-      margin-top:16px;
-      display:grid;
-      gap:10px;
-    }
-
-    .mini-box{
-      padding:13px 14px;
-      border-radius:18px;
-      background:rgba(255,255,255,.68);
-      border:1px solid var(--line);
-      transition:background .25s ease,border-color .25s ease;
-    }
-
-    body.dark .mini-box{
-      background:rgba(255,255,255,0.03);
-    }
-
-    .mini-box .label{
-      display:block;
-      font-size:11px;
-      color:var(--muted);
-      text-transform:uppercase;
-      letter-spacing:.06em;
-      margin-bottom:6px;
-    }
-
-    .mini-box .text{
-      font-size:14px;
-      line-height:1.65;
-    }
-
-    .pill-wrap{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:14px;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      padding:8px 12px;
-      border-radius:999px;
-      background:var(--accent-soft);
-      color:var(--accent);
-      border:1px solid rgba(85,100,255,.12);
-      font-size:12px;
-      font-weight:700;
-    }
-
-    .footer-note{
-      text-align:center;
-      color:var(--muted);
-      font-size:13px;
-      padding:10px 0 4px;
-    }
-
-    .hidden-card{
-      display:none;
-    }
-
-    .modal{
-      position:fixed;
-      inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-      z-index:1000;
-      background:rgba(10,15,25,0.45);
-      backdrop-filter:blur(8px);
-      -webkit-backdrop-filter:blur(8px);
-      opacity:0;
-      transition:opacity .22s ease;
-    }
-
-    .modal.show{
-      display:flex;
-      opacity:1;
-    }
-
-    .modal-card{
-      width:min(880px, 100%);
-      max-height:90vh;
-      overflow:auto;
-      border-radius:30px;
-      padding:22px;
-      background:var(--glass-strong);
-      border:1px solid var(--line);
-      box-shadow:var(--shadow);
-      transform:translateY(14px) scale(.98);
-      transition:transform .22s ease;
-    }
-
-    .modal.show .modal-card{
-      transform:translateY(0) scale(1);
-    }
-
-    .modal-top{
-      display:flex;
-      justify-content:space-between;
-      gap:16px;
-      align-items:flex-start;
-      margin-bottom:18px;
-    }
-
-    .modal-profile{
-      display:flex;
-      gap:16px;
-      align-items:flex-start;
-    }
-
-    .modal-avatar{
-      width:160px;
-      height:160px;
-      border-radius:34px;
-      overflow:hidden;
-      background:linear-gradient(135deg, rgba(110,168,255,.18), rgba(143,123,255,.18));
-      border:1px solid var(--line);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      flex:0 0 auto;
-      box-shadow:0 14px 34px rgba(0,0,0,.12);
-    }
-
-    .modal-avatar img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    .modal-avatar-fallback{
-      font-size:42px;
-      font-weight:800;
-      color:var(--accent);
-    }
-
-    .modal-name{
-      margin:0;
-      font-size:32px;
-      letter-spacing:-.04em;
-      line-height:1;
-    }
-
-    .modal-name-en{
-      margin-top:6px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.5;
-    }
-
-    .modal-role{
-      margin-top:10px;
-      font-size:15px;
-      font-weight:700;
-    }
-
-    .close-btn{
-      border:none;
-      background:rgba(255,255,255,.72);
-      border:1px solid var(--line);
-      color:var(--text);
-      width:40px;
-      height:40px;
-      border-radius:999px;
-      cursor:pointer;
-      font-size:18px;
-      flex:0 0 auto;
-    }
-
-    body.dark .close-btn{
-      background:rgba(255,255,255,0.05);
-    }
-
-    .modal-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
-
-    .modal-box{
-      padding:16px;
-      border-radius:18px;
-      background:rgba(255,255,255,.56);
-      border:1px solid var(--line);
-    }
-
-    body.dark .modal-box{
-      background:rgba(255,255,255,0.03);
-    }
-
-    .modal-box.full{
-      grid-column:1 / -1;
-    }
-
-    .modal-box .label{
-      display:block;
-      font-size:11px;
-      color:var(--muted);
-      text-transform:uppercase;
-      letter-spacing:.06em;
-      margin-bottom:8px;
-    }
-
-    .modal-box .text{
-      font-size:15px;
-      line-height:1.7;
-    }
-
-    @media (max-width: 1100px){
-      .team-grid{ grid-template-columns:repeat(2,1fr); }
-      .hero-strip{ grid-template-columns:repeat(2,1fr); }
-    }
-
-    @media (max-width: 720px){
-      body{ padding:12px; }
-      .hero,.section,.member-card,.modal-card{ padding:18px; border-radius:22px; }
-      .team-grid,.hero-strip,.modal-grid{ grid-template-columns:1fr; }
-      .member-name{ font-size:22px; }
-      h1{ font-size:36px; }
-      .member-head{ align-items:center; }
-      .modal-profile{ flex-direction:column; }
-      .modal-top{ align-items:flex-start; }
-      .avatar-wrap{
-        width:92px;
-        height:92px;
-        border-radius:24px;
-      }
-      .modal-avatar{
-        width:120px;
-        height:120px;
-        border-radius:26px;
-      }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Casa Lab — R&D Team</title>
+<style>
+:root{
+--bg1:#eef4ff;
+--bg2:#f8f6ff;
+--bg3:#f6fbf7;
+--glass:rgba(255,255,255,0.58);
+--glass-strong:rgba(255,255,255,0.78);
+--line:rgba(255,255,255,0.72);
+--text:#17212f;
+--muted:#667085;
+--accent:#5564ff;
+--accent-soft:rgba(85,100,255,0.12);
+--shadow:0 20px 60px rgba(23,33,47,0.10);
+--card-shadow:0 18px 40px rgba(16,24,40,0.08);
+}
+
+body.dark{
+--bg1:#0c1220;
+--bg2:#12192b;
+--bg3:#0f1728;
+--glass:rgba(17,24,39,0.58);
+--glass-strong:rgba(17,24,39,0.74);
+--line:rgba(255,255,255,0.08);
+--text:#eef2ff;
+--muted:#a8b0c2;
+--accent:#8ea2ff;
+--accent-soft:rgba(142,162,255,0.18);
+--shadow:0 20px 60px rgba(0,0,0,0.30);
+--card-shadow:0 18px 40px rgba(0,0,0,0.22);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",sans-serif;
+color:var(--text);
+background:
+radial-gradient(circle at 12% 12%, rgba(131,182,255,0.34), transparent 23%),
+radial-gradient(circle at 88% 10%, rgba(255,205,153,0.26), transparent 24%),
+radial-gradient(circle at 80% 84%, rgba(110,231,183,0.18), transparent 22%),
+linear-gradient(180deg,var(--bg1),var(--bg2) 48%,var(--bg3));
+min-height:100vh;
+padding:20px;
+transition:background .25s ease,color .25s ease;
+}
+
+.orb{
+position:fixed;
+width:320px;
+height:320px;
+border-radius:999px;
+filter:blur(28px);
+opacity:.42;
+pointer-events:none;
+z-index:0;
+animation:float 16s ease-in-out infinite;
+}
+.orb.one{
+top:0;
+left:-80px;
+background:radial-gradient(circle, rgba(100,149,237,0.38), transparent 60%);
+}
+.orb.two{
+bottom:-60px;
+right:-80px;
+background:radial-gradient(circle, rgba(255,185,122,0.28), transparent 60%);
+animation-delay:-7s;
+}
+@keyframes float{
+0%,100%{ transform:translateY(0) translateX(0); }
+50%{ transform:translateY(-18px) translateX(10px); }
+}
+
+.shell{
+max-width:1320px;
+margin:0 auto;
+position:relative;
+z-index:1;
+}
+
+.glass{
+background:var(--glass);
+border:1px solid var(--line);
+backdrop-filter:blur(22px) saturate(1.2);
+-webkit-backdrop-filter:blur(22px) saturate(1.2);
+box-shadow:var(--shadow);
+}
+
+.topbar{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:18px;
+align-items:center;
+justify-content:space-between;
+}
+
+.topbar-left,.topbar-right{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+align-items:center;
+}
+
+.nav-btn,.ghost-btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:11px 16px;
+border-radius:999px;
+text-decoration:none;
+font-size:14px;
+color:var(--text);
+background:rgba(255,255,255,0.72);
+border:1px solid var(--line);
+box-shadow:0 8px 20px rgba(0,0,0,.04);
+transition:.2s ease;
+cursor:pointer;
+font:inherit;
+}
+
+body.dark .nav-btn,
+body.dark .ghost-btn{
+background:rgba(255,255,255,0.04);
+}
+
+.nav-btn:hover,.ghost-btn:hover{
+transform:translateY(-1px);
+}
+
+.nav-btn.primary{
+background:linear-gradient(135deg,#6ea8ff,#8f7bff);
+color:#fff;
+border:none;
+}
+
+.hero{
+padding:30px;
+border-radius:34px;
+margin-bottom:18px;
+overflow:hidden;
+position:relative;
+}
+
+.hero::after{
+content:"";
+position:absolute;
+right:-70px;
+top:-40px;
+width:240px;
+height:240px;
+border-radius:999px;
+background:radial-gradient(circle, rgba(255,255,255,.38), transparent 68%);
+pointer-events:none;
+}
+
+.eyebrow{
+display:inline-flex;
+padding:8px 14px;
+border-radius:999px;
+background:rgba(255,255,255,.72);
+border:1px solid var(--line);
+color:var(--muted);
+font-size:12px;
+font-weight:700;
+margin-bottom:14px;
+}
+
+body.dark .eyebrow{
+background:rgba(255,255,255,0.05);
+}
+
+h1{
+margin:0;
+font-size:clamp(36px,5vw,62px);
+line-height:.92;
+letter-spacing:-.055em;
+}
+
+.hero p{
+margin:14px 0 0;
+max-width:900px;
+color:var(--muted);
+line-height:1.7;
+font-size:16px;
+}
+
+.hero-strip{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-top:20px;
+}
+
+.strip-card{
+padding:16px;
+border-radius:22px;
+background:rgba(255,255,255,.72);
+border:1px solid var(--line);
+}
+
+body.dark .strip-card{
+background:rgba(255,255,255,0.04);
+}
+
+.strip-card .label{
+display:block;
+font-size:11px;
+color:var(--muted);
+text-transform:uppercase;
+letter-spacing:.06em;
+margin-bottom:8px;
+}
+
+.strip-card .value{
+font-size:22px;
+font-weight:800;
+letter-spacing:-.04em;
+}
+
+.section{
+padding:22px;
+border-radius:30px;
+margin-bottom:18px;
+}
+
+.section h2{
+margin:0 0 6px;
+font-size:30px;
+letter-spacing:-.04em;
+}
+
+.section-sub{
+color:var(--muted);
+font-size:14px;
+margin-bottom:18px;
+}
+
+.toolbar{
+display:flex;
+justify-content:space-between;
+gap:12px;
+align-items:center;
+flex-wrap:wrap;
+margin-bottom:18px;
+}
+
+.filter-group{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.filter-btn{
+border:none;
+cursor:pointer;
+padding:10px 14px;
+border-radius:999px;
+font:inherit;
+font-size:13px;
+color:var(--text);
+background:rgba(255,255,255,.72);
+border:1px solid var(--line);
+transition:.2s ease;
+}
+
+body.dark .filter-btn{
+background:rgba(255,255,255,0.04);
+}
+
+.filter-btn.active{
+background:var(--accent-soft);
+border-color:rgba(85,100,255,.15);
+color:var(--accent);
+font-weight:700;
+}
+
+.team-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.member-card{
+padding:20px;
+border-radius:28px;
+background:rgba(255,255,255,.74);
+border:1px solid var(--line);
+position:relative;
+overflow:hidden;
+box-shadow:var(--card-shadow);
+transition:transform .22s ease, box-shadow .22s ease, opacity .2s ease;
+cursor:pointer;
+}
+
+body.dark .member-card{
+background:rgba(255,255,255,0.04);
+}
+
+.member-card:hover{
+transform:translateY(-4px);
+box-shadow:0 22px 50px rgba(16,24,40,0.12);
+}
+
+.member-card::before{
+content:"";
+position:absolute;
+top:-30px;
+right:-30px;
+width:120px;
+height:120px;
+border-radius:999px;
+background:radial-gradient(circle, rgba(143,123,255,.18), transparent 70%);
+pointer-events:none;
+}
+
+.member-head{
+display:flex;
+gap:14px;
+align-items:flex-start;
+}
+
+.avatar-wrap{
+flex:0 0 auto;
+width:72px;
+height:72px;
+border-radius:22px;
+overflow:hidden;
+background:linear-gradient(135deg, rgba(110,168,255,.18), rgba(143,123,255,.18));
+border:1px solid var(--line);
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 8px 18px rgba(0,0,0,.05);
+}
+
+.avatar-wrap img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.avatar-fallback{
+font-size:24px;
+font-weight:800;
+color:var(--accent);
+}
+
+.member-main{
+min-width:0;
+flex:1 1 auto;
+}
+
+.member-name{
+margin:0;
+font-size:24px;
+line-height:1.05;
+letter-spacing:-.04em;
+}
+
+.member-name-en{
+margin-top:6px;
+color:var(--muted);
+font-size:13px;
+line-height:1.4;
+}
+
+.member-role{
+margin-top:8px;
+color:var(--text);
+font-size:14px;
+font-weight:600;
+line-height:1.5;
+}
+
+.role-tag{
+display:inline-flex;
+align-items:center;
+margin-top:10px;
+padding:7px 11px;
+border-radius:999px;
+background:var(--accent-soft);
+color:var(--accent);
+border:1px solid rgba(85,100,255,.10);
+font-size:12px;
+font-weight:700;
+}
+
+.member-block{
+margin-top:16px;
+display:grid;
+gap:10px;
+}
+
+.mini-box{
+padding:12px 14px;
+border-radius:18px;
+background:rgba(255,255,255,.64);
+border:1px solid var(--line);
+}
+
+body.dark .mini-box{
+background:rgba(255,255,255,0.03);
+}
+
+.mini-box .label{
+display:block;
+font-size:11px;
+color:var(--muted);
+text-transform:uppercase;
+letter-spacing:.06em;
+margin-bottom:6px;
+}
+
+.mini-box .text{
+font-size:14px;
+line-height:1.65;
+}
+
+.pill-wrap{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-top:14px;
+}
+
+.pill{
+display:inline-flex;
+align-items:center;
+padding:8px 12px;
+border-radius:999px;
+background:var(--accent-soft);
+color:var(--accent);
+border:1px solid rgba(85,100,255,.12);
+font-size:12px;
+font-weight:700;
+}
+
+.footer-note{
+text-align:center;
+color:var(--muted);
+font-size:13px;
+padding:10px 0 4px;
+}
+
+.hidden-card{
+display:none;
+}
+
+.modal{
+position:fixed;
+inset:0;
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:1000;
+background:rgba(10,15,25,0.45);
+backdrop-filter:blur(8px);
+-webkit-backdrop-filter:blur(8px);
+}
+
+.modal.show{
+display:flex;
+}
+
+.modal-card{
+width:min(860px, 100%);
+max-height:90vh;
+overflow:auto;
+border-radius:28px;
+padding:22px;
+background:var(--glass-strong);
+border:1px solid var(--line);
+box-shadow:var(--shadow);
+}
+
+.modal-top{
+display:flex;
+justify-content:space-between;
+gap:16px;
+align-items:flex-start;
+margin-bottom:18px;
+}
+
+.modal-profile{
+display:flex;
+gap:16px;
+align-items:flex-start;
+}
+
+.modal-avatar{
+width:92px;
+height:92px;
+border-radius:24px;
+overflow:hidden;
+background:linear-gradient(135deg, rgba(110,168,255,.18), rgba(143,123,255,.18));
+border:1px solid var(--line);
+display:flex;
+align-items:center;
+justify-content:center;
+flex:0 0 auto;
+}
+
+.modal-avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.modal-avatar-fallback{
+font-size:28px;
+font-weight:800;
+color:var(--accent);
+}
+
+.modal-name{
+margin:0;
+font-size:30px;
+letter-spacing:-.04em;
+line-height:1;
+}
+
+.modal-name-en{
+margin-top:6px;
+color:var(--muted);
+font-size:14px;
+}
+
+.modal-role{
+margin-top:10px;
+font-size:15px;
+font-weight:700;
+}
+
+.close-btn{
+border:none;
+background:rgba(255,255,255,.72);
+border:1px solid var(--line);
+color:var(--text);
+width:40px;
+height:40px;
+border-radius:999px;
+cursor:pointer;
+font-size:18px;
+}
+
+body.dark .close-btn{
+background:rgba(255,255,255,0.05);
+}
+
+.modal-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+}
+
+.modal-box{
+padding:16px;
+border-radius:18px;
+background:rgba(255,255,255,.56);
+border:1px solid var(--line);
+}
+
+body.dark .modal-box{
+background:rgba(255,255,255,0.03);
+}
+
+.modal-box.full{
+grid-column:1 / -1;
+}
+
+.modal-box .label{
+display:block;
+font-size:11px;
+color:var(--muted);
+text-transform:uppercase;
+letter-spacing:.06em;
+margin-bottom:8px;
+}
+
+.modal-box .text{
+font-size:15px;
+line-height:1.7;
+}
+
+@media (max-width: 1100px){
+.team-grid{ grid-template-columns:repeat(2,1fr); }
+.hero-strip{ grid-template-columns:repeat(2,1fr); }
+}
+
+@media (max-width: 720px){
+body{ padding:12px; }
+.hero,.section,.member-card,.modal-card{ padding:18px; border-radius:22px; }
+.team-grid,.hero-strip,.modal-grid{ grid-template-columns:1fr; }
+.member-name{ font-size:22px; }
+h1{ font-size:36px; }
+.member-head{ align-items:center; }
+.modal-profile{ flex-direction:column; }
+.modal-top{ align-items:flex-start; }
+}
+</style>
 </head>
 <body>
-  <div class="orb one"></div>
-  <div class="orb two"></div>
+<div class="orb one"></div>
+<div class="orb two"></div>
 
-  <div class="shell">
-    <div class="topbar">
-      <div class="topbar-left">
-        <a href="https://yaitonk.github.io/my-1st-site/" class="nav-btn">🏠 Home</a>
-        <a href="https://yaitonk.github.io/my-1st-site/mini-cupping.html" class="nav-btn">☕ Cupping</a>
-        <a href="https://yaitonk.github.io/casa-cupping-data/dashboard.html" class="nav-btn primary">📊 Dashboard</a>
-      </div>
-      <div class="topbar-right">
-        <button class="ghost-btn" id="themeToggle">🌙 Dark</button>
-      </div>
-    </div>
+<div class="shell">
+<div class="topbar">
+<div class="topbar-left">
+<a href="https://yaitonk.github.io/my-1st-site/" class="nav-btn">🏠 Home</a>
+<a href="https://yaitonk.github.io/my-1st-site/mini-cupping.html" class="nav-btn">☕ Cupping</a>
+<a href="https://yaitonk.github.io/casa-cupping-data/dashboard.html" class="nav-btn primary">📊 Dashboard</a>
+</div>
+<div class="topbar-right">
+<button class="ghost-btn" id="themeToggle">🌙 Dark</button>
+</div>
+</div>
 
-    <section class="hero glass">
-      <div class="eyebrow">Casa Lab · R&D People</div>
-      <h1>The Team<br>Behind R&D</h1>
+<section class="hero glass">
+<div class="eyebrow">Casa Lab · R&D People</div>
+<h1>The Team<br>Behind R&D</h1>
       <p>
-        รวมสมาชิกในทีม R&amp;D พร้อมบทบาท ประสบการณ์ และจุดแข็งของแต่ละคน
-        ในรูปแบบ card profile ที่ดูทันสมัย อ่านง่าย และสะท้อนแนวคิดของทีมที่ใช้ทั้ง
+        รวมสมาชิกในทีม R&amp;D 
         sensory evaluation, roast development และ data-driven workflow ในการพัฒนากาแฟ
       </p>
 
-      <div class="hero-strip">
-        <div class="strip-card">
-          <span class="label">Team Size</span>
-          <div class="value">7 Members</div>
-        </div>
-        <div class="strip-card">
-          <span class="label">Main Area</span>
-          <div class="value">Coffee R&amp;D</div>
-        </div>
-        <div class="strip-card">
-          <span class="label">Core Skills</span>
-          <div class="value">Sensory · Roast · QA</div>
-        </div>
-        <div class="strip-card">
-          <span class="label">Mindset</span>
-          <div class="value">Test · Learn · Refine</div>
-        </div>
-      </div>
-    </section>
+      
+<div class="hero-strip">
+<div class="strip-card">
+<span class="label">Team Size</span>
+<div class="value">7 Members</div>
+</div>
+<div class="strip-card">
+<span class="label">Main Area</span>
+<div class="value">Coffee R&amp;D</div>
+</div>
+<div class="strip-card">
+<span class="label">Core Skills</span>
+<div class="value">Sensory · Roast · QA</div>
+</div>
+<div class="strip-card">
+<span class="label">Mindset</span>
+<div class="value">Test · Learn · Refine</div>
+</div>
+</div>
+</section>
 
-    <section class="section glass">
-      <h2>R&amp;D Members</h2>
-      <div class="section-sub">คลิกที่การ์ดเพื่อดูรายละเอียดเต็ม</div>
+<section class="section glass">
+<h2>R&amp;D Members</h2>
+<div class="section-sub">คลิกที่การ์ดเพื่อดูรายละเอียดเต็ม</div>
 
-      <div class="toolbar">
-        <div class="filter-group">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="leadership">Leadership</button>
-          <button class="filter-btn" data-filter="product">Product</button>
-          <button class="filter-btn" data-filter="roast">Roast</button>
-          <button class="filter-btn" data-filter="support">Support</button>
-        </div>
-      </div>
+<div class="toolbar">
+<div class="filter-group">
+<button class="filter-btn active" data-filter="all">All</button>
+<button class="filter-btn" data-filter="leadership">Leadership</button>
+<button class="filter-btn" data-filter="product">Product</button>
+<button class="filter-btn" data-filter="roast">Roast</button>
+<button class="filter-btn" data-filter="support">Support</button>
+</div>
+</div>
 
-      <div class="team-grid" id="teamGrid">
-        <article class="member-card"
-          data-group="leadership"
-          data-name-th="สรพันธ์ ทันตา"
-          data-name-en="Surapan Tanta"
-          data-role="SVP / Founder — Casa Lapin"
-          data-tag="Leadership"
-          data-image="images/surapan-tanta.jpg"
-          data-fallback="S"
-          data-experience="Founder ของ Casa Lapin และผู้อยู่เบื้องหลังการพัฒนาแนวคิดด้านกาแฟในองค์กร มีประสบการณ์ด้านการคัดเลือกกาแฟ การประเมินคุณภาพ และการวาง direction ของ product"
-          data-strength="เชื่อม vision ระหว่าง business, product และ sensory ได้อย่างชัดเจน ทำให้การพัฒนา R&D มีทิศทางและ identity ที่แข็งแรง"
-          data-responsibility="ดูแลภาพรวมของการกำหนดทิศทางผลิตภัณฑ์ การตัดสินใจเชิงคุณภาพ และการผลักดันแนวคิดด้านกาแฟขององค์กร"
-          data-focus="Leadership, Coffee Direction, Founder Vision">
-          <div class="member-head">
-            <div class="avatar-wrap">
-              <img src="images/surapan-tanta.jpg" alt="Surapan Tanta" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="avatar-fallback" style="display:none;">S</div>
-            </div>
-            <div class="member-main">
-              <h3 class="member-name">สรพันธ์ ทันตา</h3>
-              <div class="member-name-en">Surapan Tanta</div>
-              <div class="member-role">SVP / Founder — Casa Lapin</div>
-              <div class="role-tag leadership">Leadership</div>
-            </div>
-          </div>
-          <div class="member-block">
-            <div class="mini-box">
-              <span class="label">Experience</span>
-              <div class="text">Founder Casa Lapin และกำหนด direction ด้านกาแฟขององค์กร</div>
-            </div>
-            <div class="mini-box">
-              <span class="label">Strength</span>
-              <div class="text">เชื่อม vision ระหว่าง business, product และ sensory ได้อย่างชัดเจน</div>
-            </div>
-          </div>
-          <div class="pill-wrap">
-            <span class="pill">Leadership</span>
-            <span class="pill">Coffee Direction</span>
-            <span class="pill">Founder Vision</span>
-          </div>
-        </article>
+<div class="team-grid" id="teamGrid">
+<article class="member-card"
+data-group="leadership"
+data-name-th="สรพันธ์ ทันตา"
+data-name-en="Surapan Tanta"
+data-role="SVP / Founder — Casa Lapin"
+data-tag="Leadership"
+data-image="images/surapan-tanta.jpg"
+data-fallback="S"
+data-experience="Founder ของ Casa Lapin และผู้อยู่เบื้องหลังการพัฒนาแนวคิดด้านกาแฟในองค์กร มีประสบการณ์ด้านการคัดเลือกกาแฟ การประเมินคุณภาพ และการวาง direction ของ product"
+data-strength="เชื่อม vision ระหว่าง business, product และ sensory ได้อย่างชัดเจน ทำให้การพัฒนา R&D มีทิศทางและ identity ที่แข็งแรง"
+data-responsibility="ดูแลภาพรวมของการกำหนดทิศทางผลิตภัณฑ์ การตัดสินใจเชิงคุณภาพ และการผลักดันแนวคิดด้านกาแฟขององค์กร"
+data-focus="Leadership, Coffee Direction, Founder Vision">
+<div class="member-head">
+<div class="avatar-wrap">
+<img src="images/surapan-tanta.jpg" alt="Surapan Tanta" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<div class="avatar-fallback" style="display:none;">S</div>
+</div>
+<div class="member-main">
+<h3 class="member-name">สรพันธ์ ทันตา</h3>
+<div class="member-name-en">Surapan Tanta</div>
+<div class="member-role">SVP / Founder — Casa Lapin</div>
+<div class="role-tag">Leadership</div>
+</div>
+</div>
+<div class="member-block">
+<div class="mini-box">
+<span class="label">Experience</span>
+<div class="text">Founder Casa Lapin</div>
+</div>
+<div class="mini-box">
+<span class="label">Strength</span>
+<div class="text">เชื่อม vision ระหว่าง business, product และ sensory ได้อย่างชัดเจน</div>
+</div>
+</div>
+<div class="pill-wrap">
+<span class="pill">Leadership</span>
+<span class="pill">Coffee Direction</span>
+<span class="pill">Founder Vision</span>
+</div>
+</article>
 
-        <article class="member-card"
-          data-group="product"
-          data-name-th="กิตติรัตน์ จันทมณี"
-          data-name-en="Kittirat Jantamanee"
-          data-role="Section Manager — Coffee Product"
-          data-tag="Product"
-          data-image="images/kittirat-jantamanee.jpg"
-          data-fallback="K"
-          data-experience="ดูแลการพัฒนาผลิตภัณฑ์กาแฟในระดับภาพรวม ตั้งแต่ selection ไปจนถึงการใช้งานจริง โดยเชื่อมมุมมองด้านคุณภาพเข้ากับ product execution"
-          data-strength="เข้าใจ balance ระหว่างคุณภาพถ้วยกับความเป็นไปได้ในการผลิตจริง ช่วยให้แนวคิด R&D ถูกนำไปใช้ต่อได้อย่างมีประสิทธิภาพ"
-          data-responsibility="ดูแลการพัฒนากลุ่ม coffee product การเชื่อม product concept กับการใช้งานจริง และช่วยผลักดันมาตรฐานด้านกาแฟ"
-          data-focus="Coffee Product, Product Direction, Execution">
-          <div class="member-head">
-            <div class="avatar-wrap">
-              <img src="images/kittirat-jantamanee.jpg" alt="Kittirat Jantamanee" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="avatar-fallback" style="display:none;">K</div>
-            </div>
-            <div class="member-main">
-              <h3 class="member-name">กิตติรัตน์ จันทมณี</h3>
-              <div class="member-name-en">Kittirat Jantamanee</div>
-              <div class="member-role">Section Manager — Coffee Product</div>
-              <div class="role-tag product">Product</div>
-            </div>
-          </div>
-          <div class="member-block">
-            <div class="mini-box">
-              <span class="label">Experience</span>
-              <div class="text">ดูแลการพัฒนาผลิตภัณฑ์กาแฟในระดับภาพรวม</div>
-            </div>
-            <div class="mini-box">
-              <span class="label">Strength</span>
-              <div class="text">เข้าใจ balance ระหว่างคุณภาพถ้วยกับความเป็นไปได้ในการผลิตจริง</div>
-            </div>
-          </div>
-          <div class="pill-wrap">
-            <span class="pill">Coffee Product</span>
-            <span class="pill">Product Direction</span>
-            <span class="pill">Execution</span>
-          </div>
-        </article>
+<article class="member-card"
+data-group="product"
+data-name-th="กิตติรัตน์ จันทมณี"
+data-name-en="Kittirat Jantamanee"
+data-role="Section Manager — Coffee Product"
+data-tag="Product"
+data-image="images/kittirat-jantamanee.jpg"
+data-fallback="K"
+data-experience="ดูแลการพัฒนาผลิตภัณฑ์กาแฟในระดับภาพรวม ตั้งแต่ selection ไปจนถึงการใช้งานจริง โดยเชื่อมมุมมองด้านคุณภาพเข้ากับ product execution"
+data-strength="เข้าใจ balance ระหว่างคุณภาพถ้วยกับความเป็นไปได้ในการผลิตจริง ช่วยให้แนวคิด R&D ถูกนำไปใช้ต่อได้อย่างมีประสิทธิภาพ"
+data-responsibility="ดูแลการพัฒนากลุ่ม coffee product การเชื่อม product concept กับการใช้งานจริง และช่วยผลักดันมาตรฐานด้านกาแฟ"
+data-focus="Coffee Product, Product Direction, Execution">
+<div class="member-head">
+<div class="avatar-wrap">
+<img src="images/kittirat-jantamanee.jpg" alt="Kittirat Jantamanee" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<div class="avatar-fallback" style="display:none;">K</div>
+</div>
+<div class="member-main">
+<h3 class="member-name">กิตติรัตน์ จันทมณี</h3>
+<div class="member-name-en">Kittirat Jantamanee</div>
+<div class="member-role">Section Manager — Coffee Product</div>
+<div class="role-tag">Product</div>
+</div>
+</div>
+<div class="member-block">
+<div class="mini-box">
+<span class="label">Experience</span>
+<div class="text">ดูแลการพัฒนาผลิตภัณฑ์กาแฟในระดับภาพรวม</div>
+</div>
+<div class="mini-box">
+<span class="label">Strength</span>
+<div class="text">เข้าใจ balance ระหว่างคุณภาพถ้วยกับความเป็นไปได้ในการผลิตจริง</div>
+</div>
+</div>
+<div class="pill-wrap">
+<span class="pill">Coffee Product</span>
+<span class="pill">Product Direction</span>
+<span class="pill">Execution</span>
+</div>
+</article>
 
-        <article class="member-card"
-          data-group="product"
-          data-name-th="สุฑาทิพย์ สว่างอารีตระกูล"
-          data-name-en="Sutatip Sawangareetagul"
-          data-role="Section Manager — Product Creator"
-          data-tag="Product"
-          data-image="images/sutatip-sawangareetagul.jpg"
-          data-fallback="S"
-          data-experience="รับผิดชอบการพัฒนา concept และ product ใหม่ ๆ ที่เชื่อมระหว่าง coffee experience, brand direction และมุมมองของผู้บริโภค"
-          data-strength="สามารถแปลง insight จาก R&D ให้กลายเป็น product ที่มี story ชัด มีคาแรกเตอร์ และเข้าถึงลูกค้าได้ดี"
-          data-responsibility="ดูแลการสร้างแนวคิดสินค้า การพัฒนา product identity และเชื่อมผลงานจาก R&D ไปสู่ประสบการณ์ของผู้บริโภค"
-          data-focus="Product Creator, Concept Design, Consumer Insight">
-          <div class="member-head">
-            <div class="avatar-wrap">
-              <img src="images/sutatip-sawangareetagul.jpg" alt="Sutatip Sawangareetagul" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="avatar-fallback" style="display:none;">S</div>
-            </div>
-            <div class="member-main">
-              <h3 class="member-name">สุฑาทิพย์ สว่างอารีตระกูล</h3>
-              <div class="member-name-en">Sutatip Sawangareetagul</div>
-              <div class="member-role">Section Manager — Product Creator</div>
-              <div class="role-tag product">Product</div>
-            </div>
-          </div>
-          <div class="member-block">
-            <div class="mini-box">
-              <span class="label">Experience</span>
-              <div class="text">ดูแลการพัฒนา concept และ product ใหม่ ๆ</div>
-            </div>
-            <div class="mini-box">
-              <span class="label">Strength</span>
-              <div class="text">แปลง insight จาก R&D ให้กลายเป็น product ที่มี story</div>
-            </div>
-          </div>
-          <div class="pill-wrap">
-            <span class="pill">Product Creator</span>
-            <span class="pill">Concept Design</span>
-            <span class="pill">Consumer Insight</span>
-          </div>
-        </article>
+<article class="member-card"
+data-group="product"
+data-name-th="สุฑาทิพย์ สว่างอารีตระกูล"
+data-name-en="SUTATIP SAWANGAREETAGUL"
+data-role="Section Manager — Product Creator"
+data-tag="Product"
+data-image="images/sutatip-sawangareetagul.jpg"
+data-fallback="S"
+data-experience="รับผิดชอบการพัฒนา concept และ product ใหม่ ๆ ที่เชื่อมระหว่าง coffee experience, brand direction และมุมมองของผู้บริโภค"
+data-strength="สามารถแปลง insight จาก R&D ให้กลายเป็น product ที่มี story ชัด มีคาแรกเตอร์ และเข้าถึงลูกค้าได้ดี"
+data-responsibility="ดูแลการสร้างแนวคิดสินค้า การพัฒนา product identity และเชื่อมผลงานจาก R&D ไปสู่ประสบการณ์ของผู้บริโภค"
+data-focus="Product Creator, Concept Design, Consumer Insight">
+<div class="member-head">
+<div class="avatar-wrap">
+<img src="images/sutatip-sawangareetagul.jpg" alt="Sutatip Sawangareetagul" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<div class="avatar-fallback" style="display:none;">S</div>
+</div>
+<div class="member-main">
+<h3 class="member-name">สุฑาทิพย์ สว่างอารีตระกูล</h3>
+<div class="member-name-en">SUTATIP SAWANGAREETAGUL</div>
+<div class="member-role">Section Manager — Product Creator</div>
+<div class="role-tag">Product</div>
+</div>
+</div>
+<div class="member-block">
+<div class="mini-box">
+<span class="label">Experience</span>
+<div class="text">ดูแลการพัฒนา concept และ product ใหม่ ๆ</div>
+</div>
+<div class="mini-box">
+<span class="label">Strength</span>
+<div class="text">แปลง insight จาก R&D ให้กลายเป็น product ที่มี story</div>
+</div>
+</div>
+<div class="pill-wrap">
+<span class="pill">Product Creator</span>
+<span class="pill">Concept Design</span>
+<span class="pill">Consumer Insight</span>
+</div>
+</article>
 
-        <article class="member-card"
-          data-group="roast"
-          data-name-th="วรายุ ก้านจันทร์"
-          data-name-en="Varayu Kanchan"
-          data-role="Senior Coffee Roaster"
-          data-tag="Roast"
-          data-image="images/varayu-kanchan.jpg"
-          data-fallback="V"
-          data-experience="มีประสบการณ์ด้านการคั่วกาแฟระดับสูง และการทดลอง roast profile เพื่อค้นหา optimum flavor สำหรับกาแฟแต่ละประเภท"
-          data-strength="ควบคุม consistency ของ roast ได้ดี และเข้าใจ behavior ของเมล็ดกาแฟในเชิงลึก ช่วยให้การทดลองมีความแม่นยำ"
-          data-responsibility="รับผิดชอบงานคั่วในระดับสูง ดูแล roast profile trial และช่วยผลักดันคุณภาพด้าน roasting ของทีม"
-          data-focus="Senior Roaster, Roast Profile, Consistency">
-          <div class="member-head">
-            <div class="avatar-wrap">
-              <img src="images/varayu-kanchan.jpg" alt="Varayu Kanchan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="avatar-fallback" style="display:none;">V</div>
-            </div>
-            <div class="member-main">
-              <h3 class="member-name">วรายุ ก้านจันทร์</h3>
-              <div class="member-name-en">Varayu Kanchan</div>
-              <div class="member-role">Senior Coffee Roaster</div>
-              <div class="role-tag roast">Roast</div>
-            </div>
-          </div>
-          <div class="member-block">
-            <div class="mini-box">
-              <span class="label">Experience</span>
-              <div class="text">มีประสบการณ์ด้านการคั่วกาแฟระดับสูง และการทดลอง roast profile</div>
-            </div>
-            <div class="mini-box">
-              <span class="label">Strength</span>
-              <div class="text">ควบคุม consistency ของ roast ได้ดี และเข้าใจ behavior ของเมล็ดกาแฟ</div>
-            </div>
-          </div>
-          <div class="pill-wrap">
-            <span class="pill">Senior Roaster</span>
-            <span class="pill">Roast Profile</span>
-            <span class="pill">Consistency</span>
-          </div>
-        </article>
+<article class="member-card"
+data-group="roast"
+data-name-th="วรายุ ก้านจันทร์"
+data-name-en="Varayu Kanchan"
+data-role="Senior Coffee Roaster"
+data-tag="Roast"
+data-image="images/varayu-kanchan.jpg"
+data-fallback="V"
+data-experience="มีประสบการณ์ด้านการคั่วกาแฟระดับสูง และการทดลอง roast profile เพื่อค้นหา optimum flavor สำหรับกาแฟแต่ละประเภท"
+data-strength="ควบคุม consistency ของ roast ได้ดี และเข้าใจ behavior ของเมล็ดกาแฟในเชิงลึก ช่วยให้การทดลองมีความแม่นยำ"
+data-responsibility="รับผิดชอบงานคั่วในระดับสูง ดูแล roast profile trial และช่วยผลักดันคุณภาพด้าน roasting ของทีม"
+data-focus="Senior Roaster, Roast Profile, Consistency">
+<div class="member-head">
+<div class="avatar-wrap">
+<img src="images/varayu-kanchan.jpg" alt="Varayu Kanchan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<div class="avatar-fallback" style="display:none;">V</div>
+</div>
+<div class="member-main">
+<h3 class="member-name">วรายุ ก้านจันทร์</h3>
+<div class="member-name-en">Varayu Kanchan</div>
+<div class="member-role">Senior Coffee Roaster</div>
+<div class="role-tag">Roast</div>
+</div>
+</div>
+<div class="member-block">
+<div class="mini-box">
+<span class="label">Experience</span>
+<div class="text">มีประสบการณ์ด้านการคั่วกาแฟระดับสูง และการทดลอง roast profile</div>
+</div>
+<div class="mini-box">
+<span class="label">Strength</span>
+<div class="text">ควบคุม consistency ของ roast ได้ดี และเข้าใจ behavior ของเมล็ดกาแฟ</div>
+</div>
+</div>
+<div class="pill-wrap">
+<span class="pill">Senior Roaster</span>
+<span class="pill">Roast Profile</span>
+<span class="pill">Consistency</span>
+</div>
+</article>
 
-        <article class="member-card"
-          data-group="roast"
-          data-name-th="สันติ มะติตะถัง"
-          data-name-en="Santi Matitathang"
-          data-role="Coffee Roaster"
-          data-tag="Roast"
-          data-image="images/santi-matitathang.jpg"
-          data-fallback="S"
-          data-experience="ทำงานด้าน roasting และสนับสนุนการทดลอง batch ต่าง ๆ ใน workflow ของ R&D เพื่อให้ทีมสามารถทดสอบหลายแนวทางได้จริง"
-          data-strength="ปรับ execution ได้รวดเร็ว ทำงานคล่อง และช่วยให้การทดลองหลาย profile เกิดขึ้นได้ต่อเนื่องในภาคปฏิบัติ"
-          data-responsibility="สนับสนุนงาน roasting, batch trial และการทดลองที่เกี่ยวข้องกับการพัฒนา roast direction ภายในทีม"
-          data-focus="Coffee Roaster, Execution, Batch Trial">
-          <div class="member-head">
-            <div class="avatar-wrap">
-              <img src="images/santi-matitathang.jpg" alt="Santi Matitathang" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="avatar-fallback" style="display:none;">S</div>
-            </div>
-            <div class="member-main">
-              <h3 class="member-name">สันติ มะติตะถัง</h3>
-              <div class="member-name-en">Santi Matitathang</div>
-              <div class="member-role">Coffee Roaster</div>
-              <div class="role-tag roast">Roast</div>
-            </div>
-          </div>
-          <div class="member-block">
-            <div class="mini-box">
-              <span class="label">Experience</span>
-              <div class="text">ทำงานด้าน roasting และสนับสนุนการทดลอง batch ต่าง ๆ</div>
-            </div>
-            <div class="mini-box">
-              <span class="label">Strength</span>
-              <div class="text">ปรับ execution ได้รวดเร็ว และช่วยให้การทดลองหลาย profile เกิดขึ้นได้จริง</div>
-            </div>
-          </div>
-          <div class="pill-wrap">
-            <span class="pill">Coffee Roaster</span>
-            <span class="pill">Execution</span>
-            <span class="pill">Batch Trial</span>
-          </div>
-        </article>
+<article class="member-card"
+data-group="roast"
+data-name-th="สันติ มะติตะถัง"
+data-name-en="SANTI MATITATHANG"
+data-role="Coffee Roaster"
+data-tag="Roast"
+data-image="images/santi-matitathang.jpg"
+data-fallback="S"
+data-experience="ทำงานด้าน roasting และสนับสนุนการทดลอง batch ต่าง ๆ ใน workflow ของ R&D เพื่อให้ทีมสามารถทดสอบหลายแนวทางได้จริง"
+data-strength="ปรับ execution ได้รวดเร็ว ทำงานคล่อง และช่วยให้การทดลองหลาย profile เกิดขึ้นได้ต่อเนื่องในภาคปฏิบัติ"
+data-responsibility="สนับสนุนงาน roasting, batch trial และการทดลองที่เกี่ยวข้องกับการพัฒนา roast direction ภายในทีม"
+data-focus="Coffee Roaster, Execution, Batch Trial">
+<div class="member-head">
+<div class="avatar-wrap">
+<img src="images/santi-matitathang.jpg" alt="Santi Matitathang" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<div class="avatar-fallback" style="display:none;">S</div>
+</div>
+<div class="member-main">
+<h3 class="member-name">สันติ มะติตะถัง</h3>
+<div class="member-name-en">SANTI MATITATHANG</div>
+<div class="member-role">Coffee Roaster</div>
+<div class="role-tag">Roast</div>
+</div>
+</div>
+<div class="member-block">
+<div class="mini-box">
+<span class="label">Experience</span>
+<div class="text">ทำงานด้าน roasting และสนับสนุนการทดลอง batch ต่าง ๆ</div>
+</div>
+<div class="mini-box">
+<span class="label">Strength</span>
+<div class="text">ปรับ execution ได้รวดเร็ว และช่วยให้การทดลองหลาย profile เกิดขึ้นได้จริง</div>
+</div>
+</div>
+<div class="pill-wrap">
+<span class="pill">Coffee Roaster</span>
+<span class="pill">Execution</span>
+<span class="pill">Batch Trial</span>
+</div>
+</article>
 
-        <article class="member-card"
-          data-group="support"
-          data-name-th="มณีนุช สุดใจ"
-          data-name-en="Maneenuch Sudjai"
-          data-role="Trainer & QC"
-          data-tag="Support"
-          data-image="images/maneenuch-sudjai.jpg"
-          data-fallback="ม"
-          data-experience="มีประสบการณ์ด้านการฝึกอบรมและการควบคุมคุณภาพ โดยทำหน้าที่สนับสนุนการยกระดับมาตรฐานการทำงานและความเข้าใจด้านกาแฟภายในทีมอย่างต่อเนื่อง"
-          data-strength="โดดเด่นด้านการถ่ายทอดความรู้ให้เข้าใจง่าย ควบคู่กับความละเอียดรอบคอบในการตรวจสอบคุณภาพ ช่วยให้ทีมทำงานได้อย่างมีมาตรฐานและสม่ำเสมอ"
-          data-responsibility="รับผิดชอบงานด้าน training และ quality control สนับสนุนการพัฒนาทักษะของทีม พร้อมดูแลให้มาตรฐานการปฏิบัติงานและคุณภาพในกระบวนการต่าง ๆ เป็นไปอย่างมีประสิทธิภาพ"
-          data-focus="Training, Quality Control, Standards">
-          <div class="member-head">
-            <div class="avatar-wrap">
-              <img src="images/maneenuch-sudjai.jpg" alt="Maneenuch Sudjai" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="avatar-fallback" style="display:none;">ม</div>
-            </div>
-            <div class="member-main">
-              <h3 class="member-name">มณีนุช สุดใจ</h3>
-              <div class="member-name-en">Maneenuch Sudjai</div>
-              <div class="member-role">Trainer &amp; QC</div>
-              <div class="role-tag support">Support</div>
-            </div>
-          </div>
-          <div class="member-block">
-            <div class="mini-box">
-              <span class="label">Experience</span>
-              <div class="text">มีประสบการณ์ด้านการฝึกอบรมและการควบคุมคุณภาพ โดยสนับสนุนการยกระดับมาตรฐานการทำงานและความเข้าใจด้านกาแฟภายในทีม</div>
-            </div>
-            <div class="mini-box">
-              <span class="label">Strength</span>
-              <div class="text">ถ่ายทอดความรู้ได้ชัดเจน เข้าใจง่าย และมีความละเอียดรอบคอบในการตรวจสอบคุณภาพ ช่วยให้ทีมทำงานได้อย่างสม่ำเสมอ</div>
-            </div>
-          </div>
-          <div class="pill-wrap">
-            <span class="pill">Trainer</span>
-            <span class="pill">Quality Control</span>
-            <span class="pill">Standards</span>
-          </div>
-        </article>
+<article class="member-card"
+data-group="support"
+data-name-th="มณีนุช สุดใจ"
+data-name-en="Maneenuch Sudjai"
+data-role="Trainer & QC"
+data-tag="Support"
+data-image="images/maneenuch-sudjai.jpg"
+data-fallback="ม"
+data-experience="มีประสบการณ์ด้านการฝึกอบรมและการควบคุมคุณภาพ โดยทำหน้าที่สนับสนุนการยกระดับมาตรฐานการทำงานและความเข้าใจด้านกาแฟภายในทีมอย่างต่อเนื่อง"
+data-strength="โดดเด่นด้านการถ่ายทอดความรู้ให้เข้าใจง่าย ควบคู่กับความละเอียดรอบคอบในการตรวจสอบคุณภาพ ช่วยให้ทีมทำงานได้อย่างมีมาตรฐานและสม่ำเสมอ"
+data-responsibility="รับผิดชอบงานด้าน training และ quality control สนับสนุนการพัฒนาทักษะของทีม พร้อมดูแลให้มาตรฐานการปฏิบัติงานและคุณภาพในกระบวนการต่าง ๆ เป็นไปอย่างมีประสิทธิภาพ"
+data-focus="Training, Quality Control, Standards">
+<div class="member-head">
+<div class="avatar-wrap">
+<img src="images/maneenuch-sudjai.jpg" alt="Maneenuch Sudjai" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<div class="avatar-fallback" style="display:none;">ม</div>
+</div>
+<div class="member-main">
+<h3 class="member-name">มณีนุช สุดใจ</h3>
+<div class="member-name-en">Maneenuch Sudjai</div>
+<div class="member-role">Trainer &amp; QC</div>
+<div class="role-tag">Support</div>
+</div>
+</div>
 
-        <article class="member-card"
-          data-group="support"
-          data-name-th="พิชญุตม์ แซ่ด่าน"
-          data-name-en="Pichyut Saedan"
-          data-role="R&D Officer"
-          data-tag="Support"
-          data-image="images/pichyut-saedan.jpg"
-          data-fallback="พ"
-          data-experience="สนับสนุนงานทดลอง การเก็บข้อมูล และการวิเคราะห์ผลใน workflow ของ R&D เพื่อให้ข้อมูลพร้อมสำหรับการทบทวนและพัฒนาต่อ"
-          data-strength="เชื่อม data กับการทดลองจริงได้ดี ช่วยให้การพัฒนาเป็นระบบมากขึ้น และลดความซ้ำซ้อนในการทำงานของทีม"
-          data-responsibility="ดูแลงานสนับสนุนด้านข้อมูล การติดตามผลการทดลอง และการเชื่อมข้อมูลกับ workflow ของทีม R&D"
-          data-focus="R&D Officer, Data Support, Workflow">
-          <div class="member-head">
-            <div class="avatar-wrap">
-              <img src="images/pichyut-saedan.jpg" alt="Pichyut Saedan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="avatar-fallback" style="display:none;">พ</div>
-            </div>
-            <div class="member-main">
-              <h3 class="member-name">พิชญุตม์ แซ่ด่าน</h3>
-              <div class="member-name-en">Pichyut Saedan</div>
-              <div class="member-role">R&amp;D Officer</div>
-              <div class="role-tag support">Support</div>
-            </div>
-          </div>
-          <div class="member-block">
-            <div class="mini-box">
-              <span class="label">Experience</span>
-              <div class="text">สนับสนุนงานทดลอง การเก็บข้อมูล และการวิเคราะห์ผลใน workflow ของ R&amp;D</div>
-            </div>
-            <div class="mini-box">
-              <span class="label">Strength</span>
-              <div class="text">เชื่อม data กับการทดลองจริง และช่วยให้การพัฒนาเป็นระบบมากขึ้น</div>
-            </div>
-          </div>
-          <div class="pill-wrap">
-            <span class="pill">R&amp;D Officer</span>
-            <span class="pill">Data Support</span>
-            <span class="pill">Workflow</span>
-          </div>
-        </article>
-      </div>
-    </section>
+<div class="member-block">
+<div class="mini-box">
+<span class="label">Experience</span>
+<div class="text">มีประสบการณ์ด้านการฝึกอบรมและการควบคุมคุณภาพ โดยสนับสนุนการยกระดับมาตรฐานการทำงานและความเข้าใจด้านกาแฟภายในทีม</div>
+</div>
+<div class="mini-box">
+<span class="label">Strength</span>
+<div class="text">ถ่ายทอดความรู้ได้ชัดเจน เข้าใจง่าย และมีความละเอียดรอบคอบในการตรวจสอบคุณภาพ ช่วยให้ทีมทำงานได้อย่างสม่ำเสมอ</div>
+</div>
+</div>
 
-    <div class="footer-note">
-      Casa Lab · R&amp;D Team Page
-    </div>
-  </div>
+<div class="pill-wrap">
+<span class="pill">Trainer</span>
+<span class="pill">Quality Control</span>
+<span class="pill">Standards</span>
+</div>
+</article>
 
-  <div class="modal" id="profileModal">
-    <div class="modal-card">
-      <div class="modal-top">
-        <div class="modal-profile">
-          <div class="modal-avatar">
-            <img id="modalImg" src="" alt="" onerror="this.style.display='none'; document.getElementById('modalFallback').style.display='flex';">
-            <div class="modal-avatar-fallback" id="modalFallback" style="display:none;">A</div>
-          </div>
-          <div>
-            <h3 class="modal-name" id="modalNameTh">-</h3>
-            <div class="modal-name-en" id="modalNameEn">-</div>
-            <div class="modal-role" id="modalRole">-</div>
-            <div class="role-tag" id="modalTag" style="margin-top:12px;">-</div>
-          </div>
-        </div>
-        <button class="close-btn" id="closeModal">✕</button>
-      </div>
+<article class="member-card"
+data-group="support"
+data-name-th="พิชญุตม์ แซ่ด่าน"
+data-name-en="Pichyut Saedan"
+data-role="R&D Officer"
+data-tag="Support"
+data-image="images/pichyut-saedan.jpg"
+data-fallback="พ"
+data-experience="สนับสนุนงานทดลอง การเก็บข้อมูล และการวิเคราะห์ผลใน workflow ของ R&D เพื่อให้ข้อมูลพร้อมสำหรับการทบทวนและพัฒนาต่อ"
+data-strength="เชื่อม data กับการทดลองจริงได้ดี ช่วยให้การพัฒนาเป็นระบบมากขึ้น และลดความซ้ำซ้อนในการทำงานของทีม"
+data-responsibility="ดูแลงานสนับสนุนด้านข้อมูล การติดตามผลการทดลอง และการเชื่อมข้อมูลกับ workflow ของทีม R&D"
+data-focus="R&D Officer, Data Support, Workflow">
+<div class="member-head">
+<div class="avatar-wrap">
+<img src="images/pichyut-saedan.jpg" alt="Pichyut Saedan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<div class="avatar-fallback" style="display:none;">พ</div>
+</div>
+<div class="member-main">
+<h3 class="member-name">พิชญุตม์ แซ่ด่าน</h3>
+<div class="member-name-en">Pichyut Saedan</div>
+<div class="member-role">R&amp;D Officer</div>
+<div class="role-tag">Support</div>
+</div>
+</div>
+<div class="member-block">
+<div class="mini-box">
+<span class="label">Experience</span>
+<div class="text">สนับสนุนงานทดลอง การเก็บข้อมูล และการวิเคราะห์ผลใน workflow ของ R&amp;D</div>
+</div>
+<div class="mini-box">
+<span class="label">Strength</span>
+<div class="text">เชื่อม data กับการทดลองจริง และช่วยให้การพัฒนาเป็นระบบมากขึ้น</div>
+</div>
+</div>
+<div class="pill-wrap">
+<span class="pill">R&amp;D Officer</span>
+<span class="pill">Data Support</span>
+<span class="pill">Workflow</span>
+</div>
+</article>
+</div>
+</section>
 
-      <div class="modal-grid">
-        <div class="modal-box">
-          <span class="label">Experience</span>
-          <div class="text" id="modalExperience">-</div>
-        </div>
-        <div class="modal-box">
-          <span class="label">Strength</span>
-          <div class="text" id="modalStrength">-</div>
-        </div>
-        <div class="modal-box full">
-          <span class="label">Responsibility</span>
-          <div class="text" id="modalResponsibility">-</div>
-        </div>
-        <div class="modal-box full">
-          <span class="label">Focus</span>
-          <div class="text" id="modalFocus">-</div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="footer-note">
+Casa Lab · R&amp;D Team Page
+</div>
+</div>
 
-  <script>
-    const themeToggle = document.getElementById("themeToggle");
-    const savedTheme = localStorage.getItem("teamTheme");
-    if (savedTheme === "dark") document.body.classList.add("dark");
-    updateThemeButton();
+<div class="modal" id="profileModal">
+<div class="modal-card">
+<div class="modal-top">
+<div class="modal-profile">
+<div class="modal-avatar">
+<img id="modalImg" src="" alt="" onerror="this.style.display='none'; document.getElementById('modalFallback').style.display='flex';">
+<div class="modal-avatar-fallback" id="modalFallback" style="display:none;">A</div>
+</div>
+<div>
+<h3 class="modal-name" id="modalNameTh">-</h3>
+<div class="modal-name-en" id="modalNameEn">-</div>
+<div class="modal-role" id="modalRole">-</div>
+<div class="role-tag" id="modalTag" style="margin-top:12px;">-</div>
+</div>
+</div>
+<button class="close-btn" id="closeModal">✕</button>
+</div>
 
-    function updateThemeButton(){
-      themeToggle.textContent = document.body.classList.contains("dark") ? "☀️ Light" : "🌙 Dark";
-    }
+<div class="modal-grid">
+<div class="modal-box">
+<span class="label">Experience</span>
+<div class="text" id="modalExperience">-</div>
+</div>
+<div class="modal-box">
+<span class="label">Strength</span>
+<div class="text" id="modalStrength">-</div>
+</div>
+<div class="modal-box full">
+<span class="label">Responsibility</span>
+<div class="text" id="modalResponsibility">-</div>
+</div>
+<div class="modal-box full">
+<span class="label">Focus</span>
+<div class="text" id="modalFocus">-</div>
+</div>
+</div>
+</div>
+</div>
 
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-      localStorage.setItem("teamTheme", document.body.classList.contains("dark") ? "dark" : "light");
-      updateThemeButton();
-    });
+<script>
+const themeToggle = document.getElementById("themeToggle");
+const savedTheme = localStorage.getItem("teamTheme");
+if (savedTheme === "dark") document.body.classList.add("dark");
+updateThemeButton();
 
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const cards = document.querySelectorAll(".member-card");
+function updateThemeButton(){
+themeToggle.textContent = document.body.classList.contains("dark") ? "☀️ Light" : "🌙 Dark";
+}
 
-    filterButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const filter = btn.dataset.filter;
-        filterButtons.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
+themeToggle.addEventListener("click", () => {
+document.body.classList.toggle("dark");
+localStorage.setItem("teamTheme", document.body.classList.contains("dark") ? "dark" : "light");
+updateThemeButton();
+});
 
-        cards.forEach(card => {
-          if (filter === "all" || card.dataset.group === filter) {
-            card.classList.remove("hidden-card");
-          } else {
-            card.classList.add("hidden-card");
-          }
-        });
-      });
-    });
+const filterButtons = document.querySelectorAll(".filter-btn");
+const cards = document.querySelectorAll(".member-card");
 
-    const modal = document.getElementById("profileModal");
-    const closeModal = document.getElementById("closeModal");
+filterButtons.forEach(btn => {
+btn.addEventListener("click", () => {
+const filter = btn.dataset.filter;
+filterButtons.forEach(b => b.classList.remove("active"));
+btn.classList.add("active");
 
-    const modalImg = document.getElementById("modalImg");
-    const modalFallback = document.getElementById("modalFallback");
-    const modalNameTh = document.getElementById("modalNameTh");
-    const modalNameEn = document.getElementById("modalNameEn");
-    const modalRole = document.getElementById("modalRole");
-    const modalTag = document.getElementById("modalTag");
-    const modalExperience = document.getElementById("modalExperience");
-    const modalStrength = document.getElementById("modalStrength");
-    const modalResponsibility = document.getElementById("modalResponsibility");
-    const modalFocus = document.getElementById("modalFocus");
+cards.forEach(card => {
+if (filter === "all" || card.dataset.group === filter) {
+card.classList.remove("hidden-card");
+} else {
+card.classList.add("hidden-card");
+}
+});
+});
+});
 
-    function tagClassName(group){
-      if (group === "leadership") return "role-tag leadership";
-      if (group === "product") return "role-tag product";
-      if (group === "roast") return "role-tag roast";
-      return "role-tag support";
-    }
+const modal = document.getElementById("profileModal");
+const closeModal = document.getElementById("closeModal");
 
-    cards.forEach(card => {
-      card.addEventListener("click", () => {
-        modalNameTh.textContent = card.dataset.nameTh || "-";
-        modalNameEn.textContent = card.dataset.nameEn || "-";
-        modalRole.textContent = card.dataset.role || "-";
-        modalTag.textContent = card.dataset.tag || "-";
-        modalTag.className = tagClassName(card.dataset.group);
-        modalExperience.textContent = card.dataset.experience || "-";
-        modalStrength.textContent = card.dataset.strength || "-";
-        modalResponsibility.textContent = card.dataset.responsibility || "-";
-        modalFocus.textContent = card.dataset.focus || "-";
+const modalImg = document.getElementById("modalImg");
+const modalFallback = document.getElementById("modalFallback");
+const modalNameTh = document.getElementById("modalNameTh");
+const modalNameEn = document.getElementById("modalNameEn");
+const modalRole = document.getElementById("modalRole");
+const modalTag = document.getElementById("modalTag");
+const modalExperience = document.getElementById("modalExperience");
+const modalStrength = document.getElementById("modalStrength");
+const modalResponsibility = document.getElementById("modalResponsibility");
+const modalFocus = document.getElementById("modalFocus");
 
-        modalFallback.textContent = card.dataset.fallback || "A";
-        modalFallback.style.display = "none";
-        modalImg.style.display = "block";
-        modalImg.src = card.dataset.image || "";
-        modalImg.alt = card.dataset.nameEn || card.dataset.nameTh || "profile";
+cards.forEach(card => {
+card.addEventListener("click", () => {
+modalNameTh.textContent = card.dataset.nameTh || "-";
+modalNameEn.textContent = card.dataset.nameEn || "-";
+modalRole.textContent = card.dataset.role || "-";
+modalTag.textContent = card.dataset.tag || "-";
+modalExperience.textContent = card.dataset.experience || "-";
+modalStrength.textContent = card.dataset.strength || "-";
+modalResponsibility.textContent = card.dataset.responsibility || "-";
+modalFocus.textContent = card.dataset.focus || "-";
 
-        modal.classList.add("show");
-        document.body.style.overflow = "hidden";
-      });
-    });
+modalFallback.textContent = card.dataset.fallback || "A";
+modalFallback.style.display = "none";
+modalImg.style.display = "block";
+modalImg.src = card.dataset.image || "";
+modalImg.alt = card.dataset.nameEn || card.dataset.nameTh || "profile";
 
-    function closeProfileModal(){
-      modal.classList.remove("show");
-      document.body.style.overflow = "";
-    }
+modal.classList.add("show");
+document.body.style.overflow = "hidden";
+});
+});
 
-    closeModal.addEventListener("click", closeProfileModal);
+function closeProfileModal(){
+modal.classList.remove("show");
+document.body.style.overflow = "";
+}
 
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) closeProfileModal();
-    });
+closeModal.addEventListener("click", closeProfileModal);
 
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && modal.classList.contains("show")) {
-        closeProfileModal();
-      }
-    });
-  </script>
+modal.addEventListener("click", (e) => {
+if (e.target === modal) closeProfileModal();
+});
+
+document.addEventListener("keydown", (e) => {
+if (e.key === "Escape" && modal.classList.contains("show")) {
+closeProfileModal();
+}
+});
+</script>
 </body>
 </html>
