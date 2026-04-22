@@ -4,25 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Casa Lab Podcast</title>
+  <meta name="description" content="Casa Lab Podcast & Learning" />
   <style>
     :root{
-      --bg-1:#f6f4f1;
-      --bg-2:#f1eeea;
+      --bg:#eef2fb;
+      --bg-2:#f7f8fc;
       --card:rgba(255,255,255,0.58);
-      --card-strong:rgba(255,255,255,0.72);
-      --line:rgba(255,255,255,0.72);
-      --text:#141414;
-      --muted:#645f59;
-      --soft:#8b847d;
-      --accent:#8c6f58;
-      --accent-2:#7f87ff;
-      --shadow:0 18px 40px rgba(32, 36, 58, 0.08);
-      --shadow-soft:0 10px 28px rgba(35, 34, 41, 0.05);
-      --radius-xl:32px;
-      --radius-lg:24px;
+      --card-strong:rgba(255,255,255,0.78);
+      --line:rgba(255,255,255,0.85);
+      --text:#151926;
+      --muted:#677086;
+      --soft:#8b92a7;
+      --accent:#7c83ff;
+      --accent-2:#5f69ff;
+      --accent-soft:#eef0ff;
+      --warm:#a18672;
+      --shadow:0 18px 40px rgba(38, 50, 77, 0.10);
+      --shadow-soft:0 10px 24px rgba(38, 50, 77, 0.06);
+      --radius-xl:34px;
+      --radius-lg:26px;
       --radius-md:18px;
       --radius-pill:999px;
-      --max:1200px;
+      --max:1220px;
     }
 
     *{
@@ -35,21 +38,30 @@
 
     body{
       margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,"Noto Sans Thai","Helvetica Neue",Arial,sans-serif;
       color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,"Noto Sans Thai","Helvetica Neue",Arial,sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(202,217,255,0.45), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(225,214,196,0.42), transparent 26%),
-        linear-gradient(180deg, var(--bg-1), var(--bg-2));
-    }
-
-    img{
-      max-width:100%;
-      display:block;
+        radial-gradient(circle at top left, rgba(181,199,255,0.45), transparent 28%),
+        radial-gradient(circle at bottom center, rgba(233,225,255,0.30), transparent 26%),
+        linear-gradient(180deg, var(--bg-2), var(--bg));
+      min-height:100vh;
     }
 
     a{
       color:inherit;
+      text-decoration:none;
+    }
+
+    img{
+      display:block;
+      max-width:100%;
+    }
+
+    button,
+    input,
+    select,
+    textarea{
+      font:inherit;
     }
 
     .container{
@@ -60,71 +72,60 @@
     .topbar-wrap{
       position:sticky;
       top:0;
-      z-index:50;
-      padding:18px 0 10px;
-      backdrop-filter:blur(12px);
-      -webkit-backdrop-filter:blur(12px);
+      z-index:80;
+      padding:16px 0 10px;
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
     }
 
     .topbar{
       width:min(var(--max), calc(100% - 32px));
       margin:0 auto;
       display:flex;
-      align-items:center;
       justify-content:space-between;
+      align-items:center;
       gap:14px;
-      padding:14px 18px;
-      border-radius:26px;
-      background:rgba(255,255,255,0.46);
+      padding:14px 16px;
+      border-radius:28px;
+      background:rgba(255,255,255,0.42);
       border:1px solid rgba(255,255,255,0.72);
       box-shadow:var(--shadow-soft);
     }
 
     .nav-group{
       display:flex;
-      align-items:center;
-      gap:10px;
       flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
     }
 
-    .nav-link{
+    .nav-link,
+    .mode-pill{
+      min-height:46px;
+      padding:0 18px;
+      border-radius:var(--radius-pill);
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:8px;
-      min-height:46px;
-      padding:0 18px;
-      border-radius:var(--radius-pill);
-      text-decoration:none;
-      color:#4e4a46;
-      background:rgba(255,255,255,0.55);
-      border:1px solid rgba(255,255,255,0.74);
+      background:rgba(255,255,255,0.56);
+      border:1px solid rgba(255,255,255,0.82);
+      color:#50586d;
       transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+      box-shadow:0 4px 14px rgba(44,57,95,0.04);
     }
 
-    .nav-link:hover{
+    .nav-link:hover,
+    .mode-pill:hover{
       transform:translateY(-1px);
-      box-shadow:0 8px 18px rgba(0,0,0,0.06);
+      box-shadow:0 10px 20px rgba(44,57,95,0.08);
     }
 
     .nav-link.active{
       color:#fff;
-      background:linear-gradient(135deg, #8b8eff, #6d73ff);
-      box-shadow:0 10px 22px rgba(109,115,255,.26);
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
       border-color:transparent;
-    }
-
-    .mode-pill{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:46px;
-      padding:0 18px;
-      border-radius:var(--radius-pill);
-      color:#5a5651;
-      background:rgba(255,255,255,0.52);
-      border:1px solid rgba(255,255,255,0.74);
-      text-decoration:none;
+      box-shadow:0 12px 24px rgba(108,115,255,0.24);
     }
 
     .hero-wrap{
@@ -134,9 +135,9 @@
 
     .hero{
       position:relative;
-      min-height:640px;
       overflow:hidden;
-      border-radius:36px;
+      min-height:650px;
+      border-radius:40px;
       background-image:url("./assets/podcast-hero.png");
       background-size:cover;
       background-position:center;
@@ -152,12 +153,12 @@
       background:
         linear-gradient(
           90deg,
-          rgba(247,244,240,.96) 0%,
-          rgba(247,244,240,.93) 28%,
-          rgba(247,244,240,.82) 40%,
-          rgba(247,244,240,.52) 54%,
-          rgba(247,244,240,.18) 66%,
-          rgba(247,244,240,.03) 76%
+          rgba(245,247,252,0.95) 0%,
+          rgba(245,247,252,0.92) 28%,
+          rgba(245,247,252,0.80) 42%,
+          rgba(245,247,252,0.48) 58%,
+          rgba(245,247,252,0.14) 72%,
+          rgba(245,247,252,0.02) 80%
         );
       z-index:0;
     }
@@ -166,67 +167,70 @@
       position:relative;
       z-index:1;
       max-width:560px;
-      padding:52px 42px 42px;
+      padding:54px 42px 42px;
       display:flex;
       flex-direction:column;
       gap:18px;
     }
 
     .hero-badge{
+      width:fit-content;
       display:inline-flex;
       align-items:center;
-      width:fit-content;
-      padding:10px 16px;
+      gap:10px;
+      min-height:42px;
+      padding:0 16px;
       border-radius:var(--radius-pill);
-      background:rgba(255,255,255,0.7);
-      border:1px solid rgba(255,255,255,0.78);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-      color:var(--accent);
+      background:rgba(255,255,255,0.68);
+      border:1px solid rgba(255,255,255,0.82);
+      color:#69728a;
       font-size:14px;
       font-weight:700;
-      letter-spacing:.01em;
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
     }
 
     .hero-title{
       margin:0;
-      font-size:clamp(44px, 7vw, 78px);
-      line-height:.94;
-      letter-spacing:-.05em;
+      font-size:clamp(46px, 7vw, 80px);
+      line-height:0.94;
+      letter-spacing:-0.05em;
       font-weight:800;
-      color:#111;
+      color:#121723;
     }
 
     .hero-title .tone{
-      color:#9a7c63;
+      color:#7c83ff;
     }
 
     .hero-desc{
       margin:0;
       max-width:520px;
-      font-size:clamp(16px, 2.2vw, 22px);
-      line-height:1.7;
       color:var(--muted);
+      font-size:clamp(16px, 2.1vw, 22px);
+      line-height:1.7;
     }
 
     .hero-actions{
       display:flex;
-      gap:12px;
       flex-wrap:wrap;
+      gap:12px;
       margin-top:4px;
     }
 
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
       min-height:50px;
       padding:0 18px;
       border-radius:16px;
-      font-size:15px;
+      border:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      cursor:pointer;
+      transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
       font-weight:700;
-      text-decoration:none;
-      transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+      font-size:15px;
     }
 
     .btn:hover{
@@ -235,89 +239,90 @@
 
     .btn-primary{
       color:#fff;
-      background:linear-gradient(135deg, #8a8eff, #6c73ff);
-      box-shadow:0 12px 24px rgba(123,129,255,.24);
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow:0 12px 24px rgba(108,115,255,0.24);
     }
 
     .btn-ghost{
-      color:#49433d;
+      color:#4c556c;
       background:rgba(255,255,255,0.66);
-      border:1px solid rgba(255,255,255,.8);
+      border:1px solid rgba(255,255,255,0.82);
       backdrop-filter:blur(8px);
       -webkit-backdrop-filter:blur(8px);
     }
 
-    .mini-card{
+    .hero-mini{
       margin-top:10px;
+      width:min(100%, 520px);
+      padding:16px 18px;
       display:flex;
       align-items:center;
       gap:14px;
-      width:min(100%, 500px);
-      padding:16px 18px;
       border-radius:24px;
-      background:rgba(255,255,255,.58);
-      border:1px solid rgba(255,255,255,.72);
+      background:rgba(255,255,255,0.56);
+      border:1px solid rgba(255,255,255,0.76);
       box-shadow:var(--shadow-soft);
       backdrop-filter:blur(10px);
       -webkit-backdrop-filter:blur(10px);
     }
 
-    .mini-icon{
-      width:42px;
-      height:42px;
+    .hero-mini-icon{
+      width:44px;
+      height:44px;
       border-radius:50%;
-      flex-shrink:0;
       display:grid;
       place-items:center;
-      background:#efe4d8;
-      color:#8b6d55;
-      font-size:15px;
+      flex-shrink:0;
+      color:#6f79ff;
+      background:#eef0ff;
+      font-size:18px;
     }
 
-    .mini-text{
+    .hero-mini-text{
       display:flex;
       flex-direction:column;
       gap:4px;
     }
 
-    .mini-text strong{
+    .hero-mini-text strong{
       font-size:18px;
+      color:#1a2030;
       line-height:1.2;
-      color:#1d1b19;
     }
 
-    .mini-text span{
+    .hero-mini-text span{
       font-size:14px;
+      color:var(--muted);
       line-height:1.5;
-      color:#6b655f;
     }
 
     .section{
       width:min(var(--max), calc(100% - 32px));
       margin:0 auto 22px;
       padding:28px;
-      border-radius:30px;
+      border-radius:32px;
       background:var(--card);
       border:1px solid var(--line);
       box-shadow:var(--shadow-soft);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
     }
 
     .section-head{
       display:flex;
-      align-items:end;
       justify-content:space-between;
-      gap:16px;
-      margin-bottom:20px;
+      align-items:end;
+      gap:18px;
       flex-wrap:wrap;
+      margin-bottom:20px;
     }
 
     .section-title{
       margin:0;
-      font-size:32px;
+      font-size:34px;
       line-height:1.05;
-      letter-spacing:-.03em;
+      letter-spacing:-0.03em;
+      color:#171c28;
     }
 
     .section-desc{
@@ -328,67 +333,67 @@
 
     .chip-row{
       display:flex;
-      flex-wrap:wrap;
       gap:10px;
+      flex-wrap:wrap;
     }
 
     .chip{
+      min-height:42px;
+      padding:0 16px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-height:42px;
-      padding:0 16px;
       border-radius:var(--radius-pill);
-      background:rgba(255,255,255,.65);
-      border:1px solid rgba(255,255,255,.78);
-      color:#59534d;
-      text-decoration:none;
-      font-weight:600;
-      transition:transform .18s ease, box-shadow .18s ease;
+      background:rgba(255,255,255,0.60);
+      border:1px solid rgba(255,255,255,0.82);
+      color:#616980;
+      font-weight:700;
+      cursor:pointer;
+      transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
     }
 
     .chip:hover{
       transform:translateY(-1px);
-      box-shadow:0 8px 18px rgba(0,0,0,.05);
+      box-shadow:0 10px 20px rgba(44,57,95,0.06);
     }
 
     .chip.active{
       color:#fff;
-      background:linear-gradient(135deg, #8a8eff, #6d73ff);
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
       border-color:transparent;
+      box-shadow:0 12px 24px rgba(108,115,255,0.22);
     }
 
     .category-grid{
       display:grid;
       grid-template-columns:repeat(4, minmax(0, 1fr));
       gap:14px;
-      margin-top:10px;
     }
 
     .category-card{
       padding:20px;
-      border-radius:22px;
-      background:#faf8f6;
-      border:1px solid rgba(255,255,255,.8);
-      box-shadow:0 8px 20px rgba(0,0,0,.03);
+      border-radius:24px;
+      background:rgba(255,255,255,0.70);
+      border:1px solid rgba(255,255,255,0.86);
+      box-shadow:0 8px 20px rgba(44,57,95,0.04);
     }
 
-    .category-card .icon{
+    .category-icon{
       width:52px;
       height:52px;
-      border-radius:50%;
+      border-radius:16px;
       display:grid;
       place-items:center;
       margin-bottom:14px;
-      background:#f1e8de;
-      color:#8b6d55;
+      background:linear-gradient(135deg, #eef0ff, #f4f5ff);
+      color:#6e76ff;
       font-size:22px;
     }
 
     .category-card h3{
       margin:0 0 8px;
       font-size:20px;
-      letter-spacing:-.02em;
+      letter-spacing:-0.02em;
     }
 
     .category-card p{
@@ -398,29 +403,86 @@
       font-size:15px;
     }
 
+    .toolbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+
+    .search-box{
+      min-width:260px;
+      flex:1;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-height:52px;
+      padding:0 16px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.68);
+      border:1px solid rgba(255,255,255,0.84);
+    }
+
+    .search-box input{
+      width:100%;
+      border:none;
+      outline:none;
+      background:transparent;
+      color:#24304a;
+    }
+
+    .search-box input::placeholder{
+      color:#8a93a9;
+    }
+
+    .filter-text{
+      color:var(--soft);
+      font-size:14px;
+      font-weight:700;
+    }
+
     .podcast-list{
       display:grid;
-      gap:14px;
-      margin-top:10px;
+      gap:16px;
     }
 
-    .podcast-item{
+    .podcast-card{
+      position:relative;
+      overflow:hidden;
       display:grid;
       grid-template-columns:1fr auto;
-      gap:16px;
+      gap:18px;
       align-items:center;
-      padding:20px;
-      border-radius:24px;
-      background:rgba(255,255,255,.62);
-      border:1px solid rgba(255,255,255,.8);
-      box-shadow:0 8px 20px rgba(0,0,0,.03);
+      padding:22px;
+      border-radius:28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.64));
+      border:1px solid rgba(255,255,255,0.86);
+      box-shadow:0 12px 28px rgba(44,57,95,0.05);
+      transition:transform .2s ease, box-shadow .2s ease;
     }
 
-    .podcast-item-main{
+    .podcast-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 16px 30px rgba(44,57,95,0.08);
+    }
+
+    .podcast-card::after{
+      content:"";
+      position:absolute;
+      inset:auto 0 0 0;
+      height:4px;
+      background:linear-gradient(90deg, rgba(124,131,255,0.75), rgba(124,131,255,0));
+      opacity:.9;
+    }
+
+    .podcast-main{
       min-width:0;
     }
 
-    .podcast-meta{
+    .podcast-top{
       display:flex;
       flex-wrap:wrap;
       gap:8px;
@@ -428,28 +490,34 @@
     }
 
     .meta-pill{
-      display:inline-flex;
-      align-items:center;
       min-height:30px;
       padding:0 10px;
       border-radius:999px;
-      background:#f5eee6;
-      color:#886c58;
+      display:inline-flex;
+      align-items:center;
+      background:#f2f4ff;
+      color:#6e76ff;
       font-size:12px;
-      font-weight:700;
+      font-weight:800;
     }
 
-    .podcast-item h3{
+    .meta-pill.warm{
+      background:#f7efe8;
+      color:#9b7b63;
+    }
+
+    .podcast-title{
       margin:0 0 8px;
-      font-size:22px;
+      font-size:24px;
       line-height:1.25;
-      letter-spacing:-.02em;
+      letter-spacing:-0.025em;
+      color:#171c28;
     }
 
-    .podcast-item p{
+    .podcast-desc{
       margin:0;
       color:var(--muted);
-      line-height:1.65;
+      line-height:1.7;
       font-size:15px;
       max-width:760px;
     }
@@ -459,53 +527,188 @@
       gap:10px;
       flex-wrap:wrap;
       justify-content:flex-end;
+      align-items:center;
     }
 
     .btn-sm{
-      min-height:42px;
+      min-height:44px;
       padding:0 14px;
       border-radius:14px;
       font-size:14px;
     }
 
     .btn-soft{
-      background:#f5f1ec;
-      color:#4e4842;
-      text-decoration:none;
-      font-weight:700;
+      color:#49536a;
+      background:#f6f8fd;
+      border:1px solid rgba(226,231,243,0.9);
     }
 
     .btn-play{
-      background:linear-gradient(135deg, #8a8eff, #6d73ff);
       color:#fff;
-      text-decoration:none;
-      font-weight:700;
-      box-shadow:0 10px 20px rgba(109,115,255,.2);
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow:0 10px 22px rgba(108,115,255,0.2);
+    }
+
+    .btn-outline{
+      color:#5d6780;
+      background:rgba(255,255,255,0.66);
+      border:1px solid rgba(230,234,244,0.95);
+    }
+
+    .empty-state{
+      display:none;
+      padding:26px;
+      text-align:center;
+      border-radius:22px;
+      background:rgba(255,255,255,0.68);
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.85);
     }
 
     .note-card{
-      padding:20px;
-      border-radius:22px;
-      background:#faf8f6;
+      padding:22px;
+      border-radius:24px;
+      background:rgba(255,255,255,0.72);
+      border:1px solid rgba(255,255,255,0.88);
       color:var(--muted);
-      line-height:1.75;
-      border:1px solid rgba(255,255,255,.8);
+      line-height:1.8;
     }
 
     .footer{
       width:min(var(--max), calc(100% - 32px));
       margin:0 auto 28px;
       padding:18px 22px;
-      border-radius:24px;
-      color:#7a756f;
       text-align:center;
-      background:rgba(255,255,255,.38);
-      border:1px solid rgba(255,255,255,.7);
+      border-radius:24px;
+      color:#7b8399;
+      background:rgba(255,255,255,0.38);
+      border:1px solid rgba(255,255,255,0.75);
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      z-index:120;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:rgba(17,24,39,0.36);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+    }
+
+    .modal.open{
+      display:flex;
+    }
+
+    .modal-card{
+      width:min(720px, 100%);
+      border-radius:30px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(246,248,253,0.94));
+      border:1px solid rgba(255,255,255,0.86);
+      box-shadow:0 24px 60px rgba(26,35,63,0.22);
+    }
+
+    .modal-head{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:flex-start;
+      padding:22px 22px 16px;
+    }
+
+    .modal-kicker{
+      display:inline-flex;
+      align-items:center;
+      min-height:30px;
+      padding:0 10px;
+      border-radius:999px;
+      background:#eef0ff;
+      color:#6e76ff;
+      font-size:12px;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    .modal-title{
+      margin:0 0 8px;
+      font-size:28px;
+      line-height:1.15;
+      letter-spacing:-0.03em;
+      color:#171c28;
+    }
+
+    .modal-desc{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:15px;
+    }
+
+    .modal-close{
+      min-width:42px;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:none;
+      cursor:pointer;
+      color:#55607a;
+      background:#f3f6fc;
+      font-size:20px;
+    }
+
+    .modal-body{
+      padding:0 22px 22px;
+      display:grid;
+      gap:16px;
+    }
+
+    .player-box{
+      padding:18px;
+      border-radius:24px;
+      background:rgba(255,255,255,0.82);
+      border:1px solid rgba(234,238,247,0.9);
+      box-shadow:0 8px 20px rgba(44,57,95,0.04);
+    }
+
+    audio{
+      width:100%;
+    }
+
+    .player-meta{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:12px;
+    }
+
+    .meta-box{
+      padding:14px;
+      border-radius:18px;
+      background:#f7f9fd;
+      border:1px solid #e9edf5;
+    }
+
+    .meta-box span{
+      display:block;
+      font-size:12px;
+      font-weight:800;
+      color:#9199ad;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      margin-bottom:6px;
+    }
+
+    .meta-box strong{
+      display:block;
+      color:#232a3b;
+      line-height:1.5;
     }
 
     @media (max-width: 980px){
       .hero{
-        min-height:580px;
+        min-height:590px;
         background-position:68% center;
       }
 
@@ -513,11 +716,11 @@
         background:
           linear-gradient(
             180deg,
-            rgba(247,244,240,.88) 0%,
-            rgba(247,244,240,.84) 35%,
-            rgba(247,244,240,.74) 52%,
-            rgba(247,244,240,.44) 68%,
-            rgba(247,244,240,.18) 100%
+            rgba(245,247,252,0.90) 0%,
+            rgba(245,247,252,0.86) 35%,
+            rgba(245,247,252,0.76) 54%,
+            rgba(245,247,252,0.46) 72%,
+            rgba(245,247,252,0.18) 100%
           );
       }
 
@@ -530,17 +733,24 @@
         grid-template-columns:repeat(2, minmax(0, 1fr));
       }
 
-      .podcast-item{
+      .podcast-card{
         grid-template-columns:1fr;
       }
 
       .podcast-actions{
         justify-content:flex-start;
       }
+
+      .player-meta{
+        grid-template-columns:1fr;
+      }
     }
 
     @media (max-width: 640px){
-      .container,
+      .topbar-wrap{
+        padding:12px 0 8px;
+      }
+
       .topbar,
       .hero-wrap,
       .section,
@@ -548,17 +758,9 @@
         width:min(100% - 20px, var(--max));
       }
 
-      .topbar-wrap{
-        padding:12px 0 8px;
-      }
-
       .topbar{
         padding:12px;
-        border-radius:20px;
-      }
-
-      .nav-group{
-        gap:8px;
+        border-radius:22px;
       }
 
       .nav-link,
@@ -570,18 +772,16 @@
 
       .hero{
         min-height:560px;
-        border-radius:24px;
+        border-radius:26px;
         background-position:72% center;
       }
 
-      .hero-badge{
-        font-size:13px;
-        padding:9px 14px;
+      .hero-title{
+        font-size:44px;
       }
 
       .hero-desc{
         font-size:16px;
-        line-height:1.65;
       }
 
       .hero-actions{
@@ -593,13 +793,9 @@
         width:100%;
       }
 
-      .mini-card{
-        border-radius:18px;
+      .hero-mini{
         padding:14px;
-      }
-
-      .mini-text strong{
-        font-size:16px;
+        border-radius:18px;
       }
 
       .section{
@@ -608,19 +804,34 @@
       }
 
       .section-title{
-        font-size:26px;
+        font-size:28px;
       }
 
       .category-grid{
         grid-template-columns:1fr;
       }
 
-      .podcast-item{
-        padding:16px;
+      .podcast-card{
+        padding:18px;
+        border-radius:22px;
       }
 
-      .podcast-item h3{
+      .podcast-title{
         font-size:20px;
+      }
+
+      .modal{
+        padding:12px;
+      }
+
+      .modal-card{
+        border-radius:22px;
+      }
+
+      .modal-head,
+      .modal-body{
+        padding-left:16px;
+        padding-right:16px;
       }
     }
   </style>
@@ -633,6 +844,7 @@
         <a class="nav-link" href="./index.html">🏠 Home</a>
         <a class="nav-link" href="./cupping.html">☕ Cupping</a>
         <a class="nav-link" href="./dashboard.html">📊 Dashboard</a>
+        <a class="nav-link" href="./team.html">👥 R&D Team</a>
         <a class="nav-link active" href="./podcast.html">🎙️ Podcast</a>
       </div>
       <a class="mode-pill" href="#">☀️ Light</a>
@@ -652,19 +864,19 @@
         <p class="hero-desc">
           แหล่งรวมไฟล์เสียงและพอดแคสต์ความรู้สำหรับบาริสต้า
           และทีมงานในเครือกาแฟของเรา ฟังเพลิน ใช้งานง่าย
-          เพื่ออัปเดตความรู้และแรงบันดาลใจในเวลาว่าง
+          เพื่ออัปเดตความรู้ แรงบันดาลใจ และ mindset ในเวลาว่าง
         </p>
 
         <div class="hero-actions">
-          <a href="#podcast-list" class="btn btn-primary">🎧 ฟังตอนล่าสุด</a>
+          <a href="#podcast-list-section" class="btn btn-primary">🎧 ฟังตอนล่าสุด</a>
           <a href="#podcast-categories" class="btn btn-ghost">☕ ดูหมวดเนื้อหา</a>
         </div>
 
-        <div class="mini-card">
-          <div class="mini-icon">◉</div>
-          <div class="mini-text">
+        <div class="hero-mini">
+          <div class="hero-mini-icon">🎧</div>
+          <div class="hero-mini-text">
             <strong>Learn Anywhere, Anytime</strong>
-            <span>ฟังเพลิน ได้ความรู้ พัฒนาตัวเองในทุกช่วงเวลา</span>
+            <span>ฟังเพลิน ได้ความรู้ พัฒนาตัวเองและทีมงานในทุกช่วงเวลา</span>
           </div>
         </div>
       </div>
@@ -676,154 +888,367 @@
       <div>
         <h2 class="section-title">หมวดเนื้อหา</h2>
         <p class="section-desc">
-          แยกหมวดให้ค้นหาและฟังได้ง่ายขึ้น เลือกตามความสนใจหรือการใช้งานในงานประจำวัน
+          เลือกฟังตามประเภทของความรู้ที่ต้องการ เพื่อให้ใช้งานง่ายขึ้นทั้งสำหรับหน้าบาร์และทีมงานหลังบ้าน
         </p>
-      </div>
-      <div class="chip-row">
-        <a class="chip active" href="#podcast-list">All</a>
-        <a class="chip" href="#podcast-list">Knowledge</a>
-        <a class="chip" href="#podcast-list">Brewing</a>
-        <a class="chip" href="#podcast-list">Service</a>
-        <a class="chip" href="#podcast-list">Growth</a>
       </div>
     </div>
 
     <div class="category-grid">
       <div class="category-card">
-        <div class="icon">📘</div>
+        <div class="category-icon">📘</div>
         <h3>Coffee Knowledge</h3>
-        <p>ความรู้พื้นฐานและเชิงลึกด้านกาแฟ ตั้งแต่ origin, process, sensory ไปจนถึงแนวคิดที่ใช้จริงในร้าน</p>
+        <p>ความรู้พื้นฐานและเชิงลึกด้านกาแฟ เช่น origin, process, sensory และแนวคิดที่ใช้จริงในงาน</p>
       </div>
 
       <div class="category-card">
-        <div class="icon">☕</div>
+        <div class="category-icon">☕</div>
         <h3>Brewing Technique</h3>
-        <p>สูตรชง การปรับ grind size การคุม extraction และแนวทางแก้ปัญหาหน้างานแบบเข้าใจง่าย</p>
+        <p>สูตรชง การคุม extraction การปรับ grind size และการแก้ปัญหาหน้างานแบบเข้าใจง่าย</p>
       </div>
 
       <div class="category-card">
-        <div class="icon">💬</div>
+        <div class="category-icon">💬</div>
         <h3>Service & Mindset</h3>
-        <p>แนวคิดเรื่องการสื่อสาร การบริการ ประสบการณ์ลูกค้า และมุมมองการทำงานให้ราบรื่นขึ้น</p>
+        <p>การสื่อสารกับลูกค้า ประสบการณ์หน้าร้าน และมุมคิดที่ช่วยให้ทีมทำงานได้ลื่นขึ้น</p>
       </div>
 
       <div class="category-card">
-        <div class="icon">📈</div>
+        <div class="category-icon">📈</div>
         <h3>Growth & Inspiration</h3>
-        <p>เนื้อหาสำหรับพัฒนาทีม พัฒนาตัวเอง และต่อยอดแรงบันดาลใจในการทำงานสายกาแฟระยะยาว</p>
+        <p>แนวคิดเรื่องการพัฒนาตัวเอง การทำงานเป็นทีม และแรงบันดาลใจระยะยาวในสายกาแฟ</p>
       </div>
     </div>
   </section>
 
-  <section class="section" id="podcast-list">
+  <section class="section" id="podcast-list-section">
     <div class="section-head">
       <div>
-        <h2 class="section-title">ตอนล่าสุด</h2>
+        <h2 class="section-title">รายการพอดแคสต์</h2>
         <p class="section-desc">
-          ตัวอย่างรายการด้านล่างสามารถเปลี่ยนชื่อ ปุ่มลิงก์ และคำอธิบายเป็นไฟล์เสียงจริงของคุณได้ทันที
+          กดปุ่มฟังตอนนี้เพื่อเปิด popup player ได้ทันที หรือค้นหาและกรองตามหมวดด้านล่าง
         </p>
+      </div>
+
+      <div class="chip-row" id="filterChips">
+        <button class="chip active" data-filter="all" type="button">All</button>
+        <button class="chip" data-filter="knowledge" type="button">Knowledge</button>
+        <button class="chip" data-filter="brewing" type="button">Brewing</button>
+        <button class="chip" data-filter="service" type="button">Service</button>
+        <button class="chip" data-filter="growth" type="button">Growth</button>
       </div>
     </div>
 
-    <div class="podcast-list">
-      <article class="podcast-item">
-        <div class="podcast-item-main">
-          <div class="podcast-meta">
+    <div class="toolbar">
+      <label class="search-box" aria-label="ค้นหา podcast">
+        <span>🔎</span>
+        <input id="searchInput" type="text" placeholder="ค้นหา episode, keyword, category..." />
+      </label>
+      <div class="filter-text" id="resultCount">แสดง 4 รายการ</div>
+    </div>
+
+    <div class="podcast-list" id="podcastList">
+
+      <article
+        class="podcast-card"
+        data-category="knowledge"
+        data-title="EP.01 เข้าใจ acidity ในกาแฟแบบง่าย"
+        data-keywords="acidity structure perception roast brew knowledge"
+        data-audio="./assets/audio/ep01.mp3"
+        data-episode="EP.01"
+        data-duration="12 min"
+        data-type="Knowledge"
+      >
+        <div class="podcast-main">
+          <div class="podcast-top">
             <span class="meta-pill">Knowledge</span>
-            <span class="meta-pill">12 min</span>
-            <span class="meta-pill">Audio</span>
+            <span class="meta-pill warm">12 min</span>
+            <span class="meta-pill warm">Audio</span>
           </div>
-          <h3>EP.01 เข้าใจ acidity ในกาแฟแบบง่ายและเอาไปใช้หน้างานได้จริง</h3>
-          <p>
-            คุยเรื่องความเปรี้ยวในกาแฟแบบไม่ซับซ้อน แยก perception, structure และความสัมพันธ์กับ roast / brew
-            เพื่อให้ทีมหน้าบาร์สื่อสารกับลูกค้าได้มั่นใจขึ้น
+          <h3 class="podcast-title">EP.01 เข้าใจ acidity ในกาแฟแบบง่ายและเอาไปใช้หน้างานได้จริง</h3>
+          <p class="podcast-desc">
+            อธิบายเรื่องความเปรี้ยวในกาแฟแบบไม่ซับซ้อน แยก perception, structure
+            และความสัมพันธ์กับ roast / brew เพื่อให้ทีมหน้าบาร์สื่อสารกับลูกค้าได้มั่นใจขึ้น
           </p>
         </div>
         <div class="podcast-actions">
-          <a class="btn btn-sm btn-soft" href="#">รายละเอียด</a>
-          <a class="btn btn-sm btn-play" href="#">▶ ฟังตอนนี้</a>
+          <button class="btn btn-sm btn-outline open-detail" type="button">รายละเอียด</button>
+          <button class="btn btn-sm btn-play open-player" type="button">▶ ฟังตอนนี้</button>
         </div>
       </article>
 
-      <article class="podcast-item">
-        <div class="podcast-item-main">
-          <div class="podcast-meta">
+      <article
+        class="podcast-card"
+        data-category="brewing"
+        data-title="EP.02 Brew recipe ที่ควรคุมให้เป็น"
+        data-keywords="brew recipe ratio grind extraction pour over brewing"
+        data-audio="./assets/audio/ep02.mp3"
+        data-episode="EP.02"
+        data-duration="15 min"
+        data-type="Brewing"
+      >
+        <div class="podcast-main">
+          <div class="podcast-top">
             <span class="meta-pill">Brewing</span>
-            <span class="meta-pill">15 min</span>
-            <span class="meta-pill">Audio</span>
+            <span class="meta-pill warm">15 min</span>
+            <span class="meta-pill warm">Audio</span>
           </div>
-          <h3>EP.02 Brew recipe ที่ควรคุมให้เป็นสำหรับงาน pour over</h3>
-          <p>
+          <h3 class="podcast-title">EP.02 Brew recipe ที่ควรคุมให้เป็นสำหรับงาน pour over</h3>
+          <p class="podcast-desc">
             สรุปเรื่อง ratio, grind size, agitation, time และการชิมผลลัพธ์หลังปรับสูตร
             เหมาะกับทั้งคนเริ่มต้นและคนที่ต้องการให้ทีมใช้ภาษาการชงร่วมกัน
           </p>
         </div>
         <div class="podcast-actions">
-          <a class="btn btn-sm btn-soft" href="#">รายละเอียด</a>
-          <a class="btn btn-sm btn-play" href="#">▶ ฟังตอนนี้</a>
+          <button class="btn btn-sm btn-outline open-detail" type="button">รายละเอียด</button>
+          <button class="btn btn-sm btn-play open-player" type="button">▶ ฟังตอนนี้</button>
         </div>
       </article>
 
-      <article class="podcast-item">
-        <div class="podcast-item-main">
-          <div class="podcast-meta">
+      <article
+        class="podcast-card"
+        data-category="service"
+        data-title="EP.03 วิธีอธิบายกาแฟให้ลูกค้าเข้าใจง่าย"
+        data-keywords="service customer sensory communication barista service mindset"
+        data-audio="./assets/audio/ep03.mp3"
+        data-episode="EP.03"
+        data-duration="10 min"
+        data-type="Service"
+      >
+        <div class="podcast-main">
+          <div class="podcast-top">
             <span class="meta-pill">Service</span>
-            <span class="meta-pill">10 min</span>
-            <span class="meta-pill">Audio</span>
+            <span class="meta-pill warm">10 min</span>
+            <span class="meta-pill warm">Audio</span>
           </div>
-          <h3>EP.03 วิธีอธิบายกาแฟให้ลูกค้าเข้าใจง่าย โดยไม่ต้องใช้ศัพท์ยากเกินไป</h3>
-          <p>
+          <h3 class="podcast-title">EP.03 วิธีอธิบายกาแฟให้ลูกค้าเข้าใจง่าย โดยไม่ต้องใช้ศัพท์ยากเกินไป</h3>
+          <p class="podcast-desc">
             เทคนิคการแปล sensory note ให้กลายเป็นภาษาที่เข้าใจง่ายขึ้น
             พร้อมตัวอย่างการคุยกับลูกค้าเมื่อลูกค้ายังไม่คุ้นกับ specialty coffee
           </p>
         </div>
         <div class="podcast-actions">
-          <a class="btn btn-sm btn-soft" href="#">รายละเอียด</a>
-          <a class="btn btn-sm btn-play" href="#">▶ ฟังตอนนี้</a>
+          <button class="btn btn-sm btn-outline open-detail" type="button">รายละเอียด</button>
+          <button class="btn btn-sm btn-play open-player" type="button">▶ ฟังตอนนี้</button>
         </div>
       </article>
 
-      <article class="podcast-item">
-        <div class="podcast-item-main">
-          <div class="podcast-meta">
+      <article
+        class="podcast-card"
+        data-category="growth"
+        data-title="EP.04 Mindset เล็กๆ ก่อนเริ่มงาน"
+        data-keywords="growth inspiration team mindset work habit"
+        data-audio="./assets/audio/ep04.mp3"
+        data-episode="EP.04"
+        data-duration="8 min"
+        data-type="Growth"
+      >
+        <div class="podcast-main">
+          <div class="podcast-top">
             <span class="meta-pill">Growth</span>
-            <span class="meta-pill">8 min</span>
-            <span class="meta-pill">Audio</span>
+            <span class="meta-pill warm">8 min</span>
+            <span class="meta-pill warm">Audio</span>
           </div>
-          <h3>EP.04 ฟังเพลินก่อนเริ่มงาน: mindset เล็กๆ ที่ช่วยให้ทีมทำงานลื่นขึ้น</h3>
-          <p>
-            ตอนสั้นสำหรับเปิดฟังก่อนเข้ากะ เน้นมุมคิดเรื่องวินัย ความใส่ใจ และการพัฒนาทีมแบบค่อยเป็นค่อยไป
+          <h3 class="podcast-title">EP.04 ฟังเพลินก่อนเริ่มงาน: mindset เล็กๆ ที่ช่วยให้ทีมทำงานลื่นขึ้น</h3>
+          <p class="podcast-desc">
+            ตอนสั้นสำหรับเปิดฟังก่อนเข้ากะ เน้นมุมคิดเรื่องวินัย ความใส่ใจ
+            และการพัฒนาทีมแบบค่อยเป็นค่อยไป
           </p>
         </div>
         <div class="podcast-actions">
-          <a class="btn btn-sm btn-soft" href="#">รายละเอียด</a>
-          <a class="btn btn-sm btn-play" href="#">▶ ฟังตอนนี้</a>
+          <button class="btn btn-sm btn-outline open-detail" type="button">รายละเอียด</button>
+          <button class="btn btn-sm btn-play open-player" type="button">▶ ฟังตอนนี้</button>
         </div>
       </article>
+
+    </div>
+
+    <div class="empty-state" id="emptyState">
+      ไม่พบรายการที่ตรงกับคำค้นหรือหมวดที่เลือก
     </div>
   </section>
 
   <section class="section">
     <div class="section-head">
       <div>
-        <h2 class="section-title">วิธีใช้งานหน้านี้</h2>
+        <h2 class="section-title">วิธีเปลี่ยนเป็นไฟล์จริงของคุณ</h2>
         <p class="section-desc">
-          ถ้าคุณจะเพิ่มตอนจริงในภายหลัง แก้เฉพาะชื่อรายการ คำอธิบาย และลิงก์ปุ่มฟังได้เลย
+          ถ้ายังไม่มีไฟล์จริง ใช้หน้านี้เป็น demo page ก่อนได้ แล้วค่อยเปลี่ยนทีหลัง
         </p>
       </div>
     </div>
 
     <div class="note-card">
-      1) เปลี่ยนรูป hero โดยอัปโหลดไฟล์ไปที่ <strong>/assets/podcast-hero.png</strong><br>
-      2) เปลี่ยนชื่อรายการในส่วน <strong>ตอนล่าสุด</strong><br>
-      3) เปลี่ยนปุ่ม <strong>▶ ฟังตอนนี้</strong> ให้ลิงก์ไปยังไฟล์เสียง, YouTube, Google Drive หรือหน้า episode แยก<br>
-      4) ถ้ายังไม่มีไฟล์จริง ใช้หน้านี้เป็น landing page สำหรับ podcast ก่อนก็ได้
+      <strong>สิ่งที่ต้องแก้ภายหลังมีหลักๆ 3 จุด</strong><br><br>
+      1) เปลี่ยนภาพ hero เป็นไฟล์ของคุณที่ <code>/assets/podcast-hero.png</code><br>
+      2) เปลี่ยนลิงก์เสียงในแต่ละรายการ เช่น <code>data-audio="./assets/audio/ep01.mp3"</code><br>
+      3) เปลี่ยนชื่อ episode, คำอธิบาย, duration และ category ให้ตรงกับตอนจริง<br><br>
+      ถ้าตอนนี้คุณยังไม่มี mp3 จริง ปุ่มฟังตอนนี้จะยังเปิด player ได้ แต่ไฟล์เสียงจะไม่เล่นจนกว่าจะใส่ path ให้ถูกต้อง
     </div>
   </section>
 
   <footer class="footer">
-    Casa Lab Podcast · built for GitHub Pages
+    Casa Lab Podcast · GitHub Pages Demo
   </footer>
 
+  <div class="modal" id="playerModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div>
+          <div class="modal-kicker" id="modalKicker">Podcast Episode</div>
+          <h3 class="modal-title" id="modalTitle">Episode Title</h3>
+          <p class="modal-desc" id="modalDesc">Episode description</p>
+        </div>
+        <button class="modal-close" id="closeModal" type="button" aria-label="Close">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="player-box">
+          <audio id="audioPlayer" controls preload="metadata">
+            <source id="audioSource" src="" type="audio/mpeg" />
+            เบราว์เซอร์นี้ไม่รองรับ audio player
+          </audio>
+        </div>
+
+        <div class="player-meta">
+          <div class="meta-box">
+            <span>Episode</span>
+            <strong id="metaEpisode">-</strong>
+          </div>
+          <div class="meta-box">
+            <span>Category</span>
+            <strong id="metaType">-</strong>
+          </div>
+          <div class="meta-box">
+            <span>Duration</span>
+            <strong id="metaDuration">-</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const chips = Array.from(document.querySelectorAll('#filterChips .chip'));
+      const searchInput = document.getElementById('searchInput');
+      const cards = Array.from(document.querySelectorAll('.podcast-card'));
+      const resultCount = document.getElementById('resultCount');
+      const emptyState = document.getElementById('emptyState');
+
+      let currentFilter = 'all';
+
+      function applyFilters() {
+        const q = (searchInput.value || '').trim().toLowerCase();
+        let visible = 0;
+
+        cards.forEach(card => {
+          const category = (card.dataset.category || '').toLowerCase();
+          const title = (card.dataset.title || '').toLowerCase();
+          const keywords = (card.dataset.keywords || '').toLowerCase();
+          const text = `${title} ${keywords}`;
+
+          const matchCategory = currentFilter === 'all' || category === currentFilter;
+          const matchSearch = !q || text.includes(q);
+
+          const show = matchCategory && matchSearch;
+          card.style.display = show ? 'grid' : 'none';
+
+          if (show) visible += 1;
+        });
+
+        resultCount.textContent = `แสดง ${visible} รายการ`;
+        emptyState.style.display = visible === 0 ? 'block' : 'none';
+      }
+
+      chips.forEach(chip => {
+        chip.addEventListener('click', function () {
+          chips.forEach(c => c.classList.remove('active'));
+          this.classList.add('active');
+          currentFilter = this.dataset.filter || 'all';
+          applyFilters();
+        });
+      });
+
+      searchInput.addEventListener('input', applyFilters);
+      applyFilters();
+
+      const modal = document.getElementById('playerModal');
+      const closeModal = document.getElementById('closeModal');
+      const audioPlayer = document.getElementById('audioPlayer');
+      const audioSource = document.getElementById('audioSource');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalDesc = document.getElementById('modalDesc');
+      const modalKicker = document.getElementById('modalKicker');
+      const metaEpisode = document.getElementById('metaEpisode');
+      const metaType = document.getElementById('metaType');
+      const metaDuration = document.getElementById('metaDuration');
+
+      function openModalFromCard(card, detailOnly = false) {
+        const title = card.querySelector('.podcast-title')?.textContent?.trim() || 'Untitled Episode';
+        const desc = card.querySelector('.podcast-desc')?.textContent?.trim() || '';
+        const audio = card.dataset.audio || '';
+        const episode = card.dataset.episode || '-';
+        const type = card.dataset.type || '-';
+        const duration = card.dataset.duration || '-';
+
+        modalTitle.textContent = title;
+        modalDesc.textContent = desc;
+        modalKicker.textContent = detailOnly ? 'Episode Detail' : 'Now Playing';
+        metaEpisode.textContent = episode;
+        metaType.textContent = type;
+        metaDuration.textContent = duration;
+
+        if (audio) {
+          audioSource.src = audio;
+          audioPlayer.load();
+        } else {
+          audioSource.src = '';
+          audioPlayer.load();
+        }
+
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+
+        if (!detailOnly && audio) {
+          const playPromise = audioPlayer.play();
+          if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(() => {});
+          }
+        }
+      }
+
+      function closePlayerModal() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        audioPlayer.pause();
+      }
+
+      document.querySelectorAll('.open-player').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const card = this.closest('.podcast-card');
+          if (card) openModalFromCard(card, false);
+        });
+      });
+
+      document.querySelectorAll('.open-detail').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const card = this.closest('.podcast-card');
+          if (card) openModalFromCard(card, true);
+        });
+      });
+
+      closeModal.addEventListener('click', closePlayerModal);
+
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) closePlayerModal();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
+          closePlayerModal();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
