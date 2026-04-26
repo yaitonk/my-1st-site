@@ -1014,6 +1014,29 @@ body.dark .infographic-card {
   border-bottom: 1px solid rgba(120,130,160,0.18);
 }
 
+.infographic-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.infographic-player {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(120,130,160,0.14);
+  background: rgba(255,255,255,0.58);
+}
+
+body.dark .infographic-player {
+  background: rgba(255,255,255,0.04);
+}
+
+.infographic-player audio {
+  width: 100%;
+  display: block;
+}
+
 .infographic-title {
   margin: 0;
   font-size: 18px;
@@ -1426,7 +1449,16 @@ body.dark .infographic-card {
     <div class="infographic-card">
       <div class="infographic-head">
         <h3 class="infographic-title" id="infographicTitle">EP.05 Infographic</h3>
-        <button class="infographic-close" id="closeInfographic" type="button" aria-label="Close infographic">×</button>
+        <div class="infographic-actions">
+          <button class="btn btn-sm btn-play" id="playFromInfographic" type="button">▶ ฟัง EP นี้</button>
+          <button class="infographic-close" id="closeInfographic" type="button" aria-label="Close infographic">×</button>
+        </div>
+      </div>
+      <div class="infographic-player">
+        <audio id="infographicAudio" controls preload="metadata">
+          <source id="infographicAudioSource" src="" type="audio/mp4" />
+          เบราว์เซอร์นี้ไม่รองรับ audio player
+        </audio>
       </div>
       <div class="infographic-body">
         <img id="infographicImage" src="" alt="Podcast infographic">
@@ -1578,43 +1610,91 @@ body.dark .infographic-card {
         }
       });
       const infographicModal = document.getElementById('infographicModal');
-const infographicImage = document.getElementById('infographicImage');
-const infographicTitle = document.getElementById('infographicTitle');
-const closeInfographic = document.getElementById('closeInfographic');
+      const infographicImage = document.getElementById('infographicImage');
+      const infographicTitle = document.getElementById('infographicTitle');
+      const closeInfographic = document.getElementById('closeInfographic');
+      const playFromInfographic = document.getElementById('playFromInfographic');
+      const infographicAudio = document.getElementById('infographicAudio');
+      const infographicAudioSource = document.getElementById('infographicAudioSource');
+      let currentInfographicCard = null;
 
-document.querySelectorAll('.open-infographic').forEach(btn => {
-  btn.addEventListener('click', function () {
-    const card = this.closest('.podcast-card');
-    if (!card) return;
+      function updateInfographicPlayButton() {
+        if (!infographicAudioSource.src) {
+          playFromInfographic.textContent = 'ไม่มีไฟล์เสียง';
+          playFromInfographic.disabled = true;
+          return;
+        }
+        playFromInfographic.disabled = false;
+        playFromInfographic.textContent = infographicAudio.paused ? '▶ ฟัง EP นี้' : '⏸ หยุดชั่วคราว';
+      }
 
-    const img = card.dataset.infographic || '';
-    const title = card.dataset.episode || 'Infographic';
+      document.querySelectorAll('.open-infographic').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const card = this.closest('.podcast-card');
+          if (!card) return;
 
-    infographicTitle.textContent = `${title} Infographic`;
-    infographicImage.src = img;
+          currentInfographicCard = card;
 
-    infographicModal.classList.add('open');
-    infographicModal.setAttribute('aria-hidden', 'false');
-  });
-});
+          const img = card.dataset.infographic || '';
+          const title = card.dataset.episode || 'Infographic';
+          const audio = card.dataset.audio || '';
 
-function closeInfographicModal() {
-  infographicModal.classList.remove('open');
-  infographicModal.setAttribute('aria-hidden', 'true');
-  infographicImage.src = '';
-}
+          infographicTitle.textContent = title + ' Infographic';
+          infographicImage.src = img;
 
-closeInfographic.addEventListener('click', closeInfographicModal);
+          if (audio) {
+            infographicAudioSource.src = audio;
+            infographicAudio.load();
+          } else {
+            infographicAudioSource.src = '';
+            infographicAudio.load();
+          }
 
-infographicModal.addEventListener('click', function (e) {
-  if (e.target === infographicModal) closeInfographicModal();
-});
+          updateInfographicPlayButton();
+          infographicModal.classList.add('open');
+          infographicModal.setAttribute('aria-hidden', 'false');
+        });
+      });
 
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape' && infographicModal.classList.contains('open')) {
-    closeInfographicModal();
-  }
-});
+      playFromInfographic.addEventListener('click', function () {
+        if (!currentInfographicCard || !infographicAudioSource.src) return;
+
+        audioPlayer.pause();
+
+        if (infographicAudio.paused) {
+          const playPromise = infographicAudio.play();
+          if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(() => {});
+          }
+        } else {
+          infographicAudio.pause();
+        }
+      });
+
+      infographicAudio.addEventListener('play', updateInfographicPlayButton);
+      infographicAudio.addEventListener('pause', updateInfographicPlayButton);
+      infographicAudio.addEventListener('ended', updateInfographicPlayButton);
+
+      function closeInfographicModal() {
+        infographicModal.classList.remove('open');
+        infographicModal.setAttribute('aria-hidden', 'true');
+        infographicImage.src = '';
+        infographicAudio.pause();
+        currentInfographicCard = null;
+        updateInfographicPlayButton();
+      }
+
+      closeInfographic.addEventListener('click', closeInfographicModal);
+
+      infographicModal.addEventListener('click', function (e) {
+        if (e.target === infographicModal) closeInfographicModal();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && infographicModal.classList.contains('open')) {
+          closeInfographicModal();
+        }
+      });
     })();
   </script>
 </body>
