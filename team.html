@@ -442,7 +442,11 @@ margin-bottom:0;
 font-size:.72em;
 }
 
-/* ---------- Evolved Q-grader hover image ---------- */
+/* Evolved Q-grader click preview */
+.credential-wrap{
+position:relative;
+display:inline-block;
+}
 
 .credential-link{
 position:relative;
@@ -512,19 +516,11 @@ margin-top:8px;
 padding:0 4px 2px;
 }
 
-.credential-wrap{
-position:relative;
-display:inline-block;
-}
-
-.credential-wrap:hover .credential-preview,
 .credential-wrap.active .credential-preview{
 opacity:1;
 visibility:visible;
 transform:translateY(0) scale(1);
 }
-
-/* ---------- end hover image ---------- */
 
 .pill-wrap{
 display:flex;
@@ -722,6 +718,7 @@ left:-20px;
 <div class="orb two"></div>
 
 <div class="shell">
+
 <div class="topbar">
 <div class="topbar-left">
 <a href="https://yaitonk.github.io/my-1st-site/" class="nav-btn">🏠 Home</a>
@@ -1140,6 +1137,7 @@ data-focus="R&D Officer, Data Support, Workflow">
 <div class="footer-note">
 Casa Lab · R&amp;D Team Page
 </div>
+
 </div>
 
 <div class="modal" id="profileModal">
@@ -1276,7 +1274,7 @@ closeProfileModal();
 }
 });
 
-/* Tap support for iPad / Mobile */
+/* Click to show Evolved Q-grader image */
 const credentialWraps = document.querySelectorAll(".credential-wrap");
 
 credentialWraps.forEach(wrap => {
@@ -1301,9 +1299,13 @@ trigger.click();
 });
 });
 
-document.addEventListener("click", () => {
+/* Click outside to close preview */
+document.addEventListener("click", (e) => {
+if (!e.target.closest(".credential-wrap")) {
 credentialWraps.forEach(wrap => wrap.classList.remove("active"));
+}
 });
 </script>
+
 </body>
 </html>
