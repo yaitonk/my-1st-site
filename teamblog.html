@@ -975,7 +975,73 @@
         grid-template-columns:1fr;
       }
     }
+.infographic-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 140;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(10, 14, 24, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
 
+.infographic-modal.open {
+  display: flex;
+}
+
+.infographic-card {
+  width: min(1100px, 100%);
+  max-height: 92vh;
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.96);
+  box-shadow: 0 28px 80px rgba(0,0,0,0.32);
+}
+
+body.dark .infographic-card {
+  background: rgba(18,26,43,0.98);
+}
+
+.infographic-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(120,130,160,0.18);
+}
+
+.infographic-title {
+  margin: 0;
+  font-size: 18px;
+  color: var(--text);
+}
+
+.infographic-close {
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: rgba(120,130,160,0.12);
+  color: var(--text);
+  font-size: 22px;
+}
+
+.infographic-body {
+  max-height: calc(92vh - 72px);
+  overflow: auto;
+  padding: 14px;
+}
+
+.infographic-body img {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+}
     @media (max-width: 640px){
       .topbar-wrap{
         padding:12px 0 8px;
@@ -1285,6 +1351,7 @@
         data-episode="EP.05"
         data-duration="6.10 min"
         data-type="knowledge"
+        data-infographic="./assets/infographic/ep05.png"
       >
         <div class="podcast-main">
           <div class="podcast-top">
@@ -1299,6 +1366,7 @@
         </div>
         <div class="podcast-actions">
           <button class="btn btn-sm btn-outline open-detail" type="button">รายละเอียด</button>
+          <button class="btn btn-sm btn-outline open-infographic" type="button">Infographic</button>
           <button class="btn btn-sm btn-play open-player" type="button">▶ ฟังตอนนี้</button>
         </div>
       </article>
@@ -1468,6 +1536,18 @@
         modal.classList.remove('open');
         modal.setAttribute('aria-hidden', 'true');
         audioPlayer.pause();
+
+      <div class="infographic-modal" id="infographicModal" aria-hidden="true">
+  <div class="infographic-card">
+    <div class="infographic-head">
+      <h3 class="infographic-title" id="infographicTitle">EP.05 Infographic</h3>
+      <button class="infographic-close" id="closeInfographic" type="button">×</button>
+    </div>
+    <div class="infographic-body">
+      <img id="infographicImage" src="" alt="Podcast infographic">
+    </div>
+  </div>
+</div>
       }
 
       document.querySelectorAll('.open-player').forEach(btn => {
@@ -1495,6 +1575,44 @@
           closePlayerModal();
         }
       });
+      const infographicModal = document.getElementById('infographicModal');
+const infographicImage = document.getElementById('infographicImage');
+const infographicTitle = document.getElementById('infographicTitle');
+const closeInfographic = document.getElementById('closeInfographic');
+
+document.querySelectorAll('.open-infographic').forEach(btn => {
+  btn.addEventListener('click', function () {
+    const card = this.closest('.podcast-card');
+    if (!card) return;
+
+    const img = card.dataset.infographic || '';
+    const title = card.dataset.episode || 'Infographic';
+
+    infographicTitle.textContent = `${title} Infographic`;
+    infographicImage.src = img;
+
+    infographicModal.classList.add('open');
+    infographicModal.setAttribute('aria-hidden', 'false');
+  });
+});
+
+function closeInfographicModal() {
+  infographicModal.classList.remove('open');
+  infographicModal.setAttribute('aria-hidden', 'true');
+  infographicImage.src = '';
+}
+
+closeInfographic.addEventListener('click', closeInfographicModal);
+
+infographicModal.addEventListener('click', function (e) {
+  if (e.target === infographicModal) closeInfographicModal();
+});
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && infographicModal.classList.contains('open')) {
+    closeInfographicModal();
+  }
+});
     })();
   </script>
 </body>
