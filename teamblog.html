@@ -3,46 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Casa Lab Podcast</title>
   <meta name="description" content="Casa Lab Podcast & Learning" />
+
   <style>
     :root{
-      --bg:#eef2fb;
-      --bg-2:#f7f8fc;
-      --card:rgba(255,255,255,0.58);
-      --card-strong:rgba(255,255,255,0.78);
-      --line:rgba(255,255,255,0.85);
-      --text:#151926;
-      --muted:#677086;
-      --soft:#8b92a7;
-      --accent:#7c83ff;
-      --accent-2:#5f69ff;
-      --accent-soft:#eef0ff;
-      --warm:#a18672;
-      --shadow:0 18px 40px rgba(38, 50, 77, 0.10);
-      --shadow-soft:0 10px 24px rgba(38, 50, 77, 0.06);
+      --bg1:#eef4ff;
+      --bg2:#f8f6ff;
+      --bg3:#f6fbf7;
+
+      --glass:rgba(255,255,255,0.58);
+      --glass-strong:rgba(255,255,255,0.76);
+      --line:rgba(255,255,255,0.72);
+
+      --text:#17212f;
+      --muted:#667085;
+      --soft:#8a94a6;
+
+      --accent:#5967ff;
+      --accent-2:#8793ff;
+      --accent-3:#a3adff;
+
+      --shadow:0 24px 70px rgba(23,33,47,0.12);
+
       --radius-xl:34px;
-      --radius-lg:26px;
+      --radius-lg:24px;
       --radius-md:18px;
-      --radius-pill:999px;
-      --max:1220px;
     }
 
     body.dark{
-      --bg:#0d1422;
-      --bg-2:#121a2b;
-      --card:rgba(17,24,39,0.58);
-      --card-strong:rgba(17,24,39,0.78);
+      --bg1:#070b14;
+      --bg2:#0f1728;
+      --bg3:#12192b;
+
+      --glass:rgba(18,24,38,0.62);
+      --glass-strong:rgba(28,36,55,0.72);
       --line:rgba(255,255,255,0.10);
-      --text:#edf2ff;
-      --muted:#a2adc2;
-      --soft:#8f99ad;
-      --accent:#98a7ff;
-      --accent-2:#7d8fff;
-      --accent-soft:rgba(124,131,255,0.16);
-      --warm:#d0b39c;
-      --shadow:0 18px 40px rgba(0, 0, 0, 0.28);
-      --shadow-soft:0 10px 24px rgba(0, 0, 0, 0.18);
+
+      --text:#eef2ff;
+      --muted:#a8b0c2;
+      --soft:#818ca3;
+
+      --accent:#8ea2ff;
+      --accent-2:#aebaff;
+      --accent-3:#c7d0ff;
+
+      --shadow:0 24px 70px rgba(0,0,0,0.34);
     }
 
     *{
@@ -55,1647 +62,1304 @@
 
     body{
       margin:0;
-      color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,"Noto Sans Thai","Helvetica Neue",Arial,sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(181,199,255,0.45), transparent 28%),
-        radial-gradient(circle at bottom center, rgba(233,225,255,0.30), transparent 26%),
-        linear-gradient(180deg, var(--bg-2), var(--bg));
       min-height:100vh;
-      transition:background .25s ease,color .25s ease;
-    }
-
-    body.dark{
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter",sans-serif;
+      color:var(--text);
       background:
-        radial-gradient(circle at top left, rgba(88,117,255,0.20), transparent 24%),
-        radial-gradient(circle at bottom center, rgba(174,122,255,0.10), transparent 24%),
-        linear-gradient(180deg, var(--bg-2), var(--bg));
+        radial-gradient(circle at 8% 8%, rgba(120,160,255,0.38), transparent 28%),
+        radial-gradient(circle at 92% 18%, rgba(255,190,135,0.30), transparent 27%),
+        radial-gradient(circle at 72% 84%, rgba(110,231,183,0.22), transparent 25%),
+        linear-gradient(180deg,var(--bg1),var(--bg2),var(--bg3));
+      padding:22px;
+      overflow-x:hidden;
+      transition:background .28s ease,color .28s ease;
     }
 
-    a{
-      color:inherit;
-      text-decoration:none;
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.20) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.16) 1px, transparent 1px);
+      background-size:42px 42px;
+      mask-image:linear-gradient(to bottom, rgba(0,0,0,0.35), transparent 72%);
+      pointer-events:none;
+      z-index:0;
     }
 
-    img{
-      display:block;
-      max-width:100%;
+    .orb{
+      position:fixed;
+      width:320px;
+      height:320px;
+      border-radius:999px;
+      filter:blur(34px);
+      opacity:0.46;
+      z-index:0;
+      pointer-events:none;
+      animation:float 16s ease-in-out infinite;
     }
 
-    button,
-    input,
-    select,
-    textarea{
-      font:inherit;
+    .orb.one{
+      top:-70px;
+      left:-90px;
+      background:rgba(120,160,255,0.55);
     }
 
-    .container{
-      width:min(var(--max), calc(100% - 32px));
+    .orb.two{
+      bottom:-90px;
+      right:-90px;
+      background:rgba(255,180,120,0.42);
+      animation-delay:-5s;
+    }
+
+    .orb.three{
+      bottom:12%;
+      left:24%;
+      background:rgba(110,231,183,0.28);
+      animation-delay:-9s;
+    }
+
+    @keyframes float{
+      0%,100%{
+        transform:translateY(0) translateX(0) scale(1);
+      }
+      50%{
+        transform:translateY(-18px) translateX(14px) scale(1.04);
+      }
+    }
+
+    .page{
+      position:relative;
+      z-index:1;
+      width:100%;
+      max-width:1040px;
       margin:0 auto;
-    }
-
-    .topbar-wrap{
-      position:sticky;
-      top:0;
-      z-index:80;
-      padding:16px 0 10px;
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
     }
 
     .topbar{
-      width:min(var(--max), calc(100% - 32px));
-      margin:0 auto;
+      position:sticky;
+      top:14px;
+      z-index:20;
       display:flex;
       justify-content:space-between;
       align-items:center;
       gap:14px;
-      padding:14px 16px;
-      border-radius:28px;
-      background:rgba(255,255,255,0.42);
-      border:1px solid rgba(255,255,255,0.72);
-      box-shadow:var(--shadow-soft);
-      transition:background .25s ease,border-color .25s ease;
+      margin-bottom:18px;
+      padding:12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.50);
+      border:1px solid var(--line);
+      backdrop-filter:blur(22px);
+      -webkit-backdrop-filter:blur(22px);
+      box-shadow:0 12px 34px rgba(23,33,47,0.08);
     }
 
     body.dark .topbar{
-      background:rgba(17,24,39,0.52);
-      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(18,24,38,0.58);
     }
 
-    .nav-group{
+    .brand-mini{
       display:flex;
-      flex-wrap:wrap;
-      gap:10px;
       align-items:center;
+      gap:10px;
+      min-width:0;
+      padding-left:4px;
+      text-decoration:none;
+      color:var(--text);
+    }
+
+    .brand-mini-icon{
+      width:38px;
+      height:38px;
+      border-radius:15px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(89,103,255,0.20), rgba(255,255,255,0.72));
+      border:1px solid var(--line);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.65);
+      flex:0 0 auto;
+    }
+
+    body.dark .brand-mini-icon{
+      background:linear-gradient(135deg, rgba(142,162,255,0.22), rgba(255,255,255,0.06));
+    }
+
+    .brand-mini-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.15;
+      min-width:0;
+    }
+
+    .brand-mini-text strong{
+      font-size:14px;
+      letter-spacing:-0.02em;
+      white-space:nowrap;
+    }
+
+    .brand-mini-text span{
+      margin-top:2px;
+      font-size:11px;
+      color:var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:8px;
     }
 
     .nav-link,
-    .mode-pill{
-      min-height:46px;
-      padding:0 18px;
-      border-radius:var(--radius-pill);
+    .theme-btn{
+      min-height:38px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
+      gap:7px;
+      padding:9px 13px;
+      border-radius:999px;
+      border:1px solid var(--line);
       background:rgba(255,255,255,0.56);
-      border:1px solid rgba(255,255,255,0.82);
-      color:#50586d;
-      transition:transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
-      box-shadow:0 4px 14px rgba(44,57,95,0.04);
+      color:var(--text);
+      text-decoration:none;
+      font:inherit;
+      font-size:12px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.22s ease;
+      white-space:nowrap;
     }
 
     body.dark .nav-link,
-    body.dark .mode-pill{
-      background:rgba(255,255,255,0.04);
-      border:1px solid rgba(255,255,255,0.08);
-      color:#d5dcf0;
-      box-shadow:none;
+    body.dark .theme-btn{
+      background:rgba(255,255,255,0.06);
     }
 
     .nav-link:hover,
-    .mode-pill:hover{
+    .theme-btn:hover{
       transform:translateY(-1px);
-      box-shadow:0 10px 20px rgba(44,57,95,0.08);
-    }
-
-    .nav-link.active{
-      color:#fff;
-      background:linear-gradient(135deg, var(--accent), var(--accent-2));
-      border-color:transparent;
-      box-shadow:0 12px 24px rgba(108,115,255,0.24);
-    }
-
-    .hero-wrap{
-      width:min(var(--max), calc(100% - 32px));
-      margin:14px auto 22px;
+      filter:saturate(1.05);
     }
 
     .hero{
       position:relative;
       overflow:hidden;
-      min-height:650px;
-      border-radius:40px;
-      background-image:url("./assets/podcast-hero.jpg");
-      background-size:cover;
-      background-position:center;
-      background-repeat:no-repeat;
+      border-radius:var(--radius-xl);
+      background:linear-gradient(145deg, var(--glass), rgba(255,255,255,0.36));
+      border:1px solid var(--line);
       box-shadow:var(--shadow);
+      backdrop-filter:blur(28px) saturate(1.20);
+      -webkit-backdrop-filter:blur(28px) saturate(1.20);
+      padding:44px 34px;
+      margin-bottom:18px;
       isolation:isolate;
+    }
+
+    body.dark .hero{
+      background:linear-gradient(145deg, var(--glass), rgba(15,23,42,0.36));
     }
 
     .hero::before{
       content:"";
       position:absolute;
-      inset:0;
+      inset:1px;
+      border-radius:calc(var(--radius-xl) - 1px);
       background:
-        linear-gradient(
-          90deg,
-          rgba(245,247,252,0.95) 0%,
-          rgba(245,247,252,0.92) 28%,
-          rgba(245,247,252,0.80) 42%,
-          rgba(245,247,252,0.48) 58%,
-          rgba(245,247,252,0.14) 72%,
-          rgba(245,247,252,0.02) 80%
-        );
-      z-index:0;
-      transition:background .25s ease;
+        linear-gradient(135deg, rgba(255,255,255,0.36), transparent 38%),
+        radial-gradient(circle at 82% 100%, rgba(255,255,255,0.18), transparent 35%);
+      pointer-events:none;
+      z-index:-1;
     }
 
-    body.dark .hero::before{
-      background:
-        linear-gradient(
-          90deg,
-          rgba(12,18,30,0.94) 0%,
-          rgba(12,18,30,0.90) 28%,
-          rgba(12,18,30,0.74) 44%,
-          rgba(12,18,30,0.42) 60%,
-          rgba(12,18,30,0.14) 74%,
-          rgba(12,18,30,0.03) 82%
-        );
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:24px;
+      align-items:center;
     }
 
-    .hero-content{
-      position:relative;
-      z-index:1;
-      max-width:560px;
-      padding:54px 42px 42px;
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-    }
-
-    .hero-badge{
-      width:fit-content;
+    .eyebrow{
       display:inline-flex;
       align-items:center;
-      gap:10px;
-      min-height:42px;
-      padding:0 16px;
-      border-radius:var(--radius-pill);
-      background:rgba(255,255,255,0.68);
-      border:1px solid rgba(255,255,255,0.82);
-      color:#69728a;
-      font-size:14px;
-      font-weight:700;
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-    }
-
-    body.dark .hero-badge{
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.10);
-      color:#b5bfd6;
-    }
-
-    .hero-title{
-      margin:0;
-      font-size:clamp(46px, 7vw, 80px);
-      line-height:0.94;
-      letter-spacing:-0.05em;
-      font-weight:800;
-      color:#121723;
-    }
-
-    body.dark .hero-title{
-      color:#f3f6ff;
-    }
-
-    .hero-title .tone{
-      color:#7c83ff;
-    }
-
-    body.dark .hero-title .tone{
-      color:#a6b2ff;
-    }
-
-    .hero-desc{
-      margin:0;
-      max-width:520px;
-      color:var(--muted);
-      font-size:clamp(16px, 2.1vw, 22px);
-      line-height:1.7;
-    }
-
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:4px;
-    }
-
-    .btn{
-      min-height:50px;
-      padding:0 18px;
-      border-radius:16px;
-      border:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
       gap:8px;
-      cursor:pointer;
-      transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
-      font-weight:700;
-      font-size:15px;
-    }
-
-    .btn:hover{
-      transform:translateY(-1px);
-    }
-
-    .btn-primary{
-      color:#fff;
-      background:linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow:0 12px 24px rgba(108,115,255,0.24);
-    }
-
-    .btn-ghost{
-      color:#4c556c;
-      background:rgba(255,255,255,0.66);
-      border:1px solid rgba(255,255,255,0.82);
-      backdrop-filter:blur(8px);
-      -webkit-backdrop-filter:blur(8px);
-    }
-
-    body.dark .btn-ghost{
-      color:#d6deef;
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.10);
-    }
-
-    .hero-mini{
-      margin-top:10px;
-      width:min(100%, 520px);
-      padding:16px 18px;
-      display:flex;
-      align-items:center;
-      gap:14px;
-      border-radius:24px;
-      background:rgba(255,255,255,0.56);
-      border:1px solid rgba(255,255,255,0.76);
-      box-shadow:var(--shadow-soft);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-    }
-
-    body.dark .hero-mini{
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(255,255,255,0.08);
-    }
-
-    .hero-mini-icon{
-      width:44px;
-      height:44px;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      flex-shrink:0;
-      color:#6f79ff;
-      background:#eef0ff;
-      font-size:18px;
-    }
-
-    body.dark .hero-mini-icon{
-      color:#b9c3ff;
-      background:rgba(124,131,255,0.14);
-    }
-
-    .hero-mini-text{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-    }
-
-    .hero-mini-text strong{
-      font-size:18px;
-      color:#1a2030;
-      line-height:1.2;
-    }
-
-    body.dark .hero-mini-text strong{
-      color:#eef2ff;
-    }
-
-    .hero-mini-text span{
-      font-size:14px;
-      color:var(--muted);
-      line-height:1.5;
-    }
-
-    .section{
-      width:min(var(--max), calc(100% - 32px));
-      margin:0 auto 22px;
-      padding:28px;
-      border-radius:32px;
-      background:var(--card);
+      padding:9px 14px;
+      border-radius:999px;
+      background:var(--glass-strong);
       border:1px solid var(--line);
-      box-shadow:var(--shadow-soft);
-      backdrop-filter:blur(12px);
-      -webkit-backdrop-filter:blur(12px);
-      transition:background .25s ease,border-color .25s ease;
-    }
-
-    .section-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:end;
-      gap:18px;
-      flex-wrap:wrap;
-      margin-bottom:20px;
-    }
-
-    .section-title{
-      margin:0;
-      font-size:34px;
-      line-height:1.05;
-      letter-spacing:-0.03em;
-      color:#171c28;
-    }
-
-    body.dark .section-title{
-      color:#edf2ff;
-    }
-
-    .section-desc{
-      margin:8px 0 0;
       color:var(--muted);
-      line-height:1.65;
-    }
-
-    .chip-row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .chip{
-      min-height:42px;
-      padding:0 16px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:var(--radius-pill);
-      background:rgba(255,255,255,0.60);
-      border:1px solid rgba(255,255,255,0.82);
-      color:#616980;
-      font-weight:700;
-      cursor:pointer;
-      transition:transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
-    }
-
-    body.dark .chip{
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(255,255,255,0.08);
-      color:#d2daec;
-    }
-
-    .chip:hover{
-      transform:translateY(-1px);
-      box-shadow:0 10px 20px rgba(44,57,95,0.06);
-    }
-
-    .chip.active{
-      color:#fff;
-      background:linear-gradient(135deg, var(--accent), var(--accent-2));
-      border-color:transparent;
-      box-shadow:0 12px 24px rgba(108,115,255,0.22);
-    }
-
-    .category-grid{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0, 1fr));
-      gap:14px;
-    }
-
-    .category-card{
-      padding:20px;
-      border-radius:24px;
-      background:rgba(255,255,255,0.70);
-      border:1px solid rgba(255,255,255,0.86);
-      box-shadow:0 8px 20px rgba(44,57,95,0.04);
-      transition:background .25s ease,border-color .25s ease;
-    }
-
-    body.dark .category-card{
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(255,255,255,0.08);
-      box-shadow:none;
-    }
-
-    .category-icon{
-      width:52px;
-      height:52px;
-      border-radius:16px;
-      display:grid;
-      place-items:center;
-      margin-bottom:14px;
-      background:linear-gradient(135deg, #eef0ff, #f4f5ff);
-      color:#6e76ff;
-      font-size:22px;
-    }
-
-    body.dark .category-icon{
-      background:rgba(124,131,255,0.14);
-      color:#b8c1ff;
-    }
-
-    .category-card h3{
-      margin:0 0 8px;
-      font-size:20px;
-      letter-spacing:-0.02em;
-      color:#171c28;
-    }
-
-    body.dark .category-card h3{
-      color:#eef2ff;
-    }
-
-    .category-card p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:15px;
-    }
-
-    .toolbar{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:14px;
-      flex-wrap:wrap;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:-0.01em;
       margin-bottom:16px;
     }
 
-    .search-box{
-      min-width:260px;
-      flex:1;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-height:52px;
-      padding:0 16px;
-      border-radius:18px;
-      background:rgba(255,255,255,0.68);
-      border:1px solid rgba(255,255,255,0.84);
-      color:#24304a;
-      transition:background .25s ease,border-color .25s ease,color .25s ease;
-    }
-
-    body.dark .search-box{
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(255,255,255,0.08);
-      color:#dce4f7;
-    }
-
-    .search-box input{
-      width:100%;
-      border:none;
-      outline:none;
-      background:transparent;
-      color:inherit;
-    }
-
-    .search-box input::placeholder{
-      color:#8a93a9;
-    }
-
-    body.dark .search-box input::placeholder{
-      color:#8490a8;
-    }
-
-    .filter-text{
-      color:var(--soft);
-      font-size:14px;
-      font-weight:700;
-    }
-
-    .podcast-list{
-      display:grid;
-      gap:16px;
-    }
-
-    .podcast-card{
-      position:relative;
-      overflow:hidden;
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:18px;
-      align-items:center;
-      padding:22px;
-      border-radius:28px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.64));
-      border:1px solid rgba(255,255,255,0.86);
-      box-shadow:0 12px 28px rgba(44,57,95,0.05);
-      transition:transform .2s ease, box-shadow .2s ease, background .25s ease, border-color .25s ease;
-    }
-
-    body.dark .podcast-card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
-      border:1px solid rgba(255,255,255,0.08);
-      box-shadow:none;
-    }
-
-    .podcast-card:hover{
-      transform:translateY(-2px);
-      box-shadow:0 16px 30px rgba(44,57,95,0.08);
-    }
-
-    body.dark .podcast-card:hover{
-      box-shadow:0 16px 30px rgba(0,0,0,0.18);
-    }
-
-    .podcast-card::after{
-      content:"";
-      position:absolute;
-      inset:auto 0 0 0;
-      height:4px;
-      background:linear-gradient(90deg, rgba(124,131,255,0.75), rgba(124,131,255,0));
-      opacity:.9;
-    }
-
-    .podcast-main{
-      min-width:0;
-    }
-
-    .podcast-top{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-bottom:10px;
-    }
-
-    .meta-pill{
-      min-height:30px;
-      padding:0 10px;
-      border-radius:999px;
-      display:inline-flex;
-      align-items:center;
-      background:#f2f4ff;
-      color:#6e76ff;
-      font-size:12px;
-      font-weight:800;
-    }
-
-    body.dark .meta-pill{
-      background:rgba(124,131,255,0.14);
-      color:#bcc5ff;
-    }
-
-    .meta-pill.warm{
-      background:#f7efe8;
-      color:#9b7b63;
-    }
-
-    body.dark .meta-pill.warm{
-      background:rgba(209,158,118,0.14);
-      color:#d7b79f;
-    }
-
-    .podcast-title{
-      margin:0 0 8px;
-      font-size:24px;
-      line-height:1.25;
-      letter-spacing:-0.025em;
-      color:#171c28;
-    }
-
-    body.dark .podcast-title{
-      color:#edf2ff;
-    }
-
-    .podcast-desc{
+    h1{
       margin:0;
+      font-size:54px;
+      line-height:.95;
+      letter-spacing:-0.065em;
+      font-weight:850;
+    }
+
+    .hero-subtitle{
+      margin-top:14px;
+      max-width:620px;
       color:var(--muted);
-      line-height:1.7;
       font-size:15px;
-      max-width:760px;
+      line-height:1.7;
     }
 
-    .podcast-actions{
+    .hero-card{
+      padding:18px;
+      border-radius:28px;
+      background:rgba(255,255,255,0.44);
+      border:1px solid var(--line);
+      box-shadow:0 16px 38px rgba(23,33,47,0.08);
+    }
+
+    body.dark .hero-card{
+      background:rgba(255,255,255,0.055);
+    }
+
+    .hero-art{
+      min-height:230px;
+      border-radius:24px;
       display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      align-items:center;
-    }
-
-    .btn-sm{
-      min-height:44px;
-      padding:0 14px;
-      border-radius:14px;
-      font-size:14px;
-    }
-
-    .btn-soft{
-      color:#49536a;
-      background:#f6f8fd;
-      border:1px solid rgba(226,231,243,0.9);
-    }
-
-    .btn-play{
-      color:#fff;
-      background:linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow:0 10px 22px rgba(108,115,255,0.2);
-    }
-
-    .btn-outline{
-      color:#5d6780;
-      background:rgba(255,255,255,0.66);
-      border:1px solid rgba(230,234,244,0.95);
-    }
-
-    body.dark .btn-outline{
-      color:#d6deef;
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(255,255,255,0.08);
-    }
-
-    .empty-state{
-      display:none;
-      padding:26px;
-      text-align:center;
-      border-radius:22px;
-      background:rgba(255,255,255,0.68);
-      color:var(--muted);
-      border:1px solid rgba(255,255,255,0.85);
-      transition:background .25s ease,border-color .25s ease;
-    }
-
-    body.dark .empty-state{
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(255,255,255,0.08);
-    }
-
-    .note-card{
-      padding:22px;
-      border-radius:24px;
-      background:rgba(255,255,255,0.72);
-      border:1px solid rgba(255,255,255,0.88);
-      color:var(--muted);
-      line-height:1.8;
-    }
-
-    body.dark .note-card{
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(255,255,255,0.08);
-    }
-
-    .footer{
-      width:min(var(--max), calc(100% - 32px));
-      margin:0 auto 28px;
-      padding:18px 22px;
-      text-align:center;
-      border-radius:24px;
-      color:#7b8399;
-      background:rgba(255,255,255,0.38);
-      border:1px solid rgba(255,255,255,0.75);
-      transition:background .25s ease,border-color .25s ease,color .25s ease;
-    }
-
-    body.dark .footer{
-      color:#96a2bb;
-      background:rgba(255,255,255,0.03);
-      border:1px solid rgba(255,255,255,0.08);
-    }
-
-    .modal{
-      position:fixed;
-      inset:0;
-      z-index:120;
-      display:none;
       align-items:center;
       justify-content:center;
-      padding:20px;
-      background:rgba(17,24,39,0.36);
-      backdrop-filter:blur(8px);
-      -webkit-backdrop-filter:blur(8px);
-    }
-
-    .modal.open{
-      display:flex;
-    }
-
-    .modal-card{
-      width:min(720px, 100%);
-      border-radius:30px;
+      text-align:center;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.85), transparent 34%),
+        linear-gradient(135deg, rgba(89,103,255,0.18), rgba(110,231,183,0.12)),
+        rgba(255,255,255,0.42);
+      border:1px solid var(--line);
       overflow:hidden;
-      background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(246,248,253,0.94));
-      border:1px solid rgba(255,255,255,0.86);
-      box-shadow:0 24px 60px rgba(26,35,63,0.22);
-      transition:background .25s ease,border-color .25s ease;
+      position:relative;
     }
 
-    body.dark .modal-card{
-      background:linear-gradient(180deg, rgba(18,26,43,0.98), rgba(14,21,35,0.96));
-      border:1px solid rgba(255,255,255,0.08);
-      box-shadow:0 24px 60px rgba(0,0,0,0.36);
+    body.dark .hero-art{
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.12), transparent 34%),
+        linear-gradient(135deg, rgba(142,162,255,0.20), rgba(110,231,183,0.10)),
+        rgba(255,255,255,0.05);
     }
 
-    .modal-head{
+    .hero-art::after{
+      content:"🎧";
+      font-size:74px;
+      filter:drop-shadow(0 18px 26px rgba(89,103,255,0.20));
+    }
+
+    .section-label{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin:24px 2px 14px;
+    }
+
+    .section-label h2{
+      margin:0;
+      font-size:22px;
+      letter-spacing:-0.035em;
+    }
+
+    .section-label span{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .episode-list{
+      display:grid;
+      gap:18px;
+      padding-bottom:40px;
+    }
+
+    .episode-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:var(--radius-xl);
+      padding:22px;
+      background:linear-gradient(145deg, var(--glass), rgba(255,255,255,0.34));
+      border:1px solid var(--line);
+      box-shadow:0 18px 48px rgba(23,33,47,0.09);
+      backdrop-filter:blur(24px) saturate(1.15);
+      -webkit-backdrop-filter:blur(24px) saturate(1.15);
+    }
+
+    body.dark .episode-card{
+      background:linear-gradient(145deg, var(--glass), rgba(15,23,42,0.34));
+    }
+
+    .episode-top{
       display:flex;
       justify-content:space-between;
-      gap:16px;
+      gap:14px;
       align-items:flex-start;
-      padding:22px 22px 16px;
+      margin-bottom:14px;
     }
 
-    .modal-kicker{
+    .episode-kicker{
       display:inline-flex;
       align-items:center;
-      min-height:30px;
-      padding:0 10px;
+      gap:7px;
+      padding:7px 11px;
       border-radius:999px;
-      background:#eef0ff;
-      color:#6e76ff;
+      background:rgba(255,255,255,0.54);
+      border:1px solid var(--line);
+      color:var(--muted);
       font-size:12px;
       font-weight:800;
-      margin-bottom:10px;
     }
 
-    body.dark .modal-kicker{
-      background:rgba(124,131,255,0.14);
-      color:#bcc5ff;
-    }
-
-    .modal-title{
-      margin:0 0 8px;
-      font-size:28px;
-      line-height:1.15;
-      letter-spacing:-0.03em;
-      color:#171c28;
-    }
-
-    body.dark .modal-title{
-      color:#eef2ff;
-    }
-
-    .modal-desc{
-      margin:0;
-      color:var(--muted);
-      line-height:1.7;
-      font-size:15px;
-    }
-
-    .modal-close{
-      min-width:42px;
-      width:42px;
-      height:42px;
-      border-radius:50%;
-      border:none;
-      cursor:pointer;
-      color:#55607a;
-      background:#f3f6fc;
-      font-size:20px;
-      transition:background .18s ease,color .18s ease;
-    }
-
-    body.dark .modal-close{
-      color:#d8e0f0;
+    body.dark .episode-kicker{
       background:rgba(255,255,255,0.06);
     }
 
-    .modal-body{
-      padding:0 22px 22px;
-      display:grid;
-      gap:16px;
+    .episode-title{
+      margin:10px 0 8px;
+      font-size:24px;
+      line-height:1.18;
+      letter-spacing:-0.035em;
     }
 
-    .player-box{
-      padding:18px;
-      border-radius:24px;
-      background:rgba(255,255,255,0.82);
-      border:1px solid rgba(234,238,247,0.9);
-      box-shadow:0 8px 20px rgba(44,57,95,0.04);
-      transition:background .25s ease,border-color .25s ease;
+    .episode-desc{
+      margin:0;
+      max-width:760px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.65;
     }
 
-    body.dark .player-box{
-      background:rgba(255,255,255,0.04);
-      border:1px solid rgba(255,255,255,0.08);
-      box-shadow:none;
+    .episode-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:14px;
+    }
+
+    .tag{
+      display:inline-flex;
+      padding:7px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.50);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:700;
+    }
+
+    body.dark .tag{
+      background:rgba(255,255,255,0.055);
+    }
+
+    .audio-wrap{
+      margin-top:16px;
+      padding:12px;
+      border-radius:22px;
+      background:rgba(255,255,255,0.46);
+      border:1px solid var(--line);
+    }
+
+    body.dark .audio-wrap{
+      background:rgba(255,255,255,0.055);
     }
 
     audio{
       width:100%;
-    }
-
-    .player-meta{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0, 1fr));
-      gap:12px;
-    }
-
-    .meta-box{
-      padding:14px;
-      border-radius:18px;
-      background:#f7f9fd;
-      border:1px solid #e9edf5;
-      transition:background .25s ease,border-color .25s ease;
-    }
-
-    body.dark .meta-box{
-      background:rgba(255,255,255,0.04);
-      border:1px solid rgba(255,255,255,0.08);
-    }
-
-    .meta-box span{
       display:block;
+    }
+
+    .footer{
+      text-align:center;
+      color:var(--soft);
+      font-size:12px;
+      padding:10px 0 28px;
+    }
+
+    .footer span{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.34);
+      border:1px solid var(--line);
+    }
+
+    body.dark .footer span{
+      background:rgba(255,255,255,0.05);
+    }
+
+    /* ================================
+       PODCAST INFOGRAPHIC MODULE
+    ================================ */
+
+    .ep-infographic-block{
+      margin-top:18px;
+      padding:16px;
+      border-radius:24px;
+      background:rgba(255,255,255,0.46);
+      border:1px solid rgba(255,255,255,0.62);
+      box-shadow:0 14px 34px rgba(23,33,47,0.08);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+    }
+
+    body.dark .ep-infographic-block{
+      background:rgba(255,255,255,0.055);
+      border-color:rgba(255,255,255,0.10);
+    }
+
+    .ep-infographic-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:12px;
+    }
+
+    .ep-infographic-title{
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+    }
+
+    .ep-infographic-title strong{
+      font-size:14px;
+      color:var(--text, #17212f);
+      letter-spacing:-0.01em;
+    }
+
+    .ep-infographic-title span{
+      font-size:12px;
+      color:var(--muted, #667085);
+      line-height:1.35;
+    }
+
+    .ep-infographic-preview{
+      position:relative;
+      width:100%;
+      aspect-ratio:16 / 10;
+      border-radius:20px;
+      overflow:hidden;
+      background:
+        linear-gradient(135deg, rgba(89,103,255,0.16), rgba(255,255,255,0.55)),
+        radial-gradient(circle at 25% 20%, rgba(255,255,255,0.95), transparent 34%);
+      border:1px solid rgba(255,255,255,0.58);
+      cursor:pointer;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.65);
+    }
+
+    body.dark .ep-infographic-preview{
+      background:
+        linear-gradient(135deg, rgba(142,162,255,0.20), rgba(255,255,255,0.06)),
+        radial-gradient(circle at 25% 20%, rgba(255,255,255,0.13), transparent 34%);
+      border-color:rgba(255,255,255,0.10);
+    }
+
+    .ep-infographic-preview img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform:scale(1.01);
+      transition:transform .35s ease, filter .35s ease;
+    }
+
+    .ep-infographic-preview:hover img{
+      transform:scale(1.04);
+      filter:saturate(1.06) contrast(1.02);
+    }
+
+    .ep-infographic-preview::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(to top, rgba(0,0,0,0.46), transparent 55%),
+        radial-gradient(circle at 50% 45%, transparent 0%, rgba(0,0,0,0.08) 100%);
+      pointer-events:none;
+    }
+
+    .ep-infographic-badge{
+      position:absolute;
+      left:14px;
+      bottom:14px;
+      z-index:2;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.84);
+      color:#17212f;
+      border:1px solid rgba(255,255,255,0.70);
       font-size:12px;
       font-weight:800;
-      color:#9199ad;
-      text-transform:uppercase;
-      letter-spacing:.06em;
-      margin-bottom:6px;
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
     }
 
-    body.dark .meta-box span{
-      color:#8e9ab3;
+    .ep-infographic-actions{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
     }
 
-    .meta-box strong{
+    .ep-info-btn{
+      flex:1;
+      min-height:46px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.42);
+      background:linear-gradient(135deg,#8793ff,#a3adff,#7c89ff);
+      color:#fff;
+      text-decoration:none;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:-0.01em;
+      box-shadow:0 12px 26px rgba(89,103,255,0.18);
+      cursor:pointer;
+      transition:transform .22s ease, box-shadow .22s ease, filter .22s ease;
+    }
+
+    .ep-info-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:
+        0 16px 32px rgba(89,103,255,0.25),
+        0 0 24px rgba(89,103,255,0.16);
+      filter:saturate(1.06);
+    }
+
+    .ep-info-btn.secondary{
+      background:rgba(255,255,255,0.58);
+      color:var(--text, #17212f);
+      border:1px solid rgba(255,255,255,0.68);
+      box-shadow:0 10px 22px rgba(23,33,47,0.08);
+    }
+
+    body.dark .ep-info-btn{
+      background:linear-gradient(135deg,#6677f8,#8798ff,#9facff);
+    }
+
+    body.dark .ep-info-btn.secondary{
+      background:rgba(255,255,255,0.07);
+      color:var(--text, #eef2ff);
+      border-color:rgba(255,255,255,0.11);
+    }
+
+    /* ================================
+       FULLSCREEN MODAL
+    ================================ */
+
+    .infographic-modal{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      background:rgba(7,11,20,0.72);
+      backdrop-filter:blur(22px);
+      -webkit-backdrop-filter:blur(22px);
+    }
+
+    .infographic-modal.is-open{
+      display:flex;
+    }
+
+    .infographic-modal-panel{
+      position:relative;
+      width:min(1100px, 100%);
+      max-height:92vh;
+      border-radius:28px;
+      overflow:hidden;
+      background:rgba(255,255,255,0.78);
+      border:1px solid rgba(255,255,255,0.42);
+      box-shadow:0 30px 90px rgba(0,0,0,0.34);
+    }
+
+    body.dark .infographic-modal-panel{
+      background:rgba(18,24,38,0.86);
+      border-color:rgba(255,255,255,0.12);
+    }
+
+    .infographic-modal-top{
+      position:absolute;
+      top:14px;
+      left:14px;
+      right:14px;
+      z-index:3;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      pointer-events:none;
+    }
+
+    .infographic-modal-title{
+      pointer-events:auto;
+      max-width:calc(100% - 70px);
+      padding:10px 13px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.86);
+      color:#17212f;
+      border:1px solid rgba(255,255,255,0.70);
+      font-size:13px;
+      font-weight:800;
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .infographic-close{
+      pointer-events:auto;
+      width:42px;
+      height:42px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.68);
+      background:rgba(255,255,255,0.86);
+      color:#17212f;
+      cursor:pointer;
+      font-size:22px;
+      font-weight:700;
+      line-height:1;
+      box-shadow:0 10px 24px rgba(0,0,0,0.14);
+    }
+
+    .infographic-modal-image-wrap{
+      max-height:92vh;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#0b1020;
+    }
+
+    .infographic-modal-image-wrap img{
+      width:100%;
+      height:auto;
       display:block;
-      color:#232a3b;
-      line-height:1.5;
     }
 
-    body.dark .meta-box strong{
-      color:#edf2ff;
+    .infographic-modal-bottom{
+      position:absolute;
+      left:14px;
+      right:14px;
+      bottom:14px;
+      z-index:3;
+      display:flex;
+      justify-content:center;
+      pointer-events:none;
     }
 
-    @media (max-width: 980px){
-      .hero{
-        min-height:590px;
-        background-position:68% center;
-      }
-
-      .hero::before{
-        background:
-          linear-gradient(
-            180deg,
-            rgba(245,247,252,0.90) 0%,
-            rgba(245,247,252,0.86) 35%,
-            rgba(245,247,252,0.76) 54%,
-            rgba(245,247,252,0.46) 72%,
-            rgba(245,247,252,0.18) 100%
-          );
-      }
-
-      body.dark .hero::before{
-        background:
-          linear-gradient(
-            180deg,
-            rgba(12,18,30,0.92) 0%,
-            rgba(12,18,30,0.86) 35%,
-            rgba(12,18,30,0.72) 54%,
-            rgba(12,18,30,0.40) 72%,
-            rgba(12,18,30,0.18) 100%
-          );
-      }
-
-      .hero-content{
-        max-width:100%;
-        padding:34px 24px 28px;
-      }
-
-      .category-grid{
-        grid-template-columns:repeat(2, minmax(0, 1fr));
-      }
-
-      .podcast-card{
-        grid-template-columns:1fr;
-      }
-
-      .podcast-actions{
-        justify-content:flex-start;
-      }
-
-      .player-meta{
-        grid-template-columns:1fr;
-      }
+    .infographic-listen-btn{
+      pointer-events:auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 16px;
+      border-radius:999px;
+      background:linear-gradient(135deg,#5967ff,#7c89ff);
+      color:#fff;
+      text-decoration:none;
+      font-size:13px;
+      font-weight:800;
+      box-shadow:0 16px 32px rgba(89,103,255,0.32);
     }
-.infographic-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 140;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-  background: rgba(10, 14, 24, 0.72);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
 
-.infographic-modal.open {
-  display: flex;
-}
-
-.infographic-card {
-  width: min(1100px, 100%);
-  max-height: 92vh;
-  border-radius: 28px;
-  overflow: hidden;
-  background: rgba(255,255,255,0.96);
-  box-shadow: 0 28px 80px rgba(0,0,0,0.32);
-}
-
-body.dark .infographic-card {
-  background: rgba(18,26,43,0.98);
-}
-
-.infographic-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 14px 16px;
-  border-bottom: 1px solid rgba(120,130,160,0.18);
-}
-
-.infographic-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-.infographic-player {
-  padding: 12px 16px;
-  border-bottom: 1px solid rgba(120,130,160,0.14);
-  background: rgba(255,255,255,0.58);
-}
-
-body.dark .infographic-player {
-  background: rgba(255,255,255,0.04);
-}
-
-.infographic-player audio {
-  width: 100%;
-  display: block;
-}
-
-.infographic-title {
-  margin: 0;
-  font-size: 18px;
-  color: var(--text);
-}
-
-.infographic-close {
-  width: 42px;
-  height: 42px;
-  border: 0;
-  border-radius: 50%;
-  cursor: pointer;
-  background: rgba(120,130,160,0.12);
-  color: var(--text);
-  font-size: 22px;
-}
-
-.infographic-body {
-  max-height: calc(92vh - 72px);
-  overflow: auto;
-  padding: 14px;
-}
-
-.infographic-body img {
-  width: 100%;
-  height: auto;
-  border-radius: 18px;
-}
-    @media (max-width: 640px){
-      .topbar-wrap{
-        padding:12px 0 8px;
-      }
-
-      .topbar,
-      .hero-wrap,
-      .section,
-      .footer{
-        width:min(100% - 20px, var(--max));
+    @media(max-width:760px){
+      body{
+        padding:14px;
       }
 
       .topbar{
-        padding:12px;
-        border-radius:22px;
+        border-radius:24px;
+        align-items:stretch;
+        flex-direction:column;
+      }
+
+      .nav-actions{
+        display:grid;
+        grid-template-columns:1fr 1fr 1fr;
+        gap:8px;
       }
 
       .nav-link,
-      .mode-pill{
-        min-height:42px;
-        padding:0 14px;
-        font-size:14px;
-      }
-
-      .hero{
-        min-height:560px;
-        border-radius:26px;
-        background-position:72% center;
-      }
-
-      .hero-title{
-        font-size:44px;
-      }
-
-      .hero-desc{
-        font-size:16px;
-      }
-
-      .hero-actions{
-        flex-direction:column;
-        align-items:stretch;
-      }
-
-      .btn{
+      .theme-btn{
         width:100%;
       }
 
-      .hero-mini{
-        padding:14px;
-        border-radius:18px;
+      .hero{
+        padding:28px 20px;
+        border-radius:28px;
       }
 
-      .section{
-        padding:20px;
-        border-radius:24px;
-      }
-
-      .section-title{
-        font-size:28px;
-      }
-
-      .category-grid{
+      .hero-grid{
         grid-template-columns:1fr;
       }
 
-      .podcast-card{
+      h1{
+        font-size:40px;
+      }
+
+      .episode-card{
         padding:18px;
+        border-radius:28px;
+      }
+
+      .episode-top{
+        flex-direction:column;
+      }
+
+      .episode-title{
+        font-size:21px;
+      }
+
+      .ep-infographic-block{
+        padding:13px;
         border-radius:22px;
       }
 
-      .podcast-title{
+      .ep-infographic-head{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .ep-infographic-preview{
+        aspect-ratio:4 / 3;
+        border-radius:18px;
+      }
+
+      .ep-infographic-actions{
+        flex-direction:column;
+      }
+
+      .infographic-modal{
+        padding:10px;
+      }
+
+      .infographic-modal-panel{
+        border-radius:22px;
+        max-height:94vh;
+      }
+
+      .infographic-modal-image-wrap{
+        max-height:94vh;
+      }
+
+      .infographic-modal-title{
+        font-size:12px;
+        max-width:calc(100% - 58px);
+      }
+
+      .infographic-close{
+        width:38px;
+        height:38px;
         font-size:20px;
-      }
-
-      .modal{
-        padding:12px;
-      }
-
-      .modal-card{
-        border-radius:22px;
-      }
-
-      .modal-head,
-      .modal-body{
-        padding-left:16px;
-        padding-right:16px;
       }
     }
   </style>
 </head>
+
 <body>
 
-  <div class="topbar-wrap">
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+  <main class="page">
+
     <nav class="topbar">
-      <div class="nav-group">
-        <a class="nav-link" href="./index.html">🏠 Home</a>
-        <a class="nav-link" href="./mini-cupping.html">☕ Cupping</a>
-        <a class="nav-link" href="https://yaitonk.github.io/casa-cupping-data/dashboard.html">📊 Dashboard</a>
-        <a class="nav-link" href="./team.html">👥 R&D Team</a>
+      <a class="brand-mini" href="index.html">
+        <div class="brand-mini-icon">☕</div>
+        <div class="brand-mini-text">
+          <strong>Casa Lab Podcast</strong>
+          <span>Audio learning for barista team</span>
+        </div>
+      </a>
+
+      <div class="nav-actions">
+        <a class="nav-link" href="index.html">⌂ Home</a>
+        <a class="nav-link" href="mini-cupping.html">☕ Cupping</a>
+        <button id="themeToggle" class="theme-btn" type="button">🌙 Dark</button>
       </div>
-      <button class="mode-pill" id="themeToggle" type="button">🌙 Dark</button>
     </nav>
-  </div>
 
-  <section class="hero-wrap">
-    <div class="hero">
-      <div class="hero-content">
-        <div class="hero-badge">✦ Casa Lab · Podcast & Learning</div>
-
-        <h1 class="hero-title">
-          Coffee Talks,<br>
-          Knowledge <span class="tone">Brews.</span>
-        </h1>
-
-        <p class="hero-desc">
-          แหล่งรวมไฟล์เสียงและพอดแคสต์ความรู้สำหรับบาริสต้า
-          และทีมงานในเครือกาแฟของเรา ฟังเพลิน ใช้งานง่าย
-          เพื่ออัปเดตความรู้ แรงบันดาลใจ และ mindset ในเวลาว่าง
-        </p>
-
-        <div class="hero-actions">
-          <a href="#podcast-list-section" class="btn btn-primary">🎧 ฟังตอนล่าสุด</a>
-          <a href="#podcast-categories" class="btn btn-ghost">☕ ดูหมวดเนื้อหา</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="podcast-categories">
-    <div class="section-head">
-      <div>
-        <h2 class="section-title">หมวดเนื้อหา</h2>
-        <p class="section-desc">
-          เลือกฟังตามประเภทของความรู้ที่ต้องการ เพื่อให้ใช้งานง่ายขึ้นทั้งสำหรับหน้าบาร์และทีมงานหลังบ้าน
-        </p>
-      </div>
-    </div>
-
-    <div class="category-grid">
-      <div class="category-card">
-        <div class="category-icon">📘</div>
-        <h3>Coffee Knowledge</h3>
-        <p>ความรู้พื้นฐานและเชิงลึกด้านกาแฟ เช่น origin, process, sensory และแนวคิดที่ใช้จริงในงาน</p>
-      </div>
-
-      <div class="category-card">
-        <div class="category-icon">☕</div>
-        <h3>Brewing Technique</h3>
-        <p>สูตรชง การคุม extraction การปรับ grind size และการแก้ปัญหาหน้างานแบบเข้าใจง่าย</p>
-      </div>
-
-      <div class="category-card">
-        <div class="category-icon">💬</div>
-        <h3>Service & Mindset</h3>
-        <p>การสื่อสารกับลูกค้า ประสบการณ์หน้าร้าน และมุมคิดที่ช่วยให้ทีมทำงานได้ลื่นขึ้น</p>
-      </div>
-
-      <div class="category-card">
-        <div class="category-icon">📈</div>
-        <h3>Growth & Inspiration</h3>
-        <p>แนวคิดเรื่องการพัฒนาตัวเอง การทำงานเป็นทีม และแรงบันดาลใจระยะยาวในสายกาแฟ</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="podcast-list-section">
-    <div class="section-head">
-      <div>
-        <h2 class="section-title">รายการพอดแคสต์</h2>
-        <p class="section-desc">
-          กดปุ่มฟังตอนนี้เพื่อเปิด popup player ได้ทันที หรือค้นหาและกรองตามหมวดด้านล่าง
-        </p>
-      </div>
-
-      <div class="chip-row" id="filterChips">
-        <button class="chip active" data-filter="all" type="button">All</button>
-        <button class="chip" data-filter="knowledge" type="button">Knowledge</button>
-        <button class="chip" data-filter="brewing" type="button">Brewing</button>
-        <button class="chip" data-filter="service" type="button">Service</button>
-        <button class="chip" data-filter="growth" type="button">Growth</button>
-      </div>
-    </div>
-
-    <div class="toolbar">
-      <label class="search-box" aria-label="ค้นหา podcast">
-        <span>🔎</span>
-        <input id="searchInput" type="text" placeholder="ค้นหา episode, keyword, category..." />
-      </label>
-      <div class="filter-text" id="resultCount">แสดง 5 รายการ</div>
-    </div>
-
-    <div class="podcast-list" id="podcastList">
-
-      <article
-        class="podcast-card"
-        data-category="brewing"
-        data-title="EP.01 ล็อกกลิ่นหอมกาแฟด้วย extract chilling"
-        data-keywords="การควบคุมอุณหภูมิหลังการสกัดบางช่วงเพื่อบางสิ่ง"
-        data-audio="./assets/audio/ep01.mp4"
-        data-episode="EP.01"
-        data-duration="5.17 min"
-        data-type="Brewing"
-      >
-        <div class="podcast-main">
-          <div class="podcast-top">
-            <span class="meta-pill">Brewing Technique</span>
-            <span class="meta-pill warm">5.17 min</span>
-            <span class="meta-pill warm">Audio</span>
-          </div>
-          <h3 class="podcast-title">EP.01   ล็อกกลิ่นหอมกาแฟด้วย extract chilling</h3>
-          <p class="podcast-desc">
-            อธิบายเรื่องกลิ่นกับวิทยาศาสตร์เบื้องหลัง กาแฟแก้วนั้นที่หอมกรุ่น
-          </p>
-        </div>
-        <div class="podcast-actions">
-          <button class="btn btn-sm btn-outline open-detail" type="button">รายละเอียด</button>
-          <button class="btn btn-sm btn-play open-player" type="button">▶ ฟังตอนนี้</button>
-        </div>
-      </article>
-
-      <article
-        class="podcast-card"
-        data-category="knowledge"
-        data-title="EP.02 filtered coffee effect"
-        data-keywords="filtered for long life"
-        data-audio="./assets/audio/ep02.mp4"
-        data-episode="EP.02"
-        data-duration="6.55 min"
-        data-type="knowledge"
-      >
-        <div class="podcast-main">
-          <div class="podcast-top">
-            <span class="meta-pill">Knowledge</span>
-            <span class="meta-pill warm">6.55 min</span>
-            <span class="meta-pill warm">Audio</span>
-          </div>
-          <h3 class="podcast-title">EP.02   ชงกาแฟผ่านกระดาษกรองช่วยยืดอายุ</h3>
-          <p class="podcast-desc">
-            บทวิจัยผลกระทบจากการดื่มกาแฟต่อสุขภาพหัวใจเเละอายุขัย
-          </p>
-        </div>
-        <div class="podcast-actions">
-          <button class="btn btn-sm btn-outline open-detail" type="button">รายละเอียด</button>
-          <button class="btn btn-sm btn-play open-player" type="button">▶ ฟังตอนนี้</button>
-        </div>
-      </article>
-
-      <article
-        class="podcast-card"
-        data-category="brewing"
-        data-title="EP.03 เเช่เเข็งเมล็ดกาแฟล็อกรสชาติก่อนบด"
-        data-keywords="The Aroma Paradox"
-        data-audio="./assets/audio/ep03.mp4"
-        data-episode="EP.03"
-        data-duration="6.03 min"
-        data-type="Brewing"
-      >
-        <div class="podcast-main">
-          <div class="podcast-top">
-            <span class="meta-pill">Brewing Technique</span>
-            <span class="meta-pill warm">6.03 nmin</span>
-            <span class="meta-pill warm">Audio</span>
-          </div>
-          <h3 class="podcast-title">EP.03   ทำไมการเเช่เเข็งเมล็ดกาแฟมีผลกับกลิ่นของกาแฟ</h3>
-          <p class="podcast-desc">
-            เทคนิคการเเช่เเข็งเมล็ดกาแฟที่นำไปปรับใช้ได้ทั้งหน้าร้าน หรือชงเองที่บ้านได้เเบบไม่ยาก 
-          </p>
-        </div>
-        <div class="podcast-actions">
-          <button class="btn btn-sm btn-outline open-detail" type="button">รายละเอียด</button>
-          <button class="btn btn-sm btn-play open-player" type="button">▶ ฟังตอนนี้</button>
-        </div>
-      </article>
-
-      <article
-        class="podcast-card"
-        data-category="brewing"
-        data-title="EP.04 Mindset กระดาษกรองเเผ่นเดียวก็เฟี้ยวได้"
-        data-keywords="The Physics of Filtration : Optimizing V60 Paper Selection"
-        data-audio="./assets/audio/ep04.mp4"
-        data-episode="EP.04"
-        data-duration="7.10 min"
-        data-type="Brewing"
-      >
-        <div class="podcast-main">
-          <div class="podcast-top">
-            <span class="meta-pill">Brewing Technique</span>
-            <span class="meta-pill warm">7.10 min</span>
-            <span class="meta-pill warm">Audio</span>
-          </div>
-          <h3 class="podcast-title">EP.04  กระดาษกรองเเผ่นเดียวก็เฟี้ยวได้</h3>
-          <p class="podcast-desc">
-            กระดาษกรองมีหลายเเบบมาก ต่างกันทั้งคุณสมบัติเเละราคา ต้องเลือกใช้ให้เหมาะสม
-          </p>
-        </div>
-        <div class="podcast-actions">
-          <button class="btn btn-sm btn-outline open-detail" type="button">รายละเอียด</button>
-          <button class="btn btn-sm btn-play open-player" type="button">▶ ฟังตอนนี้</button>
-        </div>
-      </article>
-
-      <article
-        class="podcast-card"
-        data-category="knowledge"
-        data-title="EP.05 Optimal Serving Temperature"
-        data-keywords="better when cooldown"
-        data-audio="./assets/audio/ep05.mp4"
-        data-episode="EP.05"
-        data-duration="6.10 min"
-        data-type="knowledge"
-        data-infographic="./assets/infographic/ep05.png"
-      >
-        <div class="podcast-main">
-          <div class="podcast-top">
-            <span class="meta-pill">Knowledge</span>
-            <span class="meta-pill warm">6.10 min</span>
-            <span class="meta-pill warm">Audio</span>
-          </div>
-          <h3 class="podcast-title">EP.05   ทำไมกาแฟร้อนจัดถึงทำลายรสชาติ</h3>
-          <p class="podcast-desc">
-            ช่วงเวลาของกาแฟที่เเสดงรสชาติต่างกัน
-          </p>
-        </div>
-        <div class="podcast-actions">
-          <button class="btn btn-sm btn-outline open-detail" type="button">รายละเอียด</button>
-          <button class="btn btn-sm btn-outline open-infographic" type="button">Infographic</button>
-          <button class="btn btn-sm btn-play open-player" type="button">▶ ฟังตอนนี้</button>
-        </div>
-      </article>
-
-
-    </div>
-
-    <div class="empty-state" id="emptyState">
-      ไม่พบรายการที่ตรงกับคำค้นหรือหมวดที่เลือก
-    </div>
-  </section>
-
-  <footer class="footer">
-    Casa Lab Podcast · GitHub Pages Demo
-  </footer>
-
-  <div class="modal" id="playerModal" aria-hidden="true">
-    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modal-head">
+    <header class="hero">
+      <div class="hero-grid">
         <div>
-          <div class="modal-kicker" id="modalKicker">Podcast Episode</div>
-          <h3 class="modal-title" id="modalTitle">Episode Title</h3>
-          <p class="modal-desc" id="modalDesc">Episode description</p>
-        </div>
-        <button class="modal-close" id="closeModal" type="button" aria-label="Close">×</button>
-      </div>
+          <div class="eyebrow">✦ Casa Lab · Podcast & Learning</div>
 
-      <div class="modal-body">
-        <div class="player-box">
-          <audio id="audioPlayer" controls preload="metadata">
-            <source id="audioSource" src="" type="audio/mp4" />
-            เบราว์เซอร์นี้ไม่รองรับ audio player
+          <h1>Listen.<br>Learn.<br>Brew Better.</h1>
+
+          <p class="hero-subtitle">
+            พื้นที่ฟังความรู้กาแฟสำหรับทีมบาริสต้าและทีม R&amp;D ของ Casa Lab
+            รวมเสียง podcast, ภาพ infographic และสรุปเนื้อหาที่เปิดดูประกอบระหว่างฟังได้
+          </p>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-art"></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="section-label">
+      <h2>Podcast Episodes</h2>
+      <span>EP01–EP05 with infographic</span>
+    </div>
+
+    <section class="episode-list">
+
+      <!-- ================= EP01 ================= -->
+      <article class="episode-card" id="ep01">
+        <div class="episode-top">
+          <div>
+            <div class="episode-kicker">🎧 EP01</div>
+            <h2 class="episode-title">EP01: Coffee Learning Topic</h2>
+            <p class="episode-desc">
+              ใส่คำอธิบายตอนที่ 01 ตรงนี้ เช่น หัวข้อหลัก สิ่งที่ผู้ฟังจะได้เรียนรู้
+              หรือประเด็นสำคัญที่อยากให้ทีมเปิดฟังประกอบการทำงาน
+            </p>
+
+            <div class="episode-tags">
+              <span class="tag">Podcast</span>
+              <span class="tag">Learning</span>
+              <span class="tag">Infographic</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="audio-wrap">
+          <audio controls preload="metadata">
+            <source src="audio/ep01.mp4" type="audio/mp4">
+            Your browser does not support the audio element.
           </audio>
         </div>
 
-        <div class="player-meta">
-          <div class="meta-box">
-            <span>Episode</span>
-            <strong id="metaEpisode">-</strong>
+        <div class="ep-infographic-block">
+          <div class="ep-infographic-head">
+            <div class="ep-infographic-title">
+              <strong>EP01 Infographic</strong>
+              <span>ภาพสรุปสำหรับเปิดดูประกอบระหว่างฟังตอนที่ 01</span>
+            </div>
           </div>
-          <div class="meta-box">
-            <span>Category</span>
-            <strong id="metaType">-</strong>
+
+          <div
+            class="ep-infographic-preview open-infographic"
+            data-title="EP01 Infographic"
+            data-img="asset/infographic/ep01.png"
+            data-episode="#ep01"
+          >
+            <img src="asset/infographic/ep01.png" alt="EP01 Infographic">
+            <div class="ep-infographic-badge">🔍 Tap to enlarge</div>
           </div>
-          <div class="meta-box">
-            <span>Duration</span>
-            <strong id="metaDuration">-</strong>
+
+          <div class="ep-infographic-actions">
+            <button
+              class="ep-info-btn open-infographic"
+              data-title="EP01 Infographic"
+              data-img="asset/infographic/ep01.png"
+              data-episode="#ep01"
+              type="button"
+            >
+              🖼️ View Infographic
+            </button>
+
+            <a class="ep-info-btn secondary" href="#ep01">
+              🎧 Listen EP01
+            </a>
           </div>
         </div>
-      </div>
+      </article>
+
+      <!-- ================= EP02 ================= -->
+      <article class="episode-card" id="ep02">
+        <div class="episode-top">
+          <div>
+            <div class="episode-kicker">🎧 EP02</div>
+            <h2 class="episode-title">EP02: Coffee Learning Topic</h2>
+            <p class="episode-desc">
+              ใส่คำอธิบายตอนที่ 02 ตรงนี้ สามารถเปลี่ยนชื่อหัวข้อและรายละเอียดได้ตามเนื้อหา podcast จริง
+            </p>
+
+            <div class="episode-tags">
+              <span class="tag">Podcast</span>
+              <span class="tag">Training</span>
+              <span class="tag">Infographic</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="audio-wrap">
+          <audio controls preload="metadata">
+            <source src="audio/ep02.mp4" type="audio/mp4">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <div class="ep-infographic-block">
+          <div class="ep-infographic-head">
+            <div class="ep-infographic-title">
+              <strong>EP02 Infographic</strong>
+              <span>ภาพสรุปสำหรับเปิดดูประกอบระหว่างฟังตอนที่ 02</span>
+            </div>
+          </div>
+
+          <div
+            class="ep-infographic-preview open-infographic"
+            data-title="EP02 Infographic"
+            data-img="asset/infographic/ep02.png"
+            data-episode="#ep02"
+          >
+            <img src="asset/infographic/ep02.png" alt="EP02 Infographic">
+            <div class="ep-infographic-badge">🔍 Tap to enlarge</div>
+          </div>
+
+          <div class="ep-infographic-actions">
+            <button
+              class="ep-info-btn open-infographic"
+              data-title="EP02 Infographic"
+              data-img="asset/infographic/ep02.png"
+              data-episode="#ep02"
+              type="button"
+            >
+              🖼️ View Infographic
+            </button>
+
+            <a class="ep-info-btn secondary" href="#ep02">
+              🎧 Listen EP02
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ================= EP03 ================= -->
+      <article class="episode-card" id="ep03">
+        <div class="episode-top">
+          <div>
+            <div class="episode-kicker">🎧 EP03</div>
+            <h2 class="episode-title">EP03: Coffee Learning Topic</h2>
+            <p class="episode-desc">
+              ใส่คำอธิบายตอนที่ 03 ตรงนี้ ใช้เป็นพื้นที่สรุปว่า episode นี้เกี่ยวกับอะไร
+              และทีมควรโฟกัสประเด็นไหนระหว่างฟัง
+            </p>
+
+            <div class="episode-tags">
+              <span class="tag">Podcast</span>
+              <span class="tag">Coffee Science</span>
+              <span class="tag">Infographic</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="audio-wrap">
+          <audio controls preload="metadata">
+            <source src="audio/ep03.mp4" type="audio/mp4">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <div class="ep-infographic-block">
+          <div class="ep-infographic-head">
+            <div class="ep-infographic-title">
+              <strong>EP03 Infographic</strong>
+              <span>ภาพสรุปสำหรับเปิดดูประกอบระหว่างฟังตอนที่ 03</span>
+            </div>
+          </div>
+
+          <div
+            class="ep-infographic-preview open-infographic"
+            data-title="EP03 Infographic"
+            data-img="asset/infographic/ep03.png"
+            data-episode="#ep03"
+          >
+            <img src="asset/infographic/ep03.png" alt="EP03 Infographic">
+            <div class="ep-infographic-badge">🔍 Tap to enlarge</div>
+          </div>
+
+          <div class="ep-infographic-actions">
+            <button
+              class="ep-info-btn open-infographic"
+              data-title="EP03 Infographic"
+              data-img="asset/infographic/ep03.png"
+              data-episode="#ep03"
+              type="button"
+            >
+              🖼️ View Infographic
+            </button>
+
+            <a class="ep-info-btn secondary" href="#ep03">
+              🎧 Listen EP03
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ================= EP04 ================= -->
+      <article class="episode-card" id="ep04">
+        <div class="episode-top">
+          <div>
+            <div class="episode-kicker">🎧 EP04</div>
+            <h2 class="episode-title">EP04: Coffee Learning Topic</h2>
+            <p class="episode-desc">
+              ใส่คำอธิบายตอนที่ 04 ตรงนี้ เหมาะสำหรับสรุป keyword หลัก
+              หรือสิ่งที่อยากให้บาริสต้าจำหลังฟังจบ
+            </p>
+
+            <div class="episode-tags">
+              <span class="tag">Podcast</span>
+              <span class="tag">Barista</span>
+              <span class="tag">Infographic</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="audio-wrap">
+          <audio controls preload="metadata">
+            <source src="audio/ep04.mp4" type="audio/mp4">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <div class="ep-infographic-block">
+          <div class="ep-infographic-head">
+            <div class="ep-infographic-title">
+              <strong>EP04 Infographic</strong>
+              <span>ภาพสรุปสำหรับเปิดดูประกอบระหว่างฟังตอนที่ 04</span>
+            </div>
+          </div>
+
+          <div
+            class="ep-infographic-preview open-infographic"
+            data-title="EP04 Infographic"
+            data-img="asset/infographic/ep04.png"
+            data-episode="#ep04"
+          >
+            <img src="asset/infographic/ep04.png" alt="EP04 Infographic">
+            <div class="ep-infographic-badge">🔍 Tap to enlarge</div>
+          </div>
+
+          <div class="ep-infographic-actions">
+            <button
+              class="ep-info-btn open-infographic"
+              data-title="EP04 Infographic"
+              data-img="asset/infographic/ep04.png"
+              data-episode="#ep04"
+              type="button"
+            >
+              🖼️ View Infographic
+            </button>
+
+            <a class="ep-info-btn secondary" href="#ep04">
+              🎧 Listen EP04
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ================= EP05 ================= -->
+      <article class="episode-card" id="ep05">
+        <div class="episode-top">
+          <div>
+            <div class="episode-kicker">🎧 EP05</div>
+            <h2 class="episode-title">EP05: Extract Chilling & Aroma Lock</h2>
+            <p class="episode-desc">
+              ตอนนี้ใช้ฟังประกอบ infographic เรื่องการล็อกกลิ่นหอมกาแฟด้วย extract chilling
+              เหมาะสำหรับเปิดดูภาพไปพร้อมกับฟังเสียง
+            </p>
+
+            <div class="episode-tags">
+              <span class="tag">Extract Chilling</span>
+              <span class="tag">Aroma Lock</span>
+              <span class="tag">Infographic</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="audio-wrap">
+          <audio controls preload="metadata">
+            <source src="audio/ep05.mp4" type="audio/mp4">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <div class="ep-infographic-block">
+          <div class="ep-infographic-head">
+            <div class="ep-infographic-title">
+              <strong>EP05 Infographic</strong>
+              <span>ภาพสรุปสำหรับเปิดดูประกอบระหว่างฟังตอนที่ 05</span>
+            </div>
+          </div>
+
+          <div
+            class="ep-infographic-preview open-infographic"
+            data-title="EP05 Infographic"
+            data-img="asset/infographic/ep05.png"
+            data-episode="#ep05"
+          >
+            <img src="asset/infographic/ep05.png" alt="EP05 Infographic">
+            <div class="ep-infographic-badge">🔍 Tap to enlarge</div>
+          </div>
+
+          <div class="ep-infographic-actions">
+            <button
+              class="ep-info-btn open-infographic"
+              data-title="EP05 Infographic"
+              data-img="asset/infographic/ep05.png"
+              data-episode="#ep05"
+              type="button"
+            >
+              🖼️ View Infographic
+            </button>
+
+            <a class="ep-info-btn secondary" href="#ep05">
+              🎧 Listen EP05
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <div class="footer">
+      <span>powered by GitHub Pages · Casa Lab</span>
     </div>
-  </div>
 
+  </main>
 
+  <!-- ================================
+       INFOGRAPHIC FULLSCREEN MODAL
+  ================================ -->
   <div class="infographic-modal" id="infographicModal" aria-hidden="true">
-    <div class="infographic-card">
-      <div class="infographic-head">
-        <h3 class="infographic-title" id="infographicTitle">EP.05 Infographic</h3>
-        <div class="infographic-actions">
-          <button class="btn btn-sm btn-play" id="playFromInfographic" type="button">▶ ฟัง EP นี้</button>
-          <button class="infographic-close" id="closeInfographic" type="button" aria-label="Close infographic">×</button>
+    <div class="infographic-modal-panel">
+      <div class="infographic-modal-top">
+        <div class="infographic-modal-title" id="infographicModalTitle">
+          Infographic
         </div>
+
+        <button class="infographic-close" id="infographicClose" type="button" aria-label="Close">
+          ×
+        </button>
       </div>
-      <div class="infographic-player">
-        <audio id="infographicAudio" controls preload="metadata">
-          <source id="infographicAudioSource" src="" type="audio/mp4" />
-          เบราว์เซอร์นี้ไม่รองรับ audio player
-        </audio>
+
+      <div class="infographic-modal-image-wrap">
+        <img id="infographicModalImage" src="" alt="Podcast Infographic">
       </div>
-      <div class="infographic-body">
-        <img id="infographicImage" src="" alt="Podcast infographic">
+
+      <div class="infographic-modal-bottom">
+        <a href="#" class="infographic-listen-btn" id="infographicListenBtn">
+          🎧 Back to episode
+        </a>
       </div>
     </div>
   </div>
 
   <script>
-    (function () {
-      const themeToggle = document.getElementById('themeToggle');
-      const savedTheme = localStorage.getItem('podcastTheme');
+    /* ================================
+       DARK / LIGHT THEME
+    ================================ */
 
-      if (savedTheme === 'dark') {
+    const themeToggle = document.getElementById('themeToggle');
+    const THEME_KEY = 'casa-podcast-theme';
+
+    function applySavedTheme() {
+      const saved = localStorage.getItem(THEME_KEY);
+
+      if (saved === 'dark') {
         document.body.classList.add('dark');
       }
 
-      function updateThemeButton() {
-        themeToggle.textContent = document.body.classList.contains('dark') ? '☀️ Light' : '🌙 Dark';
-      }
+      updateThemeButton();
+    }
+
+    function updateThemeButton() {
+      const isDark = document.body.classList.contains('dark');
+      themeToggle.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+
+      const isDark = document.body.classList.contains('dark');
+      localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
 
       updateThemeButton();
+    });
 
-      themeToggle.addEventListener('click', function () {
-        document.body.classList.toggle('dark');
-        localStorage.setItem(
-          'podcastTheme',
-          document.body.classList.contains('dark') ? 'dark' : 'light'
-        );
-        updateThemeButton();
+    applySavedTheme();
+
+    /* ================================
+       INFOGRAPHIC MODAL SCRIPT
+    ================================ */
+
+    const infographicModal = document.getElementById('infographicModal');
+    const infographicModalImage = document.getElementById('infographicModalImage');
+    const infographicModalTitle = document.getElementById('infographicModalTitle');
+    const infographicClose = document.getElementById('infographicClose');
+    const infographicListenBtn = document.getElementById('infographicListenBtn');
+
+    function openInfographicModal(title, imgSrc, episodeAnchor) {
+      infographicModalTitle.textContent = title || 'Infographic';
+      infographicModalImage.src = imgSrc || '';
+      infographicModalImage.alt = title || 'Podcast Infographic';
+      infographicListenBtn.href = episodeAnchor || '#';
+
+      infographicModal.classList.add('is-open');
+      infographicModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeInfographicModal() {
+      infographicModal.classList.remove('is-open');
+      infographicModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+
+      setTimeout(() => {
+        infographicModalImage.src = '';
+      }, 180);
+    }
+
+    document.querySelectorAll('.open-infographic').forEach((item) => {
+      item.addEventListener('click', () => {
+        const title = item.getAttribute('data-title');
+        const imgSrc = item.getAttribute('data-img');
+        const episodeAnchor = item.getAttribute('data-episode');
+
+        openInfographicModal(title, imgSrc, episodeAnchor);
       });
+    });
 
-      const chips = Array.from(document.querySelectorAll('#filterChips .chip'));
-      const searchInput = document.getElementById('searchInput');
-      const cards = Array.from(document.querySelectorAll('.podcast-card'));
-      const resultCount = document.getElementById('resultCount');
-      const emptyState = document.getElementById('emptyState');
+    infographicClose.addEventListener('click', closeInfographicModal);
 
-      let currentFilter = 'all';
-
-      function applyFilters() {
-        const q = (searchInput.value || '').trim().toLowerCase();
-        let visible = 0;
-
-        cards.forEach(card => {
-          const category = (card.dataset.category || '').toLowerCase();
-          const title = (card.dataset.title || '').toLowerCase();
-          const keywords = (card.dataset.keywords || '').toLowerCase();
-          const text = `${title} ${keywords}`;
-
-          const matchCategory = currentFilter === 'all' || category === currentFilter;
-          const matchSearch = !q || text.includes(q);
-
-          const show = matchCategory && matchSearch;
-          card.style.display = show ? 'grid' : 'none';
-
-          if (show) visible += 1;
-        });
-
-        resultCount.textContent = `แสดง ${visible} รายการ`;
-        emptyState.style.display = visible === 0 ? 'block' : 'none';
+    infographicModal.addEventListener('click', (event) => {
+      if (event.target === infographicModal) {
+        closeInfographicModal();
       }
+    });
 
-      chips.forEach(chip => {
-        chip.addEventListener('click', function () {
-          chips.forEach(c => c.classList.remove('active'));
-          this.classList.add('active');
-          currentFilter = this.dataset.filter || 'all';
-          applyFilters();
-        });
-      });
-
-      searchInput.addEventListener('input', applyFilters);
-      applyFilters();
-
-      const modal = document.getElementById('playerModal');
-      const closeModal = document.getElementById('closeModal');
-      const audioPlayer = document.getElementById('audioPlayer');
-      const audioSource = document.getElementById('audioSource');
-      const modalTitle = document.getElementById('modalTitle');
-      const modalDesc = document.getElementById('modalDesc');
-      const modalKicker = document.getElementById('modalKicker');
-      const metaEpisode = document.getElementById('metaEpisode');
-      const metaType = document.getElementById('metaType');
-      const metaDuration = document.getElementById('metaDuration');
-
-      function openModalFromCard(card, detailOnly = false) {
-        const title = card.querySelector('.podcast-title')?.textContent?.trim() || 'Untitled Episode';
-        const desc = card.querySelector('.podcast-desc')?.textContent?.trim() || '';
-        const audio = card.dataset.audio || '';
-        const episode = card.dataset.episode || '-';
-        const type = card.dataset.type || '-';
-        const duration = card.dataset.duration || '-';
-
-        modalTitle.textContent = title;
-        modalDesc.textContent = desc;
-        modalKicker.textContent = detailOnly ? 'Episode Detail' : 'Now Playing';
-        metaEpisode.textContent = episode;
-        metaType.textContent = type;
-        metaDuration.textContent = duration;
-
-        if (audio) {
-          audioSource.src = audio;
-          audioPlayer.load();
-        } else {
-          audioSource.src = '';
-          audioPlayer.load();
-        }
-
-        modal.classList.add('open');
-        modal.setAttribute('aria-hidden', 'false');
-
-        if (!detailOnly && audio) {
-          const playPromise = audioPlayer.play();
-          if (playPromise && typeof playPromise.catch === 'function') {
-            playPromise.catch(() => {});
-          }
-        }
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && infographicModal.classList.contains('is-open')) {
+        closeInfographicModal();
       }
+    });
 
-      function closePlayerModal() {
-        modal.classList.remove('open');
-        modal.setAttribute('aria-hidden', 'true');
-        audioPlayer.pause();
-      }
-
-      document.querySelectorAll('.open-player').forEach(btn => {
-        btn.addEventListener('click', function () {
-          const card = this.closest('.podcast-card');
-          if (card) openModalFromCard(card, false);
-        });
-      });
-
-      document.querySelectorAll('.open-detail').forEach(btn => {
-        btn.addEventListener('click', function () {
-          const card = this.closest('.podcast-card');
-          if (card) openModalFromCard(card, true);
-        });
-      });
-
-      closeModal.addEventListener('click', closePlayerModal);
-
-      modal.addEventListener('click', function (e) {
-        if (e.target === modal) closePlayerModal();
-      });
-
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && modal.classList.contains('open')) {
-          closePlayerModal();
-        }
-      });
-      const infographicModal = document.getElementById('infographicModal');
-      const infographicImage = document.getElementById('infographicImage');
-      const infographicTitle = document.getElementById('infographicTitle');
-      const closeInfographic = document.getElementById('closeInfographic');
-      const playFromInfographic = document.getElementById('playFromInfographic');
-      const infographicAudio = document.getElementById('infographicAudio');
-      const infographicAudioSource = document.getElementById('infographicAudioSource');
-      let currentInfographicCard = null;
-
-      function updateInfographicPlayButton() {
-        if (!infographicAudioSource.src) {
-          playFromInfographic.textContent = 'ไม่มีไฟล์เสียง';
-          playFromInfographic.disabled = true;
-          return;
-        }
-        playFromInfographic.disabled = false;
-        playFromInfographic.textContent = infographicAudio.paused ? '▶ ฟัง EP นี้' : '⏸ หยุดชั่วคราว';
-      }
-
-      document.querySelectorAll('.open-infographic').forEach(btn => {
-        btn.addEventListener('click', function () {
-          const card = this.closest('.podcast-card');
-          if (!card) return;
-
-          currentInfographicCard = card;
-
-          const img = card.dataset.infographic || '';
-          const title = card.dataset.episode || 'Infographic';
-          const audio = card.dataset.audio || '';
-
-          infographicTitle.textContent = title + ' Infographic';
-          infographicImage.src = img;
-
-          if (audio) {
-            infographicAudioSource.src = audio;
-            infographicAudio.load();
-          } else {
-            infographicAudioSource.src = '';
-            infographicAudio.load();
-          }
-
-          updateInfographicPlayButton();
-          infographicModal.classList.add('open');
-          infographicModal.setAttribute('aria-hidden', 'false');
-        });
-      });
-
-      playFromInfographic.addEventListener('click', function () {
-        if (!currentInfographicCard || !infographicAudioSource.src) return;
-
-        audioPlayer.pause();
-
-        if (infographicAudio.paused) {
-          const playPromise = infographicAudio.play();
-          if (playPromise && typeof playPromise.catch === 'function') {
-            playPromise.catch(() => {});
-          }
-        } else {
-          infographicAudio.pause();
-        }
-      });
-
-      infographicAudio.addEventListener('play', updateInfographicPlayButton);
-      infographicAudio.addEventListener('pause', updateInfographicPlayButton);
-      infographicAudio.addEventListener('ended', updateInfographicPlayButton);
-
-      function closeInfographicModal() {
-        infographicModal.classList.remove('open');
-        infographicModal.setAttribute('aria-hidden', 'true');
-        infographicImage.src = '';
-        infographicAudio.pause();
-        currentInfographicCard = null;
-        updateInfographicPlayButton();
-      }
-
-      closeInfographic.addEventListener('click', closeInfographicModal);
-
-      infographicModal.addEventListener('click', function (e) {
-        if (e.target === infographicModal) closeInfographicModal();
-      });
-
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && infographicModal.classList.contains('open')) {
-          closeInfographicModal();
-        }
-      });
-    })();
+    infographicListenBtn.addEventListener('click', () => {
+      closeInfographicModal();
+    });
   </script>
+
 </body>
 </html>
