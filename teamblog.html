@@ -699,20 +699,86 @@
       pointer-events:none;
     }
 
-    .infographic-listen-btn{
+    .infographic-audio-controls{
       pointer-events:auto;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      max-width:96%;
+      padding:10px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.78);
+      border:1px solid rgba(255,255,255,0.68);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      box-shadow:0 16px 34px rgba(0,0,0,0.18);
+    }
+
+    body.dark .infographic-audio-controls{
+      background:rgba(18,24,38,0.78);
+      border-color:rgba(255,255,255,0.12);
+    }
+
+    .infographic-audio-btn{
+      min-width:132px;
+      min-height:42px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:8px;
-      padding:12px 16px;
+      padding:10px 15px;
       border-radius:999px;
+      border:1px solid rgba(255,255,255,0.42);
       background:linear-gradient(135deg,#5967ff,#7c89ff);
       color:#fff;
+      font-size:13px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 12px 26px rgba(89,103,255,0.26);
+      transition:transform .22s ease, box-shadow .22s ease, filter .22s ease;
+    }
+
+    .infographic-audio-btn:hover{
+      transform:translateY(-1px);
+      box-shadow:
+        0 16px 32px rgba(89,103,255,0.32),
+        0 0 24px rgba(89,103,255,0.18);
+      filter:saturate(1.06);
+    }
+
+    .infographic-audio-note{
+      font-size:12px;
+      font-weight:700;
+      color:#17212f;
+      white-space:nowrap;
+    }
+
+    body.dark .infographic-audio-note{
+      color:#eef2ff;
+    }
+
+    .infographic-listen-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:42px;
+      padding:10px 15px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.62);
+      border:1px solid rgba(255,255,255,0.68);
+      color:#17212f;
       text-decoration:none;
       font-size:13px;
       font-weight:800;
-      box-shadow:0 16px 32px rgba(89,103,255,0.32);
+      white-space:nowrap;
+    }
+
+    body.dark .infographic-listen-btn{
+      background:rgba(255,255,255,0.08);
+      border-color:rgba(255,255,255,0.12);
+      color:#eef2ff;
     }
 
     @media(max-width:760px){
@@ -800,6 +866,22 @@
         height:38px;
         font-size:20px;
       }
+
+      .infographic-audio-controls{
+        width:100%;
+        border-radius:22px;
+        flex-direction:column;
+        gap:8px;
+      }
+
+      .infographic-audio-btn,
+      .infographic-listen-btn{
+        width:100%;
+      }
+
+      .infographic-audio-note{
+        font-size:11px;
+      }
     }
   </style>
 </head>
@@ -884,7 +966,7 @@
           <div class="ep-infographic-head">
             <div class="ep-infographic-title">
               <strong>EP01 Infographic</strong>
-              <span>กดปุ่มเพื่อเปิดภาพประกอบแบบเต็มจอ</span>
+              <span>กดปุ่มเพื่อเปิดภาพประกอบแบบเต็มจอ และฟังเสียงไปพร้อมกัน</span>
             </div>
           </div>
 
@@ -893,6 +975,7 @@
               class="ep-info-btn open-infographic"
               data-title="EP01 Infographic"
               data-img="assets/infographic/ep01.png"
+              data-audio="assets/ep01.mp4"
               data-episode="#ep01"
               type="button"
             >
@@ -935,7 +1018,7 @@
           <div class="ep-infographic-head">
             <div class="ep-infographic-title">
               <strong>EP02 Infographic</strong>
-              <span>กดปุ่มเพื่อเปิดภาพประกอบแบบเต็มจอ</span>
+              <span>กดปุ่มเพื่อเปิดภาพประกอบแบบเต็มจอ และฟังเสียงไปพร้อมกัน</span>
             </div>
           </div>
 
@@ -944,6 +1027,7 @@
               class="ep-info-btn open-infographic"
               data-title="EP02 Infographic"
               data-img="assets/infographic/ep02.png"
+              data-audio="assets/ep02.mp4"
               data-episode="#ep02"
               type="button"
             >
@@ -987,7 +1071,7 @@
           <div class="ep-infographic-head">
             <div class="ep-infographic-title">
               <strong>EP03 Infographic</strong>
-              <span>กดปุ่มเพื่อเปิดภาพประกอบแบบเต็มจอ</span>
+              <span>กดปุ่มเพื่อเปิดภาพประกอบแบบเต็มจอ และฟังเสียงไปพร้อมกัน</span>
             </div>
           </div>
 
@@ -996,6 +1080,7 @@
               class="ep-info-btn open-infographic"
               data-title="EP03 Infographic"
               data-img="assets/infographic/ep03.png"
+              data-audio="assets/ep03.mp4"
               data-episode="#ep03"
               type="button"
             >
@@ -1039,7 +1124,7 @@
           <div class="ep-infographic-head">
             <div class="ep-infographic-title">
               <strong>EP04 Infographic</strong>
-              <span>กดปุ่มเพื่อเปิดภาพประกอบแบบเต็มจอ</span>
+              <span>กดปุ่มเพื่อเปิดภาพประกอบแบบเต็มจอ และฟังเสียงไปพร้อมกัน</span>
             </div>
           </div>
 
@@ -1048,6 +1133,7 @@
               class="ep-info-btn open-infographic"
               data-title="EP04 Infographic"
               data-img="assets/infographic/ep04.png"
+              data-audio="assets/ep04.mp4"
               data-episode="#ep04"
               type="button"
             >
@@ -1091,7 +1177,7 @@
           <div class="ep-infographic-head">
             <div class="ep-infographic-title">
               <strong>EP05 Infographic</strong>
-              <span>กดปุ่มเพื่อเปิดภาพประกอบแบบเต็มจอ</span>
+              <span>กดปุ่มเพื่อเปิดภาพประกอบแบบเต็มจอ และฟังเสียงไปพร้อมกัน</span>
             </div>
           </div>
 
@@ -1100,6 +1186,7 @@
               class="ep-info-btn open-infographic"
               data-title="EP05 Infographic"
               data-img="assets/infographic/ep05.png"
+              data-audio="assets/ep05.mp4"
               data-episode="#ep05"
               type="button"
             >
@@ -1141,12 +1228,24 @@
       </div>
 
       <div class="infographic-modal-bottom">
-        <a href="#" class="infographic-listen-btn" id="infographicListenBtn">
-          🎧 Back to episode
-        </a>
+        <div class="infographic-audio-controls">
+          <button class="infographic-audio-btn" id="infographicPlayBtn" type="button">
+            ▶ Play EP
+          </button>
+
+          <span class="infographic-audio-note" id="infographicAudioNote">
+            Listen while viewing
+          </span>
+
+          <a href="#" class="infographic-listen-btn" id="infographicListenBtn">
+            Back to episode
+          </a>
+        </div>
       </div>
     </div>
   </div>
+
+  <audio id="infographicAudio" preload="metadata"></audio>
 
   <script>
     /* ================================
@@ -1183,7 +1282,7 @@
     applySavedTheme();
 
     /* ================================
-       INFOGRAPHIC MODAL SCRIPT
+       INFOGRAPHIC MODAL + AUDIO SCRIPT
     ================================ */
 
     const infographicModal = document.getElementById('infographicModal');
@@ -1192,11 +1291,44 @@
     const infographicClose = document.getElementById('infographicClose');
     const infographicListenBtn = document.getElementById('infographicListenBtn');
 
-    function openInfographicModal(title, imgSrc, episodeAnchor) {
+    const infographicAudio = document.getElementById('infographicAudio');
+    const infographicPlayBtn = document.getElementById('infographicPlayBtn');
+    const infographicAudioNote = document.getElementById('infographicAudioNote');
+
+    function pauseAllPageAudio() {
+      document.querySelectorAll('audio').forEach((audio) => {
+        if (audio !== infographicAudio) {
+          audio.pause();
+        }
+      });
+    }
+
+    function resetModalAudio() {
+      infographicAudio.pause();
+      infographicAudio.currentTime = 0;
+      infographicPlayBtn.textContent = '▶ Play EP';
+      infographicAudioNote.textContent = 'Listen while viewing';
+    }
+
+    function openInfographicModal(title, imgSrc, audioSrc, episodeAnchor) {
       infographicModalTitle.textContent = title || 'Infographic';
       infographicModalImage.src = imgSrc || '';
       infographicModalImage.alt = title || 'Podcast Infographic';
       infographicListenBtn.href = episodeAnchor || '#';
+
+      resetModalAudio();
+
+      if (audioSrc) {
+        infographicAudio.src = audioSrc;
+        infographicPlayBtn.disabled = false;
+        infographicPlayBtn.textContent = '▶ Play EP';
+        infographicAudioNote.textContent = 'Ready to listen';
+      } else {
+        infographicAudio.removeAttribute('src');
+        infographicPlayBtn.disabled = true;
+        infographicPlayBtn.textContent = 'No audio';
+        infographicAudioNote.textContent = 'Audio file not found';
+      }
 
       infographicModal.classList.add('is-open');
       infographicModal.setAttribute('aria-hidden', 'false');
@@ -1204,12 +1336,15 @@
     }
 
     function closeInfographicModal() {
+      resetModalAudio();
+
       infographicModal.classList.remove('is-open');
       infographicModal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
 
       setTimeout(() => {
         infographicModalImage.src = '';
+        infographicAudio.removeAttribute('src');
       }, 180);
     }
 
@@ -1217,10 +1352,46 @@
       item.addEventListener('click', () => {
         const title = item.getAttribute('data-title');
         const imgSrc = item.getAttribute('data-img');
+        const audioSrc = item.getAttribute('data-audio');
         const episodeAnchor = item.getAttribute('data-episode');
 
-        openInfographicModal(title, imgSrc, episodeAnchor);
+        openInfographicModal(title, imgSrc, audioSrc, episodeAnchor);
       });
+    });
+
+    infographicPlayBtn.addEventListener('click', async () => {
+      if (!infographicAudio.src) return;
+
+      try {
+        if (infographicAudio.paused) {
+          pauseAllPageAudio();
+          await infographicAudio.play();
+          infographicPlayBtn.textContent = '⏸ Pause EP';
+          infographicAudioNote.textContent = 'Now playing';
+        } else {
+          infographicAudio.pause();
+          infographicPlayBtn.textContent = '▶ Play EP';
+          infographicAudioNote.textContent = 'Paused';
+        }
+      } catch (error) {
+        infographicAudioNote.textContent = 'Tap again to play';
+      }
+    });
+
+    infographicAudio.addEventListener('ended', () => {
+      infographicPlayBtn.textContent = '▶ Play EP';
+      infographicAudioNote.textContent = 'Finished';
+    });
+
+    infographicAudio.addEventListener('pause', () => {
+      if (!infographicAudio.ended) {
+        infographicPlayBtn.textContent = '▶ Play EP';
+      }
+    });
+
+    infographicAudio.addEventListener('play', () => {
+      infographicPlayBtn.textContent = '⏸ Pause EP';
+      infographicAudioNote.textContent = 'Now playing';
     });
 
     infographicClose.addEventListener('click', closeInfographicModal);
