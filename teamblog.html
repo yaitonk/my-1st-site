@@ -1166,7 +1166,8 @@ body.dark .infographic-card {
           <a href="#podcast-list-section" class="btn btn-primary">🎧 ฟังตอนล่าสุด</a>
           <a href="#podcast-categories" class="btn btn-ghost">☕ ดูหมวดเนื้อหา</a>
         </div>
-
+      </div>
+    </div>
   </section>
 
   <section class="section" id="podcast-categories">
@@ -1229,7 +1230,7 @@ body.dark .infographic-card {
         <span>🔎</span>
         <input id="searchInput" type="text" placeholder="ค้นหา episode, keyword, category..." />
       </label>
-      <div class="filter-text" id="resultCount">แสดง 4 รายการ</div>
+      <div class="filter-text" id="resultCount">แสดง 5 รายการ</div>
     </div>
 
     <div class="podcast-list" id="podcastList">
@@ -1317,7 +1318,7 @@ body.dark .infographic-card {
 
       <article
         class="podcast-card"
-        data-category="ิิbrewing"
+        data-category="brewing"
         data-title="EP.04 Mindset กระดาษกรองเเผ่นเดียวก็เฟี้ยวได้"
         data-keywords="The Physics of Filtration : Optimizing V60 Paper Selection"
         data-audio="./assets/audio/ep04.mp4"
@@ -1397,7 +1398,7 @@ body.dark .infographic-card {
       <div class="modal-body">
         <div class="player-box">
           <audio id="audioPlayer" controls preload="metadata">
-            <source id="audioSource" src="" type="audio/mpeg" />
+            <source id="audioSource" src="" type="audio/mp4" />
             เบราว์เซอร์นี้ไม่รองรับ audio player
           </audio>
         </div>
@@ -1416,6 +1417,19 @@ body.dark .infographic-card {
             <strong id="metaDuration">-</strong>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="infographic-modal" id="infographicModal" aria-hidden="true">
+    <div class="infographic-card">
+      <div class="infographic-head">
+        <h3 class="infographic-title" id="infographicTitle">EP.05 Infographic</h3>
+        <button class="infographic-close" id="closeInfographic" type="button" aria-label="Close infographic">×</button>
+      </div>
+      <div class="infographic-body">
+        <img id="infographicImage" src="" alt="Podcast infographic">
       </div>
     </div>
   </div>
@@ -1536,18 +1550,6 @@ body.dark .infographic-card {
         modal.classList.remove('open');
         modal.setAttribute('aria-hidden', 'true');
         audioPlayer.pause();
-
-      <div class="infographic-modal" id="infographicModal" aria-hidden="true">
-  <div class="infographic-card">
-    <div class="infographic-head">
-      <h3 class="infographic-title" id="infographicTitle">EP.05 Infographic</h3>
-      <button class="infographic-close" id="closeInfographic" type="button">×</button>
-    </div>
-    <div class="infographic-body">
-      <img id="infographicImage" src="" alt="Podcast infographic">
-    </div>
-  </div>
-</div>
       }
 
       document.querySelectorAll('.open-player').forEach(btn => {
