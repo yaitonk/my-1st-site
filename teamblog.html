@@ -497,15 +497,16 @@
 
     /* ================================
        PODCAST INFOGRAPHIC MODULE
+       Button-only version
     ================================ */
 
     .ep-infographic-block{
       margin-top:18px;
-      padding:16px;
+      padding:14px;
       border-radius:24px;
-      background:rgba(255,255,255,0.46);
+      background:rgba(255,255,255,0.42);
       border:1px solid rgba(255,255,255,0.62);
-      box-shadow:0 14px 34px rgba(23,33,47,0.08);
+      box-shadow:0 12px 30px rgba(23,33,47,0.07);
       backdrop-filter:blur(18px);
       -webkit-backdrop-filter:blur(18px);
     }
@@ -541,79 +542,14 @@
       line-height:1.35;
     }
 
-    .ep-infographic-preview{
-      position:relative;
-      width:100%;
-      aspect-ratio:16 / 10;
-      border-radius:20px;
-      overflow:hidden;
-      background:
-        linear-gradient(135deg, rgba(89,103,255,0.16), rgba(255,255,255,0.55)),
-        radial-gradient(circle at 25% 20%, rgba(255,255,255,0.95), transparent 34%);
-      border:1px solid rgba(255,255,255,0.58);
-      cursor:pointer;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,0.65);
-    }
-
-    body.dark .ep-infographic-preview{
-      background:
-        linear-gradient(135deg, rgba(142,162,255,0.20), rgba(255,255,255,0.06)),
-        radial-gradient(circle at 25% 20%, rgba(255,255,255,0.13), transparent 34%);
-      border-color:rgba(255,255,255,0.10);
-    }
-
-    .ep-infographic-preview img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      transform:scale(1.01);
-      transition:transform .35s ease, filter .35s ease;
-    }
-
-    .ep-infographic-preview:hover img{
-      transform:scale(1.04);
-      filter:saturate(1.06) contrast(1.02);
-    }
-
-    .ep-infographic-preview::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(to top, rgba(0,0,0,0.46), transparent 55%),
-        radial-gradient(circle at 50% 45%, transparent 0%, rgba(0,0,0,0.08) 100%);
-      pointer-events:none;
-    }
-
-    .ep-infographic-badge{
-      position:absolute;
-      left:14px;
-      bottom:14px;
-      z-index:2;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:9px 12px;
-      border-radius:999px;
-      background:rgba(255,255,255,0.84);
-      color:#17212f;
-      border:1px solid rgba(255,255,255,0.70);
-      font-size:12px;
-      font-weight:800;
-      backdrop-filter:blur(14px);
-      -webkit-backdrop-filter:blur(14px);
-    }
-
     .ep-infographic-actions{
       display:flex;
       gap:10px;
-      margin-top:12px;
     }
 
     .ep-info-btn{
       flex:1;
-      min-height:46px;
+      min-height:48px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
@@ -837,11 +773,6 @@
         align-items:flex-start;
       }
 
-      .ep-infographic-preview{
-        aspect-ratio:4 / 3;
-        border-radius:18px;
-      }
-
       .ep-infographic-actions{
         flex-direction:column;
       }
@@ -944,7 +875,7 @@
 
         <div class="audio-wrap">
           <audio controls preload="metadata">
-            <source src="audio/ep01.mp4" type="audio/mp4">
+            <source src="assets/ep01.mp4" type="audio/mp4">
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -953,25 +884,15 @@
           <div class="ep-infographic-head">
             <div class="ep-infographic-title">
               <strong>EP01 Infographic</strong>
-              <span>ภาพสรุปสำหรับเปิดดูประกอบระหว่างฟังตอนที่ 01</span>
+              <span>กดปุ่มเพื่อเปิดภาพประกอบแบบเต็มจอ</span>
             </div>
-          </div>
-
-          <div
-            class="ep-infographic-preview open-infographic"
-            data-title="EP01 Infographic"
-            data-img="asset/infographic/ep01.png"
-            data-episode="#ep01"
-          >
-            <img src="asset/infographic/ep01.png" alt="EP01 Infographic">
-            <div class="ep-infographic-badge">🔍 Tap to enlarge</div>
           </div>
 
           <div class="ep-infographic-actions">
             <button
               class="ep-info-btn open-infographic"
               data-title="EP01 Infographic"
-              data-img="asset/infographic/ep01.png"
+              data-img="assets/infographic/ep01.png"
               data-episode="#ep01"
               type="button"
             >
@@ -1005,7 +926,7 @@
 
         <div class="audio-wrap">
           <audio controls preload="metadata">
-            <source src="audio/ep02.mp4" type="audio/mp4">
+            <source src="assets/ep02.mp4" type="audio/mp4">
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -1014,25 +935,15 @@
           <div class="ep-infographic-head">
             <div class="ep-infographic-title">
               <strong>EP02 Infographic</strong>
-              <span>ภาพสรุปสำหรับเปิดดูประกอบระหว่างฟังตอนที่ 02</span>
+              <span>กดปุ่มเพื่อเปิดภาพประกอบแบบเต็มจอ</span>
             </div>
-          </div>
-
-          <div
-            class="ep-infographic-preview open-infographic"
-            data-title="EP02 Infographic"
-            data-img="asset/infographic/ep02.png"
-            data-episode="#ep02"
-          >
-            <img src="asset/infographic/ep02.png" alt="EP02 Infographic">
-            <div class="ep-infographic-badge">🔍 Tap to enlarge</div>
           </div>
 
           <div class="ep-infographic-actions">
             <button
               class="ep-info-btn open-infographic"
               data-title="EP02 Infographic"
-              data-img="asset/infographic/ep02.png"
+              data-img="assets/infographic/ep02.png"
               data-episode="#ep02"
               type="button"
             >
@@ -1067,7 +978,7 @@
 
         <div class="audio-wrap">
           <audio controls preload="metadata">
-            <source src="audio/ep03.mp4" type="audio/mp4">
+            <source src="assets/ep03.mp4" type="audio/mp4">
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -1076,25 +987,15 @@
           <div class="ep-infographic-head">
             <div class="ep-infographic-title">
               <strong>EP03 Infographic</strong>
-              <span>ภาพสรุปสำหรับเปิดดูประกอบระหว่างฟังตอนที่ 03</span>
+              <span>กดปุ่มเพื่อเปิดภาพประกอบแบบเต็มจอ</span>
             </div>
-          </div>
-
-          <div
-            class="ep-infographic-preview open-infographic"
-            data-title="EP03 Infographic"
-            data-img="asset/infographic/ep03.png"
-            data-episode="#ep03"
-          >
-            <img src="asset/infographic/ep03.png" alt="EP03 Infographic">
-            <div class="ep-infographic-badge">🔍 Tap to enlarge</div>
           </div>
 
           <div class="ep-infographic-actions">
             <button
               class="ep-info-btn open-infographic"
               data-title="EP03 Infographic"
-              data-img="asset/infographic/ep03.png"
+              data-img="assets/infographic/ep03.png"
               data-episode="#ep03"
               type="button"
             >
@@ -1129,7 +1030,7 @@
 
         <div class="audio-wrap">
           <audio controls preload="metadata">
-            <source src="audio/ep04.mp4" type="audio/mp4">
+            <source src="assets/ep04.mp4" type="audio/mp4">
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -1138,18 +1039,8 @@
           <div class="ep-infographic-head">
             <div class="ep-infographic-title">
               <strong>EP04 Infographic</strong>
-              <span>ภาพสรุปสำหรับเปิดดูประกอบระหว่างฟังตอนที่ 04</span>
+              <span>กดปุ่มเพื่อเปิดภาพประกอบแบบเต็มจอ</span>
             </div>
-          </div>
-
-          <div
-            class="ep-infographic-preview open-infographic"
-            data-title="EP04 Infographic"
-            data-img="asset/infographic/ep04.png"
-            data-episode="#ep04"
-          >
-            <img src="assets/infographic/ep04.png" alt="EP04 Infographic">
-            <div class="ep-infographic-badge">🔍 Tap to enlarge</div>
           </div>
 
           <div class="ep-infographic-actions">
@@ -1191,7 +1082,7 @@
 
         <div class="audio-wrap">
           <audio controls preload="metadata">
-            <source src="assets/audio/ep05.mp4" type="audio/mp4">
+            <source src="assets/ep05.mp4" type="audio/mp4">
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -1200,18 +1091,8 @@
           <div class="ep-infographic-head">
             <div class="ep-infographic-title">
               <strong>EP05 Infographic</strong>
-              <span>ภาพสรุปสำหรับเปิดดูประกอบระหว่างฟังตอนที่ 05</span>
+              <span>กดปุ่มเพื่อเปิดภาพประกอบแบบเต็มจอ</span>
             </div>
-          </div>
-
-          <div
-            class="ep-infographic-preview open-infographic"
-            data-title="EP05 Infographic"
-            data-img="assets/infographic/ep05.png"
-            data-episode="#ep05"
-          >
-            <img src="assets/infographic/ep05.png" alt="EP05 Infographic">
-            <div class="ep-infographic-badge">🔍 Tap to enlarge</div>
           </div>
 
           <div class="ep-infographic-actions">
