@@ -291,7 +291,7 @@ border-radius:28px;
 background:rgba(255,255,255,.74);
 border:1px solid var(--line);
 position:relative;
-overflow:visible;
+overflow:hidden;
 box-shadow:var(--card-shadow);
 transition:transform .22s ease, box-shadow .22s ease, opacity .2s ease;
 cursor:pointer;
@@ -442,12 +442,7 @@ margin-bottom:0;
 font-size:.72em;
 }
 
-/* Evolved Q-grader click preview */
-.credential-wrap{
-position:relative;
-display:inline-block;
-}
-
+/* Link style for Evolved Q-grader */
 .credential-link{
 position:relative;
 display:inline-flex;
@@ -475,51 +470,6 @@ color:var(--accent);
 color:var(--accent);
 background:rgba(85,100,255,0.13);
 transform:translateY(-1px);
-}
-
-.credential-preview{
-position:absolute;
-left:0;
-top:34px;
-width:300px;
-padding:10px;
-border-radius:22px;
-background:rgba(255,255,255,0.92);
-border:1px solid var(--line);
-box-shadow:0 24px 70px rgba(16,24,40,0.20);
-backdrop-filter:blur(18px);
--webkit-backdrop-filter:blur(18px);
-opacity:0;
-visibility:hidden;
-transform:translateY(8px) scale(.98);
-transition:.18s ease;
-z-index:30;
-pointer-events:none;
-}
-
-body.dark .credential-preview{
-background:rgba(17,24,39,0.92);
-}
-
-.credential-preview img{
-width:100%;
-height:auto;
-display:block;
-border-radius:16px;
-}
-
-.credential-caption{
-font-size:12px;
-line-height:1.45;
-color:var(--muted);
-margin-top:8px;
-padding:0 4px 2px;
-}
-
-.credential-wrap.active .credential-preview{
-opacity:1;
-visibility:visible;
-transform:translateY(0) scale(1);
 }
 
 .pill-wrap{
@@ -704,11 +654,6 @@ h1{ font-size:36px; }
 .member-head{ align-items:center; }
 .modal-profile{ flex-direction:column; }
 .modal-top{ align-items:flex-start; }
-
-.credential-preview{
-width:260px;
-left:-20px;
-}
 }
 </style>
 </head>
@@ -726,6 +671,7 @@ left:-20px;
 <a href="teamblog.html" class="nav-btn">📝 Blog</a>
 <a href="https://yaitonk.github.io/casa-cupping-data/dashboard.html" class="nav-btn primary">📊 Dashboard</a>
 </div>
+
 <div class="topbar-right">
 <button class="ghost-btn" id="themeToggle">🌙 Dark</button>
 </div>
@@ -740,14 +686,17 @@ left:-20px;
 <span class="label">Team Size</span>
 <div class="value">7 Members</div>
 </div>
+
 <div class="strip-card">
 <span class="label">Main Area</span>
 <div class="value">Coffee R&amp;D</div>
 </div>
+
 <div class="strip-card">
 <span class="label">Core Skills</span>
 <div class="value">Sensory · Roast · QA</div>
 </div>
+
 <div class="strip-card">
 <span class="label">Mindset</span>
 <div class="value">Test · Learn · Refine</div>
@@ -789,6 +738,7 @@ data-focus="Leadership, Coffee Direction, Founder Vision">
 <img src="images/surapan-tanta.jpg" alt="Surapan Tanta" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 <div class="avatar-fallback" style="display:none;">S</div>
 </div>
+
 <div class="member-main">
 <h3 class="member-name">สุรพันธ์ ทันตา</h3>
 <div class="member-name-en">Surapan Tanta</div>
@@ -803,19 +753,17 @@ data-focus="Leadership, Coffee Direction, Founder Vision">
 <ul class="exp-list">
 <li>BoT National Judge 2022</li>
 <li>Indonesia CoE International Judge 2023</li>
-
 <li>
-<span class="credential-wrap">
-<span class="credential-link" role="button" tabindex="0">
+<a
+class="credential-link"
+href="images/evolved-q-grader.jpg"
+target="_blank"
+rel="noopener noreferrer"
+onclick="event.stopPropagation();"
+>
 Evolved Q-grader
-</span>
-<span class="credential-preview">
-<img src="images/evolved-q-grader.jpg" alt="Evolved Q-grader certificate">
-<div class="credential-caption">Evolved Q-grader credential / certificate preview</div>
-</span>
-</span>
+</a>
 </li>
-
 <li>Hosted Buyer Program of FICAFE' in PERU 2025</li>
 <li>Coach for 2nd runner-up, TNCRC 2026</li>
 <li>PCRIC, Bangsan 2026</li>
@@ -853,6 +801,7 @@ data-focus="Coffee Product, Product Direction, Execution">
 <img src="images/kittirat-jantamanee.jpg" alt="Kittirat Jantamanee" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 <div class="avatar-fallback" style="display:none;">K</div>
 </div>
+
 <div class="member-main">
 <h3 class="member-name">กิตติรัตน์ จันทมณี</h3>
 <div class="member-name-en">Kittirat Jantamanee</div>
@@ -873,6 +822,7 @@ data-focus="Coffee Product, Product Direction, Execution">
 <li>Coach for 1st runner-up, SACRC, Hau-Hin 2025</li>
 </ul>
 </div>
+
 <div class="mini-box">
 <span class="label">Strength</span>
 <div class="text">ดูแลการพัฒนาผลิตภัณฑ์กาแฟในระดับภาพรวม เข้าใจ balance ระหว่างคุณภาพถ้วยกับความเป็นไปได้ในการผลิตจริง</div>
@@ -904,6 +854,7 @@ data-focus="Product Creator, Concept Design, Consumer Insight">
 <img src="images/sutatip-sawangareetagul.jpg" alt="Sutatip Sawangareetagul" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 <div class="avatar-fallback" style="display:none;">S</div>
 </div>
+
 <div class="member-main">
 <h3 class="member-name">สุฑาทิพย์ สว่างอารีตระกูล</h3>
 <div class="member-name-en">SUTATIP SAWANGAREETAGUL</div>
@@ -924,6 +875,7 @@ data-focus="Product Creator, Concept Design, Consumer Insight">
 <li>2nd runner-up Asian Coffee Brewer League 2025</li>
 </ul>
 </div>
+
 <div class="mini-box">
 <span class="label">Strength</span>
 <div class="text">ดูแลการพัฒนา concept และ product ใหม่ ๆ แปลง insight จาก R&D ให้กลายเป็น product ที่มี story</div>
@@ -955,6 +907,7 @@ data-focus="Senior Roaster, Roast Profile, Consistency">
 <img src="images/varayu-kanchan.jpg" alt="Varayu Kanchan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 <div class="avatar-fallback" style="display:none;">V</div>
 </div>
+
 <div class="member-main">
 <h3 class="member-name">วรายุ ก้านจันทร์</h3>
 <div class="member-name-en">Varayu Kanchan</div>
@@ -973,6 +926,7 @@ data-focus="Senior Roaster, Roast Profile, Consistency">
 <li>TNCRC 2026</li>
 </ul>
 </div>
+
 <div class="mini-box">
 <span class="label">Strength</span>
 <div class="text">มีประสบการณ์ด้านการคั่วกาแฟระดับสูง และการทดลอง roast profile ควบคุม consistency ของ roast ได้ดี และเข้าใจ behavior ของเมล็ดกาแฟ</div>
@@ -1004,6 +958,7 @@ data-focus="Coffee Roaster, Execution, Batch Trial">
 <img src="images/santi-matitathang.jpg" alt="Santi Matitathang" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 <div class="avatar-fallback" style="display:none;">S</div>
 </div>
+
 <div class="member-main">
 <h3 class="member-name">สันติ มะติตะถัง</h3>
 <div class="member-name-en">SANTI MATITATHANG</div>
@@ -1022,6 +977,7 @@ data-focus="Coffee Roaster, Execution, Batch Trial">
 <li>GRTC 2026</li>
 </ul>
 </div>
+
 <div class="mini-box">
 <span class="label">Strength</span>
 <div class="text">ทำงานด้าน roasting และสนับสนุนการทดลอง batch ต่าง ๆ ปรับ execution ได้รวดเร็ว และช่วยให้การทดลองหลาย profile เกิดขึ้นได้จริง</div>
@@ -1053,6 +1009,7 @@ data-focus="Training, Quality Control, Standards">
 <img src="images/maneenuch-sudjai.jpg" alt="Maneenuch Sudjai" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 <div class="avatar-fallback" style="display:none;">ม</div>
 </div>
+
 <div class="member-main">
 <h3 class="member-name">มณีนุช สุดใจ</h3>
 <div class="member-name-en">Maneenuch Sudjai</div>
@@ -1070,6 +1027,7 @@ data-focus="Training, Quality Control, Standards">
 <li>Helps elevate coffee knowledge and work standards</li>
 </ul>
 </div>
+
 <div class="mini-box">
 <span class="label">Strength</span>
 <div class="text">ถ่ายทอดความรู้ได้ชัดเจน เข้าใจง่าย และมีความละเอียดรอบคอบในการตรวจสอบคุณภาพ ช่วยให้ทีมทำงานได้อย่างสม่ำเสมอ</div>
@@ -1101,6 +1059,7 @@ data-focus="R&D Officer, Data Support, Workflow">
 <img src="images/pichyut-saedan.jpg" alt="Pichyut Saedan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 <div class="avatar-fallback" style="display:none;">พ</div>
 </div>
+
 <div class="member-main">
 <h3 class="member-name">พิชญุตม์ แซ่ด่าน</h3>
 <div class="member-name-en">Pichyut Saedan</div>
@@ -1118,6 +1077,7 @@ data-focus="R&D Officer, Data Support, Workflow">
 <li>Assists analysis within the R&amp;D workflow</li>
 </ul>
 </div>
+
 <div class="mini-box">
 <span class="label">Strength</span>
 <div class="text">เชื่อม data กับการทดลองจริง และช่วยให้การพัฒนาเป็นระบบมากขึ้น</div>
@@ -1148,6 +1108,7 @@ Casa Lab · R&amp;D Team Page
 <img id="modalImg" src="" alt="" onerror="this.style.display='none'; document.getElementById('modalFallback').style.display='flex';">
 <div class="modal-avatar-fallback" id="modalFallback" style="display:none;">A</div>
 </div>
+
 <div>
 <h3 class="modal-name" id="modalNameTh">-</h3>
 <div class="modal-name-en" id="modalNameEn">-</div>
@@ -1155,6 +1116,7 @@ Casa Lab · R&amp;D Team Page
 <div class="role-tag" id="modalTag" style="margin-top:12px;">-</div>
 </div>
 </div>
+
 <button class="close-btn" id="closeModal">✕</button>
 </div>
 
@@ -1163,14 +1125,17 @@ Casa Lab · R&amp;D Team Page
 <span class="label">Experience</span>
 <div class="text" id="modalExperience">-</div>
 </div>
+
 <div class="modal-box">
 <span class="label">Strength</span>
 <div class="text" id="modalStrength">-</div>
 </div>
+
 <div class="modal-box full">
 <span class="label">Responsibility</span>
 <div class="text" id="modalResponsibility">-</div>
 </div>
+
 <div class="modal-box full">
 <span class="label">Focus</span>
 <div class="text" id="modalFocus">-</div>
@@ -1232,7 +1197,7 @@ const modalFocus = document.getElementById("modalFocus");
 cards.forEach(card => {
 card.addEventListener("click", (e) => {
 
-if (e.target.closest(".credential-wrap")) {
+if (e.target.closest(".credential-link")) {
 e.stopPropagation();
 return;
 }
@@ -1271,38 +1236,6 @@ if (e.target === modal) closeProfileModal();
 document.addEventListener("keydown", (e) => {
 if (e.key === "Escape" && modal.classList.contains("show")) {
 closeProfileModal();
-}
-});
-
-/* Click to show Evolved Q-grader image */
-const credentialWraps = document.querySelectorAll(".credential-wrap");
-
-credentialWraps.forEach(wrap => {
-const trigger = wrap.querySelector(".credential-link");
-
-trigger.addEventListener("click", (e) => {
-e.preventDefault();
-e.stopPropagation();
-
-credentialWraps.forEach(other => {
-if (other !== wrap) other.classList.remove("active");
-});
-
-wrap.classList.toggle("active");
-});
-
-trigger.addEventListener("keydown", (e) => {
-if (e.key === "Enter" || e.key === " ") {
-e.preventDefault();
-trigger.click();
-}
-});
-});
-
-/* Click outside to close preview */
-document.addEventListener("click", (e) => {
-if (!e.target.closest(".credential-wrap")) {
-credentialWraps.forEach(wrap => wrap.classList.remove("active"));
 }
 });
 </script>
