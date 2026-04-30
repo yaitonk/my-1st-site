@@ -25,10 +25,6 @@
       --accent-2:#7b86ff;
       --accent-3:#a7afff;
 
-      --green:#22c55e;
-      --orange:#f59e0b;
-      --blue:#3b82f6;
-
       --radius-xl:34px;
       --radius-lg:24px;
       --radius-md:18px;
@@ -188,6 +184,7 @@
       font-weight:700;
       text-decoration:none;
       box-shadow:0 8px 20px rgba(23,33,47,0.06);
+      transition:0.22s ease;
     }
 
     .pill{
@@ -257,6 +254,15 @@
       line-height:1.7;
     }
 
+    .month-title{
+      text-align:center;
+      margin:4px 0 24px;
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:0.06em;
+      color:var(--text);
+    }
+
     .tabs{
       display:flex;
       justify-content:center;
@@ -275,42 +281,20 @@
       font-size:13px;
       font-weight:800;
       box-shadow:0 8px 20px rgba(23,33,47,0.06);
+      transition:0.22s ease;
     }
 
     .tab:hover{
       transform:translateY(-1px);
     }
 
-    .section-title{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:18px;
-      margin:28px 0 14px;
-    }
-
-    .section-title h2{
-      margin:0;
-      font-size:26px;
-      letter-spacing:-0.04em;
-    }
-
-    .section-title p{
-      margin:6px 0 0;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.5;
-    }
-
-    .recipe-grid{
+    .coffee-list{
       display:grid;
-      grid-template-columns:1fr 1fr;
       gap:18px;
     }
 
     .recipe-card{
       position:relative;
-      padding:22px;
       border-radius:var(--radius-lg);
       background:rgba(255,255,255,0.48);
       border:1px solid var(--line);
@@ -322,75 +306,42 @@
       background:rgba(255,255,255,0.05);
     }
 
-    .recipe-card::before{
-      content:"";
-      position:absolute;
-      top:-80px;
-      right:-80px;
-      width:180px;
-      height:180px;
-      border-radius:999px;
-      background:rgba(89,103,255,0.13);
-      pointer-events:none;
+    .recipe-banner{
+      padding:14px 18px;
+      text-align:center;
+      font-size:20px;
+      font-weight:900;
+      letter-spacing:-0.03em;
+      border-bottom:1px solid var(--line);
     }
 
-    .recipe-head{
-      position:relative;
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:14px;
-      margin-bottom:16px;
+    .banner-yellow{
+      background:rgba(255,238,170,0.58);
     }
 
-    .recipe-icon{
-      width:52px;
-      height:52px;
-      border-radius:18px;
-      display:grid;
-      place-items:center;
-      font-size:25px;
-      background:rgba(255,255,255,0.48);
-      border:1px solid var(--line);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,0.32);
-      flex:0 0 auto;
+    .banner-orange{
+      background:rgba(255,196,128,0.58);
     }
 
-    body.dark .recipe-icon{
+    .banner-pink{
+      background:rgba(245,190,195,0.58);
+    }
+
+    body.dark .banner-yellow,
+    body.dark .banner-orange,
+    body.dark .banner-pink{
       background:rgba(255,255,255,0.08);
     }
 
-    .recipe-title h3{
-      margin:0;
-      font-size:21px;
-      letter-spacing:-0.03em;
+    .recipe-body{
+      padding:20px;
     }
 
-    .recipe-title .note{
-      margin-top:5px;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.5;
-    }
-
-    .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:7px 10px;
-      border-radius:999px;
-      font-size:11px;
-      font-weight:800;
-      color:#fff;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      white-space:nowrap;
-    }
-
-    .params{
+    .recipe-meta{
       display:grid;
-      grid-template-columns:repeat(2,1fr);
+      grid-template-columns:repeat(5,1fr);
       gap:10px;
-      margin:16px 0;
+      margin-bottom:16px;
     }
 
     .param{
@@ -420,58 +371,97 @@
       font-size:15px;
       font-weight:850;
       letter-spacing:-0.02em;
+      line-height:1.35;
     }
 
-    .steps{
-      margin:16px 0 0;
-      padding:0;
-      list-style:none;
+    .pour-grid{
       display:grid;
+      grid-template-columns:repeat(4,1fr);
       gap:10px;
     }
 
-    .steps li{
-      display:grid;
-      grid-template-columns:74px 1fr;
-      gap:12px;
-      align-items:start;
-      padding:13px;
-      border-radius:17px;
-      background:rgba(255,255,255,0.44);
+    .pour-card{
+      padding:14px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.46);
       border:1px solid var(--line);
     }
 
-    body.dark .steps li{
+    body.dark .pour-card{
       background:rgba(255,255,255,0.055);
     }
 
-    .time{
-      font-size:12px;
-      font-weight:850;
+    .pour-card h4{
+      margin:0 0 10px;
+      font-size:15px;
+      font-weight:900;
       color:var(--accent);
-      white-space:nowrap;
     }
 
-    .action{
+    .pour-row{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding:7px 0;
+      border-bottom:1px solid rgba(128,128,128,0.12);
       font-size:13px;
-      color:var(--text);
-      line-height:1.55;
-      font-weight:650;
     }
 
-    .tip-box{
-      margin-top:16px;
+    .pour-row:last-child{
+      border-bottom:0;
+    }
+
+    .pour-row span:first-child{
+      color:var(--muted);
+      font-weight:750;
+    }
+
+    .pour-row span:last-child{
+      text-align:right;
+      font-weight:900;
+    }
+
+    .pour-style{
+      margin-top:14px;
       padding:14px;
       border-radius:18px;
-      background:linear-gradient(135deg, rgba(89,103,255,0.12), rgba(255,255,255,0.28));
+      background:linear-gradient(135deg, rgba(89,103,255,0.10), rgba(255,255,255,0.28));
       border:1px solid var(--line);
       color:var(--muted);
       font-size:13px;
       line-height:1.65;
     }
 
-    body.dark .tip-box{
+    body.dark .pour-style{
       background:linear-gradient(135deg, rgba(142,162,255,0.12), rgba(255,255,255,0.04));
+    }
+
+    .recipe-note{
+      margin-top:12px;
+      font-size:12px;
+      color:var(--soft);
+      line-height:1.5;
+    }
+
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
+      margin:32px 0 14px;
+    }
+
+    .section-title h2{
+      margin:0;
+      font-size:26px;
+      letter-spacing:-0.04em;
+    }
+
+    .section-title p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
     }
 
     .mini-table{
@@ -516,6 +506,21 @@
       border-radius:0 16px 16px 0;
     }
 
+    .tip-box{
+      margin-top:16px;
+      padding:14px;
+      border-radius:18px;
+      background:linear-gradient(135deg, rgba(89,103,255,0.12), rgba(255,255,255,0.28));
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.65;
+    }
+
+    body.dark .tip-box{
+      background:linear-gradient(135deg, rgba(142,162,255,0.12), rgba(255,255,255,0.04));
+    }
+
     .footer{
       margin-top:26px;
       text-align:center;
@@ -535,6 +540,16 @@
 
     body.dark .footer span{
       background:rgba(255,255,255,0.05);
+    }
+
+    @media(max-width:900px){
+      .recipe-meta{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .pour-grid{
+        grid-template-columns:1fr 1fr;
+      }
     }
 
     @media(max-width:860px){
@@ -567,10 +582,6 @@
         font-size:40px;
       }
 
-      .recipe-grid{
-        grid-template-columns:1fr;
-      }
-
       .section-title{
         flex-direction:column;
         align-items:flex-start;
@@ -578,17 +589,13 @@
     }
 
     @media(max-width:560px){
-      .params{
+      .recipe-meta,
+      .pour-grid{
         grid-template-columns:1fr;
       }
 
-      .steps li{
-        grid-template-columns:1fr;
-        gap:4px;
-      }
-
-      .mini-table{
-        font-size:12px;
+      .recipe-banner{
+        font-size:17px;
       }
 
       .mini-table th:nth-child(3),
@@ -607,6 +614,7 @@
 
   <div class="page">
     <main class="shell">
+
       <div class="topbar">
         <div class="left-tools">
           <a class="home-link" href="https://yaitonk.github.io/my-1st-site/">← Home</a>
@@ -621,287 +629,444 @@
       <section class="hero">
         <div class="brand-mark">🫖</div>
         <h1>Brewing Recipe</h1>
-        <div class="subtitle">Hand Drip · xBloom · Front Bar Standard</div>
+        <div class="subtitle">Hand Drip · Front Bar Standard</div>
         <div class="desc">
-          รวมสูตรชงกาแฟสำหรับน้องๆ บาริสต้าหน้าร้าน ใช้เป็นแนวทางกลางในการชงให้คงที่
-          ทั้งแบบ Hand Drip และเครื่อง xBloom โดยสามารถปรับ grind size, temperature และ ratio ตามกาแฟแต่ละตัวได้
+          สูตรชงกาแฟประจำเดือนสำหรับบาริสต้าหน้าร้าน แยกตามเมล็ดกาแฟและรูปแบบการเสิร์ฟ Hot / Iced
+          เพื่อให้การชงมีความคงที่ ตรวจสอบรสชาติได้ง่าย และใช้เป็นมาตรฐานร่วมกันภายในทีม
         </div>
       </section>
 
+      <div class="month-title">COFFEE RECIPE MARCH 2026</div>
+
       <nav class="tabs">
-        <a class="tab" href="#handdrip">💧 Hand Drip</a>
-        <a class="tab" href="#xbloom">⚙️ xBloom</a>
+        <a class="tab" href="#colombia">🌼 Colombia Gesha</a>
+        <a class="tab" href="#kenya">🍊 Kenya Moran</a>
+        <a class="tab" href="#ethiopia">🍓 Ethiopia Sidamo</a>
         <a class="tab" href="#adjustment">📐 Adjustment Guide</a>
       </nav>
 
-      <section id="handdrip">
-        <div class="section-title">
-          <div>
-            <h2>Hand Drip Recipes</h2>
-            <p>สูตรพื้นฐานสำหรับชงหน้าร้าน เน้นความสะอาด ความหวาน และ aftertaste ที่ดี</p>
+      <section class="coffee-list">
+
+        <!-- Colombia Gesha -->
+        <article id="colombia" class="recipe-card">
+          <div class="recipe-banner banner-yellow">
+            Hot Colombia Gesha La Terraza Washed
           </div>
-        </div>
 
-        <div class="recipe-grid">
-
-          <article class="recipe-card">
-            <div class="recipe-head">
-              <div class="recipe-title">
-                <div class="recipe-icon">💧</div>
-                <h3>Clean & Sweet Cup</h3>
-                <div class="note">สูตรมาตรฐานสำหรับกาแฟ washed / honey / light-medium roast</div>
-              </div>
-              <span class="tag">Standard</span>
-            </div>
-
-            <div class="params">
+          <div class="recipe-body">
+            <div class="recipe-meta">
               <div class="param">
                 <span class="k">Coffee</span>
                 <span class="v">15 g</span>
               </div>
               <div class="param">
-                <span class="k">Water</span>
-                <span class="v">240 g</span>
+                <span class="k">Temperature</span>
+                <span class="v">92°C</span>
+              </div>
+              <div class="param">
+                <span class="k">Water TDS</span>
+                <span class="v">70</span>
               </div>
               <div class="param">
                 <span class="k">Ratio</span>
-                <span class="v">1 : 16</span>
+                <span class="v">1 : 16.3 / 245 ml</span>
               </div>
               <div class="param">
-                <span class="k">Temp</span>
-                <span class="v">92–94°C</span>
-              </div>
-              <div class="param">
-                <span class="k">Grind</span>
-                <span class="v">Medium</span>
-              </div>
-              <div class="param">
-                <span class="k">Time</span>
-                <span class="v">2:30–3:00</span>
+                <span class="k">Grind Size</span>
+                <span class="v">หยาบเท่าน้ำตาลทรายแดง</span>
               </div>
             </div>
 
-            <ul class="steps">
-              <li>
-                <span class="time">0:00</span>
-                <span class="action">Bloom 45 g แล้วรอ 35–40 วินาที ให้กาแฟคลายแก๊ส</span>
-              </li>
-              <li>
-                <span class="time">0:40</span>
-                <span class="action">Pour ขึ้นไปที่ 120 g วนกลางออกนอก เบาและนิ่ง</span>
-              </li>
-              <li>
-                <span class="time">1:20</span>
-                <span class="action">Pour ขึ้นไปที่ 180 g คุม flow ไม่ให้แรงเกิน</span>
-              </li>
-              <li>
-                <span class="time">2:00</span>
-                <span class="action">Pour จบที่ 240 g แล้วรอ drawdown</span>
-              </li>
-            </ul>
+            <div class="pour-grid">
+              <div class="pour-card">
+                <h4>รอบที่ 1</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>70 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>70 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:40</span></div>
+              </div>
 
-            <div class="tip-box">
-              <strong>Target cup:</strong> cup สะอาด หวานชัด acidity balance และ aftertaste สุภาพ
-            </div>
-          </article>
+              <div class="pour-card">
+                <h4>รอบที่ 2</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>130 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>0:40–1:15</span></div>
+              </div>
 
-          <article class="recipe-card">
-            <div class="recipe-head">
-              <div class="recipe-title">
-                <div class="recipe-icon">🌸</div>
-                <h3>Floral & Bright</h3>
-                <div class="note">เหมาะกับ Geisha / Ethiopia / กาแฟ floral-acidity สูง</div>
+              <div class="pour-card">
+                <h4>รอบที่ 3</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>80 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>210 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>1:15–1:40</span></div>
               </div>
-              <span class="tag">Aromatic</span>
-            </div>
 
-            <div class="params">
-              <div class="param">
-                <span class="k">Coffee</span>
-                <span class="v">15 g</span>
-              </div>
-              <div class="param">
-                <span class="k">Water</span>
-                <span class="v">230 g</span>
-              </div>
-              <div class="param">
-                <span class="k">Ratio</span>
-                <span class="v">1 : 15.3</span>
-              </div>
-              <div class="param">
-                <span class="k">Temp</span>
-                <span class="v">90–92°C</span>
-              </div>
-              <div class="param">
-                <span class="k">Grind</span>
-                <span class="v">Medium-coarse</span>
-              </div>
-              <div class="param">
-                <span class="k">Time</span>
-                <span class="v">2:15–2:45</span>
+              <div class="pour-card">
+                <h4>รอบที่ 4</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>35 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>245 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>1:40–2:10</span></div>
               </div>
             </div>
 
-            <ul class="steps">
-              <li>
-                <span class="time">0:00</span>
-                <span class="action">Bloom 45 g แบบนุ่ม ไม่กวนแรง</span>
-              </li>
-              <li>
-                <span class="time">0:35</span>
-                <span class="action">Pour ขึ้นไปที่ 110 g เน้น flow บางและต่อเนื่อง</span>
-              </li>
-              <li>
-                <span class="time">1:10</span>
-                <span class="action">Pour ขึ้นไปที่ 170 g คุมระดับน้ำไม่สูงเกิน</span>
-              </li>
-              <li>
-                <span class="time">1:50</span>
-                <span class="action">Pour จบที่ 230 g ลด agitation เพื่อรักษากลิ่นดอกไม้</span>
-              </li>
-            </ul>
-
-            <div class="tip-box">
-              <strong>Target cup:</strong> floral ชัดขึ้น acidity สดใส body ไม่หนัก และ finish สะอาด
+            <div class="pour-style">
+              <strong>ลักษณะการเท:</strong> รอบที่ 1–2 ใช้การเทแบบเส้นเล็กและเบามือ
+              เพื่อให้รสชาติมีความนุ่มนวลมากขึ้น รอจนหน้ากาแฟแห้งแล้วค่อยเทต่อ
+              รอบที่ 3–4 ใช้เส้นใหญ่ขึ้น แต่วนช้าและสม่ำเสมอ เพื่อเพิ่มความนุ่มนวลและ body
+              โดยหน้ากาแฟไม่ควรแห้งก่อนเทรอบถัดไป ควรมีความชุ่มน้ำอยู่
             </div>
-          </article>
-
-        </div>
-      </section>
-
-      <section id="xbloom">
-        <div class="section-title">
-          <div>
-            <h2>xBloom Recipes</h2>
-            <p>สูตรสำหรับเครื่อง xBloom ใช้เป็น baseline ให้บาริสต้ากดใช้งานง่ายและชิมเทียบได้สม่ำเสมอ</p>
           </div>
-        </div>
+        </article>
 
-        <div class="recipe-grid">
+        <article class="recipe-card">
+          <div class="recipe-banner banner-yellow">
+            Iced Colombia Gesha La Terraza Washed
+          </div>
 
-          <article class="recipe-card">
-            <div class="recipe-head">
-              <div class="recipe-title">
-                <div class="recipe-icon">⚙️</div>
-                <h3>xBloom Balance</h3>
-                <div class="note">สูตรกลางสำหรับกาแฟส่วนใหญ่ เน้น balance และ consistency</div>
-              </div>
-              <span class="tag">xBloom</span>
-            </div>
-
-            <div class="params">
+          <div class="recipe-body">
+            <div class="recipe-meta">
               <div class="param">
                 <span class="k">Coffee</span>
                 <span class="v">15 g</span>
               </div>
               <div class="param">
-                <span class="k">Water</span>
-                <span class="v">240 g</span>
+                <span class="k">Temperature</span>
+                <span class="v">92°C</span>
+              </div>
+              <div class="param">
+                <span class="k">Water TDS</span>
+                <span class="v">70</span>
               </div>
               <div class="param">
                 <span class="k">Ratio</span>
-                <span class="v">1 : 16</span>
+                <span class="v">1 : 13.3 / 200 ml</span>
               </div>
               <div class="param">
-                <span class="k">Temp</span>
+                <span class="k">Grind Size</span>
+                <span class="v">หยาบเท่าน้ำตาลทรายขาว</span>
+              </div>
+            </div>
+
+            <div class="pour-grid">
+              <div class="pour-card">
+                <h4>รอบที่ 1</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>60 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:40</span></div>
+              </div>
+
+              <div class="pour-card">
+                <h4>รอบที่ 2</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>110 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>0:40–1:15</span></div>
+              </div>
+
+              <div class="pour-card">
+                <h4>รอบที่ 3</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>160 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>1:15–1:40</span></div>
+              </div>
+
+              <div class="pour-card">
+                <h4>รอบที่ 4</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>40 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>200 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>1:30–2:00</span></div>
+              </div>
+            </div>
+
+            <div class="pour-style">
+              <strong>ลักษณะการเท:</strong> ใช้การเทแบบเส้นเล็กและเบามือในช่วงต้น
+              เพื่อให้รสชาตินุ่มนวลขึ้น รอจนหน้ากาแฟแห้งแล้วจึงค่อยเทต่อ
+              เหมาะกับการเสิร์ฟเย็นที่ต้องการความสะอาด ความหวาน และ acidity ที่ชัด
+            </div>
+
+            <div class="recipe-note">
+              * สูตร Iced ใช้น้ำร้อนรวม 200 g ยังไม่รวมปริมาณน้ำแข็งตอนเสิร์ฟ
+            </div>
+          </div>
+        </article>
+
+        <!-- Kenya Moran -->
+        <article id="kenya" class="recipe-card">
+          <div class="recipe-banner banner-orange">
+            Hot Kenya Moran Washed
+          </div>
+
+          <div class="recipe-body">
+            <div class="recipe-meta">
+              <div class="param">
+                <span class="k">Coffee</span>
+                <span class="v">15 g</span>
+              </div>
+              <div class="param">
+                <span class="k">Temperature</span>
                 <span class="v">93°C</span>
               </div>
               <div class="param">
-                <span class="k">Grind</span>
-                <span class="v">Medium</span>
+                <span class="k">Water TDS</span>
+                <span class="v">70</span>
               </div>
               <div class="param">
-                <span class="k">Target</span>
-                <span class="v">Sweet / Clean</span>
+                <span class="k">Ratio</span>
+                <span class="v">1 : 16.3 / 245 ml</span>
+              </div>
+              <div class="param">
+                <span class="k">Grind Size</span>
+                <span class="v">หยาบเท่าน้ำตาลทรายแดง</span>
               </div>
             </div>
 
-            <ul class="steps">
-              <li>
-                <span class="time">Bloom</span>
-                <span class="action">45 g / 35 sec</span>
-              </li>
-              <li>
-                <span class="time">Pour 1</span>
-                <span class="action">เพิ่มถึง 120 g ด้วย flow ปานกลาง</span>
-              </li>
-              <li>
-                <span class="time">Pour 2</span>
-                <span class="action">เพิ่มถึง 180 g ลดความแรงเล็กน้อย</span>
-              </li>
-              <li>
-                <span class="time">Pour 3</span>
-                <span class="action">จบที่ 240 g แล้วปล่อยให้ drawdown จบสะอาด</span>
-              </li>
-            </ul>
-
-            <div class="tip-box">
-              <strong>Use case:</strong> ใช้เป็นสูตรเริ่มต้นก่อนปรับละเอียดตามกาแฟแต่ละตัว
-            </div>
-          </article>
-
-          <article class="recipe-card">
-            <div class="recipe-head">
-              <div class="recipe-title">
-                <div class="recipe-icon">🍑</div>
-                <h3>xBloom Fruit Forward</h3>
-                <div class="note">เหมาะกับ natural / anaerobic / fruit-driven coffee</div>
+            <div class="pour-grid">
+              <div class="pour-card">
+                <h4>รอบที่ 1</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>50 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:45</span></div>
               </div>
-              <span class="tag">Fruity</span>
+
+              <div class="pour-card">
+                <h4>รอบที่ 2</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>90 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>140 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>0:45–1:15</span></div>
+              </div>
+
+              <div class="pour-card">
+                <h4>รอบที่ 3</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>70 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>210 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>1:15–1:40</span></div>
+              </div>
+
+              <div class="pour-card">
+                <h4>รอบที่ 4</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>35 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>245 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>1:40–2:10</span></div>
+              </div>
             </div>
 
-            <div class="params">
+            <div class="pour-style">
+              <strong>ลักษณะการเท:</strong> รอบที่ 1–2 ใช้การเทแบบเส้นเล็กและเบามือ
+              เพื่อให้รสชาติมีความนุ่มนวลมากขึ้น รอจนหน้ากาแฟแห้งแล้วค่อยเทต่อ
+              รอบที่ 3–4 ใช้เส้นใหญ่ขึ้น แต่วนช้าและสม่ำเสมอ เพื่อให้รสชาติมีความนุ่มนวลมากขึ้น
+              และหน้ากาแฟต้องไม่แห้งก่อนการเท ควรมีความชุ่มน้ำอยู่
+            </div>
+          </div>
+        </article>
+
+        <article class="recipe-card">
+          <div class="recipe-banner banner-orange">
+            Iced Kenya Moran Washed
+          </div>
+
+          <div class="recipe-body">
+            <div class="recipe-meta">
               <div class="param">
                 <span class="k">Coffee</span>
                 <span class="v">15 g</span>
               </div>
               <div class="param">
-                <span class="k">Water</span>
-                <span class="v">225 g</span>
+                <span class="k">Temperature</span>
+                <span class="v">93°C</span>
+              </div>
+              <div class="param">
+                <span class="k">Water TDS</span>
+                <span class="v">70</span>
               </div>
               <div class="param">
                 <span class="k">Ratio</span>
-                <span class="v">1 : 15</span>
+                <span class="v">1 : 13.3 / 200 ml</span>
               </div>
               <div class="param">
-                <span class="k">Temp</span>
-                <span class="v">90–92°C</span>
-              </div>
-              <div class="param">
-                <span class="k">Grind</span>
-                <span class="v">Medium-coarse</span>
-              </div>
-              <div class="param">
-                <span class="k">Target</span>
-                <span class="v">Juicy / Bright</span>
+                <span class="k">Grind Size</span>
+                <span class="v">หยาบเท่าน้ำตาลทรายขาว</span>
               </div>
             </div>
 
-            <ul class="steps">
-              <li>
-                <span class="time">Bloom</span>
-                <span class="action">45 g / 35 sec เพื่อเปิด aroma โดยไม่ over-extract</span>
-              </li>
-              <li>
-                <span class="time">Pour 1</span>
-                <span class="action">เพิ่มถึง 110 g เน้น flow นุ่ม</span>
-              </li>
-              <li>
-                <span class="time">Pour 2</span>
-                <span class="action">เพิ่มถึง 165 g คุม agitation ต่ำ</span>
-              </li>
-              <li>
-                <span class="time">Pour 3</span>
-                <span class="action">จบที่ 225 g เพื่อให้ cup สว่างและ juicy</span>
-              </li>
-            </ul>
+            <div class="pour-grid">
+              <div class="pour-card">
+                <h4>รอบที่ 1</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>50 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:45</span></div>
+              </div>
 
-            <div class="tip-box">
-              <strong>Use case:</strong> ใช้กับกาแฟที่อยากดัน fruit, acidity และ aroma โดยไม่ทำให้ body หนักเกิน
+              <div class="pour-card">
+                <h4>รอบที่ 2</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>110 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>0:45–1:10</span></div>
+              </div>
+
+              <div class="pour-card">
+                <h4>รอบที่ 3</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>170 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>1:10–1:30</span></div>
+              </div>
+
+              <div class="pour-card">
+                <h4>รอบที่ 4</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>30 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>200 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>1:30–2:00</span></div>
+              </div>
             </div>
-          </article>
 
-        </div>
+            <div class="pour-style">
+              <strong>ลักษณะการเท:</strong> ใช้การเทแบบเส้นเล็กและเบามือในช่วงต้น
+              เพื่อให้ cup ไม่แข็ง แล้วเพิ่ม flow ในช่วงกลางเพื่อดึง fruit acidity และ body
+              สำหรับเสิร์ฟเย็น
+            </div>
+
+            <div class="recipe-note">
+              * สูตร Iced ใช้น้ำร้อนรวม 200 g ยังไม่รวมปริมาณน้ำแข็งตอนเสิร์ฟ
+            </div>
+          </div>
+        </article>
+
+        <!-- Ethiopia Sidamo -->
+        <article id="ethiopia" class="recipe-card">
+          <div class="recipe-banner banner-pink">
+            Hot Ethiopia Sidamo Twakok Natural
+          </div>
+
+          <div class="recipe-body">
+            <div class="recipe-meta">
+              <div class="param">
+                <span class="k">Coffee</span>
+                <span class="v">15 g</span>
+              </div>
+              <div class="param">
+                <span class="k">Temperature</span>
+                <span class="v">91°C</span>
+              </div>
+              <div class="param">
+                <span class="k">Water TDS</span>
+                <span class="v">70</span>
+              </div>
+              <div class="param">
+                <span class="k">Ratio</span>
+                <span class="v">1 : 16.3 / 245 ml</span>
+              </div>
+              <div class="param">
+                <span class="k">Grind Size</span>
+                <span class="v">หยาบเท่าน้ำตาลทรายแดง</span>
+              </div>
+            </div>
+
+            <div class="pour-grid">
+              <div class="pour-card">
+                <h4>รอบที่ 1</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>50 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:45</span></div>
+              </div>
+
+              <div class="pour-card">
+                <h4>รอบที่ 2</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>90 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>140 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>0:45–1:15</span></div>
+              </div>
+
+              <div class="pour-card">
+                <h4>รอบที่ 3</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>70 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>210 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>1:15–1:40</span></div>
+              </div>
+
+              <div class="pour-card">
+                <h4>รอบที่ 4</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>35 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>245 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>1:40–2:10</span></div>
+              </div>
+            </div>
+
+            <div class="pour-style">
+              <strong>ลักษณะการเท:</strong> รอบที่ 1–2 ใช้การเทแบบเส้นเล็กและเบามือ
+              เพื่อให้รสชาติมีความนุ่มนวลมากขึ้น รอจนหน้ากาแฟแห้งแล้วค่อยเทต่อ
+              รอบที่ 3–4 ใช้เส้นใหญ่ขึ้น แต่วนช้าและสม่ำเสมอ เพื่อให้รสชาติมีความนุ่มนวลมากขึ้น
+              และหน้ากาแฟต้องไม่แห้งก่อนการเท ควรมีความชุ่มน้ำอยู่
+            </div>
+          </div>
+        </article>
+
+        <article class="recipe-card">
+          <div class="recipe-banner banner-pink">
+            Iced Ethiopia Sidamo Twakok Natural
+          </div>
+
+          <div class="recipe-body">
+            <div class="recipe-meta">
+              <div class="param">
+                <span class="k">Coffee</span>
+                <span class="v">15 g</span>
+              </div>
+              <div class="param">
+                <span class="k">Temperature</span>
+                <span class="v">91°C</span>
+              </div>
+              <div class="param">
+                <span class="k">Water TDS</span>
+                <span class="v">70</span>
+              </div>
+              <div class="param">
+                <span class="k">Ratio</span>
+                <span class="v">1 : 13.3 / 200 ml</span>
+              </div>
+              <div class="param">
+                <span class="k">Grind Size</span>
+                <span class="v">หยาบเท่าน้ำตาลทรายขาว</span>
+              </div>
+            </div>
+
+            <div class="pour-grid">
+              <div class="pour-card">
+                <h4>รอบที่ 1</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>50 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:45</span></div>
+              </div>
+
+              <div class="pour-card">
+                <h4>รอบที่ 2</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>110 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>0:45–1:10</span></div>
+              </div>
+
+              <div class="pour-card">
+                <h4>รอบที่ 3</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>170 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>1:10–1:30</span></div>
+              </div>
+
+              <div class="pour-card">
+                <h4>รอบที่ 4</h4>
+                <div class="pour-row"><span>ปริมาณที่เท</span><span>30 g</span></div>
+                <div class="pour-row"><span>ผลรวม</span><span>200 g</span></div>
+                <div class="pour-row"><span>ช่วงเวลา</span><span>1:30–2:00</span></div>
+              </div>
+            </div>
+
+            <div class="pour-style">
+              <strong>ลักษณะการเท:</strong> ใช้การเทแบบเส้นเล็กและเบามือในช่วงต้น
+              เพื่อให้รสชาตินุ่มนวลขึ้น รอจนหน้ากาแฟแห้งแล้วจึงค่อยเทต่อ
+              ช่วงท้ายไม่ควรเทแรงเกิน เพื่อรักษา fruit aroma และความสะอาดของ Natural process
+            </div>
+
+            <div class="recipe-note">
+              * สูตร Iced ใช้น้ำร้อนรวม 200 g ยังไม่รวมปริมาณน้ำแข็งตอนเสิร์ฟ
+            </div>
+          </div>
+        </article>
+
       </section>
 
       <section id="adjustment">
@@ -926,21 +1091,25 @@
               <td>Extraction ต่ำไป / น้ำไหลเร็วเกิน / บดหยาบเกิน</td>
               <td>บดละเอียดขึ้นเล็กน้อย หรือเพิ่มอุณหภูมิ +1°C</td>
             </tr>
+
             <tr>
               <td>Bitter / Dry</td>
               <td>Extraction สูงไป / agitation เยอะ / บดละเอียดเกิน</td>
               <td>บดหยาบขึ้นเล็กน้อย ลดอุณหภูมิ หรือเทให้นุ่มลง</td>
             </tr>
+
             <tr>
               <td>Flat / Dull</td>
               <td>กลิ่นไม่เปิด / ratio เจือเกิน / กาแฟพักนาน</td>
               <td>ลดน้ำลง 5–10 g หรือเพิ่ม dose เล็กน้อย</td>
             </tr>
+
             <tr>
               <td>Weak Aroma</td>
               <td>น้ำร้อนต่ำไป / bloom ไม่พอ / grind ไม่เหมาะ</td>
-              <td>เพิ่ม temp +1°C หรือเพิ่ม bloom time เป็น 40–45 sec</td>
+              <td>เพิ่ม temperature +1°C หรือเพิ่ม bloom time เป็น 40–45 sec</td>
             </tr>
+
             <tr>
               <td>Heavy Body</td>
               <td>Extraction หนัก / ratio เข้ม / agitation สูง</td>
@@ -951,13 +1120,14 @@
 
         <div class="tip-box">
           <strong>Barista note:</strong> เวลาปรับสูตร ให้ปรับทีละ 1 ตัวแปรเท่านั้น เช่น grind size, temperature หรือ total water
-          เพื่อให้รู้ชัดว่ารสชาติเปลี่ยนจากอะไร
+          เพื่อให้รู้ชัดว่ารสชาติเปลี่ยนจากอะไร และควรบันทึกผลหลังปรับทุกครั้ง
         </div>
       </section>
 
       <div class="footer">
-        <span>Casa Lab · Brewing Standard for Front Bar</span>
+        <span>Casa Lab · Coffee Recipe March 2026</span>
       </div>
+
     </main>
   </div>
 
