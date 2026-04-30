@@ -23,11 +23,9 @@
 
       --accent:#5967ff;
       --accent-2:#7b86ff;
-      --accent-3:#a7afff;
 
       --radius-xl:34px;
       --radius-lg:24px;
-      --radius-md:18px;
     }
 
     body.dark{
@@ -47,7 +45,6 @@
 
       --accent:#8ea2ff;
       --accent-2:#aebaff;
-      --accent-3:#c7d0ff;
     }
 
     *{
@@ -208,26 +205,45 @@
     }
 
     .brand-mark{
-      width:70px;
-      height:70px;
+      width:78px;
+      height:78px;
       margin:0 auto 16px;
-      border-radius:24px;
+      border-radius:26px;
       display:grid;
       place-items:center;
       background:
-        linear-gradient(135deg, rgba(89,103,255,0.18), rgba(255,255,255,0.74)),
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.9), transparent 45%);
+        linear-gradient(135deg, rgba(89,103,255,0.14), rgba(255,255,255,0.74)),
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.95), transparent 45%);
       border:1px solid var(--line);
       box-shadow:
         0 14px 34px rgba(89,103,255,0.16),
         inset 0 1px 0 rgba(255,255,255,0.7);
-      font-size:32px;
     }
 
     body.dark .brand-mark{
       background:
         linear-gradient(135deg, rgba(142,162,255,0.24), rgba(255,255,255,0.08)),
         radial-gradient(circle at 30% 20%, rgba(255,255,255,0.18), transparent 45%);
+    }
+
+    .kettle-icon{
+      width:54px;
+      height:54px;
+      display:block;
+      color:#16181d;
+      filter:drop-shadow(0 8px 12px rgba(0,0,0,0.16));
+    }
+
+    body.dark .kettle-icon{
+      color:#eef2ff;
+      filter:drop-shadow(0 8px 16px rgba(0,0,0,0.35));
+    }
+
+    .mini-kettle{
+      width:18px;
+      height:18px;
+      color:currentColor;
+      vertical-align:-4px;
     }
 
     h1{
@@ -252,6 +268,46 @@
       font-size:14px;
       color:var(--muted);
       line-height:1.7;
+    }
+
+    .month-switch{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:4px auto 24px;
+    }
+
+    .month-chip{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:11px 16px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--glass-strong);
+      color:var(--text);
+      font-size:13px;
+      font-weight:900;
+      text-decoration:none;
+      box-shadow:0 8px 20px rgba(23,33,47,0.06);
+      transition:0.22s ease;
+    }
+
+    .month-chip:hover{
+      transform:translateY(-1px);
+    }
+
+    .month-chip.active{
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#fff;
+      border-color:rgba(255,255,255,0.38);
+    }
+
+    .month-chip.soon{
+      color:var(--muted);
+      opacity:0.9;
     }
 
     .month-title{
@@ -526,6 +582,12 @@
       background:rgba(255,255,255,0.08);
     }
 
+    .xbloom-icon svg{
+      width:30px;
+      height:30px;
+      color:currentColor;
+    }
+
     .xbloom-title{
       font-size:15px;
       font-weight:900;
@@ -695,6 +757,15 @@
 
 <body>
 
+  <svg style="display:none" aria-hidden="true">
+    <symbol id="modern-kettle" viewBox="0 0 128 128">
+      <path fill="currentColor" d="M47 31h42c6.6 0 12 5.4 12 12v7.4c7.7 1.8 13.5 6.2 17.1 12.7 3.8 6.9 4.3 15.7 1.6 25.5-1.1 3.8-5 6-8.8 4.9-3.8-1.1-6-5-4.9-8.8 1.6-5.7 1.4-10.7-.6-14.4-1-1.9-2.5-3.4-4.4-4.4v25.8c0 13.4-10.9 24.3-24.3 24.3H53.2C39.8 116 29 105.1 29 91.7V54.2c0-12.8 7.8-23.2 18-23.2Z"/>
+      <path fill="currentColor" d="M49.5 20h37c3.6 0 6.5 2.9 6.5 6.5S90.1 33 86.5 33h-37c-3.6 0-6.5-2.9-6.5-6.5S45.9 20 49.5 20Z"/>
+      <path fill="currentColor" d="M25.2 55.4c-5.8 1.7-10.9 4.8-14.7 9-5.2 5.6-8 12.9-8.5 21.7-.2 3.9 2.7 7.3 6.7 7.5 3.9.2 7.3-2.7 7.5-6.7.3-5.4 1.8-9.7 4.7-12.8 1.2-1.3 2.6-2.3 4.3-3.2V55.4Z"/>
+      <path fill="rgba(255,255,255,0.22)" d="M75 38h12c3.3 0 6 2.7 6 6v45c0 9.9-8.1 18-18 18h-2c8.3-5.2 12.5-13.5 12.5-24.9V50.5C85.5 43.6 81.4 39.4 75 38Z"/>
+    </symbol>
+  </svg>
+
   <div class="orb one"></div>
   <div class="orb two"></div>
   <div class="orb three"></div>
@@ -705,7 +776,10 @@
       <div class="topbar">
         <div class="left-tools">
           <a class="home-link" href="https://yaitonk.github.io/my-1st-site/">← Home</a>
-          <div class="pill">✦ Casa Lab · Brewing Recipe</div>
+          <div class="pill">
+            <svg class="mini-kettle"><use href="#modern-kettle"></use></svg>
+            Casa Lab · Brewing Recipe
+          </div>
         </div>
 
         <div class="right-tools">
@@ -714,7 +788,10 @@
       </div>
 
       <section class="hero">
-        <div class="brand-mark">🫖</div>
+        <div class="brand-mark">
+          <svg class="kettle-icon"><use href="#modern-kettle"></use></svg>
+        </div>
+
         <h1>Brewing Recipe</h1>
         <div class="subtitle">Hand Drip · xBloom · Front Bar Standard</div>
         <div class="desc">
@@ -723,7 +800,18 @@
         </div>
       </section>
 
-      <div class="month-title">COFFEE RECIPE MARCH 2026</div>
+      <div class="month-switch">
+        <a class="month-chip active" href="#march-2026">
+          <svg class="mini-kettle"><use href="#modern-kettle"></use></svg>
+          March 2026
+        </a>
+        <a class="month-chip soon" href="#may-2026">
+          <svg class="mini-kettle"><use href="#modern-kettle"></use></svg>
+          May 2026 · Coming Soon
+        </a>
+      </div>
+
+      <div id="march-2026" class="month-title">COFFEE RECIPE MARCH 2026</div>
 
       <nav class="tabs">
         <a class="tab" href="#colombia">🌼 Colombia Gesha</a>
@@ -731,16 +819,14 @@
         <a class="tab" href="#ethiopia">🍓 Ethiopia Sidamo</a>
         <a class="tab" href="#xbloom-iced">🧊 Iced xBloom</a>
         <a class="tab" href="#xbloom-hot">🔥 Hot xBloom</a>
+        <a class="tab" href="#may-2026">May 2026</a>
         <a class="tab" href="#adjustment">📐 Adjustment Guide</a>
       </nav>
 
       <section class="coffee-list">
 
         <article id="colombia" class="recipe-card">
-          <div class="recipe-banner banner-yellow">
-            Hot Colombia Gesha La Terraza Washed
-          </div>
-
+          <div class="recipe-banner banner-yellow">Hot Colombia Gesha La Terraza Washed</div>
           <div class="recipe-body">
             <div class="recipe-meta">
               <div class="param"><span class="k">Coffee</span><span class="v">15 g</span></div>
@@ -751,30 +837,10 @@
             </div>
 
             <div class="pour-grid">
-              <div class="pour-card">
-                <h4>รอบที่ 1</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>70 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>70 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:40</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 2</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>130 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>0:40–1:15</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 3</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>80 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>210 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>1:15–1:40</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 4</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>35 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>245 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>1:40–2:10</span></div>
-              </div>
+              <div class="pour-card"><h4>รอบที่ 1</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>70 g</span></div><div class="pour-row"><span>ผลรวม</span><span>70 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:40</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 2</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div><div class="pour-row"><span>ผลรวม</span><span>130 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>0:40–1:15</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 3</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>80 g</span></div><div class="pour-row"><span>ผลรวม</span><span>210 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>1:15–1:40</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 4</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>35 g</span></div><div class="pour-row"><span>ผลรวม</span><span>245 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>1:40–2:10</span></div></div>
             </div>
 
             <div class="pour-style">
@@ -787,10 +853,7 @@
         </article>
 
         <article class="recipe-card">
-          <div class="recipe-banner banner-yellow">
-            Iced Colombia Gesha La Terraza Washed
-          </div>
-
+          <div class="recipe-banner banner-yellow">Iced Colombia Gesha La Terraza Washed</div>
           <div class="recipe-body">
             <div class="recipe-meta">
               <div class="param"><span class="k">Coffee</span><span class="v">15 g</span></div>
@@ -801,30 +864,10 @@
             </div>
 
             <div class="pour-grid">
-              <div class="pour-card">
-                <h4>รอบที่ 1</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>60 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:40</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 2</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>110 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>0:40–1:15</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 3</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>160 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>1:15–1:40</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 4</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>40 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>200 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>1:30–2:00</span></div>
-              </div>
+              <div class="pour-card"><h4>รอบที่ 1</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div><div class="pour-row"><span>ผลรวม</span><span>60 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:40</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 2</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div><div class="pour-row"><span>ผลรวม</span><span>110 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>0:40–1:15</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 3</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div><div class="pour-row"><span>ผลรวม</span><span>160 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>1:15–1:40</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 4</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>40 g</span></div><div class="pour-row"><span>ผลรวม</span><span>200 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>1:30–2:00</span></div></div>
             </div>
 
             <div class="pour-style">
@@ -833,17 +876,12 @@
               เหมาะกับการเสิร์ฟเย็นที่ต้องการความสะอาด ความหวาน และ acidity ที่ชัด
             </div>
 
-            <div class="recipe-note">
-              * สูตร Iced ใช้น้ำร้อนรวม 200 g ยังไม่รวมปริมาณน้ำแข็งตอนเสิร์ฟ
-            </div>
+            <div class="recipe-note">* สูตร Iced ใช้น้ำร้อนรวม 200 g ยังไม่รวมปริมาณน้ำแข็งตอนเสิร์ฟ</div>
           </div>
         </article>
 
         <article id="kenya" class="recipe-card">
-          <div class="recipe-banner banner-orange">
-            Hot Kenya Moran Washed
-          </div>
-
+          <div class="recipe-banner banner-orange">Hot Kenya Moran Washed</div>
           <div class="recipe-body">
             <div class="recipe-meta">
               <div class="param"><span class="k">Coffee</span><span class="v">15 g</span></div>
@@ -854,30 +892,10 @@
             </div>
 
             <div class="pour-grid">
-              <div class="pour-card">
-                <h4>รอบที่ 1</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>50 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:45</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 2</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>90 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>140 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>0:45–1:15</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 3</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>70 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>210 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>1:15–1:40</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 4</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>35 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>245 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>1:40–2:10</span></div>
-              </div>
+              <div class="pour-card"><h4>รอบที่ 1</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div><div class="pour-row"><span>ผลรวม</span><span>50 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:45</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 2</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>90 g</span></div><div class="pour-row"><span>ผลรวม</span><span>140 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>0:45–1:15</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 3</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>70 g</span></div><div class="pour-row"><span>ผลรวม</span><span>210 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>1:15–1:40</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 4</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>35 g</span></div><div class="pour-row"><span>ผลรวม</span><span>245 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>1:40–2:10</span></div></div>
             </div>
 
             <div class="pour-style">
@@ -890,10 +908,7 @@
         </article>
 
         <article class="recipe-card">
-          <div class="recipe-banner banner-orange">
-            Iced Kenya Moran Washed
-          </div>
-
+          <div class="recipe-banner banner-orange">Iced Kenya Moran Washed</div>
           <div class="recipe-body">
             <div class="recipe-meta">
               <div class="param"><span class="k">Coffee</span><span class="v">15 g</span></div>
@@ -904,49 +919,23 @@
             </div>
 
             <div class="pour-grid">
-              <div class="pour-card">
-                <h4>รอบที่ 1</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>50 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:45</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 2</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>110 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>0:45–1:10</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 3</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>170 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>1:10–1:30</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 4</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>30 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>200 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>1:30–2:00</span></div>
-              </div>
+              <div class="pour-card"><h4>รอบที่ 1</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div><div class="pour-row"><span>ผลรวม</span><span>50 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:45</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 2</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div><div class="pour-row"><span>ผลรวม</span><span>110 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>0:45–1:10</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 3</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div><div class="pour-row"><span>ผลรวม</span><span>170 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>1:10–1:30</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 4</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>30 g</span></div><div class="pour-row"><span>ผลรวม</span><span>200 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>1:30–2:00</span></div></div>
             </div>
 
             <div class="pour-style">
               <strong>ลักษณะการเท:</strong> ใช้การเทแบบเส้นเล็กและเบามือในช่วงต้น
-              เพื่อให้ cup ไม่แข็ง แล้วเพิ่ม flow ในช่วงกลางเพื่อดึง fruit acidity และ body
-              สำหรับเสิร์ฟเย็น
+              เพื่อให้ cup ไม่แข็ง แล้วเพิ่ม flow ในช่วงกลางเพื่อดึง fruit acidity และ body สำหรับเสิร์ฟเย็น
             </div>
 
-            <div class="recipe-note">
-              * สูตร Iced ใช้น้ำร้อนรวม 200 g ยังไม่รวมปริมาณน้ำแข็งตอนเสิร์ฟ
-            </div>
+            <div class="recipe-note">* สูตร Iced ใช้น้ำร้อนรวม 200 g ยังไม่รวมปริมาณน้ำแข็งตอนเสิร์ฟ</div>
           </div>
         </article>
 
         <article id="ethiopia" class="recipe-card">
-          <div class="recipe-banner banner-pink">
-            Hot Ethiopia Sidamo Twakok Natural
-          </div>
-
+          <div class="recipe-banner banner-pink">Hot Ethiopia Sidamo Twakok Natural</div>
           <div class="recipe-body">
             <div class="recipe-meta">
               <div class="param"><span class="k">Coffee</span><span class="v">15 g</span></div>
@@ -957,30 +946,10 @@
             </div>
 
             <div class="pour-grid">
-              <div class="pour-card">
-                <h4>รอบที่ 1</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>50 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:45</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 2</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>90 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>140 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>0:45–1:15</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 3</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>70 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>210 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>1:15–1:40</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 4</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>35 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>245 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>1:40–2:10</span></div>
-              </div>
+              <div class="pour-card"><h4>รอบที่ 1</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div><div class="pour-row"><span>ผลรวม</span><span>50 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:45</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 2</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>90 g</span></div><div class="pour-row"><span>ผลรวม</span><span>140 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>0:45–1:15</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 3</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>70 g</span></div><div class="pour-row"><span>ผลรวม</span><span>210 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>1:15–1:40</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 4</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>35 g</span></div><div class="pour-row"><span>ผลรวม</span><span>245 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>1:40–2:10</span></div></div>
             </div>
 
             <div class="pour-style">
@@ -993,10 +962,7 @@
         </article>
 
         <article class="recipe-card">
-          <div class="recipe-banner banner-pink">
-            Iced Ethiopia Sidamo Twakok Natural
-          </div>
-
+          <div class="recipe-banner banner-pink">Iced Ethiopia Sidamo Twakok Natural</div>
           <div class="recipe-body">
             <div class="recipe-meta">
               <div class="param"><span class="k">Coffee</span><span class="v">15 g</span></div>
@@ -1007,30 +973,10 @@
             </div>
 
             <div class="pour-grid">
-              <div class="pour-card">
-                <h4>รอบที่ 1</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>50 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:45</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 2</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>110 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>0:45–1:10</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 3</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>170 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>1:10–1:30</span></div>
-              </div>
-              <div class="pour-card">
-                <h4>รอบที่ 4</h4>
-                <div class="pour-row"><span>ปริมาณที่เท</span><span>30 g</span></div>
-                <div class="pour-row"><span>ผลรวม</span><span>200 g</span></div>
-                <div class="pour-row"><span>ช่วงเวลา</span><span>1:30–2:00</span></div>
-              </div>
+              <div class="pour-card"><h4>รอบที่ 1</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>50 g</span></div><div class="pour-row"><span>ผลรวม</span><span>50 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>0:00–0:45</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 2</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div><div class="pour-row"><span>ผลรวม</span><span>110 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>0:45–1:10</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 3</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>60 g</span></div><div class="pour-row"><span>ผลรวม</span><span>170 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>1:10–1:30</span></div></div>
+              <div class="pour-card"><h4>รอบที่ 4</h4><div class="pour-row"><span>ปริมาณที่เท</span><span>30 g</span></div><div class="pour-row"><span>ผลรวม</span><span>200 g</span></div><div class="pour-row"><span>ช่วงเวลา</span><span>1:30–2:00</span></div></div>
             </div>
 
             <div class="pour-style">
@@ -1039,9 +985,7 @@
               ช่วงท้ายไม่ควรเทแรงเกิน เพื่อรักษา fruit aroma และความสะอาดของ Natural process
             </div>
 
-            <div class="recipe-note">
-              * สูตร Iced ใช้น้ำร้อนรวม 200 g ยังไม่รวมปริมาณน้ำแข็งตอนเสิร์ฟ
-            </div>
+            <div class="recipe-note">* สูตร Iced ใช้น้ำร้อนรวม 200 g ยังไม่รวมปริมาณน้ำแข็งตอนเสิร์ฟ</div>
           </div>
         </article>
 
@@ -1056,55 +1000,25 @@
         </div>
 
         <div class="recipe-card">
-          <div class="recipe-banner banner-blue">
-            xBloom Iced Shared Recipes
-          </div>
+          <div class="recipe-banner banner-blue">xBloom Iced Shared Recipes</div>
 
           <div class="recipe-body">
             <div class="xbloom-grid">
 
               <a class="xbloom-link-card" href="https://share-h5.xbloom.com/?id=bk%2B1X5hjAmoZ2e5UN1WSIQ%3D%3D" target="_blank" rel="noopener">
-                <div class="xbloom-info">
-                  <div class="xbloom-icon">🍊</div>
-                  <div>
-                    <div class="xbloom-title">Iced Kenya Moran</div>
-                    <div class="xbloom-note">15 g · xBloom iced drip recipe</div>
-                  </div>
-                </div>
-                <div class="xbloom-arrow">↗</div>
+                <div class="xbloom-info"><div class="xbloom-icon">🍊</div><div><div class="xbloom-title">Iced Kenya Moran</div><div class="xbloom-note">15 g · xBloom iced drip recipe</div></div></div><div class="xbloom-arrow">↗</div>
               </a>
 
               <a class="xbloom-link-card" href="https://share-h5.xbloom.com/?id=lHIYtaSC5ZmAiwrU3Zmo%2Fw%3D%3D" target="_blank" rel="noopener">
-                <div class="xbloom-info">
-                  <div class="xbloom-icon">🍓</div>
-                  <div>
-                    <div class="xbloom-title">Iced Ethiopia Twakok</div>
-                    <div class="xbloom-note">14 g · xBloom iced drip recipe</div>
-                  </div>
-                </div>
-                <div class="xbloom-arrow">↗</div>
+                <div class="xbloom-info"><div class="xbloom-icon">🍓</div><div><div class="xbloom-title">Iced Ethiopia Twakok</div><div class="xbloom-note">14 g · xBloom iced drip recipe</div></div></div><div class="xbloom-arrow">↗</div>
               </a>
 
               <a class="xbloom-link-card" href="https://share-h5.xbloom.com/?id=9DrjkRLyqPs%2FT4CIPRbCcQ%3D%3D" target="_blank" rel="noopener">
-                <div class="xbloom-info">
-                  <div class="xbloom-icon">🌼</div>
-                  <div>
-                    <div class="xbloom-title">Iced Colombia Gesha Finale</div>
-                    <div class="xbloom-note">15 g · xBloom iced drip recipe</div>
-                  </div>
-                </div>
-                <div class="xbloom-arrow">↗</div>
+                <div class="xbloom-info"><div class="xbloom-icon">🌼</div><div><div class="xbloom-title">Iced Colombia Gesha Finale</div><div class="xbloom-note">15 g · xBloom iced drip recipe</div></div></div><div class="xbloom-arrow">↗</div>
               </a>
 
               <a class="xbloom-link-card" href="https://share-h5.xbloom.com/?id=4h%2BmS44hT3oQ%2BF48JfwAww%3D%3D" target="_blank" rel="noopener">
-                <div class="xbloom-info">
-                  <div class="xbloom-icon">🌸</div>
-                  <div>
-                    <div class="xbloom-title">Iced Panama Gesha La Mascarada</div>
-                    <div class="xbloom-note">14 g · xBloom iced drip recipe</div>
-                  </div>
-                </div>
-                <div class="xbloom-arrow">↗</div>
+                <div class="xbloom-info"><div class="xbloom-icon">🌸</div><div><div class="xbloom-title">Iced Panama Gesha La Mascarada</div><div class="xbloom-note">14 g · xBloom iced drip recipe</div></div></div><div class="xbloom-arrow">↗</div>
               </a>
 
             </div>
@@ -1126,55 +1040,25 @@
         </div>
 
         <div class="recipe-card">
-          <div class="recipe-banner banner-green">
-            xBloom Hot Shared Recipes
-          </div>
+          <div class="recipe-banner banner-green">xBloom Hot Shared Recipes</div>
 
           <div class="recipe-body">
             <div class="xbloom-grid">
 
               <a class="xbloom-link-card" href="https://share-h5.xbloom.com/?id=Stl8VVKoqmGMS1LAPNQSzQ%3D%3D" target="_blank" rel="noopener">
-                <div class="xbloom-info">
-                  <div class="xbloom-icon">🍊</div>
-                  <div>
-                    <div class="xbloom-title">Hot Kenya Moran Final</div>
-                    <div class="xbloom-note">15 g · xBloom hot drip recipe</div>
-                  </div>
-                </div>
-                <div class="xbloom-arrow">↗</div>
+                <div class="xbloom-info"><div class="xbloom-icon"><svg><use href="#modern-kettle"></use></svg></div><div><div class="xbloom-title">Hot Kenya Moran Final</div><div class="xbloom-note">15 g · xBloom hot drip recipe</div></div></div><div class="xbloom-arrow">↗</div>
               </a>
 
               <a class="xbloom-link-card" href="https://share-h5.xbloom.com/?id=bKl0MIFn%2F3I6Ja6m8VEMhg%3D%3D" target="_blank" rel="noopener">
-                <div class="xbloom-info">
-                  <div class="xbloom-icon">🍓</div>
-                  <div>
-                    <div class="xbloom-title">Hot Ethiopia Twakok Finale</div>
-                    <div class="xbloom-note">14 g · xBloom hot drip recipe</div>
-                  </div>
-                </div>
-                <div class="xbloom-arrow">↗</div>
+                <div class="xbloom-info"><div class="xbloom-icon"><svg><use href="#modern-kettle"></use></svg></div><div><div class="xbloom-title">Hot Ethiopia Twakok Finale</div><div class="xbloom-note">14 g · xBloom hot drip recipe</div></div></div><div class="xbloom-arrow">↗</div>
               </a>
 
               <a class="xbloom-link-card" href="https://share-h5.xbloom.com/?id=PsrSzhgaS%2FuJT43gVs1XIA%3D%3D" target="_blank" rel="noopener">
-                <div class="xbloom-info">
-                  <div class="xbloom-icon">🌼</div>
-                  <div>
-                    <div class="xbloom-title">Hot Colombia Gesha Finale</div>
-                    <div class="xbloom-note">15 g · drop · xBloom hot drip recipe</div>
-                  </div>
-                </div>
-                <div class="xbloom-arrow">↗</div>
+                <div class="xbloom-info"><div class="xbloom-icon"><svg><use href="#modern-kettle"></use></svg></div><div><div class="xbloom-title">Hot Colombia Gesha Finale</div><div class="xbloom-note">15 g · drop · xBloom hot drip recipe</div></div></div><div class="xbloom-arrow">↗</div>
               </a>
 
               <a class="xbloom-link-card" href="https://share-h5.xbloom.com/?id=Q47DLtQhttW4FNYURN8I0Q%3D%3D" target="_blank" rel="noopener">
-                <div class="xbloom-info">
-                  <div class="xbloom-icon">🌸</div>
-                  <div>
-                    <div class="xbloom-title">Hot Panama Gesha La Mascarada</div>
-                    <div class="xbloom-note">14 g · xBloom hot drip recipe</div>
-                  </div>
-                </div>
-                <div class="xbloom-arrow">↗</div>
+                <div class="xbloom-info"><div class="xbloom-icon"><svg><use href="#modern-kettle"></use></svg></div><div><div class="xbloom-title">Hot Panama Gesha La Mascarada</div><div class="xbloom-note">14 g · xBloom hot drip recipe</div></div></div><div class="xbloom-arrow">↗</div>
               </a>
 
             </div>
@@ -1182,6 +1066,25 @@
             <div class="tip-box">
               <strong>Barista note:</strong> สูตรนี้เป็นสูตร Hot Drip สำหรับเครื่อง xBloom โดยตรง
               ควรตรวจสอบ dose, grind size, water temperature และ server ก่อนเริ่มเสิร์ฟทุกครั้ง
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="may-2026">
+        <div class="section-title">
+          <div>
+            <h2>BREWING RECIPE MAY 2026</h2>
+            <p>พื้นที่รอใส่สูตรชงประจำเดือน May 2026 สำหรับ Hand Drip และ xBloom</p>
+          </div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-banner banner-green">May 2026 · Coming Soon</div>
+          <div class="recipe-body">
+            <div class="tip-box">
+              <strong>Status:</strong> กำลังรอเพิ่มสูตรชงประจำเดือน May 2026
+              สามารถใช้พื้นที่นี้สำหรับอัปเดตเมล็ดกาแฟใหม่, สูตร Hot / Iced, และลิงก์ xBloom recipe ได้ภายหลัง
             </div>
           </div>
         </div>
@@ -1244,7 +1147,10 @@
       </section>
 
       <div class="footer">
-        <span>Casa Lab · Coffee Recipe March 2026</span>
+        <span>
+          <svg class="mini-kettle"><use href="#modern-kettle"></use></svg>
+          Casa Lab · Coffee Recipe March 2026
+        </span>
       </div>
 
     </main>
