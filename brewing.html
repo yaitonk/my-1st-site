@@ -268,6 +268,40 @@
       line-height:1.7;
     }
 
+    .hero-photo-wrap{
+      margin:24px auto 0;
+      max-width:780px;
+      border-radius:30px;
+      padding:8px;
+      background:rgba(255,255,255,0.38);
+      border:1px solid var(--line);
+      box-shadow:0 18px 44px rgba(23,33,47,0.10);
+      overflow:hidden;
+    }
+
+    body.dark .hero-photo-wrap{
+      background:rgba(255,255,255,0.055);
+    }
+
+    .hero-photo{
+      width:100%;
+      height:330px;
+      display:block;
+      object-fit:cover;
+      object-position:center 48%;
+      border-radius:24px;
+      filter:saturate(0.96) contrast(0.98) brightness(0.98);
+    }
+
+    .hero-photo-caption{
+      padding:10px 8px 2px;
+      text-align:center;
+      font-size:12px;
+      font-weight:700;
+      color:var(--muted);
+      letter-spacing:-0.01em;
+    }
+
     .month-switch{
       display:flex;
       justify-content:center;
@@ -739,6 +773,23 @@
       }
     }
 
+    @media(max-width:640px){
+      .hero-photo-wrap{
+        margin-top:20px;
+        border-radius:24px;
+        padding:6px;
+      }
+
+      .hero-photo{
+        height:220px;
+        border-radius:19px;
+      }
+
+      .hero-photo-caption{
+        font-size:11px;
+      }
+    }
+
     @media(max-width:560px){
       .recipe-meta,
       .pour-grid{
@@ -790,6 +841,13 @@
         <div class="desc">
           สูตรชงกาแฟประจำเดือนสำหรับบาริสต้าหน้าร้าน แยกตามเมล็ดกาแฟและรูปแบบการเสิร์ฟ Hot / Iced
           เพื่อให้การชงมีความคงที่ ตรวจสอบรสชาติได้ง่าย และใช้เป็นมาตรฐานร่วมกันภายในทีม
+        </div>
+
+        <div class="hero-photo-wrap">
+          <img src="assets/brewing/brewing-hero.jpg" alt="Hand drip brewing at Casa Lab" class="hero-photo">
+          <div class="hero-photo-caption">
+            Hand drip workflow · Brew bar calibration · Casa Lab
+          </div>
         </div>
       </section>
 
@@ -1226,7 +1284,9 @@
 
               <a class="xbloom-link-card" href="https://share-h5.xbloom.com/?id=Stl8VVKoqmGMS1LAPNQSzQ%3D%3D" target="_blank" rel="noopener">
                 <div class="xbloom-info">
-                  <div class="xbloom-icon">🍊</div>
+                  <div class="xbloom-icon">
+                    <img src="assets/brewing/kettle.png" alt="Kettle" class="xbloom-kettle-img">
+                  </div>
                   <div>
                     <div class="xbloom-title">Hot Kenya Moran Final</div>
                     <div class="xbloom-note">15 g · xBloom hot drip recipe</div>
@@ -1237,7 +1297,9 @@
 
               <a class="xbloom-link-card" href="https://share-h5.xbloom.com/?id=bKl0MIFn%2F3I6Ja6m8VEMhg%3D%3D" target="_blank" rel="noopener">
                 <div class="xbloom-info">
-                  <div class="xbloom-icon">🍓</div>
+                  <div class="xbloom-icon">
+                    <img src="assets/brewing/kettle.png" alt="Kettle" class="xbloom-kettle-img">
+                  </div>
                   <div>
                     <div class="xbloom-title">Hot Ethiopia Twakok Finale</div>
                     <div class="xbloom-note">14 g · xBloom hot drip recipe</div>
@@ -1248,7 +1310,9 @@
 
               <a class="xbloom-link-card" href="https://share-h5.xbloom.com/?id=PsrSzhgaS%2FuJT43gVs1XIA%3D%3D" target="_blank" rel="noopener">
                 <div class="xbloom-info">
-                  <div class="xbloom-icon">🌼</div>
+                  <div class="xbloom-icon">
+                    <img src="assets/brewing/kettle.png" alt="Kettle" class="xbloom-kettle-img">
+                  </div>
                   <div>
                     <div class="xbloom-title">Hot Colombia Gesha Finale</div>
                     <div class="xbloom-note">15 g · drop · xBloom hot drip recipe</div>
@@ -1259,7 +1323,9 @@
 
               <a class="xbloom-link-card" href="https://share-h5.xbloom.com/?id=Q47DLtQhttW4FNYURN8I0Q%3D%3D" target="_blank" rel="noopener">
                 <div class="xbloom-info">
-                  <div class="xbloom-icon">🌸</div>
+                  <div class="xbloom-icon">
+                    <img src="assets/brewing/kettle.png" alt="Kettle" class="xbloom-kettle-img">
+                  </div>
                   <div>
                     <div class="xbloom-title">Hot Panama Gesha La Mascarada</div>
                     <div class="xbloom-note">14 g · xBloom hot drip recipe</div>
