@@ -133,7 +133,7 @@
       position:relative;
       z-index:1;
       width:100%;
-      max-width:760px;
+      max-width:980px;
       padding:34px;
       border-radius:var(--radius-xl);
       background:linear-gradient(145deg, var(--glass), rgba(255,255,255,0.38));
@@ -255,11 +255,21 @@
     }
 
     .desc{
-      max-width:560px;
+      max-width:640px;
       margin:12px auto 0;
       font-size:14px;
       color:var(--muted);
       line-height:1.7;
+    }
+
+    .section-label{
+      margin:30px 0 12px;
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
     }
 
     .link-section{
@@ -327,28 +337,12 @@
       background:linear-gradient(135deg,#5967ff,#6f7cff,#8d98ff);
     }
 
-    .link-soft{
-      background:linear-gradient(135deg,#8793ff,#a3adff,#7c89ff);
-    }
-
-    .link-green{
-      background:linear-gradient(135deg,#54c6a6,#7dddc2,#94e8d0);
-    }
-
     .link-dark{
       background:linear-gradient(135deg,#2f3446,#4a536f,#6d789a);
     }
 
     body.dark .link-primary{
       background:linear-gradient(135deg,#7f91ff,#9aa8ff,#b5c0ff);
-    }
-
-    body.dark .link-soft{
-      background:linear-gradient(135deg,#6677f8,#8798ff,#9facff);
-    }
-
-    body.dark .link-green{
-      background:linear-gradient(135deg,#3da98b,#5fc4a9,#7bd7bf);
     }
 
     body.dark .link-dark{
@@ -400,14 +394,176 @@
       flex:0 0 auto;
     }
 
-    .section-label{
-      margin:28px 0 12px;
+    .activity-intro{
+      max-width:620px;
+      margin:0 auto 16px;
       text-align:center;
       color:var(--muted);
+      font-size:13px;
+      line-height:1.65;
+      font-weight:650;
+    }
+
+    .activity-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:14px;
+      margin-top:8px;
+    }
+
+    .activity-card{
+      background:rgba(255,255,255,0.42);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:8px;
+      box-shadow:0 12px 28px rgba(23,33,47,0.08);
+      overflow:hidden;
+      transition:0.22s ease;
+    }
+
+    .activity-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 18px 38px rgba(89,103,255,0.14);
+    }
+
+    body.dark .activity-card{
+      background:rgba(255,255,255,0.05);
+    }
+
+    .activity-photo{
+      width:100%;
+      aspect-ratio:1/1;
+      object-fit:cover;
+      display:block;
+      border-radius:16px;
+      filter:saturate(0.96) contrast(0.98) brightness(0.98);
+    }
+
+    .activity-caption{
+      padding:10px 6px 4px;
       font-size:12px;
-      font-weight:900;
+      font-weight:800;
+      color:var(--muted);
+      text-align:center;
+      line-height:1.45;
+    }
+
+    .event-list{
+      display:grid;
+      gap:14px;
+      margin-top:6px;
+    }
+
+    .event-card{
+      display:grid;
+      grid-template-columns:112px 1fr auto;
+      gap:16px;
+      align-items:center;
+      padding:16px;
+      border-radius:24px;
+      background:rgba(255,255,255,0.44);
+      border:1px solid var(--line);
+      box-shadow:0 12px 28px rgba(23,33,47,0.07);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .event-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg, rgba(89,103,255,0.08), transparent 42%);
+      pointer-events:none;
+    }
+
+    body.dark .event-card{
+      background:rgba(255,255,255,0.05);
+    }
+
+    .event-date{
+      position:relative;
+      border-radius:18px;
+      padding:14px 12px;
+      text-align:center;
+      background:linear-gradient(135deg, rgba(89,103,255,0.18), rgba(255,255,255,0.52));
+      border:1px solid var(--line);
+    }
+
+    body.dark .event-date{
+      background:linear-gradient(135deg, rgba(142,162,255,0.16), rgba(255,255,255,0.05));
+    }
+
+    .event-day{
+      display:block;
+      font-size:28px;
+      font-weight:950;
+      line-height:1;
+      color:var(--accent);
+      letter-spacing:-0.04em;
+    }
+
+    .event-month{
+      display:block;
+      margin-top:6px;
+      font-size:11px;
+      font-weight:850;
+      color:var(--muted);
       letter-spacing:0.08em;
       text-transform:uppercase;
+    }
+
+    .event-content{
+      position:relative;
+      min-width:0;
+    }
+
+    .event-title{
+      font-size:17px;
+      font-weight:950;
+      letter-spacing:-0.02em;
+      color:var(--text);
+    }
+
+    .event-meta{
+      margin-top:6px;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.55;
+      font-weight:750;
+    }
+
+    .event-note{
+      margin-top:8px;
+      font-size:12px;
+      color:var(--soft);
+      line-height:1.55;
+      font-weight:650;
+    }
+
+    .event-status{
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      padding:9px 12px;
+      border-radius:999px;
+      background:var(--glass-strong);
+      border:1px solid var(--line);
+      color:var(--accent);
+      font-size:11px;
+      font-weight:900;
+      white-space:nowrap;
+      box-shadow:0 8px 20px rgba(23,33,47,0.06);
+    }
+
+    .event-status::before{
+      content:"";
+      width:7px;
+      height:7px;
+      border-radius:999px;
+      background:var(--accent);
+      box-shadow:0 0 0 4px rgba(89,103,255,0.12);
     }
 
     .footer{
@@ -429,6 +585,21 @@
 
     body.dark .footer span{
       background:rgba(255,255,255,0.05);
+    }
+
+    @media(max-width:900px){
+      .activity-grid{
+        grid-template-columns:repeat(2, 1fr);
+      }
+
+      .event-card{
+        grid-template-columns:100px 1fr;
+      }
+
+      .event-status{
+        grid-column:2;
+        justify-self:flex-start;
+      }
     }
 
     @media(max-width:640px){
@@ -488,6 +659,22 @@
       .link-note{
         font-size:11px;
       }
+
+      .activity-grid{
+        grid-template-columns:1fr;
+      }
+
+      .event-card{
+        grid-template-columns:1fr;
+      }
+
+      .event-date{
+        max-width:140px;
+      }
+
+      .event-status{
+        grid-column:auto;
+      }
     }
   </style>
 </head>
@@ -512,10 +699,10 @@
       <div class="brand-mark">🔗</div>
 
       <h1>Casa Lab Links</h1>
-      <div class="subtitle">Websites · Resources · Learning Pages</div>
+      <div class="subtitle">Websites · Department Activity · Upcoming Events</div>
 
       <div class="desc">
-        รวมลิงก์เว็บไซต์และพื้นที่ทำงานที่เกี่ยวข้องกับ Casa Lab, Casa Lapin, brewing, cupping, podcast และ dashboard
+        รวมเว็บไซต์หลักของทีม ภาพกิจกรรมภายในแผนก และตารางกิจกรรมที่กำลังจะเกิดขึ้น เพื่อให้ทีมเข้าถึงข้อมูลสำคัญได้ง่ายในที่เดียว
       </div>
     </section>
 
@@ -545,63 +732,129 @@
       </a>
     </section>
 
-    <div class="section-label">Casa Lab Pages</div>
+    <div class="section-label">Department Activity</div>
 
-    <section class="link-section">
-      <a class="link-card link-soft" href="https://yaitonk.github.io/my-1st-site/brewing.html">
-        <div class="link-left">
-          <div class="link-icon">🫖</div>
-          <div class="link-text">
-            <div class="link-title">Brewing Recipe</div>
-            <div class="link-note">Hand drip & xBloom recipes for front bar</div>
+    <div class="activity-intro">
+      ภาพบรรยากาศการทำงาน ทดลองชง ชิมกาแฟ แลกเปลี่ยนความรู้ และกิจกรรมภายในทีม Casa Lab
+    </div>
+
+    <section class="activity-grid">
+      <div class="activity-card">
+        <img src="assets/links/activity-01.jpg" alt="Brew bar calibration" class="activity-photo">
+        <div class="activity-caption">Brew Bar Calibration</div>
+      </div>
+
+      <div class="activity-card">
+        <img src="assets/links/activity-02.jpg" alt="Cupping and sensory session" class="activity-photo">
+        <div class="activity-caption">Cupping & Sensory Session</div>
+      </div>
+
+      <div class="activity-card">
+        <img src="assets/links/activity-03.jpg" alt="Coffee recipe development" class="activity-photo">
+        <div class="activity-caption">Recipe Development</div>
+      </div>
+
+      <div class="activity-card">
+        <img src="assets/links/activity-04.jpg" alt="Barista training workflow" class="activity-photo">
+        <div class="activity-caption">Barista Training Workflow</div>
+      </div>
+
+      <div class="activity-card">
+        <img src="assets/links/activity-05.jpg" alt="xBloom brewing test" class="activity-photo">
+        <div class="activity-caption">xBloom Brewing Test</div>
+      </div>
+
+      <div class="activity-card">
+        <img src="assets/links/activity-06.jpg" alt="Quality control discussion" class="activity-photo">
+        <div class="activity-caption">Quality Control Discussion</div>
+      </div>
+
+      <div class="activity-card">
+        <img src="assets/links/activity-07.jpg" alt="Roasting and brewing review" class="activity-photo">
+        <div class="activity-caption">Roast & Brew Review</div>
+      </div>
+
+      <div class="activity-card">
+        <img src="assets/links/activity-08.jpg" alt="Team knowledge sharing" class="activity-photo">
+        <div class="activity-caption">Team Knowledge Sharing</div>
+      </div>
+
+      <div class="activity-card">
+        <img src="assets/links/activity-09.jpg" alt="Front bar standardization" class="activity-photo">
+        <div class="activity-caption">Front Bar Standardization</div>
+      </div>
+    </section>
+
+    <div class="section-label">Upcoming Events</div>
+
+    <section class="event-list">
+      <div class="event-card">
+        <div class="event-date">
+          <span class="event-day">12</span>
+          <span class="event-month">May 2026</span>
+        </div>
+
+        <div class="event-content">
+          <div class="event-title">Monthly Brewing Calibration</div>
+          <div class="event-meta">Casa Lab Brew Bar · 10:00 AM</div>
+          <div class="event-note">
+            ทดสอบสูตรใหม่ เช็ก workflow และปรับมาตรฐานการชงประจำเดือนสำหรับทีมหน้าร้าน
           </div>
         </div>
-        <div class="link-arrow">→</div>
-      </a>
 
-      <a class="link-card link-soft" href="https://yaitonk.github.io/my-1st-site/mini-cupping.html">
-        <div class="link-left">
-          <div class="link-icon">☕</div>
-          <div class="link-text">
-            <div class="link-title">Mini Cupping Form</div>
-            <div class="link-note">Cupping record form based on Mini CVA workflow</div>
+        <div class="event-status">Scheduled</div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-date">
+          <span class="event-day">18</span>
+          <span class="event-month">May 2026</span>
+        </div>
+
+        <div class="event-content">
+          <div class="event-title">Cupping Session</div>
+          <div class="event-meta">R&amp;D Room · 01:30 PM</div>
+          <div class="event-note">
+            ชิมเปรียบเทียบเมล็ดกาแฟใหม่ บันทึก sensory feedback และสรุปแนวทางการใช้งาน
           </div>
         </div>
-        <div class="link-arrow">→</div>
-      </a>
 
-      <a class="link-card link-green" href="https://yaitonk.github.io/casa-cupping-data/dashboard.html">
-        <div class="link-left">
-          <div class="link-icon">📊</div>
-          <div class="link-text">
-            <div class="link-title">Cupping Dashboard</div>
-            <div class="link-note">Compare batches, visualize scores, and review insights</div>
+        <div class="event-status">Open</div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-date">
+          <span class="event-day">24</span>
+          <span class="event-month">May 2026</span>
+        </div>
+
+        <div class="event-content">
+          <div class="event-title">xBloom Recipe Workshop</div>
+          <div class="event-meta">Training Corner · 03:00 PM</div>
+          <div class="event-note">
+            อัปเดตสูตรชง xBloom สำหรับหน้าร้าน ทดลอง setting ใหม่ และจัดทำ recipe standard
           </div>
         </div>
-        <div class="link-arrow">→</div>
-      </a>
 
-      <a class="link-card link-soft" href="https://yaitonk.github.io/my-1st-site/teamblog.html">
-        <div class="link-left">
-          <div class="link-icon">🎧</div>
-          <div class="link-text">
-            <div class="link-title">Podcast / Team Blog</div>
-            <div class="link-note">Internal learning audio and knowledge sharing</div>
+        <div class="event-status">Workshop</div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-date">
+          <span class="event-day">31</span>
+          <span class="event-month">May 2026</span>
+        </div>
+
+        <div class="event-content">
+          <div class="event-title">Team Knowledge Sharing</div>
+          <div class="event-meta">Casa Lab · 05:00 PM</div>
+          <div class="event-note">
+            สรุปบทเรียนของเดือน แชร์ insight ด้าน brewing, cupping, service และการพัฒนาทีม
           </div>
         </div>
-        <div class="link-arrow">→</div>
-      </a>
 
-      <a class="link-card link-primary" href="https://yaitonk.github.io/my-1st-site/team.html">
-        <div class="link-left">
-          <div class="link-icon">👥</div>
-          <div class="link-text">
-            <div class="link-title">R&amp;D Team</div>
-            <div class="link-note">Casa Lab people and R&amp;D profile page</div>
-          </div>
-        </div>
-        <div class="link-arrow">→</div>
-      </a>
+        <div class="event-status">Internal</div>
+      </div>
     </section>
 
     <div class="footer">
