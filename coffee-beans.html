@@ -1,1793 +1,1652 @@
 <!DOCTYPE html>
-
 <html lang="th">
-
 <head>
-
   <meta charset="UTF-8" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
   <title>Casa Lab · Coffee Beans</title>
 
   <style>
-
     :root{
-
       --bg1:#edf3ff;
-
       --bg2:#f7f5ff;
-
       --bg3:#f4fbf7;
 
       --glass:rgba(255,255,255,0.62);
-
       --glass-strong:rgba(255,255,255,0.78);
-
       --line:rgba(255,255,255,0.78);
 
       --text:#17212f;
-
       --muted:#667085;
-
       --soft:#8a94a6;
 
       --shadow:0 28px 80px rgba(23,33,47,0.13);
 
       --accent:#5967ff;
-
       --accent-2:#7b86ff;
-
       --accent-3:#a7afff;
 
       --green:#37b37e;
-
       --orange:#ff9f43;
-
       --rose:#ff6b8a;
 
       --radius-xl:34px;
-
       --radius-lg:22px;
-
     }
 
     body.dark{
-
       --bg1:#070b14;
-
       --bg2:#0f1728;
-
       --bg3:#12192b;
 
       --glass:rgba(18,24,38,0.62);
-
       --glass-strong:rgba(28,36,55,0.72);
-
       --line:rgba(255,255,255,0.10);
 
       --text:#eef2ff;
-
       --muted:#a8b0c2;
-
       --soft:#818ca3;
 
       --shadow:0 28px 80px rgba(0,0,0,0.34);
 
       --accent:#8ea2ff;
-
       --accent-2:#aebaff;
-
       --accent-3:#c7d0ff;
-
     }
 
     *{
-
       box-sizing:border-box;
-
     }
 
     html{
-
       scroll-behavior:smooth;
-
     }
 
     body{
-
       margin:0;
-
       min-height:100vh;
-
       font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter",sans-serif;
-
       color:var(--text);
-
       background:
-
         radial-gradient(circle at 8% 8%, rgba(120,160,255,0.38), transparent 28%),
-
         radial-gradient(circle at 92% 18%, rgba(255,190,135,0.30), transparent 27%),
-
         radial-gradient(circle at 72% 84%, rgba(110,231,183,0.22), transparent 25%),
-
         linear-gradient(180deg,var(--bg1),var(--bg2),var(--bg3));
-
       padding:24px;
-
       overflow-x:hidden;
-
       transition:background .28s ease,color .28s ease;
-
     }
 
     body::before{
-
       content:"";
-
       position:fixed;
-
       inset:0;
-
       background-image:
-
         linear-gradient(rgba(255,255,255,0.22) 1px, transparent 1px),
-
         linear-gradient(90deg, rgba(255,255,255,0.18) 1px, transparent 1px);
-
       background-size:42px 42px;
-
       mask-image:linear-gradient(to bottom, rgba(0,0,0,0.35), transparent 70%);
-
       pointer-events:none;
-
       z-index:0;
-
     }
 
     .orb{
-
       position:fixed;
-
       width:320px;
-
       height:320px;
-
       border-radius:999px;
-
       filter:blur(34px);
-
       opacity:0.48;
-
       z-index:0;
-
       pointer-events:none;
-
       animation:float 16s ease-in-out infinite;
-
     }
 
     .orb.one{
-
       top:-70px;
-
       left:-90px;
-
       background:rgba(120,160,255,0.55);
-
     }
 
     .orb.two{
-
       bottom:-90px;
-
       right:-90px;
-
       background:rgba(255,180,120,0.42);
-
       animation-delay:-5s;
-
     }
 
     .orb.three{
-
       bottom:12%;
-
       left:24%;
-
       background:rgba(110,231,183,0.28);
-
       animation-delay:-9s;
-
     }
 
     @keyframes float{
-
       0%,100%{
-
         transform:translateY(0) translateX(0) scale(1);
-
       }
-
       50%{
-
         transform:translateY(-18px) translateX(14px) scale(1.04);
-
       }
-
     }
 
     .wrap{
-
       position:relative;
-
       z-index:1;
-
       width:100%;
-
       max-width:1180px;
-
       margin:0 auto;
-
     }
 
     .nav{
-
       display:flex;
-
       justify-content:space-between;
-
       align-items:center;
-
       gap:14px;
-
       margin-bottom:18px;
-
       padding:12px;
-
       border-radius:999px;
-
       background:var(--glass);
-
       backdrop-filter:blur(24px) saturate(1.2);
-
       -webkit-backdrop-filter:blur(24px) saturate(1.2);
-
       border:1px solid var(--line);
-
       box-shadow:0 14px 32px rgba(23,33,47,0.08);
-
     }
 
     .nav-left,
-
     .nav-right{
-
       display:flex;
-
       align-items:center;
-
       gap:10px;
-
       flex-wrap:wrap;
-
     }
 
     .nav a,
-
     .theme-btn{
-
       border:1px solid var(--line);
-
       background:var(--glass-strong);
-
       color:var(--text);
-
       padding:10px 14px;
-
       border-radius:999px;
-
       cursor:pointer;
-
       font:inherit;
-
       font-size:13px;
-
       font-weight:700;
-
       text-decoration:none;
-
       transition:0.22s ease;
-
       white-space:nowrap;
-
       box-shadow:0 8px 20px rgba(23,33,47,0.06);
-
     }
 
     .nav a:hover,
-
     .theme-btn:hover{
-
       transform:translateY(-1px);
-
     }
 
     .hero{
-
       margin-top:18px;
-
       padding:34px;
-
       border-radius:var(--radius-xl);
-
       background:linear-gradient(145deg, var(--glass), rgba(255,255,255,0.38));
-
       backdrop-filter:blur(28px) saturate(1.25);
-
       -webkit-backdrop-filter:blur(28px) saturate(1.25);
-
       border:1px solid var(--line);
-
       box-shadow:var(--shadow);
-
       overflow:hidden;
-
       position:relative;
-
     }
 
     body.dark .hero,
-
     body.dark .section-card,
-
     body.dark .variety-card,
-
     body.dark .note-card{
-
       background:linear-gradient(145deg, var(--glass), rgba(15,23,42,0.38));
-
     }
 
     .eyebrow{
-
       display:inline-flex;
-
       align-items:center;
-
       gap:8px;
-
       padding:9px 14px;
-
       border-radius:999px;
-
       background:var(--glass-strong);
-
       border:1px solid var(--line);
-
       color:var(--muted);
-
       font-size:13px;
-
       font-weight:700;
-
       letter-spacing:-0.01em;
-
       box-shadow:0 8px 20px rgba(23,33,47,0.06);
-
       margin-bottom:18px;
-
     }
 
     h1{
-
       margin:0;
-
       font-size:52px;
-
       letter-spacing:-0.06em;
-
       line-height:0.95;
-
       font-weight:850;
-
     }
 
     .subtitle{
-
       margin-top:14px;
-
       max-width:720px;
-
       color:var(--muted);
-
       font-size:15px;
-
       line-height:1.7;
-
     }
 
     .hero-grid{
-
       display:grid;
-
       grid-template-columns:1.2fr 0.8fr;
-
       gap:22px;
-
       align-items:end;
-
     }
 
     .hero-stats{
-
       display:grid;
-
       grid-template-columns:1fr 1fr;
-
       gap:12px;
-
     }
 
     .stat{
-
       padding:16px;
-
       border-radius:22px;
-
       background:var(--glass-strong);
-
       border:1px solid var(--line);
-
     }
 
     .stat-number{
-
       font-size:28px;
-
       font-weight:850;
-
       letter-spacing:-0.04em;
-
     }
 
     .stat-label{
-
       margin-top:4px;
-
       color:var(--muted);
-
       font-size:12px;
-
       font-weight:700;
-
     }
 
     .section{
-
       margin-top:22px;
-
     }
 
     .section-title{
-
       display:flex;
-
       align-items:flex-end;
-
       justify-content:space-between;
-
       gap:14px;
-
       margin-bottom:14px;
-
     }
 
     .section-title h2{
-
       margin:0;
-
       font-size:25px;
-
       letter-spacing:-0.04em;
-
     }
 
     .section-title p{
-
       margin:0;
-
       color:var(--muted);
-
       font-size:13px;
-
       line-height:1.5;
-
     }
 
     .section-card,
-
     .note-card{
-
       border-radius:var(--radius-lg);
-
       background:linear-gradient(145deg, var(--glass), rgba(255,255,255,0.42));
-
       backdrop-filter:blur(24px) saturate(1.18);
-
       -webkit-backdrop-filter:blur(24px) saturate(1.18);
-
       border:1px solid var(--line);
-
       box-shadow:0 18px 42px rgba(23,33,47,0.08);
-
       overflow:hidden;
-
     }
 
     .section-card{
-
       padding:22px;
-
     }
 
     .library-tools{
-
       display:grid;
-
       grid-template-columns:1.15fr 0.85fr;
-
       gap:14px;
-
       align-items:center;
-
     }
 
     .search-box{
-
       width:100%;
-
       padding:16px 18px;
-
       border-radius:22px;
-
       border:1px solid var(--line);
-
       background:var(--glass-strong);
-
       color:var(--text);
-
       font:inherit;
-
       font-size:15px;
-
       font-weight:650;
-
       outline:none;
-
       box-shadow:0 12px 28px rgba(23,33,47,0.08);
-
     }
 
     .search-box::placeholder{
-
       color:var(--soft);
-
     }
 
     .filter-row{
-
       display:flex;
-
       flex-wrap:wrap;
-
       gap:10px;
-
       align-items:center;
-
       justify-content:flex-end;
-
     }
 
     .filter-chip{
-
       border:1px solid var(--line);
-
       background:var(--glass-strong);
-
       color:var(--text);
-
       padding:12px 14px;
-
       border-radius:999px;
-
       cursor:pointer;
-
       font:inherit;
-
       font-size:13px;
-
       font-weight:800;
-
       transition:.22s ease;
-
       box-shadow:0 8px 20px rgba(23,33,47,0.06);
-
     }
 
     .filter-chip:hover,
-
     .filter-chip.active{
-
       transform:translateY(-1px);
-
       color:#fff;
-
       background:linear-gradient(135deg,var(--accent),var(--accent-2));
-
     }
 
     .variety-grid{
-
       display:grid;
-
       grid-template-columns:repeat(4,1fr);
-
       gap:14px;
-
     }
 
     .variety-card{
-
       padding:18px;
-
       border-radius:24px;
-
       background:linear-gradient(145deg, var(--glass), rgba(255,255,255,0.42));
-
       backdrop-filter:blur(24px) saturate(1.18);
-
       -webkit-backdrop-filter:blur(24px) saturate(1.18);
-
       border:1px solid var(--line);
-
       box-shadow:0 18px 42px rgba(23,33,47,0.08);
-
       cursor:pointer;
-
       transition:.24s ease;
-
       min-height:196px;
-
       display:flex;
-
       flex-direction:column;
-
       justify-content:space-between;
-
     }
 
     .variety-card:hover{
-
       transform:translateY(-4px);
-
       box-shadow:0 24px 52px rgba(23,33,47,0.13);
-
     }
 
     .variety-code{
-
       color:var(--soft);
-
       font-size:12px;
-
       font-weight:850;
-
       letter-spacing:.04em;
-
     }
 
     .variety-name{
-
       margin-top:8px;
-
       font-size:20px;
-
       font-weight:850;
-
       letter-spacing:-0.04em;
-
       line-height:1.05;
-
     }
 
     .variety-thai{
-
       margin-top:5px;
-
       color:var(--muted);
-
       font-size:13px;
-
       font-weight:700;
-
     }
 
     .variety-summary{
-
       margin:12px 0 0;
-
       color:var(--muted);
-
       font-size:12px;
-
       line-height:1.55;
-
       display:-webkit-box;
-
       -webkit-line-clamp:3;
-
       -webkit-box-orient:vertical;
-
       overflow:hidden;
-
     }
 
     .variety-meta{
-
       margin-top:14px;
-
       display:flex;
-
       flex-wrap:wrap;
-
       gap:7px;
-
     }
 
     .pill{
-
       display:inline-flex;
-
       align-items:center;
-
       padding:7px 9px;
-
       border-radius:999px;
-
       font-size:11px;
-
       font-weight:850;
-
       color:var(--text);
-
       background:rgba(255,255,255,0.38);
-
       border:1px solid var(--line);
-
     }
 
     body.dark .pill{
-
       background:rgba(255,255,255,0.06);
-
     }
 
     .pill.priority-high{
-
       color:#fff;
-
       background:linear-gradient(135deg,#37b37e,#62d8a4);
-
     }
 
     .pill.priority-medium{
-
       color:#fff;
-
       background:linear-gradient(135deg,#5967ff,#8d98ff);
-
     }
 
     .pill.priority-low{
-
       color:#fff;
-
       background:linear-gradient(135deg,#8a94a6,#b8c0ce);
-
     }
 
     .empty-state{
-
       display:none;
-
       padding:30px;
-
       border-radius:24px;
-
       text-align:center;
-
       color:var(--muted);
-
       background:var(--glass);
-
       border:1px solid var(--line);
-
     }
 
     .note-grid{
-
       display:grid;
-
       grid-template-columns:repeat(3,1fr);
-
       gap:16px;
-
     }
 
     .note-card{
-
       padding:22px;
-
     }
 
     .note-card h3{
-
       margin:0 0 10px;
-
       font-size:19px;
-
       letter-spacing:-0.03em;
-
     }
 
     .note-card p{
-
       margin:0;
-
       color:var(--muted);
-
       font-size:13px;
-
       line-height:1.7;
-
     }
 
     .modal{
-
       position:fixed;
-
       inset:0;
-
       z-index:50;
-
       display:none;
-
       align-items:center;
-
       justify-content:center;
-
       padding:22px;
-
       background:rgba(7,11,20,0.42);
-
       backdrop-filter:blur(16px);
-
       -webkit-backdrop-filter:blur(16px);
-
     }
 
     .modal.open{
-
       display:flex;
-
     }
 
     .modal-panel{
-
       width:100%;
-
       max-width:960px;
-
       max-height:88vh;
-
       overflow:auto;
-
       border-radius:32px;
-
       background:
-
         linear-gradient(145deg, var(--glass-strong), rgba(255,255,255,0.54));
-
       border:1px solid var(--line);
-
       box-shadow:0 30px 90px rgba(0,0,0,0.28);
-
       padding:26px;
-
     }
 
     body.dark .modal-panel{
-
       background:
-
         linear-gradient(145deg, rgba(28,36,55,0.92), rgba(15,23,42,0.82));
-
     }
 
     .modal-top{
-
       display:flex;
-
       justify-content:space-between;
-
       gap:18px;
-
       align-items:flex-start;
-
       margin-bottom:18px;
-
     }
 
     .modal-code{
-
       color:var(--soft);
-
       font-size:13px;
-
       font-weight:850;
-
       letter-spacing:.06em;
-
     }
 
     .modal-title{
-
       margin:6px 0 0;
-
       font-size:38px;
-
       letter-spacing:-0.06em;
-
       line-height:.95;
-
     }
 
     .modal-subtitle{
-
       margin-top:9px;
-
       color:var(--muted);
-
       font-size:14px;
-
       font-weight:700;
-
       line-height:1.65;
-
     }
 
     .close-btn{
-
       border:1px solid var(--line);
-
       background:var(--glass-strong);
-
       color:var(--text);
-
       width:42px;
-
       height:42px;
-
       border-radius:999px;
-
       cursor:pointer;
-
       font-size:20px;
-
       font-weight:900;
-
       flex:0 0 auto;
-
     }
 
     .detail-grid{
-
       display:grid;
-
       grid-template-columns:repeat(4,1fr);
-
       gap:12px;
-
       margin:18px 0;
-
     }
 
     .detail-mini{
-
       padding:14px;
-
       border-radius:20px;
-
       background:rgba(255,255,255,0.34);
-
       border:1px solid var(--line);
-
     }
 
     body.dark .detail-mini{
-
       background:rgba(255,255,255,0.05);
-
     }
 
     .detail-mini small{
-
       display:block;
-
       color:var(--soft);
-
       font-size:11px;
-
       font-weight:850;
-
       margin-bottom:5px;
-
       text-transform:uppercase;
-
       letter-spacing:.04em;
-
     }
 
     .detail-mini strong{
-
       font-size:13px;
-
       line-height:1.45;
-
     }
 
     .detail-section{
-
       margin-top:16px;
-
       padding:18px;
-
       border-radius:22px;
-
       background:rgba(255,255,255,0.28);
-
       border:1px solid var(--line);
-
     }
 
     body.dark .detail-section{
-
       background:rgba(255,255,255,0.045);
-
     }
 
     .detail-section h3{
-
       margin:0 0 12px;
-
       font-size:18px;
-
       letter-spacing:-0.03em;
-
     }
 
     .detail-section ul{
-
       margin:0;
-
       padding-left:19px;
-
       color:var(--muted);
-
     }
 
     .detail-section li{
-
       margin:8px 0;
-
       line-height:1.65;
-
       font-size:14px;
-
     }
 
     .learning-note{
-
       margin-top:16px;
-
       padding:18px;
-
       border-radius:22px;
-
       color:#fff;
-
       background:linear-gradient(135deg,var(--accent),var(--accent-2),var(--accent-3));
-
       box-shadow:0 18px 42px rgba(89,103,255,0.18);
-
     }
 
     .learning-note h3{
-
       margin:0 0 8px;
-
       font-size:18px;
-
     }
 
     .learning-note p{
-
       margin:0;
-
       font-size:13px;
-
       line-height:1.7;
-
       opacity:.92;
-
     }
 
     .footer{
-
       margin:24px 0 8px;
-
       text-align:center;
-
       font-size:12px;
-
       color:var(--soft);
-
     }
 
     .footer span{
-
       display:inline-flex;
-
       align-items:center;
-
       gap:6px;
-
       padding:8px 12px;
-
       border-radius:999px;
-
       background:rgba(255,255,255,0.34);
-
       border:1px solid var(--line);
-
     }
 
     body.dark .footer span{
-
       background:rgba(255,255,255,0.05);
-
     }
 
     @media(max-width:1020px){
-
       .variety-grid{
-
         grid-template-columns:repeat(3,1fr);
-
       }
 
       .library-tools{
-
         grid-template-columns:1fr;
-
       }
 
       .filter-row{
-
         justify-content:flex-start;
-
       }
 
       .detail-grid{
-
         grid-template-columns:1fr 1fr;
-
       }
 
       .note-grid{
-
         grid-template-columns:1fr;
-
       }
-
     }
 
     @media(max-width:900px){
-
       .hero-grid{
-
         grid-template-columns:1fr;
-
       }
 
       h1{
-
         font-size:42px;
-
       }
-
     }
 
     @media(max-width:640px){
-
       body{
-
         padding:16px;
-
       }
 
       .nav{
-
         border-radius:24px;
-
         align-items:stretch;
-
         flex-direction:column;
-
       }
 
       .nav-left,
-
       .nav-right{
-
         display:grid;
-
         grid-template-columns:1fr 1fr;
-
         width:100%;
-
       }
 
       .nav a,
-
       .theme-btn{
-
         text-align:center;
-
         justify-content:center;
-
       }
 
       .hero{
-
         padding:24px 18px;
-
         border-radius:28px;
-
       }
 
       h1{
-
         font-size:36px;
-
       }
 
       .hero-stats,
-
       .variety-grid,
-
       .detail-grid{
-
         grid-template-columns:1fr;
-
       }
 
       .section-title{
-
         align-items:flex-start;
-
         flex-direction:column;
-
       }
 
       .modal{
-
         padding:14px;
-
       }
 
       .modal-panel{
-
         padding:20px;
-
         border-radius:26px;
-
       }
 
       .modal-title{
-
         font-size:31px;
-
       }
-
     }
-
   </style>
-
 </head>
 
 <body>
 
   <div class="orb one"></div>
-
   <div class="orb two"></div>
-
   <div class="orb three"></div>
 
   <div class="wrap">
 
     <nav class="nav">
-
       <div class="nav-left">
-
         <a href="https://yaitonk.github.io/my-1st-site/">Home</a>
-
         <a href="https://yaitonk.github.io/my-1st-site/brewing.html">Brewing</a>
-
         <a href="https://yaitonk.github.io/my-1st-site/mini-cupping.html">Cupping</a>
-
         <a href="https://yaitonk.github.io/casa-cupping-data/dashboard.html">Dashboard</a>
-
         <a href="https://yaitonk.github.io/my-1st-site/team.html">R&amp;D Team</a>
-
       </div>
 
       <div class="nav-right">
-
         <button id="themeToggle" class="theme-btn">🌙 Dark</button>
-
       </div>
-
     </nav>
 
     <header class="hero">
-
       <div class="hero-grid">
-
         <div>
-
           <div class="eyebrow">🌱 Casa Lab · Coffee Variety Library</div>
-
           <h1>Coffee Beans</h1>
-
           <div class="subtitle">
-
             ฐานข้อมูลสายพันธุ์กาแฟสำหรับบาริสต้า ใช้เรียนรู้เรื่อง origin, parentage, morphology,
-
             cup profile, roasting direction และความเชื่อมโยงของสายพันธุ์ในโลก specialty coffee
-
           </div>
-
         </div>
 
         <div class="hero-stats">
-
           <div class="stat">
-
             <div class="stat-number">71</div>
-
             <div class="stat-label">Varieties / Species</div>
-
           </div>
 
           <div class="stat">
-
             <div class="stat-number">11</div>
-
             <div class="stat-label">Detailed Cards</div>
-
           </div>
 
           <div class="stat">
-
             <div class="stat-number">CVA</div>
-
             <div class="stat-label">Sensory Focus</div>
-
           </div>
 
           <div class="stat">
-
             <div class="stat-number">R&amp;D</div>
-
             <div class="stat-label">Training Library</div>
-
           </div>
-
         </div>
-
       </div>
-
     </header>
 
     <section class="section">
-
       <div class="section-title">
-
         <div>
-
           <h2>Variety Library</h2>
-
           <p>ค้นหาและกดดูรายละเอียดของสายพันธุ์กาแฟแต่ละตัว เหมาะสำหรับใช้สอนทีมบาริสต้าและทีม R&amp;D</p>
-
         </div>
-
       </div>
 
       <div class="section-card">
-
         <div class="library-tools">
-
           <input
-
             id="varietySearch"
-
             class="search-box"
-
             type="search"
-
             placeholder="ค้นหา เช่น typica, geisha, bourbon, Ethiopia, Brazil, JARC..."
-
           />
 
           <div class="filter-row">
-
             <button class="filter-chip active" data-filter="all">All</button>
-
             <button class="filter-chip" data-filter="arabica">Arabica</button>
-
             <button class="filter-chip" data-filter="canephora">Canephora</button>
-
             <button class="filter-chip" data-filter="ethiopia">Ethiopia</button>
-
             <button class="filter-chip" data-filter="brazil">Brazil</button>
-
             <button class="filter-chip" data-filter="competition">Competition</button>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
 
     <section class="section">
-
       <div class="variety-grid" id="varietyGrid"></div>
 
       <div class="empty-state" id="emptyState">
-
         ไม่พบสายพันธุ์ที่ค้นหา ลองเปลี่ยน keyword หรือ filter อีกครั้ง
-
       </div>
-
     </section>
 
     <section class="section">
-
       <div class="section-title">
-
         <div>
-
           <h2>How Baristas Should Use This Page</h2>
-
           <p>ใช้เป็น learning path แบบเร็วสำหรับเชื่อมโยงสายพันธุ์ → รสชาติ → การคั่ว → การสื่อสารกับลูกค้า</p>
-
         </div>
-
       </div>
 
       <div class="note-grid">
-
         <div class="note-card">
-
           <h3>1. Variety Story</h3>
-
           <p>
-
             เริ่มจากที่มาและ parentage ของสายพันธุ์ เช่น Typica, Bourbon, Caturra, Geisha
-
             เพื่อให้ทีมเข้าใจว่าแต่ละสายพันธุ์มีรากทางพันธุกรรมและประวัติศาสตร์ต่างกัน
-
           </p>
-
         </div>
 
         <div class="note-card">
-
           <h3>2. Cup Profile</h3>
-
           <p>
-
             ใช้เทียบ sensory language เช่น floral, citrus, stone fruit, caramel, chocolate, tea-like
-
             เพื่อช่วยให้บาริสต้าอธิบายรสชาติได้แม่นขึ้น
-
           </p>
-
         </div>
 
         <div class="note-card">
-
           <h3>3. Roasting Lens</h3>
-
           <p>
-
             เชื่อมโยง morphology และ density กับการคั่ว เช่น เมล็ดใหญ่แบบ Pacamara ต้องระวัง heat penetration
-
             ส่วน Geisha ต้องเน้น aroma preservation
-
           </p>
-
         </div>
-
       </div>
-
     </section>
 
     <div class="footer">
-
       <span>🌱 Casa Lab Coffee Beans Library · powered by GitHub Pages</span>
-
     </div>
 
   </div>
 
   <div class="modal" id="varietyModal">
-
     <div class="modal-panel">
-
       <div class="modal-top">
-
         <div>
-
           <div class="modal-code" id="modalCode"></div>
-
           <h2 class="modal-title" id="modalTitle"></h2>
-
           <div class="modal-subtitle" id="modalSubtitle"></div>
-
         </div>
 
         <button class="close-btn" id="closeModal">×</button>
-
       </div>
 
       <div class="detail-grid">
-
         <div class="detail-mini">
-
           <small>Type</small>
-
           <strong id="modalType"></strong>
-
         </div>
 
         <div class="detail-mini">
-
           <small>Origin</small>
-
           <strong id="modalOrigin"></strong>
-
         </div>
 
         <div class="detail-mini">
-
           <small>Parentage</small>
-
           <strong id="modalParentage"></strong>
-
         </div>
 
         <div class="detail-mini">
-
           <small>Priority</small>
-
           <strong id="modalPriority"></strong>
-
         </div>
-
       </div>
 
       <div id="modalSections"></div>
 
       <div class="learning-note">
-
         <h3>Barista Learning Angle</h3>
-
         <p id="modalLearning"></p>
-
       </div>
-
     </div>
-
   </div>
 
   <script>
-
     const themeToggle = document.getElementById('themeToggle');
-
     const THEME_KEY = 'casa-beans-theme';
 
     function applySavedTheme() {
-
       const saved = localStorage.getItem(THEME_KEY);
 
       if (saved === 'dark') {
-
         document.body.classList.add('dark');
-
       }
 
       updateThemeButton();
-
     }
 
     function updateThemeButton() {
-
       const isDark = document.body.classList.contains('dark');
-
       themeToggle.textContent = isDark ? '☀️ Light' : '🌙 Dark';
-
     }
 
     themeToggle.addEventListener('click', () => {
-
       document.body.classList.toggle('dark');
 
       const isDark = document.body.classList.contains('dark');
-
       localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
 
       updateThemeButton();
-
     });
 
     const varieties = [
-
       {
-
         code:"#001",
-
         slug:"typica",
-
         name:"Typica",
-
         thai:"ทิปปิก้า",
-
         type:"Coffee-Variety · Arabica",
-
         origin:"Ethiopia · Yemen",
-
         priority:"High",
-
         parentage:"Founder Variety",
-
         tags:["arabica","ethiopia","competition"],
-
         summary:"หนึ่งในสายพันธุ์ต้นตระกูลดั้งเดิมที่สุดของกาแฟอาราบิก้า ให้รสสะอาด ละมุน floral และเป็น flavor benchmark สำคัญของ specialty coffee",
-
         sections:{
-
           "Genetics":[
-
             "อยู่ในวงศ์ Rubiaceae สกุลกาแฟ สายพันธุ์อาราบิก้า มีจำนวนโครโมโซม 2n = 4x = 44",
-
             "เป็นหนึ่งใน founder variety สำคัญของกาแฟอาราบิก้าที่แพร่กระจายออกจากเอธิโอเปียผ่านเยเมน อินเดีย ชวา และมาร์ตินีก",
-
             "มีความหลากหลายทางพันธุกรรมต่ำ โครงสร้างยีนค่อนข้างบริสุทธิ์สูง"
-
           ],
-
           "Morphology":[
-
             "ลำต้นสูงใหญ่ เติบโตตามธรรมชาติได้ประมาณ 3.5–5 เมตร",
-
             "กิ่งข้างยาว ทรงพุ่มคล้ายกรวยคว่ำ",
-
             "ใบอ่อนมักมีสีทองแดง ผลเชอร์รี่ค่อนข้างใหญ่ รูปทรงรี"
-
           ],
-
           "History / Commercial":[
-
             "เป็นประวัติศาสตร์ที่มีชีวิตของการปลูกกาแฟยุคใหม่",
-
             "มีจุดอ่อนคืออ่อนไหวต่อโรคราสนิมและให้ผลผลิตต่ำกว่าสายพันธุ์ลูกผสมสมัยใหม่",
-
             "โดดเด่นด้าน cup quality: clean, floral, sweet, delicate"
-
           ],
-
           "Cup Profile":[
-
             "floral ละเอียด",
-
             "sweetness นุ่ม",
-
             "acidity สะอาด",
-
             "body บางถึงกลาง",
-
             "aftertaste ใสและ elegant"
-
           ],
-
           "Roasting Note":[
-
             "เหมาะกับการคั่วที่รักษาความใสของ acidity และ floral",
-
             "ระวัง Maillard ยาวเกินไปจน cup กลายเป็น caramel หรือ savory หนัก",
-
             "ควรใช้เป็น benchmark เทียบกับ Bourbon และ Caturra"
-
           ]
-
         },
-
         learning:"ใช้ Typica เป็น benchmark สำหรับอธิบายคำว่า clean cup, delicate floral, soft sweetness และใช้เปรียบเทียบกับ Bourbon หรือ Caturra ได้ดี"
-
       },
 
       {
-
         code:"#002",
-
         slug:"bourbon",
-
         name:"Bourbon",
-
         thai:"เบอร์บอน",
-
         type:"Coffee-Variety · Arabica",
-
         origin:"Bourbon Island / Réunion",
-
         priority:"High",
-
         parentage:"Natural Mutation of Typica",
-
         tags:["arabica","competition"],
-
         summary:"สายพันธุ์สำคัญที่ให้ความหวานสูง body กลม และเป็น parentage ของหลายสายพันธุ์ เช่น Caturra, Pacas, Mundo Novo",
-
         sections:{
-
           "Genetics":[
-
             "เกิดจากการกลายพันธุ์ตามธรรมชาติของ Typica",
-
             "เป็นหนึ่งในสองสายพันธุ์หลักต้นตระกูลร่วมกับ Typica",
-
             "เป็นพ่อแม่พันธุ์หลักของ Caturra, Mundo Novo, Pacas และสายพันธุ์เชิงพาณิชย์อีกหลายชนิด"
-
           ],
-
           "Morphology":[
-
             "ลำต้นสูงปานกลางถึงสูง ประมาณ 3–4 เมตร",
-
             "กิ่งข้างทำมุมแคบกว่าทิปปิก้า ทำให้ทรงพุ่มดูแน่นและกลมกว่า",
-
             "ใบอ่อนส่วนใหญ่มักเป็นสีเขียว ผลเชอร์รี่มีสีแดง และมีกลายพันธุ์เป็น Yellow Bourbon / Orange Bourbon"
-
           ],
-
           "History / Commercial":[
-
             "ตั้งชื่อตามเกาะ Bourbon ซึ่งปัจจุบันคือ Réunion",
+            "แพร่กระจายสู่บราซิลและอเมริกากลางในช่วงศตวรรษที่ 19",
+            "ให้ผลผลิตมากกว่า Typica แต่ยังอ่อนไหวต่อโรคและสภาพอากาศร้อนจัด"
+          ],
+          "Cup Profile":[
+            "caramel sweetness",
+            "rounded body",
+            "balanced acidity",
+            "red fruit",
+            "milk chocolate"
+          ],
+          "Roasting Note":[
+            "รองรับ development ได้มากกว่า Gesha หรือ Typica บาง lot",
+            "เหมาะกับ profile ที่เน้น sweetness และ mouthfeel",
+            "ระวังไม่ให้ development หนักจน fruit tone หาย"
+          ]
+        },
+        learning:"เหมาะสำหรับสอนเรื่อง sweetness, body และ balance เพราะ Bourbon มักแสดงโครงสร้างรสชาติที่ชัดและเข้าใจง่าย"
+      },
 
-            "แพร่กระจายสู่บราซ
+      {
+        code:"#003",
+        slug:"caturra",
+        name:"Caturra",
+        thai:"คาทูร่า",
+        type:"Coffee-Variety · Arabica",
+        origin:"Brazil",
+        priority:"Medium",
+        parentage:"Dwarf Mutation of Bourbon",
+        tags:["arabica","brazil"],
+        summary:"สายพันธุ์แคระจาก Bourbon ปลูกหนาแน่นได้ ผลผลิตดี ใช้เป็นฐานสำคัญในระบบปรับปรุงพันธุ์กาแฟ",
+        sections:{
+          "Genetics":[
+            "เกิดจากการกลายพันธุ์ตามธรรมชาติแบบต้นเตี้ยของ Bourbon",
+            "ลักษณะแคระถูกควบคุมโดย Single Dominant Gene: Ct",
+            "เป็นพ่อแม่พันธุ์หลักของ Catuai"
+          ],
+          "Morphology":[
+            "ต้นเตี้ยและกะทัดรัด สูงประมาณ 1.5–2.5 เมตร",
+            "กิ่งข้างหนาแน่น ข้อกิ่งสั้น ทรงพุ่มคล้ายพุ่มไม้เตี้ย",
+            "ใบกว้างและสั้นกว่า Bourbon ขอบใบเป็นคลื่นชัด"
+          ],
+          "Commercial":[
+            "เหมาะกับ high-density planting",
+            "ช่วยให้ดูแลและเก็บเกี่ยวด้วยแรงงานคนได้ง่าย",
+            "ไม่มีความต้านทานโรคราสนิม จึงถูกแทนที่ในบางพื้นที่ด้วย hybrid รุ่นใหม่"
+          ],
+          "Cup Profile":[
+            "citrus acidity",
+            "clean cup",
+            "medium sweetness",
+            "complexity ต่ำกว่า Typica / Bourbon เล็กน้อย"
+          ],
+          "Roasting Note":[
+            "เป็นสายพันธุ์ที่เหมาะกับการทดลอง roast profile เพราะค่อนข้างอ่านง่าย",
+            "ถ้าเร่งเร็วเกินไป cup อาจออก sharp หรือ thin",
+            "ถ้ายืด Maillard มากเกินไป acidity จะหม่นลง"
+          ]
+        },
+        learning:"ใช้สอนเรื่อง dwarf mutation, high-density planting และความสัมพันธ์ระหว่าง agronomy กับ economics ของฟาร์มกาแฟ"
+      },
+
+      {
+        code:"#004",
+        slug:"catuai",
+        name:"Catuai",
+        thai:"คาทุย",
+        type:"Coffee-Variety · Arabica",
+        origin:"Brazil",
+        priority:"Medium",
+        parentage:"Caturra × Mundo Novo",
+        tags:["arabica","brazil"],
+        summary:"ลูกผสมจาก Caturra และ Mundo Novo ให้ผลผลิตสูง ต้นไม่สูงมาก และเหมาะกับการผลิตเชิงพาณิชย์",
+        sections:{
+          "Genetics":[
+            "พัฒนาโดย IAC ประเทศบราซิล เริ่มผสมในปี 1949 และเผยแพร่ในปี 1972",
+            "ได้รับ dwarfism จาก Caturra และความแข็งแรงจาก Mundo Novo",
+            "เป็นสายพันธุ์ที่ผสมขึ้นโดยมนุษย์เพื่อแก้โจทย์ผลผลิตและการจัดการสวน"
+          ],
+          "Morphology":[
+            "ทรงต้นต่ำถึงปานกลาง ประมาณ 1.5–2.8 เมตร",
+            "กิ่งก้านหนาแน่นและสั้น ผลไม่หลุดร่วงง่าย",
+            "มี Red Catuai และ Yellow Catuai"
+          ],
+          "Commercial":[
+            "เป็นสายพันธุ์เชิงพาณิชย์สำคัญของบราซิล",
+            "ปรับตัวได้กว้างในระดับความสูงประมาณ 500–1,600 เมตร",
+            "ให้ผลผลิตสูง เหมาะกับระบบเกษตรเชิงอุตสาหกรรม"
+          ],
+          "Cup Profile":[
+            "nutty",
+            "caramel",
+            "mild citrus",
+            "medium body",
+            "balanced but not highly complex"
+          ],
+          "Roasting Note":[
+            "เหมาะกับ daily roast, espresso base และ profile ที่ต้องการ sweetness ใช้งานง่าย",
+            "ถ้าเป็น lot คุณภาพสูง สามารถดัน acidity และ sweetness ให้สดขึ้นได้",
+            "ต้องระวังไม่ให้ cup จืดหรือ flat จากการคั่วปลอดภัยเกินไป"
+          ]
+        },
+        learning:"เหมาะสำหรับอธิบาย concept ว่า variety บางตัวถูกสร้างขึ้นเพื่อ productivity และ farm management มากกว่าความซับซ้อนเชิง flavor เพียงอย่างเดียว"
+      },
+
+      {
+        code:"#005",
+        slug:"mundo-novo",
+        name:"Mundo Novo",
+        thai:"มุนโด โนโว",
+        type:"Coffee-Variety · Arabica",
+        origin:"Brazil",
+        priority:"High",
+        parentage:"Bourbon × Typica · Natural Hybrid",
+        tags:["arabica","brazil"],
+        summary:"ลูกผสมธรรมชาติของ Bourbon และ Typica สำคัญมากในบราซิล ให้ต้นแข็งแรง เมล็ดค่อนข้างใหญ่ และรสชาติสมดุล",
+        sections:{
+          "Genetics":[
+            "เป็นลูกผสมตามธรรมชาติของ Bourbon และ Typica",
+            "ค้นพบโดยนักวิจัยชาวบราซิลในรัฐเซาเปาลูช่วงปี 1940",
+            "ได้รับการคัดเลือกและยอมรับในปี 1952"
+          ],
+          "Morphology":[
+            "ต้นใหญ่และสูงประมาณ 3.5–4.5 เมตร",
+            "กิ่งก้านแข็งแรง ใบอ่อนสีทองแดง ใบแก่เขียวเข้ม",
+            "ผลกลม สีแดงเมื่อสุก เมล็ดค่อนข้างใหญ่"
+          ],
+          "Cup Quality":[
+            "รสชาติสมดุล",
+            "มักให้โทนถั่ว ช็อกโกแลตนม และ sweetness แบบ mellow",
+            "เหมาะกับพื้นที่ราบหรือระดับความสูงต่ำกว่าสายพันธุ์ delicate บางชนิด"
+          ],
+          "Roasting Note":[
+            "เหมาะกับ profile ที่เน้น sweetness, chocolate, nutty และ round body",
+            "ถ้าต้องการความสว่าง ควรระวังอย่าให้ Maillard ยาวเกินไป",
+            "สามารถใช้เป็น reference ของ Brazilian profile ได้ดี"
+          ]
+        },
+        learning:"ใช้เปรียบเทียบกับ Catuai ได้ดี เพราะ Catuai ได้ความแข็งแรงส่วนหนึ่งมาจาก Mundo Novo"
+      },
+
+      {
+        code:"#006",
+        slug:"pacas",
+        name:"Pacas",
+        thai:"ปาคาส",
+        type:"Coffee-Variety · Arabica",
+        origin:"El Salvador",
+        priority:"Medium",
+        parentage:"Natural Mutation of Bourbon",
+        tags:["arabica"],
+        summary:"การกลายพันธุ์ตามธรรมชาติของ Bourbon มีทรงต้นเล็ก ให้ผลผลิตสูงกว่า Bourbon และเป็นต้นกำเนิดของ Pacamara",
+        sections:{
+          "Genetics":[
+            "เกิดจาก natural mutation ของ Bourbon",
+            "ค้นพบที่ไร่ของครอบครัว Francisco Pacas ในปี 1949",
+            "มียีนแคระ Ct gene คล้าย Caturra"
+          ],
+          "Morphology":[
+            "ต้นขนาดเล็กประมาณ 1.5–2.5 เมตร",
+            "กิ่งก้านหนาแน่น พุ่มแน่น ใบอ่อนสีทองแดง",
+            "ผลสีแดง ขนาดผลปานกลาง"
+          ],
+          "History":[
+            "มีความสำคัญมากใน El Salvador",
+            "ให้ผลผลิตสูงกว่า Bourbon ดั้งเดิมประมาณ 30%",
+            "เป็นหนึ่งในสายพันธุ์ต้นกำเนิดของ Pacamara"
+          ],
+          "Cup Profile":[
+            "sweet",
+            "balanced",
+            "soft fruit",
+            "caramel",
+            "medium body"
+          ],
+          "Roasting Note":[
+            "เหมาะกับการคั่วที่เน้น sweetness และ structure",
+            "ถ้า process ดีสามารถให้ fruit และ floral ที่นุ่มได้",
+            "เป็นสายพันธุ์ที่ใช้เล่า parentage ของ Pacamara ได้ดี"
+          ]
+        },
+        learning:"เหมาะสำหรับสอนเรื่อง mutation จาก Bourbon และการพัฒนาสายพันธุ์ที่ต่อยอดไปสู่ Pacamara"
+      },
+
+      {
+        code:"#007",
+        slug:"pacamara",
+        name:"Pacamara",
+        thai:"ปาคามารา",
+        type:"Coffee-Variety · Arabica",
+        origin:"El Salvador",
+        priority:"High",
+        parentage:"Pacas × Maragogipe",
+        tags:["arabica","competition"],
+        summary:"เมล็ดใหญ่ มี cup profile ชัด expressive และมักใช้ในกาแฟประกวด แต่ต้องระวังการคั่วให้ความร้อนเข้าแกนเมล็ดดี",
+        sections:{
+          "Genetics":[
+            "เกิดจากการผสม Pacas กับ Maragogipe",
+            "รวมลักษณะต้นกะทัดรัดของ Pacas กับขนาดเมล็ดใหญ่ของ Maragogipe",
+            "เป็นสายพันธุ์ที่มีเอกลักษณ์สูงในตลาด specialty coffee"
+          ],
+          "Morphology":[
+            "เมล็ดมีขนาดใหญ่กว่าสายพันธุ์อาราบิก้าทั่วไป",
+            "ลักษณะทางกายภาพอาจแปรผันตามแหล่งปลูกและการคัดเลือก",
+            "ต้องใช้การคัดเกรดและคั่วที่แม่นยำ"
+          ],
+          "Cup Quality":[
+            "มักให้ peach, tropical fruit, floral, creamy texture",
+            "บาง lot มี herbal หรือ spicy complexity",
+            "ถ้าคั่วไม่ถึงแกน อาจเกิด underdevelopment ได้ง่าย"
+          ],
+          "Roasting Note":[
+            "ต้องระวัง heat penetration เพราะเมล็ดใหญ่",
+            "ถ้าคั่วเร็วเกินไป surface อาจดูพัฒนาแล้ว แต่แกนในยังไม่สุก",
+            "เหมาะกับการประเมิน mouthfeel, complexity และ finish"
+          ]
+        },
+        learning:"ใช้สอนเรื่อง bean size, heat penetration และความเสี่ยง outside developed แต่ inside underdeveloped"
+      },
+
+      {
+        code:"#020",
+        slug:"geisha",
+        name:"Geisha / Gesha",
+        thai:"เกชา / เกอิชา",
+        type:"Coffee-Variety · Arabica",
+        origin:"Ethiopia",
+        priority:"High",
+        parentage:"Ethiopian Landrace",
+        tags:["arabica","ethiopia","competition"],
+        summary:"สายพันธุ์ระดับ iconic ของ specialty coffee โดดเด่นด้วย white floral, jasmine, bergamot, peach และ cup complexity สูงมาก",
+        sections:{
+          "Genetics":[
+            "มีต้นกำเนิดจากบริเวณป่า Gesha ใกล้ Jimma ทางตะวันตกเฉียงใต้ของเอธิโอเปีย",
+            "เป็นส่วนหนึ่งของกลุ่มยีนกาแฟอาราบิก้าป่าดั้งเดิม",
+            "มีระยะห่างทางพันธุกรรมชัดเมื่อเทียบกับ Bourbon และ Typica"
+          ],
+          "Morphology":[
+            "ลำต้นสูงใหญ่และเรียวบาง สูงได้ประมาณ 4–5 เมตร",
+            "กิ่งข้างทำมุมกว้าง ทรงพุ่มโปร่งและสง่างาม",
+            "ใบเรียวยาว สีเขียวอ่อน ผลและเมล็ดมีทรงรียาวเป็นเอกลักษณ์"
+          ],
+          "History":[
+            "สร้างชื่อเสียงระดับโลกจาก Hacienda La Esmeralda ใน Best of Panama ปี 2004",
+            "เส้นทางสายพันธุ์สำคัญ: Ethiopia → CATIE Costa Rica → Panama",
+            "ปัจจุบัน Geisha จาก Panama เป็นหนึ่งในกาแฟที่มีมูลค่าสูงที่สุดในตลาดประมูล"
+          ],
+          "Cup Quality":[
+            "white flower",
+            "jasmine",
+            "bergamot",
+            "mandarin",
+            "peach",
+            "tropical fruit",
+            "silky acidity",
+            "long clean aftertaste"
+          ],
+          "Roasting Note":[
+            "ต้องระวังการสูญเสีย floral aromatics",
+            "ไม่ควรให้ Maillard หนักเกินไปจนกลายเป็น caramel-dominant",
+            "late development ควรสะอาด ไม่ flick หรือ bitter finish"
+          ]
+        },
+        learning:"เหมาะมากสำหรับสอนเรื่อง aroma preservation ในการคั่ว เพราะ floral compounds เสียได้ง่ายถ้า Maillard หนักหรือ development ร้อนเกินไป"
+      },
+
+      {
+        code:"#021",
+        slug:"ethiopian-landrace",
+        name:"Ethiopian Landrace",
+        thai:"สายพันธุ์ดั้งเดิมเอธิโอเปีย",
+        type:"Coffee-Variety · Arabica",
+        origin:"Ethiopia",
+        priority:"High",
+        parentage:"Wild / Semi-domesticated Arabica Populations",
+        tags:["arabica","ethiopia","competition"],
+        summary:"ไม่ใช่สายพันธุ์เดี่ยว แต่เป็นกลุ่มความหลากหลายทางพันธุกรรมของอาราบิก้าป่าและกึ่งป่าหลายร้อยถึงหลายพันสายพันธุ์",
+        sections:{
+          "Genetics":[
+            "เป็นตัวแทนของศูนย์กลางความหลากหลายทางพันธุกรรมของ Coffea arabica",
+            "พื้นที่สำคัญ ได้แก่ Kaffa, Jimma, Illubabor และภูมิภาคตะวันตกเฉียงใต้ของเอธิโอเปีย",
+            "เป็น gene bank สำคัญที่สุดแห่งหนึ่งของโลกกาแฟ"
+          ],
+          "Morphology":[
+            "มีความหลากหลายสูงมาก ทั้งความสูงต้น รูปทรงใบ สีผล และขนาดเมล็ด",
+            "สีผลอาจพบได้ตั้งแต่แดง เหลือง ส้ม ไปจนถึงชมพู",
+            "แต่ละพื้นที่อาจมี population ที่แสดง cup profile ต่างกันมาก"
+          ],
+          "Cup Quality":[
+            "โดยภาพรวมมักโดดเด่นด้วย floral, tea-like, citrus, berry, tropical fruit และ spice",
+            "โปรไฟล์ขึ้นกับ microclimate, processing และ local genetics",
+            "เป็นแหล่งที่มาสำคัญของความหลากหลายด้าน flavor ใน specialty coffee"
+          ],
+          "Roasting Note":[
+            "ควรคั่วโดยเริ่มจาก cup goal เพราะแต่ละ lot มีความหลากหลายสูง",
+            "ถ้าเป็น washed Ethiopia มักเน้น clarity, floral และ tea-like",
+            "ถ้าเป็น natural Ethiopia ต้องระวัง fermentation note และ bitterness ช่วงท้าย"
+          ]
+        },
+        learning:"ใช้สอนบาริสต้าให้เข้าใจว่า Ethiopian Heirloom / Landrace ไม่ใช่ชื่อ variety เดี่ยว แต่เป็นกลุ่มพันธุกรรมที่หลากหลายมาก"
+      },
+
+      {
+        code:"#023",
+        slug:"74158",
+        name:"74158",
+        thai:"74158 · JARC Selection",
+        type:"Coffee-Variety · Arabica",
+        origin:"Ethiopia",
+        priority:"Medium",
+        parentage:"JARC Selection",
+        tags:["arabica","ethiopia"],
+        summary:"สายพันธุ์คัดเลือกโดย JARC จากประชากรกาแฟป่าทางตะวันตกเฉียงใต้ของเอธิโอเปีย มี Ethiopian profile และความเสถียรในการปลูกดี",
+        sections:{
+          "Genetics":[
+            "อยู่ในกลุ่มอาราบิก้าที่คัดเลือกจากประชากรกาแฟป่าของเอธิโอเปีย",
+            "คัดเลือกโดย Jimma Agricultural Research Center หรือ JARC",
+            "มีความเชื่อมโยงกับการพัฒนาสายพันธุ์จากช่วงปี 1970"
+          ],
+          "Morphology":[
+            "ทรงต้นสูงปานกลางถึงสูง ประมาณ 2.5–3.5 เมตร",
+            "ใบขนาดปานกลาง สีเขียวเข้ม ยอดอ่อนมีสีเขียวอมทองแดง",
+            "ผลสีแดง เมล็ดขนาดปานกลาง"
+          ],
+          "History":[
+            "เป็นหนึ่งในสายพันธุ์ที่ใช้แพร่หลายในพื้นที่ผลิตกาแฟพิเศษของเอธิโอเปีย",
+            "โดดเด่นเรื่อง Ethiopian profile และการปรับตัวในพื้นที่สูง",
+            "มีความต้านทานโรคราสนิมดีกว่าสายพันธุ์ดั้งเดิมบางชนิด"
+          ],
+          "Cup Profile":[
+            "floral",
+            "citrus",
+            "tea-like",
+            "soft fruit",
+            "clean sweetness"
+          ],
+          "Roasting Note":[
+            "เหมาะกับการคั่วที่คงความใสและ aromatic lift",
+            "ไม่ควรทำ Maillard หนักเกินไปถ้าต้องการ Ethiopian profile",
+            "ใช้เป็นตัวอย่างของ JARC selection ที่มี character เฉพาะ"
+          ]
+        },
+        learning:"เหมาะสำหรับเชื่อมโยงเรื่อง variety selection กับ cup identity ของ Ethiopia ว่าความ floral/tea-like ไม่ได้มาจาก process อย่างเดียว"
+      },
+
+      {
+        code:"#024",
+        slug:"robusta",
+        name:"Robusta",
+        thai:"โรบัสต้า",
+        type:"Coffee Species · Canephora",
+        origin:"Central / West Africa",
+        priority:"Medium",
+        parentage:"Coffea canephora",
+        tags:["canephora"],
+        summary:"กาแฟคนละ species กับ Arabica มี caffeine สูงกว่า body หนา และใช้มากใน espresso blend / instant coffee",
+        sections:{
+          "Genetics":[
+            "เป็น Coffea canephora ไม่ใช่ Coffea arabica",
+            "โดยทั่วไปมีความแข็งแรงและทนโรคมากกว่าอาราบิก้า",
+            "มี caffeine สูงกว่าอาราบิก้า"
+          ],
+          "Cup Quality":[
+            "มักให้ body หนา crema ดี bitterness สูงกว่า",
+            "specialty robusta สามารถมี sweetness, nutty, cacao และ fruit tone ได้",
+            "คุณภาพขึ้นกับ cultivar, processing และ post-harvest อย่างมาก"
+          ],
+          "Commercial":[
+            "นิยมใช้ใน espresso blend และ instant coffee",
+            "ปลูกได้ดีในพื้นที่ร้อนและต่ำกว่า Arabica",
+            "มีบทบาทมากขึ้นใน climate-resilient coffee"
+          ],
+          "Roasting Note":[
+            "ต้องระวัง bitterness และ harsh finish",
+            "มักต้องการ profile ที่พัฒนาโครงสร้าง sweetness ให้พอ",
+            "ถ้าเป็น fine robusta ควรประเมิน clean cup, body และ aftertaste แยกจาก robusta commodity"
+          ]
+        },
+        learning:"ใช้สอนให้บาริสต้าแยก species, caffeine, body และ bitterness ระหว่าง Arabica กับ Canephora อย่างชัดเจน"
+      }
+    ];
+
+    const varietyIndex = [
+      ["#008","maragogipe","Maragogipe","มาราโกจิเป้","Coffee-Variety · Arabica","Brazil","Medium","Mutation of Typica",["arabica","brazil"]],
+      ["#009","castillo","Castillo","คาสติโย","Coffee-Variety · Arabica Hybrid","Colombia","Medium","Caturra × Timor Hybrid",["arabica"]],
+      ["#010","colombia","Colombia","โคลอมเบีย","Coffee-Variety · Arabica Hybrid","Colombia","Medium","Caturra × Timor Hybrid",["arabica"]],
+      ["#011","timor-hybrid","Timor Hybrid","ติมอร์ ไฮบริด","Coffee-Variety · Arabica Hybrid","Timor","High","Arabica × Robusta",["arabica","canephora"]],
+      ["#012","sarchimor","Sarchimor","ซาร์ชิมอร์","Coffee-Variety · Arabica Hybrid","Costa Rica / Timor Line","Medium","Villa Sarchi × Timor Hybrid",["arabica"]],
+      ["#013","villa-sarchi","Villa Sarchi","วิลลา ซาร์ชี","Coffee-Variety · Arabica","Costa Rica","Medium","Bourbon Mutation",["arabica"]],
+      ["#014","yellow-bourbon","Yellow Bourbon","เบอร์บอนเหลือง","Coffee-Variety · Arabica","Brazil","High","Bourbon Mutation",["arabica","brazil","competition"]],
+      ["#015","orange-bourbon","Orange Bourbon","เบอร์บอนส้ม","Coffee-Variety · Arabica","Latin America","Medium","Bourbon Mutation",["arabica"]],
+      ["#016","sl28","SL28","เอสแอล 28","Coffee-Variety · Arabica","Kenya","High","Scott Labs Selection",["arabica","competition"]],
+      ["#017","sl34","SL34","เอสแอล 34","Coffee-Variety · Arabica","Kenya","High","Scott Labs Selection",["arabica","competition"]],
+      ["#018","ruiru-11","Ruiru 11","รูอิรู 11","Coffee-Variety · Arabica Hybrid","Kenya","Medium","Complex Hybrid",["arabica"]],
+      ["#019","batian","Batian","บาเทียน","Coffee-Variety · Arabica","Kenya","Medium","Kenya Selection",["arabica"]],
+      ["#022","gesha-74110","Gesha 74110","เกชา 74110","Coffee-Variety · Arabica","Ethiopia","Medium","JARC Selection",["arabica","ethiopia","competition"]],
+      ["#025","liberica","Liberica","ลิเบอริกา","Coffee Species","West Africa / Southeast Asia","Medium","Coffea liberica",[]],
+      ["#026","excelsa","Excelsa","เอ็กเซลซา","Coffee Species","Southeast Asia","Medium","Liberica group",[]],
+      ["#027","kona-typica","Kona Typica","โคน่า ทิปปิก้า","Coffee-Variety · Arabica","Hawaii","Medium","Typica Line",["arabica"]],
+      ["#028","blue-mountain-typica","Blue Mountain Typica","บลูเมาท์เทน ทิปปิก้า","Coffee-Variety · Arabica","Jamaica","High","Typica Line",["arabica","competition"]],
+      ["#029","mocha","Mocha","โมคา","Coffee-Variety · Arabica","Yemen","High","Yemen Landrace",["arabica","competition"]],
+      ["#030","harrar","Harrar","ฮาร์ราร์","Coffee-Variety · Arabica","Ethiopia","High","Ethiopian Landrace",["arabica","ethiopia","competition"]],
+      ["#031","k7","K7","เค 7","Coffee-Variety · Arabica","Kenya","Medium","Bourbon-related Selection",["arabica"]],
+      ["#032","french-mission-bourbon","French Mission Bourbon","เฟรนช์มิชชัน เบอร์บอน","Coffee-Variety · Arabica","East Africa","Medium","Bourbon Line",["arabica"]],
+      ["#033","jackson","Jackson","แจ็คสัน","Coffee-Variety · Arabica","Rwanda / Burundi","Medium","Bourbon-related",["arabica"]],
+      ["#034","mibirizi","Mibirizi","มิบิริซี","Coffee-Variety · Arabica","Rwanda / Burundi","Medium","Bourbon-related",["arabica"]],
+      ["#035","icatu","Icatu","อิคาตู","Coffee-Variety · Arabica Hybrid","Brazil","Medium","Arabica × Robusta backcross",["arabica","brazil","canephora"]],
+      ["#036","obatã","Obatã","โอบาตา","Coffee-Variety · Arabica Hybrid","Brazil","Medium","Sarchimor-derived",["arabica","brazil"]],
+      ["#037","topázio","Topázio","โทปาซิโอ","Coffee-Variety · Arabica","Brazil","Medium","Mundo Novo × Catuai",["arabica","brazil"]],
+      ["#038","acaiá","Acaiá","อาไซอา","Coffee-Variety · Arabica","Brazil","Medium","Mundo Novo Selection",["arabica","brazil"]],
+      ["#039","sudan-rume","Sudan Rume","ซูดาน รูเม","Coffee-Variety · Arabica","South Sudan","High","Wild Arabica",["arabica","competition"]],
+      ["#040","catimor","Catimor","คาติมอร์","Coffee-Variety · Arabica Hybrid","Portugal / Timor Line","Medium","Caturra × Timor Hybrid",["arabica"]],
+      ["#041","arusha","Arusha","อารูชา","Coffee-Variety · Arabica","Tanzania","Medium","Typica / Bourbon-related",["arabica"]],
+      ["#042","kent","Kent","เคนต์","Coffee-Variety · Arabica","India","Medium","Typica Selection",["arabica"]],
+      ["#043","s795","S795","เอส 795","Coffee-Variety · Arabica","India","Medium","Kent × S288",["arabica"]],
+      ["#044","cauvery","Cauvery","คอเวรี","Coffee-Variety · Arabica Hybrid","India","Medium","Catimor Line",["arabica"]],
+      ["#045","catimor-yunnan-selection","Catimor Yunnan Selection","คาติมอร์ ยูนนาน","Coffee-Variety · Arabica Hybrid","China / Yunnan","Medium","Catimor Selection",["arabica"]],
+      ["#046","yunnan-arabica","Yunnan Arabica","ยูนนาน อาราบิก้า","Coffee-Variety · Arabica","China / Yunnan","Medium","Mixed Arabica Lines",["arabica"]],
+      ["#047","hainan-robusta","Hainan Robusta","ไห่หนาน โรบัสต้า","Coffee Species · Canephora","China / Hainan","Medium","Coffea canephora",["canephora"]],
+      ["#048","conilon","Conilon","โคนิลอน","Coffee Species · Canephora","Brazil","Medium","Coffea canephora",["canephora","brazil"]],
+      ["#049","parainema","Parainema","ปาราอิเนมา","Coffee-Variety · Arabica Hybrid","Honduras","Medium","Sarchimor Line",["arabica"]],
+      ["#050","java","Java","ชวา","Coffee-Variety · Arabica","Indonesia / Java","Medium","Typica / Ethiopian Line",["arabica"]],
+      ["#051","costa-rica-95","Costa Rica 95","คอสตาริกา 95","Coffee-Variety · Arabica Hybrid","Costa Rica","Medium","Catimor Line",["arabica"]],
+      ["#052","wild-arabica","Wild Arabica","อาราบิก้าป่า","Coffee-Variety · Arabica","Ethiopia","High","Wild Coffea arabica",["arabica","ethiopia","competition"]],
+      ["#053","pink-bourbon","Pink Bourbon","พิงก์ เบอร์บอน","Coffee-Variety · Arabica","Colombia","High","Bourbon-related",["arabica","competition"]],
+      ["#054","yunka-no-1","Yunka No.1","ยุนกะ หมายเลข 1","Coffee-Variety · Arabica","China / Yunnan","Medium","Yunnan Selection",["arabica"]],
+      ["#055","yunka-no-2","Yunka No.2","ยุนกะ หมายเลข 2","Coffee-Variety · Arabica","China / Yunnan","Medium","Yunnan Selection",["arabica"]],
+      ["#056","f1-hybrid","F1 Hybrid","เอฟวัน ไฮบริด","Coffee-Variety · Arabica Hybrid","Multiple Origins","High","First-generation Hybrid",["arabica","competition"]],
+      ["#057","marsellesa","Marsellesa","มาร์เซเยซา","Coffee-Variety · Arabica Hybrid","Nicaragua / Central America","Medium","Sarchimor-derived",["arabica"]],
+      ["#058","wild-canephora","Wild Canephora","คาเนฟอราป่า","Coffee Species · Canephora","Central / West Africa","Medium","Wild Coffea canephora",["canephora"]],
+      ["#059","eugenioides","Eugenioides","ยูจีนิออยเดส","Coffee Species","East Africa","High","Coffea eugenioides",["competition"]],
+      ["#060","starmaya","Starmaya","สตาร์มายา","Coffee-Variety · Arabica Hybrid","Nicaragua","Medium","F1 Hybrid",["arabica"]],
+      ["#061","laurina","Laurina","ลอรีนา","Coffee-Variety · Arabica","Réunion","High","Bourbon Mutation",["arabica","competition"]],
+      ["#062","papayo","Papayo","ปาปาโย","Coffee-Variety · Arabica","Colombia","High","Rare / Local Selection",["arabica","competition"]],
+      ["#063","caturron","Caturron","คาทูร์รอน","Coffee-Variety · Arabica","Colombia","Medium","Local Selection",["arabica"]],
+      ["#064","sl14","SL14","เอสแอล 14","Coffee-Variety · Arabica","Kenya / Uganda","Medium","Scott Labs Selection",["arabica"]],
+      ["#065","blue-bourbon","Blue Bourbon","บลู เบอร์บอน","Coffee-Variety · Arabica","Rwanda / Latin America","Medium","Bourbon-related",["arabica"]],
+      ["#066","pache","Pache","ปาเช่","Coffee-Variety · Arabica","Guatemala","Medium","Typica Mutation",["arabica"]],
+      ["#067","pache-colis","Pache Colis","ปาเช่ โคลิส","Coffee-Variety · Arabica","Guatemala","Medium","Pache × Caturra",["arabica"]],
+      ["#068","tekisic","Tekisic","เทคิซิก","Coffee-Variety · Arabica","El Salvador","High","Bourbon Selection",["arabica","competition"]],
+      ["#069","cavimor","Cavimor","คาวิมอร์","Coffee-Variety · Arabica Hybrid","Central America","Medium","Catimor-related",["arabica"]],
+      ["#070","selection-9","Selection 9","ซีเลกชัน 9","Coffee-Variety · Arabica","India","Medium","Ethiopian × Tafarikela",["arabica"]],
+      ["#071","bernardina","Bernardina","เบอร์นาร์ดินา","Coffee-Variety · Arabica","El Salvador","High","Ethiopian Landrace-related",["arabica","competition"]]
+    ];
+
+    varietyIndex.forEach(item => {
+      const [code, slug, name, thai, type, origin, priority, parentage, tags] = item;
+
+      if (!varieties.find(v => v.code === code)) {
+        varieties.push({
+          code,
+          slug,
+          name,
+          thai,
+          type,
+          origin,
+          priority,
+          parentage,
+          tags,
+          summary:`${name} เป็นสายพันธุ์ที่อยู่ในฐานข้อมูล Coffee Variety Library ของ Casa Lab สามารถเพิ่มรายละเอียด Genetics, Morphology, History, Cup Profile และ Roasting Note ภายหลังได้`,
+          sections:{
+            "Study Note":[
+              "เพิ่มข้อมูลลักษณะทางพันธุกรรมและที่มาของสายพันธุ์ในส่วนนี้",
+              "เพิ่มข้อมูล morphology เช่น ความสูงต้น สีใบ สีผล และขนาดเมล็ด",
+              "เพิ่มข้อมูล cup profile และ roasting implication สำหรับใช้สอนบาริสต้า"
+            ],
+            "Suggested Learning Questions":[
+              "สายพันธุ์นี้มี parentage มาจากอะไร",
+              "จุดเด่นของ cup profile คืออะไร",
+              "เหมาะกับการคั่วแนวไหน และมี risk อะไรที่ต้องระวัง"
+            ]
+          },
+          learning:"ใช้ card นี้เป็น placeholder สำหรับเติมข้อมูลเชิงลึกเพิ่มเติม เหมาะกับการค่อย ๆ สร้าง knowledge base ของทีม"
+        });
+      }
+    });
+
+    varieties.sort((a,b) => a.code.localeCompare(b.code));
+
+    const grid = document.getElementById('varietyGrid');
+    const searchInput = document.getElementById('varietySearch');
+    const emptyState = document.getElementById('emptyState');
+    const filterButtons = document.querySelectorAll('.filter-chip');
+
+    const modal = document.getElementById('varietyModal');
+    const closeModal = document.getElementById('closeModal');
+
+    let activeFilter = 'all';
+
+    function priorityClass(priority){
+      if(priority === 'High') return 'priority-high';
+      if(priority === 'Medium') return 'priority-medium';
+      return 'priority-low';
+    }
+
+    function escapeHtml(text){
+      return String(text)
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'","&#039;");
+    }
+
+    function renderVarieties(){
+      const keyword = searchInput.value.toLowerCase().trim();
+
+      const filtered = varieties.filter(v => {
+        const searchable = `
+          ${v.code}
+          ${v.name}
+          ${v.thai}
+          ${v.type}
+          ${v.origin}
+          ${v.priority}
+          ${v.parentage}
+          ${v.summary}
+          ${v.tags.join(' ')}
+        `.toLowerCase();
+
+        const matchKeyword = searchable.includes(keyword);
+        const matchFilter = activeFilter === 'all' || v.tags.includes(activeFilter);
+
+        return matchKeyword && matchFilter;
+      });
+
+      grid.innerHTML = filtered.map(v => `
+        <article class="variety-card" onclick="openVariety('${escapeHtml(v.code)}')">
+          <div>
+            <div class="variety-code">${escapeHtml(v.code)}</div>
+            <div class="variety-name">${escapeHtml(v.name)}</div>
+            <div class="variety-thai">${escapeHtml(v.thai)}</div>
+            <p class="variety-summary">${escapeHtml(v.summary)}</p>
+          </div>
+
+          <div class="variety-meta">
+            <span class="pill ${priorityClass(v.priority)}">${escapeHtml(v.priority)}</span>
+            <span class="pill">${escapeHtml(v.origin)}</span>
+          </div>
+        </article>
+      `).join('');
+
+      emptyState.style.display = filtered.length ? 'none' : 'block';
+    }
+
+    function openVariety(code){
+      const v = varieties.find(item => item.code === code);
+      if(!v) return;
+
+      document.getElementById('modalCode').textContent = `${v.code} · ${v.slug}`;
+      document.getElementById('modalTitle').textContent = v.name;
+      document.getElementById('modalSubtitle').textContent = `${v.thai} · ${v.summary}`;
+      document.getElementById('modalType').textContent = v.type;
+      document.getElementById('modalOrigin').textContent = v.origin;
+      document.getElementById('modalParentage').textContent = v.parentage;
+      document.getElementById('modalPriority').textContent = v.priority;
+      document.getElementById('modalLearning').textContent = v.learning;
+
+      const modalSections = document.getElementById('modalSections');
+
+      modalSections.innerHTML = Object.entries(v.sections).map(([title, items]) => `
+        <section class="detail-section">
+          <h3>${escapeHtml(title)}</h3>
+          <ul>
+            ${items.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
+          </ul>
+        </section>
+      `).join('');
+
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+
+    modal.addEventListener('click', e => {
+      if(e.target === modal){
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape'){
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        renderVarieties();
+      });
+    });
+
+    searchInput.addEventListener('input', renderVarieties);
+
+    applySavedTheme();
+    renderVarieties();
+  </script>
+
+</body>
+</html>
