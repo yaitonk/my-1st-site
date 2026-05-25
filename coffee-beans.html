@@ -1,941 +1,1793 @@
 <!DOCTYPE html>
+
 <html lang="th">
+
 <head>
+
   <meta charset="UTF-8" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <title>Casa Lab · Coffee Beans</title>
 
   <style>
+
     :root{
+
       --bg1:#edf3ff;
+
       --bg2:#f7f5ff;
+
       --bg3:#f4fbf7;
 
       --glass:rgba(255,255,255,0.62);
+
       --glass-strong:rgba(255,255,255,0.78);
+
       --line:rgba(255,255,255,0.78);
 
       --text:#17212f;
+
       --muted:#667085;
+
       --soft:#8a94a6;
 
       --shadow:0 28px 80px rgba(23,33,47,0.13);
 
       --accent:#5967ff;
+
       --accent-2:#7b86ff;
+
       --accent-3:#a7afff;
 
       --green:#37b37e;
+
       --orange:#ff9f43;
+
       --rose:#ff6b8a;
 
       --radius-xl:34px;
+
       --radius-lg:22px;
+
     }
 
     body.dark{
+
       --bg1:#070b14;
+
       --bg2:#0f1728;
+
       --bg3:#12192b;
 
       --glass:rgba(18,24,38,0.62);
+
       --glass-strong:rgba(28,36,55,0.72);
+
       --line:rgba(255,255,255,0.10);
 
       --text:#eef2ff;
+
       --muted:#a8b0c2;
+
       --soft:#818ca3;
 
       --shadow:0 28px 80px rgba(0,0,0,0.34);
 
       --accent:#8ea2ff;
+
       --accent-2:#aebaff;
+
       --accent-3:#c7d0ff;
+
     }
 
     *{
+
       box-sizing:border-box;
+
     }
 
     html{
+
       scroll-behavior:smooth;
+
     }
 
     body{
+
       margin:0;
+
       min-height:100vh;
+
       font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter",sans-serif;
+
       color:var(--text);
+
       background:
+
         radial-gradient(circle at 8% 8%, rgba(120,160,255,0.38), transparent 28%),
+
         radial-gradient(circle at 92% 18%, rgba(255,190,135,0.30), transparent 27%),
+
         radial-gradient(circle at 72% 84%, rgba(110,231,183,0.22), transparent 25%),
+
         linear-gradient(180deg,var(--bg1),var(--bg2),var(--bg3));
+
       padding:24px;
+
       overflow-x:hidden;
+
       transition:background .28s ease,color .28s ease;
+
     }
 
     body::before{
+
       content:"";
+
       position:fixed;
+
       inset:0;
+
       background-image:
+
         linear-gradient(rgba(255,255,255,0.22) 1px, transparent 1px),
+
         linear-gradient(90deg, rgba(255,255,255,0.18) 1px, transparent 1px);
+
       background-size:42px 42px;
+
       mask-image:linear-gradient(to bottom, rgba(0,0,0,0.35), transparent 70%);
+
       pointer-events:none;
+
       z-index:0;
+
     }
 
     .orb{
+
       position:fixed;
+
       width:320px;
+
       height:320px;
+
       border-radius:999px;
+
       filter:blur(34px);
+
       opacity:0.48;
+
       z-index:0;
+
       pointer-events:none;
+
       animation:float 16s ease-in-out infinite;
+
     }
 
     .orb.one{
+
       top:-70px;
+
       left:-90px;
+
       background:rgba(120,160,255,0.55);
+
     }
 
     .orb.two{
+
       bottom:-90px;
+
       right:-90px;
+
       background:rgba(255,180,120,0.42);
+
       animation-delay:-5s;
+
     }
 
     .orb.three{
+
       bottom:12%;
+
       left:24%;
+
       background:rgba(110,231,183,0.28);
+
       animation-delay:-9s;
+
     }
 
     @keyframes float{
+
       0%,100%{
+
         transform:translateY(0) translateX(0) scale(1);
+
       }
+
       50%{
+
         transform:translateY(-18px) translateX(14px) scale(1.04);
+
       }
+
     }
 
     .wrap{
+
       position:relative;
+
       z-index:1;
+
       width:100%;
-      max-width:1120px;
+
+      max-width:1180px;
+
       margin:0 auto;
+
     }
 
     .nav{
+
       display:flex;
+
       justify-content:space-between;
+
       align-items:center;
+
       gap:14px;
+
       margin-bottom:18px;
+
       padding:12px;
+
       border-radius:999px;
+
       background:var(--glass);
+
       backdrop-filter:blur(24px) saturate(1.2);
+
       -webkit-backdrop-filter:blur(24px) saturate(1.2);
+
       border:1px solid var(--line);
+
       box-shadow:0 14px 32px rgba(23,33,47,0.08);
+
     }
 
     .nav-left,
+
     .nav-right{
+
       display:flex;
+
       align-items:center;
+
       gap:10px;
+
       flex-wrap:wrap;
+
     }
 
     .nav a,
+
     .theme-btn{
+
       border:1px solid var(--line);
+
       background:var(--glass-strong);
+
       color:var(--text);
+
       padding:10px 14px;
+
       border-radius:999px;
+
       cursor:pointer;
+
       font:inherit;
+
       font-size:13px;
+
       font-weight:700;
+
       text-decoration:none;
+
       transition:0.22s ease;
+
       white-space:nowrap;
+
       box-shadow:0 8px 20px rgba(23,33,47,0.06);
+
     }
 
     .nav a:hover,
+
     .theme-btn:hover{
+
       transform:translateY(-1px);
+
     }
 
     .hero{
+
       margin-top:18px;
+
       padding:34px;
+
       border-radius:var(--radius-xl);
+
       background:linear-gradient(145deg, var(--glass), rgba(255,255,255,0.38));
+
       backdrop-filter:blur(28px) saturate(1.25);
+
       -webkit-backdrop-filter:blur(28px) saturate(1.25);
+
       border:1px solid var(--line);
+
       box-shadow:var(--shadow);
+
       overflow:hidden;
+
       position:relative;
+
     }
 
     body.dark .hero,
+
     body.dark .section-card,
-    body.dark .bean-card,
+
+    body.dark .variety-card,
+
     body.dark .note-card{
+
       background:linear-gradient(145deg, var(--glass), rgba(15,23,42,0.38));
+
     }
 
     .eyebrow{
+
       display:inline-flex;
+
       align-items:center;
+
       gap:8px;
+
       padding:9px 14px;
+
       border-radius:999px;
+
       background:var(--glass-strong);
+
       border:1px solid var(--line);
+
       color:var(--muted);
+
       font-size:13px;
+
       font-weight:700;
+
       letter-spacing:-0.01em;
+
       box-shadow:0 8px 20px rgba(23,33,47,0.06);
+
       margin-bottom:18px;
+
     }
 
     h1{
+
       margin:0;
+
       font-size:52px;
+
       letter-spacing:-0.06em;
+
       line-height:0.95;
+
       font-weight:850;
+
     }
 
     .subtitle{
+
       margin-top:14px;
-      max-width:660px;
+
+      max-width:720px;
+
       color:var(--muted);
+
       font-size:15px;
+
       line-height:1.7;
+
     }
 
     .hero-grid{
+
       display:grid;
+
       grid-template-columns:1.2fr 0.8fr;
+
       gap:22px;
+
       align-items:end;
+
     }
 
     .hero-stats{
+
       display:grid;
+
       grid-template-columns:1fr 1fr;
+
       gap:12px;
+
     }
 
     .stat{
+
       padding:16px;
+
       border-radius:22px;
+
       background:var(--glass-strong);
+
       border:1px solid var(--line);
+
     }
 
     .stat-number{
+
       font-size:28px;
+
       font-weight:850;
+
       letter-spacing:-0.04em;
+
     }
 
     .stat-label{
+
       margin-top:4px;
+
       color:var(--muted);
+
       font-size:12px;
+
       font-weight:700;
+
     }
 
     .section{
+
       margin-top:22px;
+
     }
 
     .section-title{
+
       display:flex;
+
       align-items:flex-end;
+
       justify-content:space-between;
+
       gap:14px;
+
       margin-bottom:14px;
+
     }
 
     .section-title h2{
+
       margin:0;
+
       font-size:25px;
+
       letter-spacing:-0.04em;
+
     }
 
     .section-title p{
+
       margin:0;
+
       color:var(--muted);
+
       font-size:13px;
+
       line-height:1.5;
+
     }
 
-    .bean-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
-    }
-
-    .bean-card,
     .section-card,
+
     .note-card{
+
       border-radius:var(--radius-lg);
+
       background:linear-gradient(145deg, var(--glass), rgba(255,255,255,0.42));
+
       backdrop-filter:blur(24px) saturate(1.18);
+
       -webkit-backdrop-filter:blur(24px) saturate(1.18);
+
       border:1px solid var(--line);
+
       box-shadow:0 18px 42px rgba(23,33,47,0.08);
+
       overflow:hidden;
-    }
 
-    .bean-card{
-      padding:20px;
-      transition:0.24s ease;
-    }
-
-    .bean-card:hover{
-      transform:translateY(-4px);
-      box-shadow:0 24px 52px rgba(23,33,47,0.13);
-    }
-
-    .bean-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:14px;
-    }
-
-    .bean-icon{
-      width:48px;
-      height:48px;
-      border-radius:18px;
-      display:grid;
-      place-items:center;
-      background:rgba(255,255,255,0.32);
-      border:1px solid var(--line);
-      font-size:24px;
-    }
-
-    .tag{
-      display:inline-flex;
-      align-items:center;
-      padding:7px 10px;
-      border-radius:999px;
-      font-size:11px;
-      font-weight:800;
-      color:#fff;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      white-space:nowrap;
-    }
-
-    .tag.green{
-      background:linear-gradient(135deg,#37b37e,#62d8a4);
-    }
-
-    .tag.orange{
-      background:linear-gradient(135deg,#ff9f43,#ffc069);
-    }
-
-    .tag.rose{
-      background:linear-gradient(135deg,#ff6b8a,#ffa3b6);
-    }
-
-    .bean-card h3{
-      margin:0 0 8px;
-      font-size:22px;
-      letter-spacing:-0.04em;
-    }
-
-    .bean-card p{
-      margin:0;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.65;
-    }
-
-    .bean-list{
-      margin:16px 0 0;
-      padding:0;
-      list-style:none;
-      display:grid;
-      gap:9px;
-    }
-
-    .bean-list li{
-      display:flex;
-      gap:8px;
-      align-items:flex-start;
-      color:var(--text);
-      font-size:13px;
-      line-height:1.45;
-    }
-
-    .bean-list li span{
-      color:var(--green);
-      font-weight:900;
     }
 
     .section-card{
-      padding:24px;
+
+      padding:22px;
+
     }
 
-    .info-grid{
+    .library-tools{
+
       display:grid;
-      grid-template-columns:repeat(4,1fr);
+
+      grid-template-columns:1.15fr 0.85fr;
+
       gap:14px;
+
+      align-items:center;
+
     }
 
-    .info-box{
-      padding:16px;
-      border-radius:20px;
-      background:rgba(255,255,255,0.34);
-      border:1px solid var(--line);
-    }
+    .search-box{
 
-    body.dark .info-box{
-      background:rgba(255,255,255,0.05);
-    }
-
-    .info-box h3{
-      margin:0 0 8px;
-      font-size:16px;
-      letter-spacing:-0.02em;
-    }
-
-    .info-box p{
-      margin:0;
-      color:var(--muted);
-      font-size:12px;
-      line-height:1.55;
-    }
-
-    .table-wrap{
-      overflow-x:auto;
-      border-radius:22px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,0.25);
-    }
-
-    table{
       width:100%;
-      border-collapse:collapse;
-      min-width:760px;
+
+      padding:16px 18px;
+
+      border-radius:22px;
+
+      border:1px solid var(--line);
+
+      background:var(--glass-strong);
+
+      color:var(--text);
+
+      font:inherit;
+
+      font-size:15px;
+
+      font-weight:650;
+
+      outline:none;
+
+      box-shadow:0 12px 28px rgba(23,33,47,0.08);
+
     }
 
-    th,
-    td{
-      padding:15px;
-      text-align:left;
-      border-bottom:1px solid var(--line);
+    .search-box::placeholder{
+
+      color:var(--soft);
+
+    }
+
+    .filter-row{
+
+      display:flex;
+
+      flex-wrap:wrap;
+
+      gap:10px;
+
+      align-items:center;
+
+      justify-content:flex-end;
+
+    }
+
+    .filter-chip{
+
+      border:1px solid var(--line);
+
+      background:var(--glass-strong);
+
+      color:var(--text);
+
+      padding:12px 14px;
+
+      border-radius:999px;
+
+      cursor:pointer;
+
+      font:inherit;
+
       font-size:13px;
-      vertical-align:top;
+
+      font-weight:800;
+
+      transition:.22s ease;
+
+      box-shadow:0 8px 20px rgba(23,33,47,0.06);
+
     }
 
-    th{
-      color:var(--text);
+    .filter-chip:hover,
+
+    .filter-chip.active{
+
+      transform:translateY(-1px);
+
+      color:#fff;
+
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+
+    }
+
+    .variety-grid{
+
+      display:grid;
+
+      grid-template-columns:repeat(4,1fr);
+
+      gap:14px;
+
+    }
+
+    .variety-card{
+
+      padding:18px;
+
+      border-radius:24px;
+
+      background:linear-gradient(145deg, var(--glass), rgba(255,255,255,0.42));
+
+      backdrop-filter:blur(24px) saturate(1.18);
+
+      -webkit-backdrop-filter:blur(24px) saturate(1.18);
+
+      border:1px solid var(--line);
+
+      box-shadow:0 18px 42px rgba(23,33,47,0.08);
+
+      cursor:pointer;
+
+      transition:.24s ease;
+
+      min-height:196px;
+
+      display:flex;
+
+      flex-direction:column;
+
+      justify-content:space-between;
+
+    }
+
+    .variety-card:hover{
+
+      transform:translateY(-4px);
+
+      box-shadow:0 24px 52px rgba(23,33,47,0.13);
+
+    }
+
+    .variety-code{
+
+      color:var(--soft);
+
       font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:0.04em;
-      background:rgba(255,255,255,0.28);
+
+      font-weight:850;
+
+      letter-spacing:.04em;
+
     }
 
-    td{
+    .variety-name{
+
+      margin-top:8px;
+
+      font-size:20px;
+
+      font-weight:850;
+
+      letter-spacing:-0.04em;
+
+      line-height:1.05;
+
+    }
+
+    .variety-thai{
+
+      margin-top:5px;
+
       color:var(--muted);
+
+      font-size:13px;
+
+      font-weight:700;
+
+    }
+
+    .variety-summary{
+
+      margin:12px 0 0;
+
+      color:var(--muted);
+
+      font-size:12px;
+
       line-height:1.55;
+
+      display:-webkit-box;
+
+      -webkit-line-clamp:3;
+
+      -webkit-box-orient:vertical;
+
+      overflow:hidden;
+
     }
 
-    td strong{
+    .variety-meta{
+
+      margin-top:14px;
+
+      display:flex;
+
+      flex-wrap:wrap;
+
+      gap:7px;
+
+    }
+
+    .pill{
+
+      display:inline-flex;
+
+      align-items:center;
+
+      padding:7px 9px;
+
+      border-radius:999px;
+
+      font-size:11px;
+
+      font-weight:850;
+
       color:var(--text);
+
+      background:rgba(255,255,255,0.38);
+
+      border:1px solid var(--line);
+
     }
 
-    tr:last-child td{
-      border-bottom:none;
+    body.dark .pill{
+
+      background:rgba(255,255,255,0.06);
+
+    }
+
+    .pill.priority-high{
+
+      color:#fff;
+
+      background:linear-gradient(135deg,#37b37e,#62d8a4);
+
+    }
+
+    .pill.priority-medium{
+
+      color:#fff;
+
+      background:linear-gradient(135deg,#5967ff,#8d98ff);
+
+    }
+
+    .pill.priority-low{
+
+      color:#fff;
+
+      background:linear-gradient(135deg,#8a94a6,#b8c0ce);
+
+    }
+
+    .empty-state{
+
+      display:none;
+
+      padding:30px;
+
+      border-radius:24px;
+
+      text-align:center;
+
+      color:var(--muted);
+
+      background:var(--glass);
+
+      border:1px solid var(--line);
+
     }
 
     .note-grid{
+
       display:grid;
-      grid-template-columns:1fr 1fr;
+
+      grid-template-columns:repeat(3,1fr);
+
       gap:16px;
+
     }
 
     .note-card{
+
       padding:22px;
+
     }
 
     .note-card h3{
+
       margin:0 0 10px;
+
       font-size:19px;
+
       letter-spacing:-0.03em;
+
     }
 
     .note-card p{
+
       margin:0;
+
       color:var(--muted);
+
       font-size:13px;
+
       line-height:1.7;
+
+    }
+
+    .modal{
+
+      position:fixed;
+
+      inset:0;
+
+      z-index:50;
+
+      display:none;
+
+      align-items:center;
+
+      justify-content:center;
+
+      padding:22px;
+
+      background:rgba(7,11,20,0.42);
+
+      backdrop-filter:blur(16px);
+
+      -webkit-backdrop-filter:blur(16px);
+
+    }
+
+    .modal.open{
+
+      display:flex;
+
+    }
+
+    .modal-panel{
+
+      width:100%;
+
+      max-width:960px;
+
+      max-height:88vh;
+
+      overflow:auto;
+
+      border-radius:32px;
+
+      background:
+
+        linear-gradient(145deg, var(--glass-strong), rgba(255,255,255,0.54));
+
+      border:1px solid var(--line);
+
+      box-shadow:0 30px 90px rgba(0,0,0,0.28);
+
+      padding:26px;
+
+    }
+
+    body.dark .modal-panel{
+
+      background:
+
+        linear-gradient(145deg, rgba(28,36,55,0.92), rgba(15,23,42,0.82));
+
+    }
+
+    .modal-top{
+
+      display:flex;
+
+      justify-content:space-between;
+
+      gap:18px;
+
+      align-items:flex-start;
+
+      margin-bottom:18px;
+
+    }
+
+    .modal-code{
+
+      color:var(--soft);
+
+      font-size:13px;
+
+      font-weight:850;
+
+      letter-spacing:.06em;
+
+    }
+
+    .modal-title{
+
+      margin:6px 0 0;
+
+      font-size:38px;
+
+      letter-spacing:-0.06em;
+
+      line-height:.95;
+
+    }
+
+    .modal-subtitle{
+
+      margin-top:9px;
+
+      color:var(--muted);
+
+      font-size:14px;
+
+      font-weight:700;
+
+      line-height:1.65;
+
+    }
+
+    .close-btn{
+
+      border:1px solid var(--line);
+
+      background:var(--glass-strong);
+
+      color:var(--text);
+
+      width:42px;
+
+      height:42px;
+
+      border-radius:999px;
+
+      cursor:pointer;
+
+      font-size:20px;
+
+      font-weight:900;
+
+      flex:0 0 auto;
+
+    }
+
+    .detail-grid{
+
+      display:grid;
+
+      grid-template-columns:repeat(4,1fr);
+
+      gap:12px;
+
+      margin:18px 0;
+
+    }
+
+    .detail-mini{
+
+      padding:14px;
+
+      border-radius:20px;
+
+      background:rgba(255,255,255,0.34);
+
+      border:1px solid var(--line);
+
+    }
+
+    body.dark .detail-mini{
+
+      background:rgba(255,255,255,0.05);
+
+    }
+
+    .detail-mini small{
+
+      display:block;
+
+      color:var(--soft);
+
+      font-size:11px;
+
+      font-weight:850;
+
+      margin-bottom:5px;
+
+      text-transform:uppercase;
+
+      letter-spacing:.04em;
+
+    }
+
+    .detail-mini strong{
+
+      font-size:13px;
+
+      line-height:1.45;
+
+    }
+
+    .detail-section{
+
+      margin-top:16px;
+
+      padding:18px;
+
+      border-radius:22px;
+
+      background:rgba(255,255,255,0.28);
+
+      border:1px solid var(--line);
+
+    }
+
+    body.dark .detail-section{
+
+      background:rgba(255,255,255,0.045);
+
+    }
+
+    .detail-section h3{
+
+      margin:0 0 12px;
+
+      font-size:18px;
+
+      letter-spacing:-0.03em;
+
+    }
+
+    .detail-section ul{
+
+      margin:0;
+
+      padding-left:19px;
+
+      color:var(--muted);
+
+    }
+
+    .detail-section li{
+
+      margin:8px 0;
+
+      line-height:1.65;
+
+      font-size:14px;
+
+    }
+
+    .learning-note{
+
+      margin-top:16px;
+
+      padding:18px;
+
+      border-radius:22px;
+
+      color:#fff;
+
+      background:linear-gradient(135deg,var(--accent),var(--accent-2),var(--accent-3));
+
+      box-shadow:0 18px 42px rgba(89,103,255,0.18);
+
+    }
+
+    .learning-note h3{
+
+      margin:0 0 8px;
+
+      font-size:18px;
+
+    }
+
+    .learning-note p{
+
+      margin:0;
+
+      font-size:13px;
+
+      line-height:1.7;
+
+      opacity:.92;
+
     }
 
     .footer{
+
       margin:24px 0 8px;
+
       text-align:center;
+
       font-size:12px;
+
       color:var(--soft);
+
     }
 
     .footer span{
+
       display:inline-flex;
+
       align-items:center;
+
       gap:6px;
+
       padding:8px 12px;
+
       border-radius:999px;
+
       background:rgba(255,255,255,0.34);
+
       border:1px solid var(--line);
+
     }
 
     body.dark .footer span{
+
       background:rgba(255,255,255,0.05);
+
+    }
+
+    @media(max-width:1020px){
+
+      .variety-grid{
+
+        grid-template-columns:repeat(3,1fr);
+
+      }
+
+      .library-tools{
+
+        grid-template-columns:1fr;
+
+      }
+
+      .filter-row{
+
+        justify-content:flex-start;
+
+      }
+
+      .detail-grid{
+
+        grid-template-columns:1fr 1fr;
+
+      }
+
+      .note-grid{
+
+        grid-template-columns:1fr;
+
+      }
+
     }
 
     @media(max-width:900px){
-      .hero-grid{
-        grid-template-columns:1fr;
-      }
 
-      .bean-grid,
-      .info-grid,
-      .note-grid{
-        grid-template-columns:1fr 1fr;
+      .hero-grid{
+
+        grid-template-columns:1fr;
+
       }
 
       h1{
+
         font-size:42px;
+
       }
+
     }
 
     @media(max-width:640px){
+
       body{
+
         padding:16px;
+
       }
 
       .nav{
+
         border-radius:24px;
+
         align-items:stretch;
+
         flex-direction:column;
+
       }
 
       .nav-left,
+
       .nav-right{
+
         display:grid;
+
         grid-template-columns:1fr 1fr;
+
         width:100%;
+
       }
 
       .nav a,
+
       .theme-btn{
+
         text-align:center;
+
         justify-content:center;
+
       }
 
       .hero{
+
         padding:24px 18px;
+
         border-radius:28px;
+
       }
 
       h1{
+
         font-size:36px;
+
       }
 
       .hero-stats,
-      .bean-grid,
-      .info-grid,
-      .note-grid{
+
+      .variety-grid,
+
+      .detail-grid{
+
         grid-template-columns:1fr;
+
       }
 
       .section-title{
+
         align-items:flex-start;
+
         flex-direction:column;
+
       }
+
+      .modal{
+
+        padding:14px;
+
+      }
+
+      .modal-panel{
+
+        padding:20px;
+
+        border-radius:26px;
+
+      }
+
+      .modal-title{
+
+        font-size:31px;
+
+      }
+
     }
+
   </style>
+
 </head>
 
 <body>
 
   <div class="orb one"></div>
+
   <div class="orb two"></div>
+
   <div class="orb three"></div>
 
   <div class="wrap">
 
     <nav class="nav">
+
       <div class="nav-left">
+
         <a href="https://yaitonk.github.io/my-1st-site/">Home</a>
+
         <a href="https://yaitonk.github.io/my-1st-site/brewing.html">Brewing</a>
+
         <a href="https://yaitonk.github.io/my-1st-site/mini-cupping.html">Cupping</a>
+
         <a href="https://yaitonk.github.io/casa-cupping-data/dashboard.html">Dashboard</a>
+
+        <a href="https://yaitonk.github.io/my-1st-site/team.html">R&amp;D Team</a>
+
       </div>
 
       <div class="nav-right">
+
         <button id="themeToggle" class="theme-btn">🌙 Dark</button>
+
       </div>
+
     </nav>
 
     <header class="hero">
+
       <div class="hero-grid">
+
         <div>
-          <div class="eyebrow">🌱 Casa Lab · Coffee Beans Library</div>
+
+          <div class="eyebrow">🌱 Casa Lab · Coffee Variety Library</div>
+
           <h1>Coffee Beans</h1>
+
           <div class="subtitle">
-            หน้ารวมข้อมูลเมล็ดกาแฟสำหรับใช้อธิบายเรื่องสายพันธุ์ แหล่งปลูก กระบวนการแปรรูป
-            และแนวทางการคั่ว/ชิมในมุมของ Casa Lab
+
+            ฐานข้อมูลสายพันธุ์กาแฟสำหรับบาริสต้า ใช้เรียนรู้เรื่อง origin, parentage, morphology,
+
+            cup profile, roasting direction และความเชื่อมโยงของสายพันธุ์ในโลก specialty coffee
+
           </div>
+
         </div>
 
         <div class="hero-stats">
+
           <div class="stat">
-            <div class="stat-number">06</div>
-            <div class="stat-label">Key Varieties</div>
+
+            <div class="stat-number">71</div>
+
+            <div class="stat-label">Varieties / Species</div>
+
           </div>
 
           <div class="stat">
-            <div class="stat-number">04</div>
-            <div class="stat-label">Process Groups</div>
+
+            <div class="stat-number">11</div>
+
+            <div class="stat-label">Detailed Cards</div>
+
           </div>
 
           <div class="stat">
-            <div class="stat-number">03</div>
-            <div class="stat-label">Roasting Angles</div>
-          </div>
 
-          <div class="stat">
             <div class="stat-number">CVA</div>
+
             <div class="stat-label">Sensory Focus</div>
+
           </div>
+
+          <div class="stat">
+
+            <div class="stat-number">R&amp;D</div>
+
+            <div class="stat-label">Training Library</div>
+
+          </div>
+
         </div>
+
       </div>
+
     </header>
 
     <section class="section">
+
       <div class="section-title">
+
         <div>
-          <h2>Variety Focus</h2>
-          <p>สายพันธุ์หลักที่มักใช้ในงานคั่ว ชิม และเล่าเรื่องกาแฟพิเศษ</p>
+
+          <h2>Variety Library</h2>
+
+          <p>ค้นหาและกดดูรายละเอียดของสายพันธุ์กาแฟแต่ละตัว เหมาะสำหรับใช้สอนทีมบาริสต้าและทีม R&amp;D</p>
+
         </div>
-      </div>
 
-      <div class="bean-grid">
-
-        <article class="bean-card">
-          <div class="bean-top">
-            <div class="bean-icon">🌸</div>
-            <div class="tag">Floral</div>
-          </div>
-          <h3>Gesha / Geisha</h3>
-          <p>
-            สายพันธุ์ที่โดดเด่นเรื่อง floral, citrus, tropical fruit และความซับซ้อนของ aroma
-            มักพบในกาแฟระดับแข่งขัน
-          </p>
-          <ul class="bean-list">
-            <li><span>•</span> Cup: jasmine, white flower, bergamot, peach</li>
-            <li><span>•</span> Roast: ระวังความร้อนท้ายคั่วมากเกินไป เพราะ florality หายง่าย</li>
-            <li><span>•</span> Good for: competition, filter, showcase lot</li>
-          </ul>
-        </article>
-
-        <article class="bean-card">
-          <div class="bean-top">
-            <div class="bean-icon">🍯</div>
-            <div class="tag orange">Sweet</div>
-          </div>
-          <h3>Typica</h3>
-          <p>
-            สายพันธุ์คลาสสิกที่ให้ cup profile สะอาด หวาน นุ่มนวล และมีความ delicate
-            เหมาะกับการคั่วที่ต้องรักษาความใส
-          </p>
-          <ul class="bean-list">
-            <li><span>•</span> Cup: sugar cane, honey, soft citrus, floral hint</li>
-            <li><span>•</span> Roast: sweet spot แคบ ต้องคุม momentum หลัง yellow ดี</li>
-            <li><span>•</span> Good for: elegant filter profile</li>
-          </ul>
-        </article>
-
-        <article class="bean-card">
-          <div class="bean-top">
-            <div class="bean-icon">🍒</div>
-            <div class="tag rose">Fruity</div>
-          </div>
-          <h3>Bourbon</h3>
-          <p>
-            ให้ความหวานดี mouthfeel ดี และมักมีโทน fruit ที่กลมกว่า Typica
-            เป็นสายพันธุ์ที่ใช้เล่าเรื่อง balance ได้ดี
-          </p>
-          <ul class="bean-list">
-            <li><span>•</span> Cup: red fruit, caramel, milk chocolate, rounded acidity</li>
-            <li><span>•</span> Roast: รองรับ development ได้มากกว่า Gesha เล็กน้อย</li>
-            <li><span>•</span> Good for: filter & espresso blend</li>
-          </ul>
-        </article>
-
-        <article class="bean-card">
-          <div class="bean-top">
-            <div class="bean-icon">🍊</div>
-            <div class="tag green">Bright</div>
-          </div>
-          <h3>SL28 / SL34</h3>
-          <p>
-            สายพันธุ์เด่นจากเคนยา มี acidity ชัด ความหวานแบบผลไม้ และ aftertaste ที่มีพลัง
-            เหมาะกับการทำ profile ที่เน้น vibrancy
-          </p>
-          <ul class="bean-list">
-            <li><span>•</span> Cup: blackcurrant, grapefruit, tomato, winey acidity</li>
-            <li><span>•</span> Roast: ต้องคุม acidity ให้สุก ไม่เขียวหรือ sharp เกินไป</li>
-            <li><span>•</span> Good for: bright filter coffee</li>
-          </ul>
-        </article>
-
-        <article class="bean-card">
-          <div class="bean-top">
-            <div class="bean-icon">🍑</div>
-            <div class="tag">Complex</div>
-          </div>
-          <h3>Pacamara</h3>
-          <p>
-            เมล็ดใหญ่ มักให้กลิ่นรสชัด มีทั้ง floral, fruit, herbal และ creamy mouthfeel
-            แต่ต้องคุมการคั่วให้ความร้อนเข้าแกนเมล็ดดี
-          </p>
-          <ul class="bean-list">
-            <li><span>•</span> Cup: peach, tropical fruit, floral, creamy texture</li>
-            <li><span>•</span> Roast: ระวัง outside developed แต่ inside underdeveloped</li>
-            <li><span>•</span> Good for: expressive single origin</li>
-          </ul>
-        </article>
-
-        <article class="bean-card">
-          <div class="bean-top">
-            <div class="bean-icon">🌰</div>
-            <div class="tag orange">Structure</div>
-          </div>
-          <h3>Caturra / Catuai</h3>
-          <p>
-            สายพันธุ์ที่พบมากในลาตินอเมริกา ให้ cup ที่เข้าใจง่าย หวาน สะอาด และใช้งานได้หลากหลาย
-            ทั้ง filter และ espresso
-          </p>
-          <ul class="bean-list">
-            <li><span>•</span> Cup: nutty, caramel, orange, mild fruit</li>
-            <li><span>•</span> Roast: ค่อนข้างยืดหยุ่น เหมาะกับการทำ profile test</li>
-            <li><span>•</span> Good for: daily brew & espresso base</li>
-          </ul>
-        </article>
-
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-title">
-        <div>
-          <h2>Process Map</h2>
-          <p>โครงสร้างเบื้องต้นของ process และผลต่อรสชาติ</p>
-        </div>
       </div>
 
       <div class="section-card">
-        <div class="info-grid">
-          <div class="info-box">
-            <h3>Washed</h3>
-            <p>เน้นความสะอาด acidity ชัด ความโปร่งใสของ terroir และ aftertaste ที่คมกว่า</p>
+
+        <div class="library-tools">
+
+          <input
+
+            id="varietySearch"
+
+            class="search-box"
+
+            type="search"
+
+            placeholder="ค้นหา เช่น typica, geisha, bourbon, Ethiopia, Brazil, JARC..."
+
+          />
+
+          <div class="filter-row">
+
+            <button class="filter-chip active" data-filter="all">All</button>
+
+            <button class="filter-chip" data-filter="arabica">Arabica</button>
+
+            <button class="filter-chip" data-filter="canephora">Canephora</button>
+
+            <button class="filter-chip" data-filter="ethiopia">Ethiopia</button>
+
+            <button class="filter-chip" data-filter="brazil">Brazil</button>
+
+            <button class="filter-chip" data-filter="competition">Competition</button>
+
           </div>
 
-          <div class="info-box">
-            <h3>Natural</h3>
-            <p>เน้น fruit intensity, sweetness, body และ aroma ที่หนาแน่นกว่า washed</p>
-          </div>
-
-          <div class="info-box">
-            <h3>Honey</h3>
-            <p>อยู่ระหว่าง washed และ natural มักให้ sweetness ดี มี texture และ fruit tone กลมขึ้น</p>
-          </div>
-
-          <div class="info-box">
-            <h3>Anaerobic</h3>
-            <p>มักให้กลิ่นรสชัด complex และ expressive แต่ต้องระวัง over-fermented note</p>
-          </div>
         </div>
+
       </div>
+
     </section>
 
     <section class="section">
-      <div class="section-title">
-        <div>
-          <h2>Variety Comparison</h2>
-          <p>ตารางเปรียบเทียบแบบเร็ว สำหรับใช้เป็น reference ตอนชิมหรือวาง roast profile</p>
-        </div>
+
+      <div class="variety-grid" id="varietyGrid"></div>
+
+      <div class="empty-state" id="emptyState">
+
+        ไม่พบสายพันธุ์ที่ค้นหา ลองเปลี่ยน keyword หรือ filter อีกครั้ง
+
       </div>
 
-      <div class="section-card">
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Variety</th>
-                <th>Main Character</th>
-                <th>Sensory Direction</th>
-                <th>Roasting Note</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td><strong>Gesha / Geisha</strong></td>
-                <td>Floral, elegant, complex</td>
-                <td>White flower, citrus, peach, tropical fruit</td>
-                <td>คั่วเร็วพอให้ aroma สด แต่ต้องไม่ underdeveloped</td>
-              </tr>
-
-              <tr>
-                <td><strong>Typica</strong></td>
-                <td>Clean, sweet, delicate</td>
-                <td>Honey, sugar cane, soft floral, gentle acidity</td>
-                <td>คุม Maillard ไม่ให้ยาวจนกลายเป็น savory/caramel หนัก</td>
-              </tr>
-
-              <tr>
-                <td><strong>Bourbon</strong></td>
-                <td>Sweet, rounded, balanced</td>
-                <td>Red fruit, caramel, chocolate, soft acidity</td>
-                <td>รับ development ได้ดี เหมาะกับ profile ที่ต้องการ sweetness</td>
-              </tr>
-
-              <tr>
-                <td><strong>SL28 / SL34</strong></td>
-                <td>Bright, juicy, intense</td>
-                <td>Blackcurrant, grapefruit, winey, high acidity</td>
-                <td>ต้องทำให้ acidity สุก ไม่ sharp หรือเขียวเกินไป</td>
-              </tr>
-
-              <tr>
-                <td><strong>Pacamara</strong></td>
-                <td>Large bean, expressive, creamy</td>
-                <td>Peach, floral, tropical, herbal, creamy texture</td>
-                <td>ต้องให้ heat penetration ดี เพราะเมล็ดใหญ่</td>
-              </tr>
-
-              <tr>
-                <td><strong>Caturra / Catuai</strong></td>
-                <td>Practical, sweet, versatile</td>
-                <td>Nutty, caramel, orange, mild fruit</td>
-                <td>เหมาะกับ daily roast และใช้เทียบ profile ได้ดี</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </section>
 
     <section class="section">
+
       <div class="section-title">
+
         <div>
-          <h2>Roasting Lens</h2>
-          <p>มุมมองการคั่วที่ใช้เชื่อม variety → process → cup profile</p>
+
+          <h2>How Baristas Should Use This Page</h2>
+
+          <p>ใช้เป็น learning path แบบเร็วสำหรับเชื่อมโยงสายพันธุ์ → รสชาติ → การคั่ว → การสื่อสารกับลูกค้า</p>
+
         </div>
+
       </div>
 
       <div class="note-grid">
+
         <div class="note-card">
-          <h3>1. Density & Bean Size</h3>
+
+          <h3>1. Variety Story</h3>
+
           <p>
-            เมล็ดที่แน่นหรือมีขนาดใหญ่ เช่น Pacamara อาจต้องใช้พลังงานต้นคั่วและ mid-phase
-            ที่ช่วยให้ความร้อนเข้าแกนเมล็ดอย่างสม่ำเสมอ ขณะที่เมล็ด delicate อย่าง Gesha
-            ต้องระวังการใช้ heat หนักเกินไปจน aroma เสีย
+
+            เริ่มจากที่มาและ parentage ของสายพันธุ์ เช่น Typica, Bourbon, Caturra, Geisha
+
+            เพื่อให้ทีมเข้าใจว่าแต่ละสายพันธุ์มีรากทางพันธุกรรมและประวัติศาสตร์ต่างกัน
+
           </p>
+
         </div>
 
         <div class="note-card">
-          <h3>2. Process & Fermentation</h3>
+
+          <h3>2. Cup Profile</h3>
+
           <p>
-            Natural และ anaerobic มักมี sugar browning และ fermentation character ชัดกว่า
-            จึงต้องระวัง development ท้ายคั่วไม่ให้กลิ่นผลไม้กลายเป็น jammy หนัก หรือเกิด bitterness
+
+            ใช้เทียบ sensory language เช่น floral, citrus, stone fruit, caramel, chocolate, tea-like
+
+            เพื่อช่วยให้บาริสต้าอธิบายรสชาติได้แม่นขึ้น
+
           </p>
+
         </div>
 
         <div class="note-card">
-          <h3>3. Aroma Preservation</h3>
+
+          <h3>3. Roasting Lens</h3>
+
           <p>
-            กาแฟที่เน้น floral และ citrus ควรคุมช่วงหลัง first crack ให้สะอาด ไม่ยืด development
-            จนกลิ่นดอกไม้หาย และควรระวัง RoR crash/flick ที่ทำให้ aftertaste ไม่สวย
+
+            เชื่อมโยง morphology และ density กับการคั่ว เช่น เมล็ดใหญ่แบบ Pacamara ต้องระวัง heat penetration
+
+            ส่วน Geisha ต้องเน้น aroma preservation
+
           </p>
+
         </div>
 
-        <div class="note-card">
-          <h3>4. Cup Goal First</h3>
-          <p>
-            เริ่มจากเป้าหมายในแก้ว เช่น floral, sweetness, acidity, body, aftertaste
-            แล้วค่อยย้อนกลับมาวาง profile ไม่ควรเริ่มจากตัวเลขเวลาอย่างเดียว
-          </p>
-        </div>
       </div>
+
     </section>
 
     <div class="footer">
+
       <span>🌱 Casa Lab Coffee Beans Library · powered by GitHub Pages</span>
+
+    </div>
+
+  </div>
+
+  <div class="modal" id="varietyModal">
+
+    <div class="modal-panel">
+
+      <div class="modal-top">
+
+        <div>
+
+          <div class="modal-code" id="modalCode"></div>
+
+          <h2 class="modal-title" id="modalTitle"></h2>
+
+          <div class="modal-subtitle" id="modalSubtitle"></div>
+
+        </div>
+
+        <button class="close-btn" id="closeModal">×</button>
+
+      </div>
+
+      <div class="detail-grid">
+
+        <div class="detail-mini">
+
+          <small>Type</small>
+
+          <strong id="modalType"></strong>
+
+        </div>
+
+        <div class="detail-mini">
+
+          <small>Origin</small>
+
+          <strong id="modalOrigin"></strong>
+
+        </div>
+
+        <div class="detail-mini">
+
+          <small>Parentage</small>
+
+          <strong id="modalParentage"></strong>
+
+        </div>
+
+        <div class="detail-mini">
+
+          <small>Priority</small>
+
+          <strong id="modalPriority"></strong>
+
+        </div>
+
+      </div>
+
+      <div id="modalSections"></div>
+
+      <div class="learning-note">
+
+        <h3>Barista Learning Angle</h3>
+
+        <p id="modalLearning"></p>
+
+      </div>
+
     </div>
 
   </div>
 
   <script>
+
     const themeToggle = document.getElementById('themeToggle');
+
     const THEME_KEY = 'casa-beans-theme';
 
     function applySavedTheme() {
+
       const saved = localStorage.getItem(THEME_KEY);
 
       if (saved === 'dark') {
+
         document.body.classList.add('dark');
+
       }
 
       updateThemeButton();
+
     }
 
     function updateThemeButton() {
+
       const isDark = document.body.classList.contains('dark');
+
       themeToggle.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+
     }
 
     themeToggle.addEventListener('click', () => {
+
       document.body.classList.toggle('dark');
 
       const isDark = document.body.classList.contains('dark');
+
       localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
 
       updateThemeButton();
+
     });
 
-    applySavedTheme();
-  </script>
+    const varieties = [
 
-</body>
-</html>
+      {
+
+        code:"#001",
+
+        slug:"typica",
+
+        name:"Typica",
+
+        thai:"ทิปปิก้า",
+
+        type:"Coffee-Variety · Arabica",
+
+        origin:"Ethiopia · Yemen",
+
+        priority:"High",
+
+        parentage:"Founder Variety",
+
+        tags:["arabica","ethiopia","competition"],
+
+        summary:"หนึ่งในสายพันธุ์ต้นตระกูลดั้งเดิมที่สุดของกาแฟอาราบิก้า ให้รสสะอาด ละมุน floral และเป็น flavor benchmark สำคัญของ specialty coffee",
+
+        sections:{
+
+          "Genetics":[
+
+            "อยู่ในวงศ์ Rubiaceae สกุลกาแฟ สายพันธุ์อาราบิก้า มีจำนวนโครโมโซม 2n = 4x = 44",
+
+            "เป็นหนึ่งใน founder variety สำคัญของกาแฟอาราบิก้าที่แพร่กระจายออกจากเอธิโอเปียผ่านเยเมน อินเดีย ชวา และมาร์ตินีก",
+
+            "มีความหลากหลายทางพันธุกรรมต่ำ โครงสร้างยีนค่อนข้างบริสุทธิ์สูง"
+
+          ],
+
+          "Morphology":[
+
+            "ลำต้นสูงใหญ่ เติบโตตามธรรมชาติได้ประมาณ 3.5–5 เมตร",
+
+            "กิ่งข้างยาว ทรงพุ่มคล้ายกรวยคว่ำ",
+
+            "ใบอ่อนมักมีสีทองแดง ผลเชอร์รี่ค่อนข้างใหญ่ รูปทรงรี"
+
+          ],
+
+          "History / Commercial":[
+
+            "เป็นประวัติศาสตร์ที่มีชีวิตของการปลูกกาแฟยุคใหม่",
+
+            "มีจุดอ่อนคืออ่อนไหวต่อโรคราสนิมและให้ผลผลิตต่ำกว่าสายพันธุ์ลูกผสมสมัยใหม่",
+
+            "โดดเด่นด้าน cup quality: clean, floral, sweet, delicate"
+
+          ],
+
+          "Cup Profile":[
+
+            "floral ละเอียด",
+
+            "sweetness นุ่ม",
+
+            "acidity สะอาด",
+
+            "body บางถึงกลาง",
+
+            "aftertaste ใสและ elegant"
+
+          ],
+
+          "Roasting Note":[
+
+            "เหมาะกับการคั่วที่รักษาความใสของ acidity และ floral",
+
+            "ระวัง Maillard ยาวเกินไปจน cup กลายเป็น caramel หรือ savory หนัก",
+
+            "ควรใช้เป็น benchmark เทียบกับ Bourbon และ Caturra"
+
+          ]
+
+        },
+
+        learning:"ใช้ Typica เป็น benchmark สำหรับอธิบายคำว่า clean cup, delicate floral, soft sweetness และใช้เปรียบเทียบกับ Bourbon หรือ Caturra ได้ดี"
+
+      },
+
+      {
+
+        code:"#002",
+
+        slug:"bourbon",
+
+        name:"Bourbon",
+
+        thai:"เบอร์บอน",
+
+        type:"Coffee-Variety · Arabica",
+
+        origin:"Bourbon Island / Réunion",
+
+        priority:"High",
+
+        parentage:"Natural Mutation of Typica",
+
+        tags:["arabica","competition"],
+
+        summary:"สายพันธุ์สำคัญที่ให้ความหวานสูง body กลม และเป็น parentage ของหลายสายพันธุ์ เช่น Caturra, Pacas, Mundo Novo",
+
+        sections:{
+
+          "Genetics":[
+
+            "เกิดจากการกลายพันธุ์ตามธรรมชาติของ Typica",
+
+            "เป็นหนึ่งในสองสายพันธุ์หลักต้นตระกูลร่วมกับ Typica",
+
+            "เป็นพ่อแม่พันธุ์หลักของ Caturra, Mundo Novo, Pacas และสายพันธุ์เชิงพาณิชย์อีกหลายชนิด"
+
+          ],
+
+          "Morphology":[
+
+            "ลำต้นสูงปานกลางถึงสูง ประมาณ 3–4 เมตร",
+
+            "กิ่งข้างทำมุมแคบกว่าทิปปิก้า ทำให้ทรงพุ่มดูแน่นและกลมกว่า",
+
+            "ใบอ่อนส่วนใหญ่มักเป็นสีเขียว ผลเชอร์รี่มีสีแดง และมีกลายพันธุ์เป็น Yellow Bourbon / Orange Bourbon"
+
+          ],
+
+          "History / Commercial":[
+
+            "ตั้งชื่อตามเกาะ Bourbon ซึ่งปัจจุบันคือ Réunion",
+
+            "แพร่กระจายสู่บราซ
