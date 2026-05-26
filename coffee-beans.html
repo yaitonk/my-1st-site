@@ -10,28 +10,19 @@
       --bg1:#edf3ff;
       --bg2:#f7f5ff;
       --bg3:#f4fbf7;
-
       --glass:rgba(255,255,255,0.62);
       --glass-strong:rgba(255,255,255,0.78);
       --line:rgba(255,255,255,0.78);
-
       --text:#17212f;
       --muted:#667085;
       --soft:#8a94a6;
-
       --shadow:0 28px 80px rgba(23,33,47,0.13);
-
       --accent:#5967ff;
       --accent-2:#7b86ff;
       --accent-3:#a7afff;
-
       --green:#37b37e;
-      --orange:#ff9f43;
-      --rose:#ff6b8a;
-
       --radius-xl:34px;
       --radius-lg:22px;
-
       --hero-image:url("./assets/coffee-cherry-bg.jpg");
       --search-image:url("./assets/coffee-cherry-row-bg.jpg");
     }
@@ -40,29 +31,21 @@
       --bg1:#070b14;
       --bg2:#0f1728;
       --bg3:#12192b;
-
       --glass:rgba(18,24,38,0.62);
       --glass-strong:rgba(28,36,55,0.72);
       --line:rgba(255,255,255,0.10);
-
       --text:#eef2ff;
       --muted:#a8b0c2;
       --soft:#818ca3;
-
       --shadow:0 28px 80px rgba(0,0,0,0.34);
-
       --accent:#8ea2ff;
       --accent-2:#aebaff;
       --accent-3:#c7d0ff;
     }
 
-    *{
-      box-sizing:border-box;
-    }
+    *{box-sizing:border-box}
 
-    html{
-      scroll-behavior:smooth;
-    }
+    html{scroll-behavior:smooth}
 
     body{
       margin:0;
@@ -84,10 +67,10 @@
       position:fixed;
       inset:0;
       background-image:
-        linear-gradient(rgba(255,255,255,0.22) 1px, transparent 20px),
-        linear-gradient(90deg, rgba(255,255,255,0.18) 1px, transparent 20px);
+        linear-gradient(rgba(255,255,255,0.22) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.18) 1px, transparent 1px);
       background-size:42px 42px;
-      mask-image:linear-gradient(to bottom, rgba(0,0,0,0.35), transparent 20%);
+      mask-image:linear-gradient(to bottom, rgba(0,0,0,0.35), transparent 70%);
       pointer-events:none;
       z-index:0;
     }
@@ -104,33 +87,13 @@
       animation:float 16s ease-in-out infinite;
     }
 
-    .orb.one{
-      top:-70px;
-      left:-90px;
-      background:rgba(120,160,255,0.55);
-    }
-
-    .orb.two{
-      bottom:-90px;
-      right:-90px;
-      background:rgba(255,180,120,0.42);
-      animation-delay:-5s;
-    }
-
-    .orb.three{
-      bottom:12%;
-      left:24%;
-      background:rgba(110,231,183,0.28);
-      animation-delay:-9s;
-    }
+    .orb.one{top:-70px;left:-90px;background:rgba(120,160,255,0.55)}
+    .orb.two{bottom:-90px;right:-90px;background:rgba(255,180,120,0.42);animation-delay:-5s}
+    .orb.three{bottom:12%;left:24%;background:rgba(110,231,183,0.28);animation-delay:-9s}
 
     @keyframes float{
-      0%,100%{
-        transform:translateY(0) translateX(0) scale(1);
-      }
-      50%{
-        transform:translateY(-18px) translateX(14px) scale(1.04);
-      }
+      0%,100%{transform:translateY(0) translateX(0) scale(1)}
+      50%{transform:translateY(-18px) translateX(14px) scale(1.04)}
     }
 
     .wrap{
@@ -156,16 +119,14 @@
       box-shadow:0 14px 32px rgba(23,33,47,0.08);
     }
 
-    .nav-left,
-    .nav-right{
+    .nav-left,.nav-right{
       display:flex;
       align-items:center;
       gap:10px;
       flex-wrap:wrap;
     }
 
-    .nav a,
-    .theme-btn{
+    .nav a,.theme-btn{
       border:1px solid var(--line);
       background:var(--glass-strong);
       color:var(--text);
@@ -176,15 +137,12 @@
       font-size:13px;
       font-weight:700;
       text-decoration:none;
-      transition:0.22s ease;
+      transition:.22s ease;
       white-space:nowrap;
       box-shadow:0 8px 20px rgba(23,33,47,0.06);
     }
 
-    .nav a:hover,
-    .theme-btn:hover{
-      transform:translateY(-1px);
-    }
+    .nav a:hover,.theme-btn:hover{transform:translateY(-1px)}
 
     .hero{
       margin-top:18px;
@@ -236,16 +194,12 @@
       width:100%;
       padding:34px;
       display:grid;
-      grid-template-columns:1.08fr 0.92fr;
+      grid-template-columns:1.08fr .92fr;
       gap:22px;
       align-items:end;
     }
 
-    .hero-copy{
-      max-width:720px;
-    }
-
-    .hero-copy .eyebrow{
+    .eyebrow{
       display:inline-flex;
       align-items:center;
       gap:8px;
@@ -256,24 +210,22 @@
       color:rgba(255,255,255,0.84);
       font-size:13px;
       font-weight:700;
-      letter-spacing:-0.01em;
-      box-shadow:0 8px 20px rgba(23,33,47,0.10);
       margin-bottom:18px;
       backdrop-filter:blur(10px);
       -webkit-backdrop-filter:blur(10px);
     }
 
-    .hero-copy h1{
+    h1{
       margin:0;
       font-size:64px;
       letter-spacing:-0.07em;
-      line-height:0.92;
+      line-height:.92;
       font-weight:860;
-      color:#ffffff;
+      color:#fff;
       text-shadow:0 6px 24px rgba(0,0,0,0.18);
     }
 
-    .hero-copy .subtitle{
+    .subtitle{
       margin-top:16px;
       max-width:760px;
       color:rgba(255,255,255,0.82);
@@ -303,7 +255,7 @@
       font-size:32px;
       font-weight:850;
       letter-spacing:-0.04em;
-      color:#ffffff;
+      color:#fff;
     }
 
     .stat-label{
@@ -313,9 +265,7 @@
       font-weight:700;
     }
 
-    .section{
-      margin-top:22px;
-    }
+    .section{margin-top:22px}
 
     .section-title{
       display:flex;
@@ -338,10 +288,9 @@
       line-height:1.5;
     }
 
-    .section-card,
-    .note-card{
+    .section-card,.note-card,.variety-card{
       border-radius:var(--radius-lg);
-      background:linear-gradient(145deg, var(--glass), rgba(255,255,255,0.42));
+      background:linear-gradient(145deg,var(--glass),rgba(255,255,255,0.42));
       backdrop-filter:blur(24px) saturate(1.18);
       -webkit-backdrop-filter:blur(24px) saturate(1.18);
       border:1px solid var(--line);
@@ -352,23 +301,16 @@
     body.dark .section-card,
     body.dark .note-card,
     body.dark .variety-card{
-      background:linear-gradient(145deg, var(--glass), rgba(15,23,42,0.38));
+      background:linear-gradient(145deg,var(--glass),rgba(15,23,42,0.38));
     }
 
-    .section-card{
-      padding:22px;
-    }
+    .section-card{padding:22px}
 
     .variety-search-card{
       position:relative;
       overflow:hidden;
       background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,0.82) 0%,
-          rgba(255,255,255,0.72) 42%,
-          rgba(255,255,255,0.58) 100%
-        ),
+        linear-gradient(135deg,rgba(255,255,255,0.82),rgba(255,255,255,0.72),rgba(255,255,255,0.58)),
         var(--search-image);
       background-size:cover;
       background-position:center;
@@ -382,12 +324,7 @@
       inset:0;
       background:
         radial-gradient(circle at 18% 18%, rgba(255,255,255,0.68), transparent 34%),
-        linear-gradient(
-          90deg,
-          rgba(237,243,255,0.74) 0%,
-          rgba(247,245,255,0.54) 52%,
-          rgba(255,255,255,0.40) 100%
-        );
+        linear-gradient(90deg,rgba(237,243,255,0.74),rgba(247,245,255,0.54),rgba(255,255,255,0.40));
       pointer-events:none;
       z-index:0;
     }
@@ -399,12 +336,7 @@
 
     body.dark .variety-search-card{
       background:
-        linear-gradient(
-          135deg,
-          rgba(15,23,42,0.78) 0%,
-          rgba(15,23,42,0.68) 48%,
-          rgba(15,23,42,0.54) 100%
-        ),
+        linear-gradient(135deg,rgba(15,23,42,0.78),rgba(15,23,42,0.68),rgba(15,23,42,0.54)),
         var(--search-image);
       background-size:cover;
       background-position:center;
@@ -415,17 +347,12 @@
     body.dark .variety-search-card::before{
       background:
         radial-gradient(circle at 18% 18%, rgba(255,255,255,0.08), transparent 34%),
-        linear-gradient(
-          90deg,
-          rgba(15,23,42,0.76) 0%,
-          rgba(15,23,42,0.58) 54%,
-          rgba(15,23,42,0.42) 100%
-        );
+        linear-gradient(90deg,rgba(15,23,42,0.76),rgba(15,23,42,0.58),rgba(15,23,42,0.42));
     }
 
     .library-tools{
       display:grid;
-      grid-template-columns:1.15fr 0.85fr;
+      grid-template-columns:1.15fr .85fr;
       gap:14px;
       align-items:center;
     }
@@ -446,13 +373,8 @@
       -webkit-backdrop-filter:blur(18px);
     }
 
-    body.dark .search-box{
-      background:rgba(15,23,42,0.62);
-    }
-
-    .search-box::placeholder{
-      color:var(--soft);
-    }
+    body.dark .search-box{background:rgba(15,23,42,0.62)}
+    .search-box::placeholder{color:var(--soft)}
 
     .filter-row{
       display:flex;
@@ -478,9 +400,7 @@
       -webkit-backdrop-filter:blur(18px);
     }
 
-    body.dark .filter-chip{
-      background:rgba(15,23,42,0.62);
-    }
+    body.dark .filter-chip{background:rgba(15,23,42,0.62)}
 
     .filter-chip:hover,
     .filter-chip.active{
@@ -497,12 +417,6 @@
 
     .variety-card{
       padding:18px;
-      border-radius:24px;
-      background:linear-gradient(145deg, var(--glass), rgba(255,255,255,0.42));
-      backdrop-filter:blur(24px) saturate(1.18);
-      -webkit-backdrop-filter:blur(24px) saturate(1.18);
-      border:1px solid var(--line);
-      box-shadow:0 18px 42px rgba(23,33,47,0.08);
       cursor:pointer;
       transition:.24s ease;
       min-height:196px;
@@ -568,9 +482,7 @@
       border:1px solid var(--line);
     }
 
-    body.dark .pill{
-      background:rgba(255,255,255,0.06);
-    }
+    body.dark .pill{background:rgba(255,255,255,0.06)}
 
     .pill.priority-high{
       color:#fff;
@@ -603,9 +515,7 @@
       gap:16px;
     }
 
-    .note-card{
-      padding:22px;
-    }
+    .note-card{padding:22px}
 
     .note-card h3{
       margin:0 0 10px;
@@ -633,9 +543,7 @@
       -webkit-backdrop-filter:blur(16px);
     }
 
-    .modal.open{
-      display:flex;
-    }
+    .modal.open{display:flex}
 
     .modal-panel{
       width:100%;
@@ -643,16 +551,14 @@
       max-height:88vh;
       overflow:auto;
       border-radius:32px;
-      background:
-        linear-gradient(145deg, var(--glass-strong), rgba(255,255,255,0.54));
+      background:linear-gradient(145deg,var(--glass-strong),rgba(255,255,255,0.54));
       border:1px solid var(--line);
       box-shadow:0 30px 90px rgba(0,0,0,0.28);
       padding:26px;
     }
 
     body.dark .modal-panel{
-      background:
-        linear-gradient(145deg, rgba(28,36,55,0.92), rgba(15,23,42,0.82));
+      background:linear-gradient(145deg,rgba(28,36,55,0.92),rgba(15,23,42,0.82));
     }
 
     .modal-top{
@@ -712,9 +618,7 @@
       border:1px solid var(--line);
     }
 
-    body.dark .detail-mini{
-      background:rgba(255,255,255,0.05);
-    }
+    body.dark .detail-mini{background:rgba(255,255,255,0.05)}
 
     .detail-mini small{
       display:block;
@@ -739,9 +643,7 @@
       border:1px solid var(--line);
     }
 
-    body.dark .detail-section{
-      background:rgba(255,255,255,0.045);
-    }
+    body.dark .detail-section{background:rgba(255,255,255,0.045)}
 
     .detail-section h3{
       margin:0 0 12px;
@@ -799,56 +701,25 @@
       border:1px solid var(--line);
     }
 
-    body.dark .footer span{
-      background:rgba(255,255,255,0.05);
-    }
+    body.dark .footer span{background:rgba(255,255,255,0.05)}
 
     @media(max-width:1020px){
-      .variety-grid{
-        grid-template-columns:repeat(3,1fr);
-      }
-
-      .library-tools{
-        grid-template-columns:1fr;
-      }
-
-      .filter-row{
-        justify-content:flex-start;
-      }
-
-      .detail-grid{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .note-grid{
-        grid-template-columns:1fr;
-      }
+      .variety-grid{grid-template-columns:repeat(3,1fr)}
+      .library-tools{grid-template-columns:1fr}
+      .filter-row{justify-content:flex-start}
+      .detail-grid{grid-template-columns:1fr 1fr}
+      .note-grid{grid-template-columns:1fr}
     }
 
     @media(max-width:900px){
-      .hero{
-        min-height:auto;
-      }
-
-      .hero-content{
-        grid-template-columns:1fr;
-        padding:26px 20px;
-      }
-
-      .hero-copy h1{
-        font-size:48px;
-      }
-
-      .hero-copy .subtitle{
-        font-size:15px;
-        line-height:1.7;
-      }
+      .hero{min-height:auto}
+      .hero-content{grid-template-columns:1fr;padding:26px 20px}
+      h1{font-size:48px}
+      .subtitle{font-size:15px;line-height:1.7}
     }
 
     @media(max-width:640px){
-      body{
-        padding:16px;
-      }
+      body{padding:16px}
 
       .nav{
         border-radius:24px;
@@ -856,22 +727,18 @@
         flex-direction:column;
       }
 
-      .nav-left,
-      .nav-right{
+      .nav-left,.nav-right{
         display:grid;
         grid-template-columns:1fr 1fr;
         width:100%;
       }
 
-      .nav a,
-      .theme-btn{
+      .nav a,.theme-btn{
         text-align:center;
         justify-content:center;
       }
 
-      .hero{
-        border-radius:28px;
-      }
+      .hero{border-radius:28px}
 
       .hero::before{
         background:
@@ -888,33 +755,12 @@
         background-repeat:no-repeat;
       }
 
-      .hero-copy h1{
-        font-size:40px;
-      }
-
-      .hero-stats,
-      .variety-grid,
-      .detail-grid{
-        grid-template-columns:1fr;
-      }
-
-      .section-title{
-        align-items:flex-start;
-        flex-direction:column;
-      }
-
-      .modal{
-        padding:14px;
-      }
-
-      .modal-panel{
-        padding:20px;
-        border-radius:26px;
-      }
-
-      .modal-title{
-        font-size:31px;
-      }
+      h1{font-size:40px}
+      .hero-stats,.variety-grid,.detail-grid{grid-template-columns:1fr}
+      .section-title{align-items:flex-start;flex-direction:column}
+      .modal{padding:14px}
+      .modal-panel{padding:20px;border-radius:26px}
+      .modal-title{font-size:31px}
     }
   </style>
 </head>
@@ -959,7 +805,7 @@
           </div>
 
           <div class="stat">
-            <div class="stat-number">11</div>
+            <div class="stat-number">13</div>
             <div class="stat-label">Detailed Cards</div>
           </div>
 
@@ -1101,15 +947,15 @@
     const themeToggle = document.getElementById('themeToggle');
     const THEME_KEY = 'casa-beans-theme';
 
-    function applySavedTheme() {
+    function applySavedTheme(){
       const saved = localStorage.getItem(THEME_KEY);
-      if (saved === 'dark') {
+      if(saved === 'dark'){
         document.body.classList.add('dark');
       }
       updateThemeButton();
     }
 
-    function updateThemeButton() {
+    function updateThemeButton(){
       const isDark = document.body.classList.contains('dark');
       themeToggle.textContent = isDark ? '☀️ Light' : '🌙 Dark';
     }
@@ -1162,7 +1008,7 @@
             "ควรใช้เป็น benchmark เทียบกับ Bourbon และ Caturra"
           ]
         },
-        learning:"ใช้ Typica เป็น benchmark สำหรับอธิบายคำว่า clean cup, delicate floral, soft sweetness และใช้เปรียบเทียบกับ Bourbon หรือ Caturra ได้ดี"
+        learning:"ใช้ Typica เป็น benchmark สำหรับอธิบาย clean cup, delicate floral และ soft sweetness และใช้เปรียบเทียบกับ Bourbon หรือ Caturra ได้ดี"
       },
 
       {
@@ -1175,7 +1021,7 @@
         priority:"High",
         parentage:"Natural Mutation of Typica",
         tags:["arabica","competition"],
-        summary:"สายพันธุ์สำคัญที่ให้ความหวานสูง body กลม และเป็น parentage ของหลายสายพันธุ์ เช่น Caturra, Pacas, Mundo Novo",
+        summary:"สายพันธุ์สำคัญที่ให้ความหวานสูง body กลม และเป็น parentage ของหลายสายพันธุ์ เช่น Caturra, Pacas และ Mundo Novo",
         sections:{
           "Genetics":[
             "เกิดจากการกลายพันธุ์ตามธรรมชาติของ Typica",
@@ -1376,36 +1222,149 @@
         code:"#007",
         slug:"pacamara",
         name:"Pacamara",
-        thai:"ปาคามารา",
+        thai:"พัคคะมาร่า",
         type:"Coffee-Variety · Arabica",
         origin:"El Salvador",
         priority:"High",
         parentage:"Pacas × Maragogipe",
         tags:["arabica","competition"],
-        summary:"เมล็ดใหญ่ มี cup profile ชัด expressive และมักใช้ในกาแฟประกวด แต่ต้องระวังการคั่วให้ความร้อนเข้าแกนเมล็ดดี",
+        summary:"ลูกผสมที่มนุษย์พัฒนาขึ้นจาก Pacas × Maragogipe โดย ISIC เอลซัลวาดอร์ มีเมล็ดใหญ่พิเศษและศักยภาพรสชาติสูงมาก",
         sections:{
           "Genetics":[
-            "เกิดจากการผสม Pacas กับ Maragogipe",
-            "รวมลักษณะต้นกะทัดรัดของ Pacas กับขนาดเมล็ดใหญ่ของ Maragogipe",
-            "เป็นสายพันธุ์ที่มีเอกลักษณ์สูงในตลาด specialty coffee"
+            "อยู่ในวงศ์ Rubiaceae สกุลกาแฟ สายพันธุ์อาราบิก้า มีจำนวนโครโมโซม 2n = 4x = 44",
+            "เป็นสายพันธุ์ลูกผสมที่มนุษย์พัฒนาขึ้น โดยมีสายพันธุ์พ่อแม่คือ Pacas × Maragogipe",
+            "พัฒนาโดยสถาบันวิจัยกาแฟแห่งเอลซัลวาดอร์ หรือ ISIC เริ่มต้นเพาะเลี้ยงและปรับปรุงพันธุ์ในปี ค.ศ. 1958 และเริ่มส่งเสริมให้ปลูกอย่างเป็นทางการในช่วงทศวรรษ 1980",
+            "ผสมผสานลักษณะต้นแคระจาก Pacas กับลักษณะเมล็ดใหญ่ยักษ์จาก Maragogipe ทำให้มีทั้งรูปลักษณ์โดดเด่นและศักยภาพด้าน cup profile สูง"
           ],
           "Morphology":[
-            "เมล็ดมีขนาดใหญ่กว่าสายพันธุ์อาราบิก้าทั่วไป",
-            "ลักษณะทางกายภาพอาจแปรผันตามแหล่งปลูกและการคัดเลือก",
-            "ต้องใช้การคัดเกรดและคั่วที่แม่นยำ"
+            "ต้นมีความสูงระดับปานกลางถึงสูงใหญ่ โดยเฉลี่ยประมาณ 2–3.5 เมตร กิ่งก้านหนาและแข็งแรง",
+            "ใบมีขนาดใหญ่มาก แผ่นใบกว้าง หนา สีเขียวเข้ม และแยกแยะจากสายพันธุ์อื่นได้ง่าย ใบอ่อนมีสีเขียวอมทองแดง",
+            "ผลเชอร์รี่มีสีแดงสด ขนาดใหญ่กว่าสายพันธุ์ทั่วไปอย่างเห็นได้ชัด",
+            "เมล็ดมีขนาดใหญ่พิเศษ ใหญ่กว่าเมล็ดกาแฟปกติประมาณ 2–3 เท่า มักอยู่ที่ screen size 18+ รูปทรงเมล็ดแบนและกว้าง"
           ],
-          "Cup Quality":[
-            "มักให้ peach, tropical fruit, floral, creamy texture",
-            "บาง lot มี herbal หรือ spicy complexity",
-            "ถ้าคั่วไม่ถึงแกน อาจเกิด underdevelopment ได้ง่าย"
+          "History / Commercial":[
+            "Pacamara ถือเป็นหนึ่งในผลงานสำคัญที่สุดของประเทศเอลซัลวาดอร์ที่ส่งผลต่อวงการกาแฟพิเศษระดับโลก",
+            "มีจุดอ่อนคือความต้านทานต่อโรคราสนิมและโรคผลกาแฟเน่าค่อนข้างต่ำ จึงต้องดูแลจัดการสวนอย่างพิถีพิถัน",
+            "เหมาะกับพื้นที่สูงประมาณ 1,200–1,800 เมตรเหนือระดับน้ำทะเล โดยเฉพาะพื้นที่อากาศเย็น",
+            "เนื่องจากเมล็ดมีขนาดใหญ่และหนามาก การตากแห้งให้ความชื้นสม่ำเสมอทำได้ยากกว่าปกติ ต้องใช้ความเข้าใจ processing สูง"
+          ],
+          "Cup Profile":[
+            "floral complex เช่น jasmine และ rose",
+            "tropical fruit",
+            "pomelo",
+            "dark chocolate",
+            "bright but soft acidity",
+            "high body",
+            "long sweet aftertaste"
           ],
           "Roasting Note":[
-            "ต้องระวัง heat penetration เพราะเมล็ดใหญ่",
-            "ถ้าคั่วเร็วเกินไป surface อาจดูพัฒนาแล้ว แต่แกนในยังไม่สุก",
-            "เหมาะกับการประเมิน mouthfeel, complexity และ finish"
+            "ต้องระวัง heat penetration เพราะเมล็ดมีขนาดใหญ่และหนามาก",
+            "ถ้าคั่วเร็วเกินไปอาจเกิด outside developed แต่ inside underdeveloped",
+            "ควรคุมพลังงานช่วงต้นและ mid-phase ให้ความร้อนเข้าแกนเมล็ดอย่างสม่ำเสมอ",
+            "เหมาะกับการใช้สอนเรื่อง bean size, internal development, body และ aftertaste"
           ]
         },
-        learning:"ใช้สอนเรื่อง bean size, heat penetration และความเสี่ยง outside developed แต่ inside underdeveloped"
+        learning:"Pacamara เป็นตัวอย่างที่ดีมากสำหรับสอนว่าขนาดเมล็ดใหญ่ไม่ได้แปลว่าคุณภาพสูงเสมอไป แต่ถ้าปลูก แปรรูป และคั่วดี สามารถให้ cup profile ที่ complex, body หนา และ aftertaste ยาวมาก"
+      },
+
+      {
+        code:"#008",
+        slug:"maragogipe",
+        name:"Maragogipe / Maragogype",
+        thai:"มาราโกจิเป้ / ส้มโด",
+        type:"Coffee-Variety · Arabica",
+        origin:"Brazil",
+        priority:"Medium",
+        parentage:"Gigantism Mutation of Typica",
+        tags:["arabica","brazil"],
+        summary:"การกลายพันธุ์ตามธรรมชาติของ Typica แบบ gigantism ทำให้ต้น ใบ ผล และเมล็ดมีขนาดใหญ่พิเศษ เป็นสายพันธุ์พ่อแม่ของ Pacamara",
+        sections:{
+          "Genetics":[
+            "อยู่ในวงศ์ Rubiaceae สกุลกาแฟ สายพันธุ์อาราบิก้า มีจำนวนโครโมโซม 2n = 4x = 44",
+            "เกิดจากการกลายพันธุ์ตามธรรมชาติของสายพันธุ์ Typica ให้มีลักษณะรูปร่างใหญ่ยักษ์ หรือ gigantism mutation",
+            "ลักษณะยักษ์ถูกควบคุมด้วยยีนด้อย ส่งผลให้ทุกส่วนของต้นและผลมีขนาดใหญ่ขึ้นอย่างเด่นชัด",
+            "เป็นหนึ่งในสายพันธุ์พ่อแม่หลักที่ใช้ผสมเพื่อกำเนิด Pacamara"
+          ],
+          "Morphology":[
+            "ทรงต้นสูงใหญ่มาก สามารถสูงได้ถึง 4.5 เมตรขึ้นไป ถือเป็นหนึ่งในสายพันธุ์ที่มีลำต้นสูงที่สุดในกลุ่มอาราบิก้าที่นำมาเพาะปลูก",
+            "ใบมีขนาดใหญ่มาก รูปทรงรี ผิวใบสีเขียวเข้มและมันวาว ความกว้างของใบอาจมากกว่าสายพันธุ์อาราบิก้าทั่วไปถึง 2 เท่า",
+            "ใบอ่อนที่ยอดมีสีทองแดง",
+            "ผลเชอร์รี่มีขนาดใหญ่มาก ลักษณะคล้ายมะเขือเทศราชินีขนาดเล็ก เมื่อสุกจัดมีสีแดง",
+            "เมล็ดมีขนาดใหญ่พิเศษ ถือเป็นหนึ่งในสายพันธุ์ที่มีเมล็ดใหญ่ที่สุดในโลก สามารถคัดผ่าน screen size 20+ ได้ง่าย"
+          ],
+          "History / Commercial":[
+            "ค้นพบครั้งแรกในทศวรรษ 1870 ในสวนกาแฟ Typica ใกล้เมือง Maragogipe รัฐบาเอีย ประเทศบราซิล",
+            "หลังค้นพบได้ถูกนำไปปลูกในประเทศแถบอเมริกากลาง เช่น กัวเตมาลา เม็กซิโก และนิการากัว",
+            "ข้อจำกัดคือทรงต้นสูงใหญ่ เก็บเกี่ยวยาก ผลผลิตต่อต้นและต่อพื้นที่ต่ำมาก ทำให้มูลค่าเชิงพาณิชย์ในตลาดยุคแรกค่อนข้างจำกัด",
+            "มีความต้านทานต่อโรคราสนิมต่ำมาก และไม่ทนต่อสภาพอากาศร้อนชื้นในพื้นที่ราบลุ่มต่ำ เหมาะกับพื้นที่สูงที่มีอากาศเย็น"
+          ],
+          "Cup Profile":[
+            "ถ้าปลูกในพื้นที่ลุ่มต่ำ รสชาติอาจค่อนข้างจืดชืดและคุณภาพปานกลาง",
+            "ถ้าปลูกในพื้นที่สูงมาก เช่น กัวเตมาลาหรือเม็กซิโก สามารถให้รสชาติที่นุ่มนวลและละเอียดอ่อน",
+            "buttery",
+            "soft sweetness",
+            "gentle acidity",
+            "delicate mouthfeel"
+          ],
+          "Roasting Note":[
+            "ต้องระวัง heat penetration เพราะเมล็ดใหญ่พิเศษ",
+            "ไม่ควรตัดสิน roast development จากสีผิวเมล็ดอย่างเดียว",
+            "เหมาะกับการคั่วที่ค่อย ๆ สร้าง internal development โดยไม่ทำให้ผิวไหม้หรือแห้งเกินไป"
+          ]
+        },
+        learning:"Maragogipe เหมาะสำหรับสอนเรื่อง gigantism mutation และทำให้บาริสต้าเข้าใจว่าลักษณะทางกายภาพของเมล็ดมีผลต่อการแปรรูป การคั่ว และการประเมินคุณภาพในแก้ว"
+      },
+
+      {
+        code:"#009",
+        slug:"castillo",
+        name:"Castillo",
+        thai:"คาสติลโล",
+        type:"Coffee-Variety · Arabica Hybrid",
+        origin:"Colombia",
+        priority:"High",
+        parentage:"Caturra × Timor Hybrid",
+        tags:["arabica","competition"],
+        summary:"สายพันธุ์ลูกผสมซับซ้อนของโคลอมเบียจาก Caturra × Timor Hybrid พัฒนาโดย Cenicafé เพื่อสร้างสมดุลระหว่างความต้านทานโรคและ cup quality",
+        sections:{
+          "Genetics":[
+            "อยู่ในวงศ์ Rubiaceae สกุลกาแฟ สายพันธุ์อาราบิก้า มีจำนวนโครโมโซม 2n = 4x = 44",
+            "เป็นสายพันธุ์ลูกผสมที่ซับซ้อน หรือ composite hybrid variety โดยมีสายพันธุ์พ่อแม่หลักคือ Caturra × Timor Hybrid",
+            "พัฒนาโดยสถาบันวิจัยกาแฟแห่งชาติโคลอมเบีย หรือ Cenicafé ผ่านการคัดเลือกและผสมกลับหลายชั่วอายุคน จนได้สายพันธุ์ที่นิ่ง",
+            "เปิดตัวอย่างเป็นทางการในปี ค.ศ. 2005",
+            "ยีนจาก Timor Hybrid ซึ่งมีเชื้อสาย Coffea canephora ช่วยส่งต่อความต้านทานโรคที่ยอดเยี่ยมให้กับ Castillo",
+            "มี regional varieties แตกกิ่งก้านตามภูมิภาค เพื่อให้เหมาะกับระดับความสูงและสภาพอากาศของแต่ละพื้นที่ในโคลอมเบีย"
+          ],
+          "Morphology":[
+            "ลักษณะต้นเป็นกึ่งแคระ หรือ semi-dwarf ความสูงเฉลี่ยประมาณ 1.8–2.8 เมตร",
+            "ทรงพุ่มกะทัดรัด กิ่งก้านแข็งแรงและหนา ข้อกิ่งสั้นปานกลาง",
+            "ใบอ่อนมีสีตั้งแต่เขียวอมทองแดงไปจนถึงสีเขียว แผ่นใบขนาดปานกลางถึงใหญ่ สีเขียวเข้ม",
+            "ผลเชอร์รี่มีสีแดงสด เมล็ดขนาดปานกลางค่อนไปทางใหญ่ ลักษณะภายนอกคล้าย Caturra มาก"
+          ],
+          "History / Commercial":[
+            "Castillo คือสายพันธุ์สำคัญระดับชาติของโคลอมเบีย และเป็นทางออกหลักในการรับมือวิกฤตโรคราสนิมช่วงปี ค.ศ. 2008–2011",
+            "ได้รับการสนับสนุนและส่งเสริมอย่างจริงจังจากโคลอมเบีย",
+            "มีความต้านทานต่อโรคราสนิมสูงมาก โดยเฉพาะสายพันธุ์หลัก ๆ ที่พบในโคลอมเบีย",
+            "ปรับตัวได้กว้างในพื้นที่ปลูกหลักของโคลอมเบีย ระดับความสูงประมาณ 700–2,000 เมตร",
+            "ให้ผลผลิตสูงมาก มากกว่าสายพันธุ์ดั้งเดิมทั่วไปประมาณ 2–3 เท่า"
+          ],
+          "Cup Quality / Debate":[
+            "คุณภาพในแก้วเป็นประเด็นถกเถียงในวงการกาแฟพิเศษมานาน",
+            "ผู้เชี่ยวชาญบางกลุ่มมองว่าความซับซ้อนอาจต่ำกว่าสายพันธุ์บริสุทธิ์อย่าง Typica หรือ Bourbon และอาจมีรสชาติแฝงจากยีน robusta เล็กน้อย",
+            "อย่างไรก็ตาม ผลการวิจัยและ cupping ของ Cenicafé พบว่า Castillo ที่ปลูกในพื้นที่สูงสามารถให้รสชาติที่ยอดเยี่ยมได้",
+            "red fruit",
+            "caramel",
+            "dark chocolate",
+            "good sweetness",
+            "balanced cup"
+          ],
+          "Roasting Note":[
+            "เหมาะกับการคั่วที่เน้น balance, sweetness และ structure",
+            "ควรระวังไม่ให้ development หนักเกินไปจนกลบ fruit tone และทำให้ cup ดู commercial เกินไป",
+            "ถ้าเป็น high altitude lot สามารถคั่วให้แสดง red fruit และ caramel sweetness ได้ดี"
+          ]
+        },
+        learning:"Castillo เหมาะมากสำหรับสอนเรื่อง trade-off ระหว่าง disease resistance, productivity และ cup quality รวมถึงการทำความเข้าใจว่าลูกผสมที่มียีน canephora ไม่ได้แปลว่าคุณภาพต่ำเสมอไป"
       },
 
       {
@@ -1571,8 +1530,6 @@
     ];
 
     const varietyIndex = [
-      ["#008","maragogipe","Maragogipe","มาราโกจิเป้","Coffee-Variety · Arabica","Brazil","Medium","Mutation of Typica",["arabica","brazil"]],
-      ["#009","castillo","Castillo","คาสติโย","Coffee-Variety · Arabica Hybrid","Colombia","Medium","Caturra × Timor Hybrid",["arabica"]],
       ["#010","colombia","Colombia","โคลอมเบีย","Coffee-Variety · Arabica Hybrid","Colombia","Medium","Caturra × Timor Hybrid",["arabica"]],
       ["#011","timor-hybrid","Timor Hybrid","ติมอร์ ไฮบริด","Coffee-Variety · Arabica Hybrid","Timor","High","Arabica × Robusta",["arabica","canephora"]],
       ["#012","sarchimor","Sarchimor","ซาร์ชิมอร์","Coffee-Variety · Arabica Hybrid","Costa Rica / Timor Line","Medium","Villa Sarchi × Timor Hybrid",["arabica"]],
@@ -1636,7 +1593,7 @@
     varietyIndex.forEach(item => {
       const [code, slug, name, thai, type, origin, priority, parentage, tags] = item;
 
-      if (!varieties.find(v => v.code === code)) {
+      if(!varieties.find(v => v.code === code)){
         varieties.push({
           code,
           slug,
@@ -1671,7 +1628,6 @@
     const searchInput = document.getElementById('varietySearch');
     const emptyState = document.getElementById('emptyState');
     const filterButtons = document.querySelectorAll('.filter-chip');
-
     const modal = document.getElementById('varietyModal');
     const closeModal = document.getElementById('closeModal');
 
