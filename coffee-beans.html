@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Casa Lab · Coffee Beans</title>
 <style>
-:root{--bg1:#edf3ff;--bg2:#f7f5ff;--bg3:#f4fbf7;--glass:rgba(255,255,255,.64);--glass-strong:rgba(255,255,255,.82);--line:rgba(255,255,255,.78);--text:#17212f;--muted:#667085;--soft:#8a94a6;--shadow:0 28px 80px rgba(23,33,47,.13);--accent:#5967ff;--accent-2:#7b86ff;--accent-3:#a7afff;--radius-xl:34px;--radius-lg:22px;--hero-image:url("./assets/coffee-cherry-bg.jpg");--search-image:url("./assets/coffee-cherry-row-bg.jpg")}
+:root{--bg1:#edf3ff;--bg2:#f7f5ff;--bg3:#f4fbf7;--glass:rgba(255,255,255,.64);--glass-strong:rgba(255,255,255,.82);--line:rgba(255,255,255,.78);--text:#17212f;--muted:#667085;--soft:#8a94a6;--shadow:0 28px 80px rgba(23,33,47,.13);--accent:#5967ff;--accent-2:#7b86ff;--accent-3:#a7afff;--radius-xl:34px;--radius-lg:22px;--hero-image:url("./asset/images/coffee-cherry-bg.jpg");--search-image:url("./assets/coffee-cherry-row-bg.jpg")}
 body.dark{--bg1:#070b14;--bg2:#0f1728;--bg3:#12192b;--glass:rgba(18,24,38,.64);--glass-strong:rgba(28,36,55,.74);--line:rgba(255,255,255,.10);--text:#eef2ff;--muted:#a8b0c2;--soft:#818ca3;--shadow:0 28px 80px rgba(0,0,0,.34);--accent:#8ea2ff;--accent-2:#aebaff;--accent-3:#c7d0ff}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;padding:24px;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter",sans-serif;color:var(--text);background:radial-gradient(circle at 8% 8%,rgba(120,160,255,.38),transparent 28%),radial-gradient(circle at 92% 18%,rgba(255,190,135,.30),transparent 27%),radial-gradient(circle at 72% 84%,rgba(110,231,183,.22),transparent 25%),linear-gradient(180deg,var(--bg1),var(--bg2),var(--bg3))}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.22) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.18) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.35),transparent 70%)}.orb{position:fixed;width:320px;height:320px;border-radius:999px;filter:blur(34px);opacity:.48;z-index:0;pointer-events:none;animation:float 16s ease-in-out infinite}.orb.one{top:-70px;left:-90px;background:rgba(120,160,255,.55)}.orb.two{bottom:-90px;right:-90px;background:rgba(255,180,120,.42);animation-delay:-5s}.orb.three{bottom:12%;left:24%;background:rgba(110,231,183,.28);animation-delay:-9s}@keyframes float{0%,100%{transform:translateY(0) translateX(0) scale(1)}50%{transform:translateY(-18px) translateX(14px) scale(1.04)}}
@@ -22,8 +22,8 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;bac
 <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div>
 <div class="wrap">
 <nav class="nav"><div class="nav-left"><a href="https://yaitonk.github.io/my-1st-site/">Home</a><a href="https://yaitonk.github.io/my-1st-site/brewing.html">Brewing</a><a href="https://yaitonk.github.io/my-1st-site/mini-cupping.html">Cupping</a><a href="https://yaitonk.github.io/casa-cupping-data/dashboard.html">Dashboard</a><a href="https://yaitonk.github.io/my-1st-site/team.html">R&amp;D Team</a></div><div class="nav-right"><button id="themeToggle" class="theme-btn">🌙 Dark</button></div></nav>
-<header class="hero"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">🌱 Casa Lab · Coffee Variety Library</div><h1>Coffee Beans</h1><div class="subtitle">ฐานข้อมูลสายพันธุ์กาแฟสำหรับบาริสต้า ใช้เรียนรู้เรื่อง origin, genetics, morphology, history, cup profile และ roasting implication ของสายพันธุ์สำคัญในโลก specialty coffee</div></div><div class="hero-stats"><div class="stat"><div class="stat-number">71</div><div class="stat-label">Varieties / Species</div></div><div class="stat"><div class="stat-number" id="detailCount">44</div><div class="stat-label">Detail Cards</div></div><div class="stat"><div class="stat-number">CVA</div><div class="stat-label">Sensory Focus</div></div><div class="stat"><div class="stat-number">R&amp;D</div><div class="stat-label">Training Library</div></div></div></div></header>
-<section class="section"><div class="section-title"><div><h2>Variety Library</h2><p>ค้นหาและกดดูรายละเอียดของสายพันธุ์กาแฟแต่ละตัว เหมาะสำหรับใช้สอนทีมบาริสต้าและทีม R&amp;D</p></div></div><div class="section-card variety-search-card"><div class="library-tools"><input id="varietySearch" class="search-box" type="search" placeholder="ค้นหา เช่น SL34, Sudan Rume, Yunnan, Kent, Java, Pink Bourbon..." /><div class="filter-row"><button class="filter-chip active" data-filter="all">All</button><button class="filter-chip" data-filter="arabica">Arabica</button><button class="filter-chip" data-filter="canephora">Canephora</button><button class="filter-chip" data-filter="species">Species</button><button class="filter-chip" data-filter="kenya">Kenya</button><button class="filter-chip" data-filter="competition">Competition</button><button class="filter-chip" data-filter="updated">Detail 44</button></div></div></div></section>
+<header class="hero"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">🌱 Casa Lab · Coffee Variety Library</div><h1>Coffee Beans</h1><div class="subtitle">ฐานข้อมูลสายพันธุ์กาแฟสำหรับบาริสต้า ใช้เรียนรู้เรื่อง origin, genetics, morphology, history, cup profile และ roasting implication ของสายพันธุ์สำคัญในโลก specialty coffee</div></div><div class="hero-stats"><div class="stat"><div class="stat-number">71</div><div class="stat-label">Varieties / Species</div></div><div class="stat"><div class="stat-number" id="detailCount">51</div><div class="stat-label">Detail Cards</div></div><div class="stat"><div class="stat-number">CVA</div><div class="stat-label">Sensory Focus</div></div><div class="stat"><div class="stat-number">R&amp;D</div><div class="stat-label">Training Library</div></div></div></div></header>
+<section class="section"><div class="section-title"><div><h2>Variety Library</h2><p>ค้นหาและกดดูรายละเอียดของสายพันธุ์กาแฟแต่ละตัว เหมาะสำหรับใช้สอนทีมบาริสต้าและทีม R&amp;D</p></div></div><div class="section-card variety-search-card"><div class="library-tools"><input id="varietySearch" class="search-box" type="search" placeholder="ค้นหา เช่น SL34, Sudan Rume, Yunnan, Kent, Java, Pink Bourbon..." /><div class="filter-row"><button class="filter-chip active" data-filter="all">All</button><button class="filter-chip" data-filter="arabica">Arabica</button><button class="filter-chip" data-filter="canephora">Canephora</button><button class="filter-chip" data-filter="species">Species</button><button class="filter-chip" data-filter="kenya">Kenya</button><button class="filter-chip" data-filter="competition">Competition</button><button class="filter-chip" data-filter="updated">Detail 51</button></div></div></div></section>
 <section class="section"><div class="variety-grid" id="varietyGrid"></div><div class="empty-state" id="emptyState">ไม่พบสายพันธุ์ที่ค้นหา ลองเปลี่ยน keyword หรือ filter อีกครั้ง</div></section>
 <section class="section"><div class="section-title"><div><h2>How Baristas Should Use This Page</h2><p>ใช้เป็น learning path แบบเร็วสำหรับเชื่อมโยงสายพันธุ์ → รสชาติ → การคั่ว → การสื่อสารกับลูกค้า</p></div></div><div class="note-grid"><div class="note-card"><h3>1. Variety Story</h3><p>เริ่มจากที่มาและ parentage เพื่อให้ทีมเข้าใจรากทางพันธุกรรมและประวัติศาสตร์ของกาแฟแต่ละตัว</p></div><div class="note-card"><h3>2. Cup Profile</h3><p>ใช้เทียบ sensory language เช่น floral, citrus, berry, caramel, chocolate, tea-like, creamy และ heavy body</p></div><div class="note-card"><h3>3. Roasting Lens</h3><p>เชื่อม morphology กับการคั่ว เช่น เมล็ดใหญ่ต้องระวัง heat penetration ส่วนสายพันธุ์ floral ต้องเน้น aroma preservation</p></div></div></section>
 <div class="footer"><span>🌱 Casa Lab Coffee Beans Library · powered by GitHub Pages</span></div>
@@ -1774,62 +1774,95 @@ const varieties = [
     "learning": "ใช้เป็น placeholder สำหรับขยายฐานข้อมูลต่อ"
   },
   {
-    "code": "#056",
-    "slug": "f1-hybrid",
-    "name": "F1 Hybrid",
-    "thai": "สายพันธุ์ลูกผสม F1",
-    "type": "Coffee-Variety · Arabica Hybrid",
-    "origin": "Multiple Origins",
-    "priority": "High",
-    "parentage": "First-generation hybrid",
-    "tags": [
-      "arabica",
-      "competition"
-    ],
-    "updated": true,
-    "summary": "F1 hybrid ใช้ heterosis เพื่อเพิ่มผลผลิต ความแข็งแรง ความทนทาน และรักษาคุณภาพรสชาติ",
-    "sections": {
-      "Genetics / Background": [
-        "first generation hybrid จากพ่อแม่ที่ห่างทางพันธุกรรม",
-        "ตัวอย่างคือ Centroamericano, Starmaya, Casiopea",
-        "Starmaya ขยายพันธุ์ด้วยเมล็ดได้จาก male sterility"
+      "code": "#056",
+      "slug": "f1-hybrid-varieties",
+      "name": "F1 Hybrid Varieties",
+      "thai": "F1 Hybrid ซีรีส์",
+      "type": "Coffee-Variety · Arabica",
+      "origin": "Global / WCR breeding route",
+      "priority": "High",
+      "parentage": "Distant-parent controlled cross; often Sudan Rume / Ethiopian-origin lines × disease-resistant lines such as T5296",
+      "tags": [
+            "arabica",
+            "hybrid",
+            "competition",
+            "updated"
       ],
-      "Morphology / Agronomy": [
-        "มักแข็งแรง ใบเขียวเข้ม กิ่งหนา ผลดก",
-        "Centroamericano สูง 2.5–3.5 เมตร; Starmaya กะทัดรัด",
-        "Cup ขึ้นกับคู่พ่อแม่ เช่น floral, tropical fruit, long sweetness"
-      ],
-      "Cup Profile / Commercial": [
-        "ประเมิน density และ growth vigor อย่าตัดสินจากชื่อ F1 อย่างเดียว"
-      ],
-      "Roasting Note": [
-        "ใช้ข้อมูลนี้เชื่อมโยงสายพันธุ์กับแนวทางการคั่วและการสื่อสารรสชาติในทีมบาริสต้า"
-      ]
-    },
-    "learning": "ใช้เป็น detail card สำหรับสอนทีมบาริสต้าเรื่องสายพันธุ์ → รสชาติ → การคั่ว → การสื่อสารกับลูกค้า"
-  },
+      "updated": true,
+      "summary": "กลุ่มสายพันธุ์ลูกผสมรุ่นที่ 1 ที่ใช้ความห่างทางพันธุกรรมของพ่อแม่พันธุ์เพื่อสร้าง hybrid vigor เพิ่มผลผลิต ความแข็งแรง ความทนทานต่อโรค และยังคงรักษาคุณภาพรสชาติระดับ specialty",
+      "sections": {
+            "Genetics / Background": [
+                  "อยู่ในวงศ์ Rubiaceae สกุลกาแฟ สายพันธุ์อาราบิก้า (Coffea arabica) มีจำนวนโครโมโซม 2n=4x=44",
+                  "เป็นกาแฟลูกผสมรุ่นที่ 1 (F1) ที่เกิดจากการควบคุมการผสมระหว่างพ่อแม่พันธุ์ที่มีระยะห่างทางพันธุกรรมค่อนข้างมาก เช่น สายพันธุ์ที่มีสายเลือดซูดาน รูเม (Sudan Rume), เอธิโอเปีย หรือสายเลือดดั้งเดิม ร่วมกับสายพันธุ์ต้านทานโรค เช่น T5296",
+                  "เป้าหมายหลักคือใช้ประโยชน์จากความเด่นของลูกผสม (Heterosis / Hybrid Vigor) เพื่อยกระดับผลผลิต ความแข็งแรงของต้น ความสามารถในการปรับตัว และคุณภาพในแก้วไปพร้อมกัน",
+                  "ตัวอย่างสำคัญในกลุ่มนี้ ได้แก่ Centroamericano ซึ่งพัฒนาโดย CATIE และ World Coffee Research (WCR), Starmaya ซึ่งพัฒนาโดย ECOM ร่วมกับ CIRAD และกลุ่ม Casiopea",
+                  "Starmaya เป็นตัวอย่างสำคัญเพราะใช้ระบบ male sterility ทำให้สามารถผลิตเมล็ดพันธุ์ F1 ได้ในเชิงพาณิชย์ ต่างจาก F1 หลายตัวที่ต้องพึ่งพาการเพาะเลี้ยงเนื้อเยื่อซึ่งมีต้นทุนสูง"
+            ],
+            "Morphology / Agronomy": [
+                  "ลักษณะภายนอกของต้น F1 แตกต่างกันตามคู่ผสม แต่โดยรวมมักแสดงความแข็งแรงแบบ hybrid vigor ชัดเจน: ต้นเติบโตเร็ว กิ่งก้านแข็งแรง ใบสีเขียวเข้มเป็นมัน และใบหนา",
+                  "ตัวอย่าง Centroamericano: ทรงต้นค่อนข้างเปิด สูงปานกลางถึงสูง ประมาณ 2.5–3.5 เมตร อยู่กึ่งกลางระหว่างสายพันธุ์พ่อแม่ที่เป็นต้นเตี้ยและต้นสูง",
+                  "ใบอ่อนมักมีสีทองแดง ผลเชอร์รี่สีแดง เมล็ดมีขนาดกลางถึงค่อนข้างใหญ่ ความสม่ำเสมอดี ผลค่อนข้างหนาแน่น และในปีที่ให้ผลดกสามารถมีปริมาณผลผลิตสูงมาก",
+                  "ตัวอย่าง Starmaya: ต้นแคระถึงปานกลาง สูงประมาณ 2–3 เมตร ทรงต้นกระชับ เหมาะกับการปลูกความหนาแน่นสูงและช่วยลดต้นทุนการผลิตเมล็ดพันธุ์ F1",
+                  "เหมาะกับพื้นที่ปลูกระดับกลางถึงสูงประมาณ 800–2,000 เมตรเหนือระดับน้ำทะเล และเหมาะกับโจทย์ climate resilience ในภูมิอากาศเขตร้อนที่เปลี่ยนแปลงเร็ว"
+            ],
+            "History / Commercial": [
+                  "F1 hybrid breeding เป็นยุทธศาสตร์สำคัญที่ WCR ผลักดันเพื่อตอบโจทย์ภัยคุกคามจากโรคพืช การเปลี่ยนแปลงสภาพภูมิอากาศ และความต้องการคุณภาพรสชาติที่สูงขึ้นของตลาดกาแฟพิเศษ",
+                  "สายพันธุ์อาราบิก้าดั้งเดิมจำนวนมากมีความหลากหลายทางพันธุกรรมต่ำเพราะผสมตัวเองสูง ทำให้พื้นที่พัฒนาสายพันธุ์ต้านทานโรคและปรับตัวต่อสภาพอากาศจำกัด แต่ F1 ใช้ความห่างทางพันธุกรรมของพ่อแม่พันธุ์เพื่อเปิดพื้นที่ทางพันธุกรรมใหม่",
+                  "ในการทดลองหลายพื้นที่ของอเมริกากลาง เช่น ฮอนดูรัส กัวเตมาลา นิการากัว และคอสตาริกา F1 บางสายพันธุ์แสดงผลผลิตสูงกว่าสายพันธุ์ดั้งเดิมราว 30–50% หรือมากกว่า ขณะเดียวกันยังรักษาคะแนน cup ให้อยู่ในระดับ specialty ได้",
+                  "Centroamericano ถูกใช้เป็นตัวอย่างสำคัญของ F1 ที่ให้ผลผลิตสูง ต้านทานโรคราสนิมได้ดี และยังมีคุณภาพ sensory ที่สามารถเข้าใกล้หรือเหนือกว่าสายพันธุ์ดั้งเดิมบางตัว",
+                  "แนวทาง F1 จึงถูกมองว่าเป็นทิศทางยุทธศาสตร์ของการปรับปรุงพันธุ์กาแฟในศตวรรษที่ 21 เพราะรวมเป้าหมายด้าน yield, disease resistance, climate adaptation และ cup quality เข้าด้วยกัน"
+            ],
+            "Cup Profile / Roasting Note": [
+                  "Cup profile ของ F1 แตกต่างตามคู่พ่อแม่ แต่กลุ่มที่มีศักยภาพสูงมักให้ความซับซ้อนของดอกไม้ ความเป็นกรดผลไม้เมืองร้อน ความหวานชัด และ finish ที่สะอาด",
+                  "ตัวอย่าง Centroamericano สามารถแสดง floral complexity, tropical fruit acidity และ refined sweetness ได้ดีเมื่อปลูกในพื้นที่สูงและผ่านการแปรรูปที่สะอาด",
+                  "ในงานคั่วควรมอง F1 เป็นกลุ่มที่มีโครงสร้าง cup ค่อนข้างแรงและให้ sweetness/body ได้ดี จึงควรระวังไม่ให้การคั่วหนักเกินจนกลบ floral และ fruit clarity",
+                  "เหมาะสำหรับใช้สอนทีมบาริสต้าเรื่องการปรับปรุงพันธุ์ยุคใหม่: สายพันธุ์ไม่ได้ถูกประเมินจากรสชาติเพียงอย่างเดียว แต่ต้องรวม productivity, resistance และ adaptation ด้วย",
+                  "สำหรับ competition หรือ R&D ควรชิมแยกตามแหล่งปลูกและคู่ผสม เพราะ F1 ไม่ใช่สายพันธุ์เดี่ยว แต่เป็นกลุ่ม genetic strategy ที่ผลลัพธ์ในแก้วแตกต่างกันมาก"
+            ]
+      },
+      "learning": "F1 Hybrid เป็นบทเรียนเรื่องอนาคตของกาแฟพิเศษ: การปรับปรุงพันธุ์ยุคใหม่ต้องทำให้ผลผลิตสูงขึ้น ต้านทานโรคดีขึ้น ปรับตัวกับ climate change ได้ และยังคงรักษา cup quality ระดับสูง"
+},
   {
-    "code": "#057",
-    "slug": "marsellesa",
-    "name": "Marsellesa",
-    "thai": "มาร์เซเยซา",
-    "type": "Coffee-Variety · Arabica",
-    "origin": "Nicaragua / Central America",
-    "priority": "Medium",
-    "parentage": "Sarchimor lineage",
-    "tags": [
-      "arabica"
-    ],
-    "updated": false,
-    "summary": "Marsellesa อยู่ใน Coffee Variety Library สามารถเติมรายละเอียด genetics, morphology, cup profile และ roasting note เพิ่มเติมภายหลังได้",
-    "sections": {
-      "Study Note": [
-        "รายการนี้เป็น index placeholder",
-        "ยังไม่มี detail card เชิงลึก",
-        "สามารถเติมข้อมูลเพิ่มเติมในรอบถัดไป"
-      ]
-    },
-    "learning": "ใช้เป็น placeholder สำหรับขยายฐานข้อมูลต่อ"
+      "code": "#057",
+      "slug": "marsellesa",
+      "name": "Marsellesa",
+      "thai": "มาร์เซเยซา",
+      "type": "Coffee-Variety · Arabica",
+      "origin": "Central America / CIRAD program",
+      "priority": "High",
+      "parentage": "Sarchimor lineage; Villa Sarchi × Timor Hybrid",
+      "tags": [
+          "arabica",
+          "competition"
+      ],
+      "updated": true,
+      "summary": "สายพันธุ์ซาร์ชิมอร์ที่พัฒนาโดย CIRAD ให้ผลผลิตดี ต้านทานโรคราสนิม และเป็นฐานพันธุกรรมสำคัญของ Starmaya",
+      "sections": {
+          "Genetics / Background": [
+              "เป็นอาราบิก้าลูกผสมพัฒนาโดย CIRAD และเครือข่ายความร่วมมือระหว่างประเทศ",
+              "อยู่ในกลุ่ม Sarchimor โดยมีพื้นฐานจาก Villa Sarchi × Timor Hybrid และผ่านการคัดเลือก/ผสมกลับหลายชั่วอายุคน",
+              "มียีนต้านทานโรคราสนิมจากสายเลือด Timor Hybrid และโครงสร้างพันธุกรรมสอดคล้องกับกลุ่ม Sarchimor",
+              "เป็นหนึ่งในแหล่งพันธุกรรมสำคัญของ Starmaya F1 โดยทำหน้าที่เป็นแม่พันธุ์ในระบบ male sterility"
+          ],
+          "Morphology / Agronomy": [
+              "ต้นแคระถึงปานกลาง สูงประมาณ 1.8–2.8 เมตร สืบทอดลักษณะต้นเตี้ยจาก Villa Sarchi",
+              "ทรงต้นกระชับ ข้อกิ่งสั้น กิ่งหนาแน่น เหมาะกับการปลูกหนาแน่นและจัดการสวนง่าย",
+              "ใบอ่อนสีทองแดงเขียวถึงเขียว ใบขนาดกลางถึงใหญ่ สีเขียวเข้มและหนา",
+              "ผลสุกสีแดง เมล็ดขนาดกลาง รูปทรงค่อนข้างกลม สม่ำเสมอดี ตะแกรงมักอยู่ราว 15–16"
+          ],
+          "History / Commercial": [
+              "Marsellesa ถูกพัฒนาในช่วงปลายศตวรรษที่ 20 ถึงต้นศตวรรษที่ 21 เพื่อใช้ในภูมิภาคอเมริกากลางและแอฟริกาตะวันออกบางส่วน",
+              "จุดเด่นคือความต้านทาน CLR ค่อนข้างดี ช่วยลดต้นทุนการจัดการโรคในพื้นที่ปลูกชื้น",
+              "เหมาะกับพื้นที่ร้อนชื้นระดับความสูงประมาณ 1,000–1,800 เมตร และปรับตัวต่อดินหลากหลายชนิดได้ดี",
+              "ให้ผลผลิตสูงและค่อนข้างเสถียร มีรายงานว่าผลผลิตสูงกว่าสายพันธุ์ดั้งเดิมอย่าง Typica/Bourbon ในหลายแหล่งปลูก"
+          ],
+          "Cup Profile / Roasting Note": [
+              "Cup quality อยู่ระดับ medium-to-high โดยทั่วไปดีกว่าค่าเฉลี่ยของกลุ่ม Sarchimor หลายตัว",
+              "โทนรสชาติหลักมักเป็น caramel sweetness, mild tropical fruit acidity และ body ที่สมดุล",
+              "ในพื้นที่สูงและ process ดี สามารถให้ floral และ red fruit ที่น่าพอใจ เหมาะกับ commercial specialty และ training เรื่อง disease-resistant specialty varieties"
+          ]
+      },
+      "learning": "ใช้เป็น detail card สำหรับสอนทีมบาริสต้าเรื่องสายพันธุ์ → รสชาติ → การคั่ว → การสื่อสารกับลูกค้า"
   },
   {
     "code": "#058",
@@ -1877,51 +1910,90 @@ const varieties = [
     "learning": "ใช้ Coffea Canephora - Wild Type/Species สอนทีมเรื่อง genetics, morphology, history, cup profile และผลต่อการคั่ว/การสื่อสารรสชาติของสายพันธุ์นี้"
   },
   {
-    "code": "#059",
-    "slug": "eugenioides",
-    "name": "Coffea eugenioides",
-    "thai": "ยูจีนิโออิดิส",
-    "type": "Coffee Species",
-    "origin": "East Africa",
-    "priority": "High",
-    "parentage": "Arabica parent species",
-    "tags": [
-      "species",
-      "competition"
-    ],
-    "updated": false,
-    "summary": "Coffea eugenioides อยู่ใน Coffee Variety Library สามารถเติมรายละเอียด genetics, morphology, cup profile และ roasting note เพิ่มเติมภายหลังได้",
-    "sections": {
-      "Study Note": [
-        "รายการนี้เป็น index placeholder",
-        "ยังไม่มี detail card เชิงลึก",
-        "สามารถเติมข้อมูลเพิ่มเติมในรอบถัดไป"
-      ]
-    },
-    "learning": "ใช้เป็น placeholder สำหรับขยายฐานข้อมูลต่อ"
+      "code": "#059",
+      "slug": "coffea-eugenioides",
+      "name": "Coffea eugenioides",
+      "thai": "ยูจีนิโออิดิส",
+      "type": "Coffee-Species · Eugenioides",
+      "origin": "East Africa",
+      "priority": "High",
+      "parentage": "One parent species of Arabica; Eu-subgenome",
+      "tags": [
+          "species",
+          "competition"
+      ],
+      "updated": true,
+      "summary": "หนึ่งในพ่อแม่พันธุ์ตามธรรมชาติของอาราบิก้า มีคาเฟอีนต่ำมากและรสหวานครีมมี่โดดเด่น",
+      "sections": {
+          "Genetics / Background": [
+              "เป็นกาแฟสปีชีส์ดิพลอยด์ (Diploid) มีโครโมโซม 2n=2x=22",
+              "เป็นหนึ่งในสองพ่อแม่พันธุ์ของ Coffea arabica อีกฝั่งคือ Coffea canephora",
+              "ส่งต่อจีโนมฝั่ง Eu-subgenome ให้กับอาราบิก้าประมาณครึ่งหนึ่ง",
+              "มีปริมาณคาเฟอีนต่ำมากจนเกือบเป็นศูนย์ ซึ่งสัมพันธ์กับข้อบกพร่อง/การแสดงออกต่ำของยีนใน caffeine biosynthesis pathway"
+          ],
+          "Morphology / Agronomy": [
+              "ต้นค่อนข้างเล็ก สูงประมาณ 1.5–3 เมตร ต่ำกว่าอาราบิก้าและโรบัสต้าอย่างชัดเจน",
+              "ใบเล็กและแคบ รูปรี ผิวเรียบมันวาว สีเขียวเข้มและค่อนข้างบาง ใบอ่อนสีเขียวสด",
+              "ดอกเล็ก สีขาว กลิ่นอ่อน ช่อผลโปร่ง ผลกลมขนาดเล็ก เมื่อสุกสีแดงสด",
+              "เมล็ดเล็กพิเศษ กลมมนและดูเรียบง่าย แต่มีคุณค่าทางพันธุกรรมสูงมาก"
+          ],
+          "History / Commercial": [
+              "กระจายพันธุ์ตามธรรมชาติในแอฟริกาตะวันออกและตอนกลาง เช่น คองโกตะวันออก ยูกันดา รวันดา เคนยาตะวันตก และแทนซาเนียตอนเหนือ",
+              "เหมาะกับพื้นที่ภูเขาสูง 1,200–2,400 เมตร และภูมิอากาศเย็นสบาย",
+              "การปลูกเชิงพาณิชย์หายากมาก ส่วนใหญ่อยู่ในงานวิจัย คลังพันธุกรรม หรือ nano-lot พิเศษ",
+              "ได้รับความสนใจสูงจาก WCR, CIRAD และคลังอนุรักษ์พันธุกรรม เพราะอาจใช้พัฒนากาแฟคาเฟอีนต่ำและความหวานสูงในอนาคต"
+          ],
+          "Cup Profile / Roasting Note": [
+              "Cup profile มีความแปลกและน่าจดจำ: creamy, milk, butter, toffee, caramel, honey และ sweet floral",
+              "กรดต่ำ แต่ sweetness สูงมาก ให้ mouthfeel คล้ายน้ำเชื่อมหรือครีมนม",
+              "ในการคั่วควรระวังไม่ให้ความร้อนหนักเกินไปจนทำลายความหวานละเอียดและ creamy texture",
+              "เหมาะใช้สอนทีมเรื่อง species ที่เป็นรากกำเนิดรสชาติหวานนุ่มของอาราบิก้า"
+          ]
+      },
+      "learning": "ใช้ Eugenioides เพื่ออธิบายรากพันธุกรรมของ Arabica, low caffeine genetics และเหตุผลที่บางสายพันธุ์ให้ความหวานนุ่มแบบครีมมี่เป็นพิเศษ"
   },
   {
-    "code": "#060",
-    "slug": "starmaya",
-    "name": "Starmaya",
-    "thai": "สตาร์มายา",
-    "type": "Coffee-Variety · Arabica",
-    "origin": "Nicaragua",
-    "priority": "Medium",
-    "parentage": "F1 hybrid",
-    "tags": [
-      "arabica"
-    ],
-    "updated": false,
-    "summary": "Starmaya อยู่ใน Coffee Variety Library สามารถเติมรายละเอียด genetics, morphology, cup profile และ roasting note เพิ่มเติมภายหลังได้",
-    "sections": {
-      "Study Note": [
-        "รายการนี้เป็น index placeholder",
-        "ยังไม่มี detail card เชิงลึก",
-        "สามารถเติมข้อมูลเพิ่มเติมในรอบถัดไป"
-      ]
-    },
-    "learning": "ใช้เป็น placeholder สำหรับขยายฐานข้อมูลต่อ"
+      "code": "#060",
+      "slug": "starmaya",
+      "name": "Starmaya",
+      "thai": "สตาร์มายา",
+      "type": "Coffee-Variety · Arabica",
+      "origin": "Central America / ECOM × CIRAD",
+      "priority": "High",
+      "parentage": "Marsellesa female-sterile mutant × Ethiopian/Sudan Rume-related male parent",
+      "tags": [
+          "arabica",
+          "competition"
+      ],
+      "updated": true,
+      "summary": "F1 hybrid ตัวแรกที่สามารถผลิตเมล็ดพันธุ์ในเชิงพาณิชย์ผ่านระบบ male sterility ได้ เป็นก้าวสำคัญของ F1 coffee breeding",
+      "sections": {
+          "Genetics / Background": [
+              "เป็นอาราบิก้าลูกผสม F1 มีโครโมโซม 2n=4x=44",
+              "พัฒนาโดย ECOM Agroindustrial Corporation ร่วมกับ CIRAD",
+              "แม่พันธุ์คือ Marsellesa กลายพันธุ์ที่มียีนเพศผู้เป็นหมัน (male sterility; ms) ทำให้ไม่สร้างเกสรตัวผู้ที่ใช้งานได้",
+              "พ่อพันธุ์เป็นสายเลือดที่มีพันธุกรรมห่าง เช่น กลุ่มเอธิโอเปียหรือ Sudan Rume เพื่อเพิ่ม heterosis และศักยภาพด้านรสชาติ"
+          ],
+          "Morphology / Agronomy": [
+              "ต้นแคระถึงปานกลาง สูงประมาณ 2–3 เมตร ทรงต้นอยู่ระหว่างพ่อแม่พันธุ์",
+              "กิ่งหนาแน่น โตแรง ใบสีเขียวเข้มเป็นมัน แสดง hybrid vigor ชัดเจน",
+              "ใบอ่อนสีทองแดงเขียวถึงเขียว ใบขนาดกลางและหนา",
+              "ผลสุกสีแดง เมล็ดขนาดกลาง สม่ำเสมอดี ให้ผลต่อช่อมากและมีศักยภาพผลผลิตสูง"
+          ],
+          "History / Commercial": [
+              "ประกาศสู่ตลาดในปี 2018 และถือเป็น milestone ของการพัฒนาพันธุ์กาแฟ F1",
+              "จุดเด่นคือช่วยขยาย F1 hybrid ด้วยเมล็ดได้ ลดต้นทุนเมื่อเทียบกับการเพาะเลี้ยงเนื้อเยื่อ",
+              "เริ่มทดลองและส่งเสริมในเม็กซิโก ฮอนดูรัส และนิการากัว โดยมีผลผลิตสูงกว่า Caturra/Catimor ในหลายการทดลอง",
+              "ปรับตัวได้ดีในพื้นที่ 1,000–2,000 เมตร และมีความต้านทาน CLR จากสาย Marsellesa ค่อนข้างดี"
+          ],
+          "Cup Profile / Roasting Note": [
+              "Cup quality หลายล็อตได้คะแนน specialty สูง บาง batch ได้มากกว่า 85 คะแนน",
+              "รสชาติเด่นด้วย floral, citrus, tropical fruit และ refined sweetness",
+              "ในการคั่วควรรักษา aromatic lift ของพ่อพันธุ์ห่างไกล และไม่ลาก Maillard จนความใสของ fruit/floral หายไป",
+              "เหมาะเป็นตัวอย่างการเชื่อม breeding innovation กับ commercial scale และ specialty cup quality"
+          ]
+      },
+      "learning": "ใช้เป็น detail card สำหรับสอนทีมบาริสต้าเรื่องสายพันธุ์ → รสชาติ → การคั่ว → การสื่อสารกับลูกค้า"
   },
   {
     "code": "#061",
@@ -2000,97 +2072,171 @@ const varieties = [
     "learning": "ใช้ Papayo สอนทีมเรื่อง genetics, morphology, history, cup profile และผลต่อการคั่ว/การสื่อสารรสชาติของสายพันธุ์นี้"
   },
   {
-    "code": "#063",
-    "slug": "caturron",
-    "name": "Caturron",
-    "thai": "คาทูร์รอน",
-    "type": "Coffee-Variety · Arabica",
-    "origin": "Colombia",
-    "priority": "Medium",
-    "parentage": "Local selection / mutation",
-    "tags": [
-      "arabica"
-    ],
-    "updated": false,
-    "summary": "Caturron อยู่ใน Coffee Variety Library สามารถเติมรายละเอียด genetics, morphology, cup profile และ roasting note เพิ่มเติมภายหลังได้",
-    "sections": {
-      "Study Note": [
-        "รายการนี้เป็น index placeholder",
-        "ยังไม่มี detail card เชิงลึก",
-        "สามารถเติมข้อมูลเพิ่มเติมในรอบถัดไป"
-      ]
-    },
-    "learning": "ใช้เป็น placeholder สำหรับขยายฐานข้อมูลต่อ"
+      "code": "#063",
+      "slug": "caturron",
+      "name": "Caturron",
+      "thai": "คาทูร์รอน",
+      "type": "Coffee-Variety · Arabica",
+      "origin": "Colombia / Latin America",
+      "priority": "Medium",
+      "parentage": "Natural reversion / mutation related to Caturra",
+      "tags": [
+          "arabica"
+      ],
+      "updated": true,
+      "summary": "สายพันธุ์กลายพันธุ์/รีเวิร์สจากกลุ่ม Caturra มีทรงต้นสูงขึ้นและมีบทบาทเชิงวิจัยมากกว่าการปลูกเชิงพาณิชย์",
+      "sections": {
+          "Genetics / Background": [
+              "เป็นอาราบิก้า มีโครโมโซม 2n=4x=44",
+              "เกี่ยวข้องกับ Caturra โดยเป็นกรณี natural reversion หรือ mutation ที่ทำให้ความเตี้ยของ Caturra ลดลง",
+              "เชื่อมโยงกับยีนแคระ Ct gene แต่เกิดการเปลี่ยนแปลงที่ตำแหน่งหรือการแสดงออกของยีน ทำให้ต้นสูงขึ้น",
+              "พบและบันทึกในบางพื้นที่ เช่น บราซิล/ละตินอเมริกา แต่ยังไม่ใช่สายพันธุ์เชิงพาณิชย์หลัก"
+          ],
+          "Morphology / Agronomy": [
+              "ต้นสูงปานกลางถึงสูง ประมาณ 2.5–3.5 เมตร สูงกว่า Caturra แต่โดยมากต่ำกว่า Bourbon มาตรฐาน",
+              "กิ่งค่อนข้างแข็งแรง ข้อกิ่งสั้นกว่า Bourbon แต่ยาวกว่า Caturra ทรงพุ่มเปิดกว่า Caturra",
+              "ใบอ่อนสีทองแดงถึงเขียวอ่อน ใบขนาดกลางถึงเล็ก สีเขียวเข้ม ขอบใบเป็นคลื่น",
+              "ผลสุกสีแดง เมล็ดขนาดกลาง รูปทรงกลมมน ใกล้เคียง Caturra"
+          ],
+          "History / Commercial": [
+              "Caturron เป็นตัวอย่างของความไม่เสถียรหรือการกลับลักษณะของยีนแคระในสภาพธรรมชาติ",
+              "มักถูกมองเป็นต้นผิดปกติในแปลง Caturra มากกว่าสายพันธุ์ที่ส่งเสริมกว้างขวาง",
+              "ความต้านทานโรคโดยรวมใกล้เคียง Caturra และไม่โดดเด่นด้าน CLR resistance",
+              "มีคุณค่าเชิงวิจัยเพื่อศึกษา dwarfism stability และการแสดงออกของยีนที่ควบคุมความสูงของต้น"
+          ],
+          "Cup Profile / Roasting Note": [
+              "Cup profile ใกล้เคียง Caturra: caramel sweetness, mild acidity และ nutty/clean profile",
+              "คุณภาพโดยรวมอยู่ระดับปานกลางถึงดี แต่ complexity มักไม่โดดเด่นกว่าสายพันธุ์หลัก",
+              "ใช้เป็นตัวอย่างสำหรับสอนทีมเรื่อง mutation/reversion และเหตุผลที่การระบุสายพันธุ์ต้องพึ่งข้อมูลแปลงปลูก ไม่ใช่ดูจากทรงต้นอย่างเดียว"
+          ]
+      },
+      "learning": "ใช้เป็น detail card สำหรับสอนทีมบาริสต้าเรื่องสายพันธุ์ → รสชาติ → การคั่ว → การสื่อสารกับลูกค้า"
   },
   {
-    "code": "#064",
-    "slug": "sl14",
-    "name": "SL14",
-    "thai": "เอสแอลสิบสี่",
-    "type": "Coffee-Variety · Arabica",
-    "origin": "Kenya",
-    "priority": "Medium",
-    "parentage": "Scott Laboratories selection",
-    "tags": [
-      "arabica",
-      "kenya"
-    ],
-    "updated": false,
-    "summary": "SL14 อยู่ใน Coffee Variety Library สามารถเติมรายละเอียด genetics, morphology, cup profile และ roasting note เพิ่มเติมภายหลังได้",
-    "sections": {
-      "Study Note": [
-        "รายการนี้เป็น index placeholder",
-        "ยังไม่มี detail card เชิงลึก",
-        "สามารถเติมข้อมูลเพิ่มเติมในรอบถัดไป"
-      ]
-    },
-    "learning": "ใช้เป็น placeholder สำหรับขยายฐานข้อมูลต่อ"
+      "code": "#064",
+      "slug": "sl14",
+      "name": "SL14",
+      "thai": "เอสแอลสิบสี่",
+      "type": "Coffee-Variety · Arabica",
+      "origin": "Kenya",
+      "priority": "Medium",
+      "parentage": "Scott Laboratories selection; Bourbon-series material",
+      "tags": [
+          "arabica",
+          "kenya"
+      ],
+      "updated": true,
+      "summary": "สายพันธุ์คัดเลือกยุคแรกของ Scott Laboratories ในเคนยา ปัจจุบันพบไม่มากแต่มีคุณค่าด้านประวัติศาสตร์ของกลุ่ม SL",
+      "sections": {
+          "Genetics / Background": [
+              "เป็นอาราบิก้า มีโครโมโซม 2n=4x=44",
+              "คัดเลือกโดย Scott Laboratories ในเคนยา เป็น selection หมายเลข 14",
+              "มีที่มาจากวัสดุพันธุกรรมกลุ่ม Bourbon-series ที่ปลูกในเคนยา",
+              "อยู่ในกลุ่มประวัติศาสตร์เดียวกับ SL28 และ SL34 แต่มีการแพร่หลายน้อยกว่าอย่างมาก"
+          ],
+          "Morphology / Agronomy": [
+              "ต้นสูงประมาณ 3–4 เมตร ลักษณะโดยรวมใกล้เคียง SL28 และ SL34",
+              "กิ่งแข็งแรง ทรงพุ่มค่อนข้างกว้าง ใบใหญ่สีเขียวเข้ม",
+              "ใบอ่อนมีสีตั้งแต่ bronze ถึงเขียว อยู่กึ่งกลางระหว่าง SL28 และ SL34",
+              "ผลสุกสีแดง เมล็ดค่อนข้างใหญ่ การแยกจาก SL28/SL34 ในแปลงจริงต้องใช้ประวัติหรือ genetic testing"
+          ],
+          "History / Commercial": [
+              "เคยมีบทบาทในพื้นที่ตอนกลางของเคนยา แต่ถูกลดบทบาทเมื่อ SL28 และ SL34 ถูกส่งเสริมอย่างกว้างขวางในช่วง 1950–1960",
+              "ปัจจุบันพบค่อนข้างน้อยในแปลงปลูกเชิงพาณิชย์ของเคนยา",
+              "เหมาะกับพื้นที่สูง 1,500–2,000 เมตร แต่ไวต่อโรคราสนิมเช่นเดียวกับกลุ่ม SL อื่น",
+              "ปัจจุบันมีคุณค่าในฐานะหลักฐานประวัติศาสตร์และทรัพยากรพันธุกรรมของสาย SL"
+          ],
+          "Cup Profile / Roasting Note": [
+              "Cup quality อยู่ในเกณฑ์ดี มี citrus acidity, red berries และ caramel sweetness",
+              "โดยทั่วไป complexity และ body อาจด้อยกว่า SL28 เล็กน้อย",
+              "ในการคั่วควรรักษาความใสของ acidity และ sweetness แบบ Kenya profile โดยไม่คั่วหนักจนกลายเป็น caramel/roasty เกินไป"
+          ]
+      },
+      "learning": "ใช้เป็น detail card สำหรับสอนทีมบาริสต้าเรื่องสายพันธุ์ → รสชาติ → การคั่ว → การสื่อสารกับลูกค้า"
   },
   {
-    "code": "#065",
-    "slug": "blue-bourbon",
-    "name": "Blue Bourbon",
-    "thai": "บลู เบอร์บอน",
-    "type": "Coffee-Variety · Arabica",
-    "origin": "Rwanda / Latin America",
-    "priority": "Medium",
-    "parentage": "Bourbon-related",
-    "tags": [
-      "arabica"
-    ],
-    "updated": false,
-    "summary": "Blue Bourbon อยู่ใน Coffee Variety Library สามารถเติมรายละเอียด genetics, morphology, cup profile และ roasting note เพิ่มเติมภายหลังได้",
-    "sections": {
-      "Study Note": [
-        "รายการนี้เป็น index placeholder",
-        "ยังไม่มี detail card เชิงลึก",
-        "สามารถเติมข้อมูลเพิ่มเติมในรอบถัดไป"
-      ]
-    },
-    "learning": "ใช้เป็น placeholder สำหรับขยายฐานข้อมูลต่อ"
+      "code": "#065",
+      "slug": "blue-bourbon",
+      "name": "Blue Bourbon",
+      "thai": "บลูเบอร์บอน",
+      "type": "Coffee-Variety · Arabica",
+      "origin": "Rwanda",
+      "priority": "High",
+      "parentage": "Local Bourbon selection in Rwanda",
+      "tags": [
+          "arabica",
+          "competition"
+      ],
+      "updated": true,
+      "summary": "กลุ่ม Bourbon ที่คัดเลือกในรวันดา ให้ศักยภาพ cup สูงมาก มี red fruit, floral และ tea-like complexity",
+      "sections": {
+          "Genetics / Background": [
+              "เป็นอาราบิก้า มีโครโมโซม 2n=4x=44",
+              "เป็น local selection ของ Bourbon ที่ปลูกในรวันดาและผ่านการคัดเลือกภายใต้พื้นที่สูงและภูมิอากาศเย็น",
+              "ชื่อ Blue Bourbon เป็นชื่อทางการตลาดของรวันดาที่ใช้กับกลุ่ม Bourbon คุณภาพสูง ไม่ได้เกี่ยวข้องกับภูเขา Blue Mountain",
+              "พันธุกรรมโดยรวมใกล้เคียง Bourbon แต่แสดง adaptation ต่อ terroir รวันดาอย่างชัดเจน"
+          ],
+          "Morphology / Agronomy": [
+              "ต้นสูงประมาณ 3–4 เมตร ใกล้เคียง Bourbon มาตรฐาน กิ่งข้างเปิด ทรงพุ่มค่อนข้างกว้าง",
+              "ใบอ่อนสีเขียว ใบกว้าง สีเขียวเข้ม ขอบใบเป็นคลื่นเล็กน้อย",
+              "ผลสุกสีแดงเข้ม เมล็ดขนาดกลาง รูปทรงค่อนข้างกลมมนและอวบ",
+              "แยกจาก Bourbon mutation อื่นด้วยตาเปล่ายาก ต้องอาศัยแหล่งปลูกและเอกสารแปลงปลูกประกอบ"
+          ],
+          "History / Commercial": [
+              "เป็นหนึ่งในกลุ่มพันธุ์สำคัญของอุตสาหกรรมกาแฟรวันดา ร่วมกับ Jackson และ Mibirizi ในโครงสร้างพันธุ์ Bourbon ของประเทศ",
+              "พบมากในพื้นที่สูงทางตอนเหนือของรวันดา เช่น Gakenke และ Rulindo ที่ระดับ 1,700–2,200 เมตร",
+              "ไวต่อ CLR เช่นเดียวกับ Bourbon ทั่วไป แต่แสดง cup quality สูงเมื่อปลูกในระดับสูงและผ่านการแปรรูปสะอาด",
+              "มักปรากฏในกาแฟประกวดและกาแฟล็อตพิเศษของรวันดา"
+          ],
+          "Cup Profile / Roasting Note": [
+              "Cup profile เด่นด้วย red currant, red berries, floral เช่น rose/jasmine, citrus และ black tea-like finish",
+              "Acidity สดชัด โครงสร้าง cup แข็งแรง และ sweetness ละเอียด",
+              "ในการคั่วควรรักษา acidity และ floral ไม่ให้ Maillard หนักจน cup กลายเป็น nutty/caramel เกินไป"
+          ]
+      },
+      "learning": "ใช้เป็น detail card สำหรับสอนทีมบาริสต้าเรื่องสายพันธุ์ → รสชาติ → การคั่ว → การสื่อสารกับลูกค้า"
   },
   {
-    "code": "#066",
-    "slug": "pache",
-    "name": "Pache",
-    "thai": "ปาเช่",
-    "type": "Coffee-Variety · Arabica",
-    "origin": "Guatemala",
-    "priority": "Medium",
-    "parentage": "Dwarf mutation of Typica",
-    "tags": [
-      "arabica"
-    ],
-    "updated": false,
-    "summary": "Pache อยู่ใน Coffee Variety Library สามารถเติมรายละเอียด genetics, morphology, cup profile และ roasting note เพิ่มเติมภายหลังได้",
-    "sections": {
-      "Study Note": [
-        "รายการนี้เป็น index placeholder",
-        "ยังไม่มี detail card เชิงลึก",
-        "สามารถเติมข้อมูลเพิ่มเติมในรอบถัดไป"
-      ]
-    },
-    "learning": "ใช้เป็น placeholder สำหรับขยายฐานข้อมูลต่อ"
+      "code": "#066",
+      "slug": "pache",
+      "name": "Pache",
+      "thai": "ปาเช่",
+      "type": "Coffee-Variety · Arabica",
+      "origin": "Guatemala",
+      "priority": "High",
+      "parentage": "Natural dwarf mutation of Typica; parent of Pacamara",
+      "tags": [
+          "arabica",
+          "competition"
+      ],
+      "updated": true,
+      "summary": "สายพันธุ์แคระจาก Typica ที่พบในกัวเตมาลา มี cup ใส ดอกไม้และ acidity ดี และเป็นหนึ่งในพ่อแม่ของ Pacamara",
+      "sections": {
+          "Genetics / Background": [
+              "เป็นอาราบิก้า มีโครโมโซม 2n=4x=44",
+              "เกิดจากการกลายพันธุ์ตามธรรมชาติแบบต้นเตี้ยของ Typica ควบคุมโดยยีน dwarfism ที่ต่างจาก Ct gene ของ Caturra",
+              "ค้นพบราวปี 1949 ที่ Finca Pache ใน Santa Rosa ประเทศกัวเตมาลา",
+              "เป็นพ่อแม่พันธุ์สำคัญของ Pacamara โดยผสมกับ Maragogipe"
+          ],
+          "Morphology / Agronomy": [
+              "ต้นแคระ สูงประมาณ 1.5–2.5 เมตร ทรงคล้าย Caturra แต่ยังรักษาลักษณะ Typica หลายจุด",
+              "กิ่งหนาแน่น ข้อกิ่งสั้น ทรงพุ่มคล้ายพุ่มไม้ ใบอ่อนสีแดงถึงทองแดง",
+              "ใบขนาดกลางถึงใหญ่ สีเขียวเข้ม หนากว่า Typica บางสาย ผลสุกสีแดง",
+              "เมล็ดขนาดกลาง รูปทรงอยู่ระหว่าง Typica และ Caturra"
+          ],
+          "History / Commercial": [
+              "ปลูกค่อนข้างแพร่หลายในกัวเตมาลา ฮอนดูรัส และเอลซัลวาดอร์ โดยเฉพาะแหล่งปลูกภูเขาไฟ",
+              "จุดเด่นคือปลูกหนาแน่นได้และจัดการง่ายกว่าต้น Typica สูงใหญ่",
+              "ไวต่อโรคราสนิมและโรคพืชหลายชนิด ต้องดูแลจัดการสวนดี",
+              "เหมาะกับพื้นที่สูง 1,200–1,800 เมตร เช่น Antigua และ Atitlán"
+          ],
+          "Cup Profile / Roasting Note": [
+              "Cup profile ดีและค่อนข้างใส ให้ acidity ชัด ดอกไม้ละเอียด sweetness สะอาด และ fruit complexity",
+              "ในกัวเตมาลาคุณภาพดีมักให้ส้ม แอปเปิล ช็อกโกแลต และ clean sweetness",
+              "ในการคั่วควรเน้น heat penetration ให้ถึงแกน แต่ไม่คั่วหนักจนสูญเสียความโปร่งและ floral clarity"
+          ]
+      },
+      "learning": "ใช้เป็น detail card สำหรับสอนทีมบาริสต้าเรื่องสายพันธุ์ → รสชาติ → การคั่ว → การสื่อสารกับลูกค้า"
   },
   {
     "code": "#067",
