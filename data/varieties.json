@@ -4,7 +4,9 @@
     "mode": "full-detail-preserve-first",
     "source": "Archive.zip Markdown files",
     "includedCount": 71,
-    "note": "Each item preserves the original Markdown in rawMarkdown and also includes parsed sections for UI rendering."
+    "note": "Each item preserves the original Markdown in rawMarkdown and also includes parsed sections for UI rendering.",
+    "total": 72,
+    "lastAdded": "SL9 / Inca Gesha (#072)"
   },
   "varieties": [
     {
@@ -7307,6 +7309,95 @@
       "rawMarkdown": "# 071 เบอร์นาร์ดินา (Bernardina)\ntype:: #Coffee-Variety\norigin:: #El-Salvador\ndiscovery-farm:: #Los-Bellotos\nproducer-family:: #Pacas-Family\nparentage:: #Typica-Landrace-Mutation\nspecies:: #Arabica\nchromosome:: 2n=4x=44\n\t- ## ลักษณะทางพฤกษศาสตร์และพันธุกรรม #Genetics\n\t\t- เบอร์นาร์ดินาเป็นกาแฟอาราบิกาที่เกิดจากการกลายพันธุ์ตามธรรมชาติ\n\t\t- มีต้นกำเนิดจากประเทศเอลซัลวาดอร์\n\t\t- จัดอยู่ในกลุ่มพันธุกรรมที่มีความเชื่อมโยงกับสาย Typica\n\t\t- เป็น landrace cultivar หรือสายพันธุ์ท้องถิ่นที่เกิดจากการคัดเลือกตามธรรมชาติและการคัดเลือกภายในฟาร์ม\n\t\t- WCR ระบุว่าเบอร์นาร์ดินาอยู่ในกลุ่มพันธุกรรม Typica-like\n\t\t- มีระยะห่างทางพันธุกรรมจาก Bourbon และสายพันธุ์ลูกหลานของ Bourbon ค่อนข้างชัดเจน\n\t\t- ยังไม่พบหลักฐานว่าเกิดจากการผสมข้ามโดยมนุษย์\n\t\t- ไม่ใช่สายพันธุ์ที่พัฒนาในโครงการปรับปรุงพันธุ์อย่างเป็นระบบ\n\t\t- เป็นสายพันธุ์ที่ถูกค้นพบและคัดเลือกจากต้นกาแฟที่มีลักษณะโดดเด่นในแปลงปลูก\n\t\t- มีความไวต่อโรคราสนิมใบค่อนข้างสูง\n\t\t- ไม่พบยีนต้านทานโรคราสนิมใบที่รู้จัก เช่น\n\t\t\t- SH1\n\t\t\t- SH2\n\t\t\t- SH3\n\t\t\t- SH4\n\t\t\t- SH5\n\t\t\t- SH6\n\t\t\t- SH7\n\t\t\t- SH8\n\t\t\t- SH9\n\t- ## ความหลากหลายทางสัณฐานวิทยา #Morphology\n\t\t- ทรงต้นโดยรวมสูงและค่อนข้างเรียวยาว\n\t\t- ความสูงของต้นอาจมากถึง **3–4 เมตร**\n\t\t- ทรงพุ่มค่อนข้างแคบ\n\t\t- กิ่งด้านข้างมีมุมค่อนข้างตั้ง\n\t\t- เหมาะกับการปลูกแบบระยะค่อนข้างชิดในพื้นที่จำกัด\n\t\t- ใบมีขนาดค่อนข้างใหญ่\n\t\t- ใบมีสีเขียวเข้ม\n\t\t- ผิวใบมีความเงาชัดเจน\n\t\t- ใบอ่อนมีสีทองแดงถึงทองแดงเข้ม\n\t\t- ลักษณะใบอ่อนใกล้เคียงกลุ่ม Typica\n\t\t- ระยะข้อค่อนข้างยาว\n\t\t- กิ่งหลักและกิ่งข้างมีการแตกกิ่งในมุมประมาณ **45–60 องศา**\n\t\t- ผลมีรูปทรงรี\n\t\t- เมื่อสุกผลมีสีแดงเข้มคล้ายเชอร์รี\n\t\t- เปลือกผลค่อนข้างหนา\n\t\t- ผลต่อข้อมีจำนวนไม่มากเมื่อเทียบกับ Bourbon\n\t\t- เมล็ดมีขนาดค่อนข้างยาว\n\t\t- เมล็ดมีรูปทรงรีและค่อนข้างแบน\n\t\t- ขนาดตะแกรงคัดเมล็ดโดยทั่วไปประมาณ **Screen 17–19**\n\t\t- เมล็ดมีความหนาแน่นสูง\n\t\t- ร่องกลางเมล็ดค่อนข้างลึกและเป็นเส้นตรง\n\t\t- ลักษณะเมล็ดโดยรวมมีความคล้าย Typica คุณภาพสูง\n\t- ## ประวัติความเป็นมาและการแพร่กระจาย #History\n\t\t- เบอร์นาร์ดินาถูกค้นพบในปี **2012**\n\t\t- ค้นพบในสวน **Los Bellotos** ของตระกูล Pacas ในประเทศเอลซัลวาดอร์\n\t\t- ผู้ค้นพบคือ **Bernardino** ผู้จัดการสวนของ Los Bellotos\n\t\t- พบต้นกาแฟจำนวนประมาณ **46 ต้น** ที่มีลักษณะต่างจากกาแฟพันธุ์อื่นในแปลง\n\t\t- หลังจากเก็บตัวอย่าง วิเคราะห์ และทดสอบทางพันธุกรรม พบว่าเป็นสายพันธุ์ที่แตกต่างจากกาแฟเชิงพาณิชย์ที่มีอยู่เดิม\n\t\t- แม้มีลักษณะทางพันธุกรรมบางส่วนใกล้เคียงกับกาแฟพื้นเมืองของเอธิโอเปียหรือกลุ่ม Typica แต่ไม่ตรงกับสายพันธุ์ที่รู้จักในอเมริกากลาง\n\t\t- จึงถูกยืนยันว่าเป็นสายพันธุ์ใหม่\n\t\t- ตั้งชื่อว่า **Bernardina** เพื่อเป็นเกียรติแก่ Bernardino ผู้ค้นพบ\n\t\t- หลังการระบุสายพันธุ์ ตระกูล Pacas ได้เริ่มคัดเลือกผลและขยายพันธุ์อย่างเป็นระบบ\n\t\t- เบอร์นาร์ดินาถูกนำไปปลูกในหลายสวนของตระกูล Pacas เช่น\n\t\t\t- La Esperanza\n\t\t\t- Santa Sofia\n\t\t\t- Los Bellotos\n\t\t\t- Santa Juana\n\t\t\t- La Guachoca\n\t\t\t- El Retiro\n\t\t- เมื่อนำไปปลูกในสภาพแวดล้อมต่างกัน เบอร์นาร์ดินาแสดงรสชาติแตกต่างกันตาม microclimate\n\t\t- บางล็อตแสดงกลิ่นดอกไม้โดดเด่น\n\t\t- บางล็อตแสดงผลไม้สุกและความหวานสูง\n\t\t- แต่โดยรวมยังคงให้คุณภาพในถ้วยสูงมาก\n\t\t- ได้รับการยกย่องว่าเป็นหนึ่งในสายพันธุ์ใหม่ที่งดงามและมีเอกลักษณ์ที่สุดของเอลซัลวาดอร์\n\t- ## การปรับตัวและการเพาะปลูก #Agronomy\n\t\t- เหมาะกับพื้นที่ปลูกระดับความสูงปานกลางถึงสูง\n\t\t- ตอบสนองดีต่อพื้นที่ที่มีอุณหภูมิกลางวันและกลางคืนต่างกันชัดเจน\n\t\t- โดยเฉพาะพื้นที่ที่มี day-night temperature gap สูงประมาณ **15°C** หรือมากกว่า\n\t\t- ระยะเวลาสุกของผลค่อนข้างยาวกว่าสายพันธุ์ Bourbon ทั่วไป\n\t\t- ระยะสุกที่ยาวช่วยให้สะสมสารตั้งต้นด้านกลิ่นรสและความหวานได้ดี\n\t\t- ความต้านทานโรคราสนิมใบต่ำ\n\t\t- ต้องการการจัดการฟาร์มที่ละเอียด\n\t\t- ต้องมีการควบคุมโรคและโภชนาการต้นอย่างดี\n\t\t- ผลผลิตต่ำถึงปานกลาง\n\t\t- ไม่เหมาะกับการปลูกเชิงปริมาณ\n\t\t- เหมาะกับฟาร์มที่มุ่งผลิตกาแฟพิเศษระดับสูงและล็อตแข่งขัน\n\t\t- ต้องการการเก็บเกี่ยวแบบ selective picking เพื่อรักษาความสม่ำเสมอของผลสุก\n\t\t- คุณภาพในถ้วยขึ้นอยู่กับ microclimate, ความสูง, การเก็บเกี่ยว และการแปรรูปอย่างมาก\n\t- ## ลักษณะรสชาติในถ้วย #Cup-Profile\n\t\t- เบอร์นาร์ดินาเป็นหนึ่งในสายพันธุ์ที่มีความซับซ้อนทางกลิ่นรสสูงมาก\n\t\t- มีลักษณะเด่นด้านความหรูหราและความละเอียดของกลิ่นดอกไม้\n\t\t- ลักษณะรสชาติที่พบได้บ่อย ได้แก่\n\t\t\t- มะลิ\n\t\t\t- ดอกส้ม\n\t\t\t- กุหลาบ\n\t\t\t- ดอกไม้สีขาว\n\t\t\t- Bergamot\n\t\t\t- ส้ม\n\t\t\t- เลมอน\n\t\t\t- แอปเปิล\n\t\t\t- พีช\n\t\t\t- Apricot\n\t\t\t- น้ำผึ้ง\n\t\t\t- คาราเมลอ่อน\n\t\t\t- Brown Sugar\n\t\t\t- ชาดำ\n\t\t\t- Earl Grey\n\t\t- Acidity สว่าง ชัดเจน และละเอียด\n\t\t- Acidity มักมีโทน malic acid แบบแอปเปิล ร่วมกับ citric acid เล็กน้อย\n\t\t- Sweetness สูงและสะอาด\n\t\t- Body ปานกลาง\n\t\t- Mouthfeel ละเอียดและโปร่ง\n\t\t- Aftertaste ยาวมาก\n\t\t- Washed Process มักให้รสชาติที่ใส สะอาด โปร่ง และ floral ชัดเจน\n\t\t- Honey Process ช่วยเพิ่มความหวาน ความเข้มของผลไม้ และความกลมของ mouthfeel\n\t\t- Natural Process หรือ experimental process บางแบบอาจช่วยขยายผลไม้สุกและความซับซ้อน แต่ต้องควบคุมอย่างระมัดระวังเพื่อไม่ให้กลบ floral character\n\t\t- เป็นสายพันธุ์ที่เหมาะกับกาแฟแข่งขันและตลาด specialty ระดับสูงมาก\n\t- ## ความสำคัญต่ออุตสาหกรรมกาแฟ #Importance\n\t\t- เป็นหนึ่งในสายพันธุ์ท้องถิ่นหายากของเอลซัลวาดอร์\n\t\t- สะท้อนศักยภาพของการค้นพบสายพันธุ์ใหม่จากแปลงปลูกที่มีอยู่แล้ว\n\t\t- ช่วยยกระดับภาพลักษณ์ของเอลซัลวาดอร์ในตลาดกาแฟพิเศษระดับโลก\n\t\t- เป็นตัวอย่างของ estate-selected landrace ที่มีคุณภาพในถ้วยสูงมาก\n\t\t- มีชื่อเสียงจากเวทีการแข่งขัน เช่น\n\t\t\t- Cup of Excellence\n\t\t\t- CCR Roasting Championship\n\t\t\t- เวทีประกวดและประมูลกาแฟพิเศษระดับนานาชาติ\n\t\t- ในปี **2026** กาแฟ Bernardina จาก Café Pacas ได้รับผลงานโดดเด่นในเวที COE El Salvador Presidential Award\n\t\t- เป็นสายพันธุ์ที่แสดงให้เห็นว่าคุณภาพระดับสูงไม่ได้มาจาก Geisha เพียงอย่างเดียว\n\t\t- มีศักยภาพสูงในฐานะสายพันธุ์หายากสำหรับตลาด ultra-specialty coffee\n\t- ## หมายเหตุเพิ่มเติม #Notes\n\t\t- Bernardina เป็นสายพันธุ์ที่เหมาะกับการทำล็อตพิเศษและล็อตแข่งขัน มากกว่าการผลิตเชิงปริมาณ\n\t\t- จุดเด่นคือ\n\t\t\t- Floral complexity สูงมาก\n\t\t\t- Acidity ใสและละเอียด\n\t\t\t- Sweetness สูง\n\t\t\t- Aftertaste ยาว\n\t\t\t- Elegance สูง\n\t\t\t- มีเอกลักษณ์แตกต่างจาก Geisha, Bourbon และ Pacamara\n\t\t- เมื่อเปรียบเทียบกับสายพันธุ์ระดับสูงอื่น\n\t\t\t- Bernardina\n\t\t\t\t- Floral หรูหรา\n\t\t\t\t- Citrus และ Apple acidity\n\t\t\t\t- Tea-like\n\t\t\t\t- Aftertaste ยาว\n\t\t\t\t- หายากมาก\n\t\t\t\t- ผลผลิตต่ำ\n\t\t\t- Geisha\n\t\t\t\t- Jasmine ชัด\n\t\t\t\t- Bergamot\n\t\t\t\t- Tea-like สูง\n\t\t\t\t- Elegance สูง\n\t\t\t\t- เป็นที่รู้จักมากกว่า\n\t\t\t- Pacamara\n\t\t\t\t- Body มากกว่า\n\t\t\t\t- Tropical Fruit\n\t\t\t\t- Complexity สูง\n\t\t\t\t- เมล็ดใหญ่\n\t\t\t\t- มีโครงสร้างหนักกว่า\n\t\t\t- SL28\n\t\t\t\t- Blackcurrant\n\t\t\t\t- Citrus acidity สูง\n\t\t\t\t- Juicy\n\t\t\t\t- Structure ชัด\n\t\t- สำหรับการคั่ว\n\t\t\t- เหมาะกับ Light Roast ถึง Light-Medium Roast\n\t\t\t- เป้าหมายหลักคือรักษา\n\t\t\t\t- Floral Layer\n\t\t\t\t- Bright Acidity\n\t\t\t\t- Tea-like Structure\n\t\t\t\t- Long Aftertaste\n\t\t\t\t- Clean Sweetness\n\t\t\t- ไม่ควรคั่วให้ development หนักเกินไป เพราะจะลด floral และความโปร่ง\n\t\t\t- การคั่วที่ดีควรทำให้ความหวานเพียงพอโดยไม่กลบกลิ่นดอกไม้\n\t\t\t- ถ้าเป็น Washed Bernardina ควรเน้น clarity และ acidity structure\n\t\t\t- ถ้าเป็น Honey Bernardina ควรเน้น balance ระหว่าง floral, honey sweetness และ fruit depth",
       "contentLength": 6745,
       "lineCount": 175
+    },
+    {
+      "code": "#072",
+      "slug": "sl09",
+      "name": "SL9 / Inca Gesha",
+      "thai": "เอสแอลไนน์ / อินคา เกชา",
+      "title": "072 เอสแอลไนน์ / อินคา เกชา (SL9 / Inca Gesha)",
+      "sourceFile": "sl09.md",
+      "type": "#Coffee-Variety",
+      "origin": "#Peru #Cusco #Inkawasi-Valley",
+      "wcrPriority": "",
+      "famousTerroir": "#Inkawasi-Valley #La-Convención #Cusco #Peru",
+      "tags": [
+        "Variety",
+        "Ethiopia Legacy",
+        "Peru",
+        "Genetics",
+        "Coffee-Variety",
+        "SL-Selection",
+        "Ethiopian-Legacy",
+        "Cusco",
+        "Inkawasi"
+      ],
+      "summary": "SL9 หรือ Inca Gesha เป็นสายพันธุ์ที่เคยถูกเข้าใจผิดว่าเป็น Gesha แต่ผล DNA ชี้ว่าอยู่ในกลุ่ม Ethiopian Legacy ใกล้กับ K7 และ Mibirizi พบหายากมาก โดยปลูกเด่นใน Cusco, Peru และมี cup profile โทน floral–tropical fruit สูง",
+      "sections": [
+        {
+          "title": "SL9 - [[Inca Gesha]]",
+          "lines": [
+            "\t- source :: @coffeewithdanielf via @lukmasterbrewing",
+            "\t- tags :: [[Variety]] [[Ethiopia Legacy]] [[Peru]] [[Genetics]]"
+          ]
+        },
+        {
+          "title": "ส่วนที่ 1 — ถอดข้อความและแปลไทย",
+          "lines": [
+            "\t\t- ### ต้นฉบับ (English)",
+            "\t\t\t- **GENETICS** · 04/06",
+            "\t\t\t- Not Gesha. Not Bourbon. Not like anything else.",
+            "\t\t\t- SL9 belongs to the Ethiopian Legacy group — genetically close to K7 and Mibirizi. Confirmed by multiple independent DNA labs including RD2 Vision and World Coffee Research.",
+            "\t\t\t- Rare in cultivation. Almost entirely confined to Cusco, Peru.",
+            "\t\t- ### คำแปล (ไทย)",
+            "\t\t\t- **พันธุกรรม** · 04/06",
+            "\t\t\t- ไม่ใช่ Gesha ไม่ใช่ Bourbon ไม่เหมือนสายพันธุ์ใดที่เคยมีมา",
+            "\t\t\t- SL9 อยู่ในกลุ่ม Ethiopian Legacy — มีความใกล้ชิดทางพันธุกรรมกับ [[k7]] และ [[mibirizi]] ได้รับการยืนยันจากแล็บ DNA อิสระหลายแห่ง รวมถึง RD2 Vision และ World Coffee Research",
+            "\t\t\t- หายากมากในการเพาะปลูก พบเกือบทั้งหมดเฉพาะในแถบ Cusco ประเทศเปรู",
+            "\t\t- ### ใจความสคัญ",
+            "\t\t\t- SL9 คือสายพันธุ์ที่ถูกเข้าใจผิดมานานว่าเป็น [[Gesha]] แต่ผ่านการพิสูจน์ทาง DNA แล้วว่าเป็นคนละสายพันธุ์โดยสิ้นเชิง",
+            "\t\t\t- มีเอกลักษณ์เป็นของตัวเอง หายากกว่า และน่าตื่นเต้นกว่าในแง่ความแปลกใหม่"
+          ]
+        },
+        {
+          "title": "ส่วนที่ 2 — ขยายความสายพันธุ์ SL9",
+          "lines": [
+            "\t\t- ### ต้นกำเนิดชื่อ \"SL\"",
+            "\t\t\t- SL ยอมาจาก Scott Agricultural Laboratories ซึ่งทำการคัดเลือกตนกาแฟเดี่ยว (single tree selections) ในช่วงปี 1935–1939",
+            "\t\t\t- SL9 หมายถง Selection No.9 จากห้องปฏิบัติการนั้น",
+            "\t\t\t- ในบรรดา SL selections ทั้งหมด [[SL28]] และ [[SL34]] เป็นที่รู้จักและปลูกแพร่หลายที่สุด ส่วน SL09 ยังคงหายากมากในการเพาะปลูกเชิงพาณิชย์",
+            "\t\t- ### เรื่องของการเข้าใจผิดครั้งใหญ่",
+            "\t\t\t- ในแถบ Inkawasi, Cusco เกษตรกรปลูกกาแฟที่มีรสชาติดอกไม้และผลไม้เขตร้อนสูง ซึ่งเติบโตที่ระดับความสูงกว่า 2,300 เมตร จึงถูกตั้งชื่อวา \"Inca Gesha\" มาโดยตลอด",
+            "\t\t\t- แต่ผู้เชี่ยวชาญสังเกตุว่าลักษณะต้นไม้ไม่ตรงกับ [[Gesha]] เลย จงนำไปสู่การทดสอบ DNA",
+            "\t\t\t- Sey Coffee (Brooklyn) ส่งตัวอย่างใบไปที่ RD2 Vision",
+            "\t\t\t- Lucio Luque ผู้ผลิตชาวเปรู ส่งตัวอย่างให้ World Coffee Research",
+            "\t\t\t- Colonna (UK) ทดสอบแยกในฝรั่งเศส",
+            "\t\t\t- ฟาร์ม Tres Cedros ทำการวิเคราะห์อิสระของตัวเอง",
+            "\t\t\t- ผลจากทุกแล็บออกมาตรงกัน — ไม่ใช่ Gesha แต่เป็น [[Ethiopian Legacy]] ที่ใกล้เคียงกับ SL34, K7 และ Mibirizi",
+            "\t\t- ### สถานะทางพันธุกรรมปัจจุบัน",
+            "\t\t\t- ลายพิมพ์พันธุกรรมที่แน่ชัดยังไม่มีอยู่ในฐานข้อมูลระดับโลก จึงใช้ชื่อ SL9 เป็น provisional label ไปก่อน",
+            "\t\t\t- ยืนยันแล้วว่าไม่มี Gesha อยู่ในองค์ประกอบทางพันธุกรรมเลย",
+            "\t\t\t- ยังมีการพูดคุยกับนักพันธุศาสตร์และชุมชนใน Inkawasi Valley อย่างต่อเนื่องเกี่ยวกับการตั้งชื่อที่เป็นทางการ",
+            "\t\t- ### ลักษณะในถ้วย",
+            "\t\t\t- เนื่องจากอยู่ในกลุ่ม [[Ethiopian Legacy]] จึงมีพฤติกรรมคล้าย heirloom แอฟริกันมากกว่า South American ทั่วไป",
+            "\t\t\t- **Aroma** :: ดอกไม้เข้มข้น — jasmine, lavender, orange blossom",
+            "\t\t\t- **Flavor** :: ผลไม้เขตร้อน — mango, dragon fruit, melon, passionfruit, lychee",
+            "\t\t\t- **Sweetness** :: candy-like, star fruit",
+            "\t\t\t- **Acidity** :: bright, crystalline, refined",
+            "\t\t\t- **Aftertaste** :: tea-like clarity คล้าย washed Ethiopian ชั้นดี",
+            "\t\t\t- ความหวานจะยังเด่นชัดเมื่อกาแฟเย็นลง",
+            "\t\t- ### แหล่งปลูก",
+            "\t\t\t- แหล่งหลัก :: Inkawasi Valley, La Convención, Cusco, Peru",
+            "\t\t\t- ระดับความสูง :: 2,250–2,400 เมตร",
+            "\t\t\t- ดิน :: ดินภูเขาไฟที่อุดมสมบูรณ์",
+            "\t\t\t- ฟาร์มที่รู้จัก :: Tres Cedros (Albino Ibias), Los Pinos (Armando Hurtado), Sol Naciente (Julio Arotaype)",
+            "\t\t\t- Roaster ที่นำเข้า :: Sey Coffee (NY), Colonna (UK), Ozone Coffee (UK)"
+          ]
+        }
+      ],
+      "rawMarkdown": "## SL9 - [[Inca Gesha]]\n\t- source :: @coffeewithdanielf via @lukmasterbrewing\n\t- tags :: [[Variety]] [[Ethiopia Legacy]] [[Peru]] [[Genetics]]\n\t- ## ส่วนที่ 1 — ถอดข้อความและแปลไทย\n\t\t- ### ต้นฉบับ (English)\n\t\t\t- **GENETICS** · 04/06\n\t\t\t- Not Gesha. Not Bourbon. Not like anything else.\n\t\t\t- SL9 belongs to the Ethiopian Legacy group — genetically close to K7 and Mibirizi. Confirmed by multiple independent DNA labs including RD2 Vision and World Coffee Research.\n\t\t\t- Rare in cultivation. Almost entirely confined to Cusco, Peru.\n\t\t- ### คำแปล (ไทย)\n\t\t\t- **พันธุกรรม** · 04/06\n\t\t\t- ไม่ใช่ Gesha ไม่ใช่ Bourbon ไม่เหมือนสายพันธุ์ใดที่เคยมีมา\n\t\t\t- SL9 อยู่ในกลุ่ม Ethiopian Legacy — มีความใกล้ชิดทางพันธุกรรมกับ [[k7]] และ [[mibirizi]] ได้รับการยืนยันจากแล็บ DNA อิสระหลายแห่ง รวมถึง RD2 Vision และ World Coffee Research\n\t\t\t- หายากมากในการเพาะปลูก พบเกือบทั้งหมดเฉพาะในแถบ Cusco ประเทศเปรู\n\t\t- ### ใจความสคัญ\n\t\t\t- SL9 คือสายพันธุ์ที่ถูกเข้าใจผิดมานานว่าเป็น [[Gesha]] แต่ผ่านการพิสูจน์ทาง DNA แล้วว่าเป็นคนละสายพันธุ์โดยสิ้นเชิง\n\t\t\t- มีเอกลักษณ์เป็นของตัวเอง หายากกว่า และน่าตื่นเต้นกว่าในแง่ความแปลกใหม่\n\t- ## ส่วนที่ 2 — ขยายความสายพันธุ์ SL9\n\t\t- ### ต้นกำเนิดชื่อ \"SL\"\n\t\t\t- SL ยอมาจาก Scott Agricultural Laboratories ซึ่งทำการคัดเลือกตนกาแฟเดี่ยว (single tree selections) ในช่วงปี 1935–1939\n\t\t\t- SL9 หมายถง Selection No.9 จากห้องปฏิบัติการนั้น\n\t\t\t- ในบรรดา SL selections ทั้งหมด [[SL28]] และ [[SL34]] เป็นที่รู้จักและปลูกแพร่หลายที่สุด ส่วน SL09 ยังคงหายากมากในการเพาะปลูกเชิงพาณิชย์\n\t\t- ### เรื่องของการเข้าใจผิดครั้งใหญ่\n\t\t\t- ในแถบ Inkawasi, Cusco เกษตรกรปลูกกาแฟที่มีรสชาติดอกไม้และผลไม้เขตร้อนสูง ซึ่งเติบโตที่ระดับความสูงกว่า 2,300 เมตร จึงถูกตั้งชื่อวา \"Inca Gesha\" มาโดยตลอด\n\t\t\t- แต่ผู้เชี่ยวชาญสังเกตุว่าลักษณะต้นไม้ไม่ตรงกับ [[Gesha]] เลย จงนำไปสู่การทดสอบ DNA\n\t\t\t- Sey Coffee (Brooklyn) ส่งตัวอย่างใบไปที่ RD2 Vision\n\t\t\t- Lucio Luque ผู้ผลิตชาวเปรู ส่งตัวอย่างให้ World Coffee Research\n\t\t\t- Colonna (UK) ทดสอบแยกในฝรั่งเศส\n\t\t\t- ฟาร์ม Tres Cedros ทำการวิเคราะห์อิสระของตัวเอง\n\t\t\t- ผลจากทุกแล็บออกมาตรงกัน — ไม่ใช่ Gesha แต่เป็น [[Ethiopian Legacy]] ที่ใกล้เคียงกับ SL34, K7 และ Mibirizi\n\t\t- ### สถานะทางพันธุกรรมปัจจุบัน\n\t\t\t- ลายพิมพ์พันธุกรรมที่แน่ชัดยังไม่มีอยู่ในฐานข้อมูลระดับโลก จึงใช้ชื่อ SL9 เป็น provisional label ไปก่อน\n\t\t\t- ยืนยันแล้วว่าไม่มี Gesha อยู่ในองค์ประกอบทางพันธุกรรมเลย\n\t\t\t- ยังมีการพูดคุยกับนักพันธุศาสตร์และชุมชนใน Inkawasi Valley อย่างต่อเนื่องเกี่ยวกับการตั้งชื่อที่เป็นทางการ\n\t\t- ### ลักษณะในถ้วย\n\t\t\t- เนื่องจากอยู่ในกลุ่ม [[Ethiopian Legacy]] จึงมีพฤติกรรมคล้าย heirloom แอฟริกันมากกว่า South American ทั่วไป\n\t\t\t- **Aroma** :: ดอกไม้เข้มข้น — jasmine, lavender, orange blossom\n\t\t\t- **Flavor** :: ผลไม้เขตร้อน — mango, dragon fruit, melon, passionfruit, lychee\n\t\t\t- **Sweetness** :: candy-like, star fruit\n\t\t\t- **Acidity** :: bright, crystalline, refined\n\t\t\t- **Aftertaste** :: tea-like clarity คล้าย washed Ethiopian ชั้นดี\n\t\t\t- ความหวานจะยังเด่นชัดเมื่อกาแฟเย็นลง\n\t\t- ### แหล่งปลูก\n\t\t\t- แหล่งหลัก :: Inkawasi Valley, La Convención, Cusco, Peru\n\t\t\t- ระดับความสูง :: 2,250–2,400 เมตร\n\t\t\t- ดิน :: ดินภูเขาไฟที่อุดมสมบูรณ์\n\t\t\t- ฟาร์มที่รู้จัก :: Tres Cedros (Albino Ibias), Los Pinos (Armando Hurtado), Sol Naciente (Julio Arotaype)\n\t\t\t- Roaster ที่นำเข้า :: Sey Coffee (NY), Colonna (UK), Ozone Coffee (UK)",
+      "contentLength": 3242,
+      "lineCount": 48
     }
   ]
 }
