@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฟิสิกส์การคั่วกาแฟ & ระบบควบคุม 3 แกน ETeRR (อ.จู 180)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'IBM Plex Sans Thai', sans-serif;
+            background-color: #F4F6F9;
+            color: #1E293B;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 290px;
+            max-height: 360px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 330px;
+            }
+        }
+        .chart-container-wide {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container-wide {
+                height: 370px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-orange-500 selection:text-white">
+
+    <nav class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md text-white shadow-lg border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl">🔥</span>
+                    <span class="font-bold text-lg tracking-wide text-orange-400">ETeRR <span class="text-white font-normal">Roasting Physics</span></span>
+                </div>
+                <div class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="#intro" class="hover:text-orange-400 transition-colors">ภาพรวม & ตัวเลขสำคัญ</a>
+                    <a href="#fabbri" class="hover:text-orange-400 transition-colors">1. Fabbri (คุณสมบัติความร้อน)</a>
+                    <a href="#fadai" class="hover:text-cyan-400 transition-colors">2. Fadai (เกราะน้ำ & Drying Front)</a>
+                    <a href="#eterr-system" class="hover:text-amber-400 transition-colors">3. ระบบควบคุม 3 แกน</a>
+                    <a href="#takeaways" class="hover:text-emerald-400 transition-colors">สรุปการนำไปใช้</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header id="intro" class="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white py-14 px-4 sm:px-6 lg:px-8 shadow-xl">
+        <div class="max-w-6xl mx-auto">
+            <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-orange-500/20 text-orange-300 border border-orange-500/30 mb-4">
+                ถอดความและวิเคราะห์ทฤษฎีจาก อ.จู 180 • Fabbri (2011) & Fadai (2017)
+            </div>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+                ฟิสิกส์ภายในเมล็ดกาแฟ & <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-300 to-cyan-400">ระบบควบคุม 3 แกน ETeRR</span>
+            </h1>
+            <p class="text-slate-300 text-base sm:text-lg max-w-3xl leading-relaxed mb-10">
+                หัววัด <strong>BT (Bean Temp)</strong> อ่านค่าได้เพียงอุณหภูมิรวมของผิวเมล็ดและอากาศรอบข้าง แต่ไม่ได้บอกว่าแกนกลางร้อนเพียงใดหรือความชื้นระเหยลึกแค่ไหน การเข้าใจพลวัตของความร้อนและมวลภายในเมล็ดจึงเปลี่ยน <em>"ความรู้สึก (Feel)"</em> หน้าเครื่องคั่วให้เป็น <em>"ทักษะที่อธิบายและทำซ้ำได้"</em>
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10 shadow-md">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-orange-300">Surface-to-Centre Gap</span>
+                        <span class="text-xl">🌡️</span>
+                    </div>
+                    <div class="text-3xl font-bold text-white mb-1">~14°C</div>
+                    <p class="text-xs text-slate-300 leading-relaxed">ช่องว่างอุณหภูมิระหว่างผิวกับแกนกลางในช่วง 5 นาทีแรก (300 วินาที) โดยปลายแหลมเมล็ดร้อนก่อนเสมอ</p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10 shadow-md">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-cyan-300">Heat Penetration Time</span>
+                        <span class="text-xl">⚡</span>
+                    </div>
+                    <div class="text-3xl font-bold text-white mb-1">~30 วินาที</div>
+                    <p class="text-xs text-slate-300 leading-relaxed">เวลาที่ความร้อนวิ่งทะลุความหนาครึ่งเมล็ด (1.85 mm) ถึงแกนกลาง อุปสรรคจริงไม่ใช่ความร้อนเข้าช้า แต่คือไอน้ำออกช้า</p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10 shadow-md">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-amber-300">Moisture Shield Energy</span>
+                        <span class="text-xl">🛡️</span>
+                    </div>
+                    <div class="text-3xl font-bold text-white mb-1">~2.3 MJ/kg</div>
+                    <p class="text-xs text-slate-300 leading-relaxed">ความร้อนแฝงของการกลายเป็นไอ (Latent Heat) ที่น้ำดูดซับไว้ ทำหน้าที่เป็นเกราะป้องกันไม่ให้เนื้อเมล็ดไหม้</p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10 shadow-md">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-emerald-300">Volume Sensitivity</span>
+                        <span class="text-xl">📏</span>
+                    </div>
+                    <div class="text-3xl font-bold text-white mb-1">10% → 4°C</div>
+                    <p class="text-xs text-slate-300 leading-relaxed">ปริมาตรเมล็ดเปลี่ยน 10% ทำให้อุณหภูมิเปลี่ยน ~4°C ชี้ชัดว่าขนาดเมล็ด (Screen Size) สำคัญกว่ารูปทรง</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-14">
+
+        <section id="fabbri" class="bg-white rounded-2xl shadow-md p-6 sm:p-8 border border-slate-200/80">
+            <div class="border-l-4 border-orange-500 pl-4 mb-6">
+                <span class="text-xs font-bold uppercase tracking-wider text-orange-600">งานวิจัยที่ 1 • Fabbri et al. (2011)</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">รูปทรงเมล็ดและการเปลี่ยนแปลงคุณสมบัติทางความร้อน</h2>
+                <p class="text-slate-600 text-sm sm:text-base mt-2 leading-relaxed">
+                    จากการสแกนเมล็ดกาแฟอาราบิก้า 3 มิติและจำลองการคั่วที่ 200°C พบว่าเมื่อการคั่วดำเนินไป โครงสร้างภายในเมล็ดจะเปลี่ยนคุณสมบัติทางฟิสิกส์อย่างมีนัยสำคัญ: <strong>เมล็ดจะยอมให้ความร้อนวิ่งผ่านได้ยากขึ้น (นำความร้อนแย่ลง) แต่กลับอมความร้อนสะสมไว้ในตัวมากขึ้น</strong>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 flex flex-col">
+                    <h3 class="text-base font-bold text-slate-800 mb-1">ค่าการนำความร้อนลดลงเกือบครึ่ง (-42.7%)</h3>
+                    <p class="text-xs text-slate-500 mb-4">Thermal Conductivity (W/m·K) ลดลงจาก 0.131 เหลือ 0.075 ทำให้ความร้อนวิ่งผ่านเนื้อเมล็ดที่สุกแล้วได้ช้าลง</p>
+                    <div class="chart-container">
+                        <canvas id="conductivityChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 flex flex-col">
+                    <h3 class="text-base font-bold text-slate-800 mb-1">ค่าความจุความร้อนจำเพาะสูงขึ้น (+31.2%)</h3>
+                    <p class="text-xs text-slate-500 mb-4">Specific Heat Capacity (J/kg·K) เพิ่มจาก 1256 เป็น 1648 ส่งผลให้เมล็ดอมความร้อนสะสมไว้ในตัวมากขึ้นเรื่อยๆ</p>
+                    <div class="chart-container">
+                        <canvas id="specificHeatChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-slate-100">
+                <div class="flex items-start space-x-3 p-3 rounded-lg bg-orange-50/70">
+                    <span class="text-xl">📐</span>
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-800">Screen Size สำคัญกว่าทรงเมล็ด</h4>
+                        <p class="text-xs text-slate-600 mt-0.5">การคัดขนาดเมล็ดให้สม่ำเสมอช่วยลดความคลาดเคลื่อนของอุณหภูมิแกนกลางได้มากกว่าการแยกทรงเมล็ด</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3 p-3 rounded-lg bg-amber-50/70">
+                    <span class="text-xl">🔥</span>
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-800">ปลายแหลมและมุมร้อนก่อนเสมอ</h4>
+                        <p class="text-xs text-slate-600 mt-0.5">บริเวณขอบและปลายเมล็ดรับความร้อนได้ไวกว่าแกนกลาง เกิดความต่าง ~14°C ใน 5 นาทีแรก</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3 p-3 rounded-lg bg-slate-100">
+                    <span class="text-xl">🔍</span>
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-800">ข้อจำกัดของโมเดล Fabbri</h4>
+                        <p class="text-xs text-slate-600 mt-0.5">ยังไม่แยกสถานะน้ำกับไอน้ำ และยังไม่รวมผลของผิวแข็งตัว (Case Hardening) ซึ่งถูกต่อยอดในงานของ Fadai</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="fadai" class="bg-white rounded-2xl shadow-md p-6 sm:p-8 border border-slate-200/80">
+            <div class="border-l-4 border-cyan-500 pl-4 mb-6">
+                <span class="text-xs font-bold uppercase tracking-wider text-cyan-600">งานวิจัยที่ 2 • Fadai et al. (2017)</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">เส้นแบ่งเขตการแห้ง (Drying Front) & เกราะป้องกันความร้อน</h2>
+                <p class="text-slate-600 text-sm sm:text-base mt-2 leading-relaxed">
+                    เมื่อแยกโครงสร้างเมล็ดออกเป็น 3 สถานะ (ของแข็งเซลลูโลส, น้ำเหลว, และไอน้ำ/ก๊าซ) พบว่าเมล็ดกาแฟระหว่างคั่วถูกแบ่งออกเป็น <strong>"2 โลก"</strong> คั่นด้วยเส้นแบ่งเขตที่ร่นถอยเข้าสู่แกนกลาง ภาวะ <em>"ข้างนอกสุก ข้างในดิบ"</em> จึงไม่ใช่ช่องว่างอุณหภูมิ แต่คือ <strong>ช่องว่างความชื้น (Moisture Gap)</strong>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-5 bg-gradient-to-b from-slate-900 to-slate-800 text-white rounded-2xl p-6 shadow-inner">
+                    <h3 class="text-base font-bold text-cyan-300 mb-1 flex items-center gap-2">
+                        <span>🫘</span> โครงสร้าง 2 โลกภายในเมล็ดกาแฟ
+                    </h3>
+                    <p class="text-xs text-slate-300 mb-5">จำลองการเคลื่อนที่ของ Drying Front และการถ่ายเทความร้อน/ไอน้ำ</p>
+
+                    <div class="relative mx-auto max-w-xs p-5 rounded-3xl border-4 border-amber-500/80 bg-amber-950/60 shadow-lg">
+                        <div class="text-center mb-3">
+                            <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-500 text-slate-950">
+                                1. Dry Outer Layer (ชั้นนอกที่แห้งแล้ว)
+                            </span>
+                            <p class="text-[11px] text-amber-200 mt-1">น้ำระเหยหมด • รูพรุนว่างเปล่า • เกิดปฏิกิริยาเคมีแบบแห้ง</p>
+                        </div>
+
+                        <div class="p-4 rounded-2xl border-2 border-dashed border-orange-400 bg-orange-950/50">
+                            <div class="text-center mb-2">
+                                <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-orange-500 text-white">
+                                    2. Drying Front (เส้นแบ่งเขต & สันแรงดัน)
+                                </span>
+                                <p class="text-[11px] text-orange-200 mt-1">จุดที่น้ำเดือดเป็นไอ • เกิดสันแรงดันไอน้ำ (Pressure Ridge)</p>
+                            </div>
+
+                            <div class="p-4 rounded-xl border-2 border-cyan-400 bg-cyan-950/80 text-center shadow-md">
+                                <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-cyan-400 text-slate-950">
+                                    3. Moist Core (แกนกลางที่ยังชื้น)
+                                </span>
+                                <p class="text-[11px] text-cyan-100 mt-1.5">ความชื้นเกือบเท่าเดิม • เกราะน้ำดูดซับความร้อนแฝง</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-white/15 grid grid-cols-2 gap-2 text-center text-xs">
+                            <div class="bg-white/10 rounded-lg p-2">
+                                <div class="text-amber-300 font-bold">⚡ ความร้อนวิ่งเข้า</div>
+                                <div class="text-white font-semibold mt-0.5">เร็ว (~30 วินาที)</div>
+                            </div>
+                            <div class="bg-white/10 rounded-lg p-2">
+                                <div class="text-cyan-300 font-bold">💨 ไอน้ำระบายออก</div>
+                                <div class="text-white font-semibold mt-0.5">ช้า (Bottleneck)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 bg-slate-50 rounded-xl p-5 border border-slate-200 flex flex-col">
+                    <h3 class="text-base font-bold text-slate-800 mb-1">พลวัตการหดตัวของ "เกราะน้ำ" เทียบกับ "อุณหภูมิเมล็ด"</h3>
+                    <p class="text-xs text-slate-500 mb-4">เมื่อเส้น Drying Front ร่นลึกเข้าไป ไอน้ำเดินทางไกลขึ้นและระเหยช้าลง เกราะป้องกันจึงบางลง ทำให้ความร้อนที่ใส่เท่าเดิมเปลี่ยนไปดันอุณหภูมิเมล็ดพุ่งสูงขึ้น</p>
+                    <div class="chart-container">
+                        <canvas id="moistureShieldChart"></canvas>
+                    </div>
+                    <div class="mt-4 p-3 rounded-lg bg-cyan-50 border border-cyan-200 text-xs text-slate-700 leading-relaxed">
+                        <strong>💡 กลไก Darcy Flow & First Crack:</strong> ไอน้ำถูกดันออกจากแกนกลางด้วยความแตกต่างของแรงดัน ก่อตัวเป็น <strong>สันแรงดันสูง (Pressure Ridge)</strong> ใกล้เส้น Drying Front สะสมความเครียดในผนังเซลล์จนนำไปสู่การแตกตัวของ <strong>First Crack</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="eterr-system" class="bg-white rounded-2xl shadow-md p-6 sm:p-8 border border-slate-200/80">
+            <div class="border-l-4 border-amber-500 pl-4 mb-6">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-600">การประยุกต์ใช้หน้าเครื่องคั่ว • ETeRR Three-Axis System</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">การปรับจังหวะคันโยก 3 แกนตามอายุขัยของเกราะน้ำ</h2>
+                <p class="text-slate-600 text-sm sm:text-base mt-2 leading-relaxed">
+                    อ.จู 180 เชื่อมโยงฟิสิกส์การหดตัวของเกราะป้องกันความชื้นเข้ากับการควบคุม 3 แกนหลัก ได้แก่ <strong>1. ETeRR (ไฟ/Gas)</strong>, <strong>2. Aero Accel (ลมดูด/Airflow)</strong> และ <strong>3. Gear Shift (รอบดรัม/Drum Speed)</strong> เพื่อส่งพลังงานเข้าแกนกลางโดยไม่ทำลายผิวเมล็ด
+                </p>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 mb-8">
+                <h3 class="text-base font-bold text-slate-800 mb-1 text-center">กราฟทิศทางการปรับคันโยกทั้ง 3 แกนตลอดกระบวนการคั่ว</h3>
+                <p class="text-xs text-slate-500 mb-4 text-center">เปรียบเทียบระดับการทำงานของ ไฟ (ลดทางเดียว), ลมดูด (ไต่ระดับ), และ รอบดรัม (ต่ำ → สูง → ต่ำ)</p>
+                <div class="chart-container-wide">
+                    <canvas id="threeAxisChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <div class="rounded-xl border-2 border-cyan-500/40 bg-gradient-to-b from-cyan-50/70 to-white p-5 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-cyan-600 text-white">ระยะที่ 1 • Early (Protect)</span>
+                            <span class="text-xs font-bold text-cyan-800">เกราะน้ำ 100%</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">Charge → ต้น Drying</h3>
+                        <ul class="space-y-2.5 text-sm text-slate-700">
+                            <li class="flex items-start gap-2">
+                                <span class="font-bold text-orange-600 shrink-0">🔥 ไฟ (ETeRR):</span>
+                                <span><strong>เริ่มที่ไฟสูงสุด</strong> เพราะเมล็ดเย็นและน้ำเต็มเปี่ยม รับพลังงาน Latent Heat ได้มากที่สุด</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="font-bold text-cyan-600 shrink-0">💨 ลม (Aero):</span>
+                                <span><strong>เริ่มลมต่ำ</strong> แล้วค่อยๆ เพิ่มตามอัตราการระเหยของไอน้ำ</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="font-bold text-indigo-600 shrink-0">⚙️ รอบดรัม:</span>
+                                <span><strong>เกียร์ 1 · รอบช้า</strong> ลดจำนวนครั้งที่เมล็ดโปรยผ่านม่านลมร้อน</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-cyan-200/70 text-xs text-slate-600">
+                        <strong>เหตุผลทางฟิสิกส์:</strong> คุมผิวไม่ให้แห้งเร็วกว่าอัตราที่ไอน้ำข้างในจะหนีออกมาทัน (ป้องกันผิวรัดตัว)
+                    </div>
+                </div>
+
+                <div class="rounded-xl border-2 border-amber-500/50 bg-gradient-to-b from-amber-50/70 to-white p-5 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-slate-950">ระยะที่ 2 • Middle (Drive)</span>
+                            <span class="text-xs font-bold text-amber-800">แรงดันไอน้ำพีค</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">Drying Front ร่นลึก → Chemical Point</h3>
+                        <ul class="space-y-2.5 text-sm text-slate-700">
+                            <li class="flex items-start gap-2">
+                                <span class="font-bold text-orange-600 shrink-0">🔥 ไฟ (ETeRR):</span>
+                                <span><strong>ลดไฟลงทีละขั้น</strong> (ลดทางเดียว ห้ามเร่งกลับ) ตามพื้นที่เกราะน้ำที่หดลง</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="font-bold text-cyan-600 shrink-0">💨 ลม (Aero):</span>
+                                <span><strong>คงลมหลัง ET RoR พีค</strong> แล้วดันลมแรงขึ้นเมื่อถึงจุด Chemical Point</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="font-bold text-indigo-600 shrink-0">⚙️ รอบดรัม:</span>
+                                <span><strong>เกียร์ 2 · รอบเร็ว</strong> เปิดรับการพาความร้อน (Convection) เต็มที่</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-amber-200/70 text-xs text-slate-600">
+                        <strong>เหตุผลทางฟิสิกส์:</strong> เกราะน้ำบางลงจึงต้องลดไฟ แต่เร่งรอบดรัมและลมเพื่อเพิ่ม Convection ชดเชยและดึงไอน้ำออก
+                    </div>
+                </div>
+
+                <div class="rounded-xl border-2 border-rose-500/40 bg-gradient-to-b from-rose-50/70 to-white p-5 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-rose-600 text-white">ระยะที่ 3 • Late (Brake)</span>
+                            <span class="text-xs font-bold text-rose-800">เกราะน้ำหมด</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">ใกล้ / หลัง First Crack</h3>
+                        <ul class="space-y-2.5 text-sm text-slate-700">
+                            <li class="flex items-start gap-2">
+                                <span class="font-bold text-orange-600 shrink-0">🔥 ไฟ (ETeRR):</span>
+                                <span><strong>ค้างไฟต่ำสุด</strong> (ห้ามเร่งไฟขึ้นอีกเด็ดขาด) เพื่อเบรกพลังงาน</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="font-bold text-cyan-600 shrink-0">💨 ลม (Aero):</span>
+                                <span><strong>เร่งลมดูดให้เร็วขึ้น</strong> ในขณะที่ไฟต่ำ เพื่อระบายความร้อนส่วนเกิน</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="font-bold text-indigo-600 shrink-0">⚙️ รอบดรัม:</span>
+                                <span><strong>เกียร์ 3 · กลับมารอบช้า</strong> ลดจำนวนครั้งที่โปรยผ่านม่านอากาศร้อน</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-rose-200/70 text-xs text-slate-600">
+                        <strong>เหตุผลทางฟิสิกส์:</strong> น้ำอิสระหมดแล้ว หากเร่งไฟกลับจะไหม้ทันที และต้องลดไฟควบคู่กับเกียร์ 3
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="p-4 rounded-xl bg-amber-50 border border-amber-300 flex items-start gap-3.5">
+                    <span class="text-2xl">⚠️</span>
+                    <div>
+                        <h4 class="text-sm font-bold text-amber-950">ข้อควรระวังในเกียร์ 3: แรงต้านจากการนาบผนังดรัม (Conduction)</h4>
+                        <p class="text-xs text-amber-900 mt-1 leading-relaxed">
+                            การลดรอบดรัมในเกียร์ 3 ช่วยลดการโดนลมร้อนก็จริง แต่แลกมากับการที่ <strong>"เมล็ดจะแนบสัมผัสกับผนังดรัมนานขึ้น"</strong> ดังนั้นในช่วงท้ายจึงต้อง <strong>ลดไฟ (Gas) ลงด้วยเสมอ</strong> เพื่อให้ผนังดรัมเย็นลง ป้องกันเมล็ดที่ไร้เกราะน้ำไหม้ (Scorch) จากการสัมผัสเหล็ก
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-xl bg-sky-50 border border-sky-300 flex items-start gap-3.5">
+                    <span class="text-2xl">🌬️</span>
+                    <div>
+                        <h4 class="text-sm font-bold text-sky-950">ข้อเท็จจริงเรื่องความชื้นในดรัมกับลมดูด (Aero Accel)</h4>
+                        <p class="text-xs text-sky-900 mt-1 leading-relaxed">
+                            ความชื้นในดรัมไม่ได้ขวางการระบายไอน้ำออกจากเมล็ดอย่างมีนัยสำคัญ เพราะแรงดันภายในตรงสันแรงดันสูงกว่าความดันในดรัมมาก หน้าที่แท้จริงของลมดูดคือ <strong>เคลียร์ไอน้ำส่วนเกิน</strong> ให้ตัวกลางสะอาด และ <strong>เพิ่มค่าสัมประสิทธิ์การพาความร้อน (h)</strong> ที่ผิวเมล็ด
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="takeaways" class="bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-2xl shadow-lg p-6 sm:p-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <span class="text-xs font-bold uppercase tracking-widest text-orange-400">บทสรุปและแนวทางปฏิบัติหน้าเครื่องคั่ว</span>
+                    <blockquote class="text-xl sm:text-2xl font-bold text-white mt-2 italic">
+                        "ก่อนที่การคั่วจะเป็นเรื่องของการให้ความร้อนแก่เมล็ด มันคือเรื่องของการดึงน้ำออกจากเมล็ดให้ถูกจังหวะเสียก่อน"
+                    </blockquote>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <div class="bg-white/10 rounded-xl p-5 border border-white/10">
+                        <div class="text-orange-400 font-bold text-base mb-2">1. แก้ปัญหา "ข้างนอกสุก ข้างในดิบ"</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            กลิ่นเขียวดิบหรือเปรี้ยวนำไม่ได้เกิดจากความร้อนเข้าไม่ถึงแกน (ความร้อนวิ่งทะลุใน 30 วินาทีอยู่แล้ว) แต่เกิดจาก <strong>Moisture Gap</strong> จึงต้องแก้ด้วยการบริหารช่วงต้น-กลางให้ไอน้ำระบายออกอย่างราบรื่น ไม่ใช่การอัดไฟท้าย
+                        </p>
+                    </div>
+
+                    <div class="bg-white/10 rounded-xl p-5 border border-white/10">
+                        <div class="text-amber-400 font-bold text-base mb-2">2. กฎเหล็ก "ลดไฟทางเดียว"</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            ห้ามเร่งไฟกลับในช่วงกลางหรือท้ายเมื่อเกราะน้ำหดตัวลงแล้ว เพราะไม่มี Latent Heat มารองรับพลังงานส่วนเกิน หากต้องการประคองพลังงานช่วงท้ายให้ปรับใช้ <strong>Aero Accel (ลม)</strong> หรือ <strong>Gear Shift (รอบดรัม)</strong> แทน
+                        </p>
+                    </div>
+
+                    <div class="bg-white/10 rounded-xl p-5 border border-white/10">
+                        <div class="text-cyan-400 font-bold text-base mb-2">3. จัดการสมดุลทั้ง 3 คันโยก</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            <strong>ไฟ</strong> ใส่เท่าที่น้ำยังรับไหว • <strong>ลม</strong> รักษาเสถียรภาพตัวกลางและค่า h • <strong>รอบดรัม</strong> ปรับจำนวนครั้งการสัมผัสลมร้อนให้สอดคล้องกับความหนาของเกราะน้ำที่เหลืออยู่
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-950 text-slate-400 py-8 px-4 text-center text-xs border-t border-slate-800">
+        <p>สังเคราะห์ข้อมูลจากบทความถอดความงานวิจัย Fabbri et al. (2011) และ Fadai et al. (2017) โดย อ.จู 180</p>
+    </footer>
+
+    <script>
+        function wrapLabel(label) {
+            if (typeof label !== 'string' || label.length <= 16) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length <= 16) {
+                    currentLine = (currentLine + ' ' + word).trim();
+                } else {
+                    if (currentLine) {
+                        lines.push(currentLine);
+                    }
+                    currentLine = word;
+                }
+            });
+            if (currentLine) {
+                lines.push(currentLine);
+            }
+            return lines;
+        }
+
+        const sharedTooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        Chart.defaults.font.family = "'IBM Plex Sans Thai', sans-serif";
+        Chart.defaults.color = '#475569';
+
+        const ctxCond = document.getElementById('conductivityChart').getContext('2d');
+        new Chart(ctxCond, {
+            type: 'bar',
+            data: {
+                labels: [
+                    wrapLabel('เมล็ดกาแฟดิบ (เริ่มต้นการคั่ว)'),
+                    wrapLabel('เมล็ดกาแฟคั่ว (หลังผ่านความร้อน)')
+                ],
+                datasets: [{
+                    label: 'Thermal Conductivity (W/m·K)',
+                    data: [0.131, 0.075],
+                    backgroundColor: ['#00B4D8', '#FF5722'],
+                    borderRadius: 8,
+                    barThickness: 56
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: sharedTooltipConfig
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 0.16,
+                        grid: { color: '#E2E8F0' },
+                        title: {
+                            display: true,
+                            text: 'W/m·K',
+                            font: { size: 12, weight: 'bold' }
+                        }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        const ctxHeat = document.getElementById('specificHeatChart').getContext('2d');
+        new Chart(ctxHeat, {
+            type: 'bar',
+            data: {
+                labels: [
+                    wrapLabel('เมล็ดกาแฟดิบ (เริ่มต้นการคั่ว)'),
+                    wrapLabel('เมล็ดกาแฟคั่ว (หลังผ่านความร้อน)')
+                ],
+                datasets: [{
+                    label: 'Specific Heat Capacity (J/kg·K)',
+                    data: [1256, 1648],
+                    backgroundColor: ['#3B82F6', '#F59E0B'],
+                    borderRadius: 8,
+                    barThickness: 56
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: sharedTooltipConfig
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 2000,
+                        grid: { color: '#E2E8F0' },
+                        title: {
+                            display: true,
+                            text: 'J/kg·K',
+                            font: { size: 12, weight: 'bold' }
+                        }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        const ctxShield = document.getElementById('moistureShieldChart').getContext('2d');
+        new Chart(ctxShield, {
+            type: 'line',
+            data: {
+                labels: [
+                    wrapLabel('0% Charge (เริ่มคั่ว)'),
+                    wrapLabel('25% Early Drying (ผิวเริ่มแห้ง)'),
+                    wrapLabel('50% Mid Roast (เส้นแห้งร่นลึก)'),
+                    wrapLabel('75% Chemical Point (เกราะบางลง)'),
+                    wrapLabel('90% First Crack (แรงดันพีค)'),
+                    wrapLabel('100% Drop (เกราะน้ำหมด)')
+                ],
+                datasets: [
+                    {
+                        label: 'ความหนาเกราะน้ำ (Moisture Shield %)',
+                        data: [100, 88, 62, 32, 12, 3],
+                        borderColor: '#00B4D8',
+                        backgroundColor: 'rgba(0, 180, 216, 0.18)',
+                        fill: true,
+                        tension: 0.35,
+                        borderWidth: 3,
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'ระดับอุณหภูมิแกนกลางเมล็ด (Relative Temp %)',
+                        data: [15, 32, 52, 74, 91, 100],
+                        borderColor: '#FF5722',
+                        backgroundColor: 'transparent',
+                        borderDash: [5, 4],
+                        tension: 0.35,
+                        borderWidth: 3,
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'สันแรงดันไอน้ำภายใน (Vapour Pressure Ridge)',
+                        data: [5, 25, 65, 85, 100, 40],
+                        borderColor: '#F59E0B',
+                        backgroundColor: 'transparent',
+                        tension: 0.4,
+                        borderWidth: 2.5,
+                        pointRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { boxWidth: 14, font: { size: 11 } }
+                    },
+                    tooltip: sharedTooltipConfig
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 110,
+                        grid: { color: '#E2E8F0' },
+                        title: {
+                            display: true,
+                            text: 'ระดับสัมพัทธ์ (%)',
+                            font: { size: 11, weight: 'bold' }
+                        }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { size: 11 } }
+                    }
+                }
+            }
+        });
+
+        const ctxAxis = document.getElementById('threeAxisChart').getContext('2d');
+        new Chart(ctxAxis, {
+            type: 'line',
+            data: {
+                labels: [
+                    wrapLabel('ช่วงที่ 1: Charge (Early · Protect)'),
+                    wrapLabel('ช่วงที่ 2: ต้น Drying (Early · Protect)'),
+                    wrapLabel('ช่วงที่ 3: Drying Front ร่นลึก (Middle · Drive)'),
+                    wrapLabel('ช่วงที่ 4: Chemical Point (Middle · Drive)'),
+                    wrapLabel('ช่วงที่ 5: ใกล้ 1st Crack (Late · Brake)'),
+                    wrapLabel('ช่วงที่ 6: หลัง 1st Crack (Late · Brake)')
+                ],
+                datasets: [
+                    {
+                        label: '1. ETeRR ไฟ / Gas (ลดทางเดียว ห้ามเร่งกลับ)',
+                        data: [100, 100, 75, 50, 25, 20],
+                        borderColor: '#FF5722',
+                        backgroundColor: 'rgba(255, 87, 34, 0.1)',
+                        stepped: 'middle',
+                        borderWidth: 3.5,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#FF5722'
+                    },
+                    {
+                        label: '2. Aero Accel ลมดูด (ไต่ระดับ & เร่งช่วงท้าย)',
+                        data: [25, 45, 60, 80, 95, 100],
+                        borderColor: '#00B4D8',
+                        backgroundColor: 'transparent',
+                        tension: 0.3,
+                        borderWidth: 3,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#00B4D8'
+                    },
+                    {
+                        label: '3. Gear Shift รอบดรัม (เกียร์ 1 ต่ำ → เกียร์ 2 สูง → เกียร์ 3 ต่ำ)',
+                        data: [30, 30, 90, 90, 30, 30],
+                        borderColor: '#6366F1',
+                        backgroundColor: 'transparent',
+                        stepped: 'middle',
+                        borderDash: [6, 4],
+                        borderWidth: 3,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#6366F1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { boxWidth: 16, font: { size: 12, weight: '500' } }
+                    },
+                    tooltip: sharedTooltipConfig
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 115,
+                        grid: { color: '#E2E8F0' },
+                        ticks: {
+                            callback: function(value) {
+                                if (value === 20) return 'ต่ำสุด (Min)';
+                                if (value === 50) return 'ปานกลาง (Mid)';
+                                if (value === 100) return 'สูงสุด (Max)';
+                                return '';
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'ระดับการเปิดใช้งานคันโยก',
+                            font: { size: 12, weight: 'bold' }
+                        }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { size: 11 } }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
