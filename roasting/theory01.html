@@ -1,99 +1,38 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-
-      <style>
-        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap');
-        body {
-            font-family: 'Sarabun', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 { text-align: center; color: #2c3e50; font-size: 24px; margin-top: 10px;}
-        h2 { color: #2980b9; border-bottom: 2px solid #2980b9; padding-bottom: 5px; margin-top: 30px; font-size: 20px;}
-        h3 { color: #16a085; font-size: 18px;}
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-        th { background-color: #f2f2f2; font-weight: bold; }
-        .highlight { background-color: #fff3cd; padding: 2px 4px; border-radius: 4px; }
-        .alert { background-color: #f8d7da; color: #721c24; padding: 10px; border-left: 4px solid #f5c6cb; margin-bottom: 20px;}
-        .takeaway { background-color: #d4edda; color: #155724; padding: 15px; border-left: 4px solid #c3e6cb; margin-top: 20px;}
-        
-        /* สไตล์สำหรับปุ่ม Home */
-        .btn-home {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: #f8f9fa;
-            color: #2c3e50;
-            text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 999px;
-            font-weight: bold;
-            font-size: 14px;
-            border: 1px solid #ddd;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: all 0.2s ease;
-            margin-bottom: 20px;
-        }
-        .btn-home:hover {
-            background-color: #e9ecef;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        /* สไตล์สำหรับปุ่ม Roastery */
-        .btn-roastery {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: #f8f9fa;
-            color: #2c3e50;
-            text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 999px;
-            font-weight: bold;
-            font-size: 14px;
-            border: 1px solid #ddd;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: all 0.2s ease;
-            margin-bottom: 20px;
-        }
-        .btn-roastery:hover {
-            background-color: #e9ecef;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-    </style>
-</head>
-<body>
-
-    <!-- ปุ่มกลับหน้า Home -->
-    <a href="https://yaitonk.github.io/my-1st-site/" class="btn-home">
-        🏠 Home
-    </a>
-    <a href="https://yaitonk.github.io/my-1st-site/articles.html" class="btn-roastery">
-        🏭 Roastery
-    </a>
-
-    
-    </div>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ฟิสิกส์การคั่วกาแฟ & ระบบควบคุม 3 แกน ETeRR (อ.จู 180)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    
     <style>
         body {
             font-family: 'IBM Plex Sans Thai', sans-serif;
             background-color: #F4F6F9;
             color: #1E293B;
+        }
+        /* สไตล์สำหรับปุ่ม Home และ Roastery */
+        .btn-nav-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #ffffff;
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 14px;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+        .btn-nav-top:hover {
+            background-color: #f1f5f9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         .chart-container {
             position: relative;
@@ -127,19 +66,34 @@
 </head>
 <body class="antialiased selection:bg-orange-500 selection:text-white">
 
+    <!-- แถบปุ่ม Home และ Roastery ด้านบนสุด -->
+    <div class="bg-[#F4F6F9] border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-3">
+            <a href="https://yaitonk.github.io/my-1st-site/" class="btn-nav-top">
+                🏠 Home
+            </a>
+            <a href="https://yaitonk.github.io/my-1st-site/articles.html" class="btn-nav-top">
+                🏭 Roastery
+            </a>
+        </div>
+    </div>
+
+    <!-- แถบเมนูนำทาง Sticky (แก้ไขความสูงและจัดวางไม่ให้ล้นกรอบ) -->
     <nav class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md text-white shadow-lg border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center space-x-2">
-                    <span class="text-2xl">🔥</span>
-                    <span class="font-bold text-lg tracking-wide text-orange-400">ETeRR <span class="text-white font-normal">Roasting Physics</span></span>
+            <div class="flex items-center justify-between min-h-[68px] py-2.5 gap-4">
+                <div class="flex items-center space-x-2.5 shrink-0">
+                    <span class="text-2xl leading-none">🔥</span>
+                    <span class="font-bold text-lg sm:text-xl tracking-wide text-orange-400 leading-tight">
+                        ETeRR <span class="text-white font-normal">Roasting Physics</span>
+                    </span>
                 </div>
-                <div class="hidden md:flex space-x-6 text-sm font-medium">
-                    <a href="#intro" class="hover:text-orange-400 transition-colors">ภาพรวม & ตัวเลขสำคัญ</a>
-                    <a href="#fabbri" class="hover:text-orange-400 transition-colors">1. Fabbri (คุณสมบัติความร้อน)</a>
-                    <a href="#fadai" class="hover:text-cyan-400 transition-colors">2. Fadai (เกราะน้ำ & Drying Front)</a>
-                    <a href="#eterr-system" class="hover:text-amber-400 transition-colors">3. ระบบควบคุม 3 แกน</a>
-                    <a href="#takeaways" class="hover:text-emerald-400 transition-colors">สรุปการนำไปใช้</a>
+                <div class="hidden md:flex flex-wrap items-center justify-end gap-x-6 gap-y-2 text-sm font-medium">
+                    <a href="#intro" class="hover:text-orange-400 transition-colors whitespace-nowrap">ภาพรวม & ตัวเลขสำคัญ</a>
+                    <a href="#fabbri" class="hover:text-orange-400 transition-colors whitespace-nowrap">1. Fabbri (คุณสมบัติความร้อน)</a>
+                    <a href="#fadai" class="hover:text-cyan-400 transition-colors whitespace-nowrap">2. Fadai (เกราะน้ำ & Drying Front)</a>
+                    <a href="#eterr-system" class="hover:text-amber-400 transition-colors whitespace-nowrap">3. ระบบควบคุม 3 แกน</a>
+                    <a href="#takeaways" class="hover:text-emerald-400 transition-colors whitespace-nowrap">สรุปการนำไปใช้</a>
                 </div>
             </div>
         </div>
@@ -147,10 +101,10 @@
 
     <header id="intro" class="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white py-14 px-4 sm:px-6 lg:px-8 shadow-xl">
         <div class="max-w-6xl mx-auto">
-            <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-orange-500/20 text-orange-300 border border-orange-500/30 mb-4">
+            <div class="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-semibold bg-orange-500/20 text-orange-300 border border-orange-500/30 mb-5">
                 ถอดความและวิเคราะห์ทฤษฎีจาก อ.จู 180 • Fabbri (2011) & Fadai (2017)
             </div>
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-snug mb-5">
                 ฟิสิกส์ภายในเมล็ดกาแฟ & <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-300 to-cyan-400">ระบบควบคุม 3 แกน ETeRR</span>
             </h1>
             <p class="text-slate-300 text-base sm:text-lg max-w-3xl leading-relaxed mb-10">
